@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->  
+<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->  
+<!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->  
+<head>
+    <title>Lawdians</title>
+    <!-- Meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">    
+    <link rel="shortcut icon" href="favicon.ico">  
+    <link href='http://fonts.googleapis.com/css?family=Roboto:400,400italic,500,500italic,700,700italic,900,900italic,300italic,300' rel='stylesheet' type='text/css'> 
+    <link href='http://fonts.googleapis.com/css?family=Roboto+Slab:400,700,300,100' rel='stylesheet' type='text/css'>
+    <!-- Global CSS -->
+    <link href="{{ url_for('static', filename='assets/plugins/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+    <!-- Plugins CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/plugins/font-awesome/css/font-awesome.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/plugins/flexslider/flexslider.css') }}">
+    <!-- Theme CSS -->
+    <link id="theme-style" rel="stylesheet" href=" {{ url_for('static', filename='assets/css/styles-3.css') }}">
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head> 
+
+<body class="home-page">   
+    <!-- ******HEADER****** -->
+    <header id="header" class="header navbar-fixed-top">
+        <div class="container">
+            <h1 class="logo">
+                <a href="{{ url_for('index') }}"><span class="text">Lawdians</span></a>
+            </h1><!--//logo-->
+            <nav class="main-nav navbar-right" role="navigation">
+                <div class="navbar-header">
+                    <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button><!--//nav-toggle-->
+                </div><!--//navbar-header-->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li class="active nav-item"><a href="{{ url_for('index') }}">Home</a></li>
+                        <li class="nav-item"><a href="{{ url_for('hospital') }}">안심병원</a></li>
+                        <li class="nav-item"><a href="{{ url_for('lawyer') }}">안심변호사</a></li>
+                        <li class="nav-item"><a href="{{ url_for('event') }}">안심이벤트</a></li>
+                        <li class="nav-item dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="0" data-close-others="false" href="#">고객센터 <i class="fa fa-angle-down"></i></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="{{ url_for('post_script') }}">안심후기</a></li>
+                                <li><a href="{{ url_for('contact') }}">안심문의</a></li>
+                            </ul>
+                        </li><!--//dropdown-->
+                        <li class="nav-item"><a href="{{ url_for('login') }}">로그인</a></li>
+                        <li class="nav-item nav-item-cta last"><a class="btn btn-cta btn-cta-secondary" href="{{ url_for('signup') }}">회원가입</a></li>
+                    </ul><!--//nav-->
+                </div><!--//navabr-collapse-->
+            </nav><!--//main-nav-->
+        </div><!--//container-->
+    </header><!--//header-->
+    
+    <div class="bg-slider-wrapper">
+        <div class="flexslider bg-slider">
+            <ul class="slides">
+                <li class="slide slide-1"></li>
+                <li class="slide slide-2"></li>
+            </ul>
+        </div>
+    </div><!--//bg-slider-wrapper-->        
+    
+    <section class="promo section section-on-bg">
+        <div class="container text-center">                
+            <h2 class="title">안전하게 예뻐지자!</h2>
+            <p class="intro">로디언즈와 함께 안전하게 예뻐지세요.</p>
+            <p><a class="btn btn-cta btn-cta-primary" href="{{ url_for('signup') }}">서비스 신청하기</a></p>
+            <button type="button" class="play-trigger btn-link " data-toggle="modal" data-target="#modal-video" ><i class="fa fa-youtube-play"></i> Watch the video</button>
+        </div><!--//container-->
+    </section><!--//promo-->
+    
+    <div class="sections-wrapper">   
+     
+        <!-- ******Why Section****** -->
+        <section id="why" class="section why">
+            <div class="container">
+                <h2 class="title text-center">로디언즈가 어떻게 도움이 될수 있을까요?</h2>
+                <p class="intro text-center">성형부작용은 안심대응 서비스로 대비하고, 성형병원 찾기는 안심 병원찾기로 안내받고,<br/>성형가격 비교로 더 이상 돌아다니지 않아도 됩니다.</p>
+                <div class="row item">
+                    <div class="content col-xs-12 col-md-4">
+                        <h3 class="title">안심 성형 서비스</h3>
+                        <div class="desc">
+                            <p>수술 부작용, 이제 걱정 끝!</p>
+                            <p>안심 성형 서비스는 이러 이러한 서비스 입니다.</p>
+                        </div>
+                    </div><!--//content-->
+                    <figure class="figure col-md-offset-1 col-sm-offset-0 col-xs-offset-0 col-xs-12 col-md-7">
+                        <img class="img-responsive" src="#" alt="" />
+                        <figcaption class="figure-caption">(안심성형 서비스 소개 이미지) </figcaption>
+                    </figure>
+                </div><!--//item-->
+                
+                <div class="row item">
+                    <div class="content col-md-push-8 col-sm-push-0 col-xs-push-0 col-xs-12 col-md-4">
+                        <h3 class="title">안심 병원</h3>
+                        <div class="desc">
+                            <p>까다로운 조건을 통과한 안심병원들.</p>
+                            <p>안심병원은 이러이러한 병원들의 명칭입니다.</p>
+                            <p> <a href="download.html">안심병원 보러가기</a></p>
+                        </div>
+                    </div><!--//content-->
+                    <figure class="figure col-md-pull-4 col-sm-pull-0 col-xs-pull-0 col-xs-12 col-md-7">
+                        <img class="img-responsive" src="#" alt="" />
+                        <div class="control text-center">
+                            <button type="button" class="play-trigger" data-toggle="modal" data-target="#modal-video"><i class="fa fa-play"></i></button>                    
+                        </div><!--//control-->
+                    </figure>
+                </div><!--//item-->
+                
+                <div class="row item ">
+                    <div class="content col-xs-12 col-md-4">
+                        <h3 class="title">안심 변호사</h3>
+                        <div class="desc">
+                            <p>성형부작용 발생 시 고객님 곁을 지켜줄 든든한 안심지킴이</p>
+                            <p>100% 선임료 무료, 오직 실비만을 받고 고객의 편에서 비용은 소송이 끝난 후 승소비용 15% (패소시 비용 청구 없음)</p>
+                        </div>
+                        <div class="quote">
+                            <div class="quote-profile">
+                                <img class="img-responsive img-circle" src="{{ url_for('static', filename='assets/images/people/profile-s-3.png') }}" alt="" />
+                            </div><!--//profile-->
+                            <div class="quote-content">
+                                <blockquote><p>로디언즈 너무너무 친절하고 세심히 관리해주시네요.</p></blockquote>
+                                <p class="source"><a href="#">@테스트</a>, 서울</p>
+                            </div><!--//quote-content-->          
+                        </div><!--//quote-->                        
+                    </div><!--//content-->
+                    <figure class="figure col-md-offset-1 col-sm-offset-0 col-xs-offset-0 col-xs-12 col-md-7">
+                        <img class="img-responsive" src="#" alt="" />
+                        <figcaption class="figure-caption">(변호사 사진) </figcaption>
+
+                    </figure>
+                </div><!--//item-->
+                
+                <div class="row item last-item">
+                    <div class="content col-md-push-8 col-sm-push-0 col-xs-push-0 col-xs-12 col-md-4">
+                        <h3 class="title">안심 후기</h3>
+                        <div class="desc">
+                            <p>믿을 수 있는 후기로, 부작용 없는 더 좋은 병원을 찾아보세요!</p>
+                            <p>다른 성형외과는 수술안심책임제가 있는데 제가 수술한 곳에는 없어서 내심 걱정이 되었어요. 어린나이에 하는 쌍꺼풀 수술도 아니고 게다가 눈매교정에 절개 뒤와 밑트임까지 하니 잘못되면 정말 어쩌나 했어요. </p>
+                        </div>
+                        
+                        <div class="quote">
+                            <div class="quote-profile">
+                                <img class="img-responsive img-circle" src="{{ url_for('static', filename='assets/images/people/profile-s-4.png') }}" alt="" />
+                            </div><!--//profile-->
+                            <div class="quote-content">
+                                <blockquote><p>로디언즈 너무 좋습니다.</p></blockquote>
+                                <p class="source">@로디언즈, 대전</p>
+                            </div><!--//quote-content-->
+                        </div><!--//quote-->
+                    </div><!--//content-->
+                    <figure class="figure col-md-pull-4 col-sm-pull-0 col-xs-pull-0 col-xs-12 col-md-7">
+                        <img class="img-responsive" src="#" alt="" />
+                    </figure>
+                </div><!--//item-->
+
+            </div><!--//container-->
+        </section><!--//why-->  
+        
+        <!-- ******Testimonials Section****** -->
+        <section class="section testimonials">
+            <div class="container">
+                <h2 class="title text-center">사용자의 후기들</h2>
+                <div id="testimonials-carousel" class="carousel slide" data-ride="carousel">
+                    <ol class="carousel-indicators">
+                        <li data-target="#testimonials-carousel" data-slide-to="0" class="active"></li>
+                        <li data-target="#testimonials-carousel" data-slide-to="1"></li>
+                        <li data-target="#testimonials-carousel" data-slide-to="2"></li>
+                    </ol><!--//carousel-indicators-->
+                    <div class="carousel-inner">
+                        <div class="item active">
+                            <figure class="profile"><img src="{{ url_for('static', filename='assets/images/people/profile-m-1.png') }}" alt="" /></figure>
+                            <div class="content">
+                                <blockquote>
+                                <i class="fa fa-quote-left"></i>
+                                <p>다른 성형외과는 수술안심책임제가 있는데 제가 수술한 곳에는 없어서 내심 걱정이 되었어요.어린나이에 하는 쌍꺼풀 수술도 아니고 게다가 눈매교정에 절개 뒤와 밑트임까지 하니 잘못되면 정말 어쩌나 했어요. </p>
+                                </blockquote>
+                                <p class="source">김ㅇㅇ<br /><span class="title">대전, 17년 3월 수술</span></p>
+                            </div><!--//content-->                         
+                        </div><!--//item-->                        
+                        <div class="item">
+                            <figure class="profile"><img src="{{ url_for('static', filename='assets/images/people/profile-m-2.png') }}" alt="" /></figure>
+                            <div class="content">
+                                <blockquote>
+                                <i class="fa fa-quote-left"></i>
+                                <p>그러다 로디언즈를 소개받고 얼른 등록했는데 정말 안심이 되었어요.물론 수술이 잘되는게 더 중요하지만 믿는 곳이 잇으니 더 두려움 없이 수술을 받을 수 있었답니다. </p>
+                                </blockquote>
+                                <p class="source">이ㅇㅇ<br /><span class="title">서울 17년 8월 수술</span></p>
+                            </div><!--//content-->                         
+                        </div><!--//item-->  
+                        <div class="item">
+                            <figure class="profile"><img src="{{ url_for('static', filename='assets/images/people/profile-m-3.png') }}" alt="" /></figure>
+                            <div class="content">
+                                <blockquote>
+                                <i class="fa fa-quote-left"></i>
+                                <p>제가 수술한 곳에 아는 직원이 있으니 로디언즈를 추천해 보려고 하고요. 저와 함께 등록하신 분도 만족도가 높아요. 다른 분들이 수술을 한다고 하면 꼭 소개할 생각이에요.</p>
+                                </blockquote>
+                                <p class="source">정ㅇㅇ<br /><span class="title">서울 17년 1월 수술</span></p>
+                            </div><!--//content-->                         
+                        </div><!--//item-->                                         
+                    </div><!--//carousel-inner-->
+                    
+                </div><!--//carousel-->
+            </div><!--//container-->
+        </section><!--//testimonials-->
+        
+        <!-- ******CTA Section****** -->
+        <section id="cta-section" class="section cta-section text-center home-cta-section">
+            <div class="container">
+               <h2 class="title">안심성형 서비스를 신청할 준비가 되셨나요?</h2>
+               <p class="intro"><span class="counting">200</span>이상의 안심병원들이 준비중에 있습니다.</p>
+               <p><a class="btn btn-cta btn-cta-primary" href="#">서비스 신청하기</a></p>
+            </div><!--//container-->
+        </section><!--//cta-section-->
+        
+    </div><!--//section-wrapper-->
+    
+    <!-- ******FOOTER****** --> 
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="container">
+                <div class="row">                    
+                    <div class="footer-col links col-md-2 col-sm-4 col-xs-12">
+                        <div class="footer-col-inner">
+                            <h3 class="title">About us</h3>
+                            <ul class="list-unstyled">
+                                <li><a href="#"><i class="fa fa-caret-right"></i>안심병원</a></li>
+                                <li><a href="#"><i class="fa fa-caret-right"></i>안심변호사</a></li>
+                                <li><a href="#"><i class="fa fa-caret-right"></i>안심이벤트</a></li>
+                                <li><a href="#"><i class="fa fa-caret-right"></i>안심후기</a></li>
+                                <li><a href="#"><i class="fa fa-caret-right"></i>안심문의</a></li>
+                            </ul>
+                        </div><!--//footer-col-inner-->
+                    </div><!--//foooter-col-->    
+                    <div class="footer-col links col-md-2 col-sm-4 col-xs-12">
+                        <div class="footer-col-inner">
+                            <h3 class="title">Product</h3>
+                            <ul class="list-unstyled">
+                                <li><a href="#"><i class="fa fa-caret-right"></i>안심병원</a></li>
+                                <li><a href="#"><i class="fa fa-caret-right"></i>안심변호사</a></li>
+                                <li><a href="#"><i class="fa fa-caret-right"></i>안심이벤트</a></li>
+                                <li><a href="#"><i class="fa fa-caret-right"></i>안심후기</a></li>
+                                <li><a href="#"><i class="fa fa-caret-right"></i>안심문의</a></li>
+                            </ul>
+                        </div><!--//footer-col-inner-->
+                    </div><!--//foooter-col-->              
+                    <div class="footer-col links col-md-2 col-sm-4 col-xs-12 sm-break">
+
+                    </div><!--//foooter-col-->
+                    <div class="footer-col contact col-xs-12 col-md-6">
+                        <div class="footer-col-inner">
+                            <h3 class="title">Contact us</h3>
+                            <p class="adr clearfix">
+                                <i class="fa fa-map-marker pull-left"></i>
+                                <span class="adr-group pull-left">
+                                    <span class="street-address">서울 구로구 </span><br>
+                                    <span class="region">디지털로32가길 16</span><br>
+                                    <span class="postal-code">1002A호</span><br>
+                                    <span class="country-name">Korea</span>
+                                </span>
+                            </p>
+                            <p class="tel"><i class="fa fa-phone"></i>070-4319-0911</p>
+                            <p class="email"><i class="fa fa-envelope-o"></i><a href="#">help@lawdians.com</a></p>
+                        </div><!--//footer-col-inner-->
+                    </div><!--//contact-->
+                    <div class="clearfix"></div> 
+                </div><!--//row-->
+            </div><!--//container-->
+        </div><!--//footer-content-->
+        <div class="bottom-bar">
+            <div class="container">
+                <small class="copyright">Copyright @ <a href="#" target="_blank">Lawdians</a></small>
+            </div><!--//container-->
+        </div><!--//bottom-bar-->
+    </footer><!--//footer-->
+ 
+    <!-- Javascript -->
+    <script type="text/javascript" src="{{ url_for('static', filename='assets/plugins/jquery-1.12.3.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='assets/plugins/bootstrap/js/bootstrap.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='assets/plugins/bootstrap-hover-dropdown.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='assets/plugins/back-to-top.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='assets/plugins/jquery-placeholder/jquery.placeholder.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='assets/plugins/FitVids/jquery.fitvids.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='assets/plugins/flexslider/jquery.flexslider-min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='assets/js/main.js') }}"></script>
+            
+</body>
+</html> 
+
