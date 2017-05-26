@@ -457,6 +457,7 @@ select {
 }
 .headline-bg.contact-headline-bg {
   background-image: url('../images/background/bg-header-small-3.jpg');
+  background-position: 5% 25%;
 }
 .headline-bg.about-headline-bg {
   background-image: url('../images/background/bg-header-small-4.jpg');
@@ -1632,7 +1633,7 @@ select {
   right: 5%!important;
 }
 .blog-slider .flex-caption {
-  padding-top: 90px;
+  padding-top: 180px;
   position: relative;
   z-index: 20;
   text-align: center;
