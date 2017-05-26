@@ -409,7 +409,7 @@ select {
   height: 780px;
 }
 .bg-slider-wrapper .flexslider .slide.slide-1 {
-  background: #253340 url('../images/background/bg-header-4.jpg') no-repeat 50% top;
+  background: #253340 url('../images/background/bg-header-1.jpg') no-repeat 50% top;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -445,7 +445,7 @@ select {
   width: 100%;
   top: 0;
   left: 0;
-  height: 500px;
+  height: 350px;
   background: #253340 url('../images/background/bg-header-small-1.jpg') no-repeat 50% top;
   -webkit-background-size: cover;
   -moz-background-size: cover;
@@ -1551,11 +1551,12 @@ select {
   z-index: 10;
 }
 .blog-slider .slide.slide-1 {
-  background: #253340 url('../images/blog/post-5.jpg') no-repeat 50% top;
+  background: #253340 url('../images/blog/post-1.jpg') no-repeat 50% top;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
+  background-position-y: 50%;
 }
 .blog-slider .slide.slide-2 {
   background: #253340 url('../images/blog/post-2.jpg') no-repeat 50% top;
@@ -1563,6 +1564,7 @@ select {
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
+  background-position-y: 50%;
 }
 .blog-slider .slide.slide-3 {
   background: #253340 url('../images/blog/post-3.jpg') no-repeat 50% top;
@@ -1570,6 +1572,7 @@ select {
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
+  background-position-y: 50%;
 }
 .blog-slider .slide.slide-4 {
   background: #253340 url('../images/blog/post-4.jpg') no-repeat 50% top;
@@ -1577,6 +1580,7 @@ select {
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
+  background-position-y: 50%;
 }
 .blog-slider .flex-control-nav {
   bottom: 15px;

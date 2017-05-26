@@ -78,7 +78,6 @@
             <h2 class="title">안전하게 예뻐지자!</h2>
             <p class="intro">로디언즈와 함께 안전하게 예뻐지세요.</p>
             <p><a class="btn btn-cta btn-cta-primary" href="{{ url_for('signup') }}">서비스 신청하기</a></p>
-            <button type="button" class="play-trigger btn-link " data-toggle="modal" data-target="#modal-video" ><i class="fa fa-youtube-play"></i> Watch the video</button>
         </div><!--//container-->
     </section><!--//promo-->
     
@@ -96,9 +95,18 @@
                             <p>수술 부작용, 이제 걱정 끝!</p>
                             <p>안심 성형 서비스는 이러 이러한 서비스 입니다.</p>
                         </div>
+                        <div class="quote">
+                            <div class="quote-profile">
+                                <img class="img-responsive img-circle" src="{{ url_for('static', filename='assets/images/people/profile-s-3.png') }}" alt="" />
+                            </div><!--//profile-->
+                            <div class="quote-content">
+                                <blockquote><p>로디언즈 너무너무 친절하고 세심히 관리해주시네요.</p></blockquote>
+                                <p class="source"><a href="#">@테스트</a>, 서울</p>
+                            </div><!--//quote-content-->
+                        </div><!--//quote-->
                     </div><!--//content-->
                     <figure class="figure col-md-offset-1 col-sm-offset-0 col-xs-offset-0 col-xs-12 col-md-7">
-                        <img class="img-responsive" src="#" alt="" />
+                        <img class="img-responsive" src="{{ url_for('static', filename='assets/images/figures/figure-1.jpg') }}" alt="" />
                         <figcaption class="figure-caption">(안심성형 서비스 소개 이미지) </figcaption>
                     </figure>
                 </div><!--//item-->
@@ -111,12 +119,18 @@
                             <p>안심병원은 이러이러한 병원들의 명칭입니다.</p>
                             <p> <a href="download.html">안심병원 보러가기</a></p>
                         </div>
+                        <div class="quote">
+                            <div class="quote-profile">
+                                <img class="img-responsive img-circle" src="{{ url_for('static', filename='assets/images/people/profile-s-4.png') }}" alt="" />
+                            </div><!--//profile-->
+                            <div class="quote-content">
+                                <blockquote><p>로디언즈 너무 좋습니다.</p></blockquote>
+                                <p class="source">@로디언즈, 대전</p>
+                            </div><!--//quote-content-->
+                        </div><!--//quote-->
                     </div><!--//content-->
                     <figure class="figure col-md-pull-4 col-sm-pull-0 col-xs-pull-0 col-xs-12 col-md-7">
-                        <img class="img-responsive" src="#" alt="" />
-                        <div class="control text-center">
-                            <button type="button" class="play-trigger" data-toggle="modal" data-target="#modal-video"><i class="fa fa-play"></i></button>                    
-                        </div><!--//control-->
+                        <img class="img-responsive" src="{{ url_for('static', filename='assets/images/figures/figure-2.jpg') }}" alt="" />
                     </figure>
                 </div><!--//item-->
                 
@@ -138,7 +152,7 @@
                         </div><!--//quote-->                        
                     </div><!--//content-->
                     <figure class="figure col-md-offset-1 col-sm-offset-0 col-xs-offset-0 col-xs-12 col-md-7">
-                        <img class="img-responsive" src="#" alt="" />
+                        <img class="img-responsive" src="{{ url_for('static', filename='assets/images/figures/figure-3.jpg') }}" alt="" />
                         <figcaption class="figure-caption">(변호사 사진) </figcaption>
 
                     </figure>
@@ -163,7 +177,7 @@
                         </div><!--//quote-->
                     </div><!--//content-->
                     <figure class="figure col-md-pull-4 col-sm-pull-0 col-xs-pull-0 col-xs-12 col-md-7">
-                        <img class="img-responsive" src="#" alt="" />
+                        <img class="img-responsive" src="{{ url_for('static', filename='assets/images/figures/figure-4.jpg') }}" alt="" />
                     </figure>
                 </div><!--//item-->
 
@@ -256,9 +270,6 @@
                                 <li><a href="#"><i class="fa fa-caret-right"></i>안심문의</a></li>
                             </ul>
                         </div><!--//footer-col-inner-->
-                    </div><!--//foooter-col-->              
-                    <div class="footer-col links col-md-2 col-sm-4 col-xs-12 sm-break">
-
                     </div><!--//foooter-col-->
                     <div class="footer-col contact col-xs-12 col-md-6">
                         <div class="footer-col-inner">
