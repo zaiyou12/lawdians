@@ -1,0 +1,24 @@
+.blog-slider {
+    margin-top: 0px;
+}
+
+.featured-blog-posts {
+    height: 400px;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.blog {
+    margin-top: 410px;
+}
+
+@media (min-width: 768px) and (max-width: 992px) {
+    .blog-page .header h1.logo {
+        float: none;
+    }
+
+    .blog-page .main-nav.navbar-right {
+        float: none !important;
+    }
+}

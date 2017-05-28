@@ -24,14 +24,8 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='assets/plugins/flexslider/flexslider.css') }}">
     <!-- Theme CSS -->
     <link id="theme-style" rel="stylesheet" href=" {{ url_for('static', filename='assets/css/styles-3.css') }}">
-
-
-    <style type="text/css">
-        .blog-slider {
-            margin-top: 0px;
-        }
-    </style>
-
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{url_for('static', filename='assets/css/postscript.css')}}">
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
@@ -40,45 +34,44 @@
 </head>
 
 <body class="blog-page">
+<!-- ******HEADER****** -->
+<header id="header" class="header navbar-fixed-top">
+    <div class="container">
+        <h1 class="logo">
+            <a href="{{ url_for('index') }}"><span class="text">Lawdians</span></a>
+        </h1><!--//logo-->
+        <nav class="main-nav navbar-right" role="navigation">
+            <div class="navbar-header">
+                <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button><!--//nav-toggle-->
+            </div><!--//navbar-header-->
+            <div id="navbar-collapse" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li class="nav-item"><a href="{{ url_for('index') }}">Home</a></li>
+                    <li class="nav-item"><a href="{{ url_for('hospital') }}">안심병원</a></li>
+                    <li class="nav-item"><a href="{{ url_for('lawyer') }}">안심변호사</a></li>
+                    <li class="nav-item"><a href="{{ url_for('event') }}">안심이벤트</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="0"
+                           data-close-others="false" href="#">고객센터 <i class="fa fa-angle-down"></i></a>
+                        <ul class="dropdown-menu">
+                            <li class="active"><a href="{{ url_for('post_script') }}">안심후기</a></li>
+                            <li><a href="{{ url_for('contact') }}">안심문의</a></li>
+                        </ul>
+                    </li><!--//dropdown-->
+                    <li class="nav-item"><a href="{{ url_for('login') }}">로그인</a></li>
+                    <li class="nav-item nav-item-cta last"><a class="btn btn-cta btn-cta-secondary"
+                                                              href="{{ url_for('signup') }}">회원가입</a></li>
+                </ul><!--//nav-->
+            </div><!--//navabr-collapse-->
+        </nav><!--//main-nav-->
+    </div><!--//container-->
+</header><!--//header-->
 <div class="wrapper">
-    <!-- ******HEADER****** -->
-    <header id="header" class="header navbar-fixed-top">
-        <div class="container">
-            <h1 class="logo">
-                <a href="{{ url_for('index') }}"><span class="text">Lawdians</span></a>
-            </h1><!--//logo-->
-            <nav class="main-nav navbar-right" role="navigation">
-                <div class="navbar-header">
-                    <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-collapse">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button><!--//nav-toggle-->
-                </div><!--//navbar-header-->
-                <div id="navbar-collapse" class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav">
-                        <li class="nav-item"><a href="{{ url_for('index') }}">Home</a></li>
-                        <li class="nav-item"><a href="{{ url_for('hospital') }}">안심병원</a></li>
-                        <li class="nav-item"><a href="{{ url_for('lawyer') }}">안심변호사</a></li>
-                        <li class="nav-item"><a href="{{ url_for('event') }}">안심이벤트</a></li>
-                        <li class="nav-item dropdown">
-                            <a class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="0"
-                               data-close-others="false" href="#">고객센터 <i class="fa fa-angle-down"></i></a>
-                            <ul class="dropdown-menu">
-                                <li class="active"><a href="{{ url_for('post_script') }}">안심후기</a></li>
-                                <li><a href="{{ url_for('contact') }}">안심문의</a></li>
-                            </ul>
-                        </li><!--//dropdown-->
-                        <li class="nav-item"><a href="{{ url_for('login') }}">로그인</a></li>
-                        <li class="nav-item nav-item-cta last"><a class="btn btn-cta btn-cta-secondary"
-                                                                  href="{{ url_for('signup') }}">회원가입</a></li>
-                    </ul><!--//nav-->
-                </div><!--//navabr-collapse-->
-            </nav><!--//main-nav-->
-        </div><!--//container-->
-    </header><!--//header-->
-
     <section class="featured-blog-posts section">
 
         <div class="flexslider blog-slider">
@@ -117,8 +110,8 @@
                     <div class="post-inner">
                         <figure class="post-thumb">
                             <a href="#"><img class="img-responsive"
-                                                            src="{{ url_for('static', filename='assets/images/blog/post-1-thumb.jpg') }}"
-                                                            alt=""/></a>
+                                             src="{{ url_for('static', filename='assets/images/blog/post-1-thumb.jpg') }}"
+                                             alt=""/></a>
                         </figure><!--//post-thumb-->
                         <div class="content">
                             <h3 class="post-title"><a href=#">신사엘성형외과</a></h3>
@@ -150,8 +143,8 @@
                     <div class="post-inner">
                         <figure class="post-thumb">
                             <a href="#"><img class="img-responsive"
-                                                            src="{{ url_for('static', filename='assets/images/blog/post-2-thumb.jpg') }}"
-                                                            alt=""/></a>
+                                             src="{{ url_for('static', filename='assets/images/blog/post-2-thumb.jpg') }}"
+                                             alt=""/></a>
                         </figure><!--//post-thumb-->
                         <div class="content">
                             <h3 class="post-title"><a href="#">얼굴지방흡입하고 3달 지났어요!!</a></h3>
@@ -183,8 +176,8 @@
                     <div class="post-inner">
                         <figure class="post-thumb">
                             <a href="#"><img class="img-responsive"
-                                                            src="{{ url_for('static', filename='assets/images/blog/post-3-thumb.jpg') }}"
-                                                            alt=""/></a>
+                                             src="{{ url_for('static', filename='assets/images/blog/post-3-thumb.jpg') }}"
+                                             alt=""/></a>
                         </figure><!--//post-thumb-->
                         <div class="content">
                             <h3 class="post-title"><a href="#">턱순이... 탈출했어요ㅎㅎ</a></h3>
@@ -214,8 +207,8 @@
                     <div class="post-inner">
                         <figure class="post-thumb">
                             <a href="#"><img class="img-responsive"
-                                                            src="{{ url_for('static', filename='assets/images/blog/post-4-thumb.jpg') }}"
-                                                            alt=""/></a>
+                                             src="{{ url_for('static', filename='assets/images/blog/post-4-thumb.jpg') }}"
+                                             alt=""/></a>
                         </figure><!--//post-thumb-->
                         <div class="content">
                             <h3 class="post-title"><a href="#">양악한지 5개월 차에용!</a></h3>
@@ -245,8 +238,8 @@
                     <div class="post-inner">
                         <figure class="post-thumb">
                             <a href="#"><img class="img-responsive"
-                                                            src="{{ url_for('static', filename='assets/images/blog/post-5-thumb.jpg') }}"
-                                                            alt=""/></a>
+                                             src="{{ url_for('static', filename='assets/images/blog/post-5-thumb.jpg') }}"
+                                             alt=""/></a>
                         </figure><!--//post-thumb-->
                         <div class="content">
                             <h3 class="post-title"><a href="#">다빈치 성형외과</a></h3>
