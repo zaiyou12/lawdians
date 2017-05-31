@@ -24,6 +24,8 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='assets/plugins/flexslider/flexslider.css') }}">
     <!-- Theme CSS -->
     <link id="theme-style" rel="stylesheet" href=" {{ url_for('static', filename='assets/css/styles-3.css') }}">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{url_for('static', filename='assets/css/hospital.css')}}">
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
@@ -85,6 +87,183 @@
         </div><!--//story-container-->
     </div><!--//container-->
 </section><!--//story-video-->
+
+<section class="featured-blog-posts section padding-top-section">
+    <h2 class="title text-center">추천 안심 병원</h2>
+    <div class="flexslider blog-slider">
+        <ul class="slides">
+            <li class="slide slide-1">
+                <div class="flex-caption container">
+                    <h5 class="title"><a href="#">HIFU신기술로 수술없는 최고의 리프팅 효과! 뉴테라리프팅 13만원</a></h5>
+                    <div class="meta">안양/범계역 라인라마르의원</div>
+                    <a class="more-link" href="#">더 알아보기 &rarr;</a>
+                </div><!--//flex-caption-->
+            </li>
+            <li class="slide slide-2">
+                <div class="flex-caption container">
+                    <h5 class="title"><a href="#">내 몸의 순환과 뽀얀피부를 위한 신데렐라&백옥 주사가 2만9천원!</a></h5>
+                    <div class="meta">중구/명동역 미탐클리닉 명동점</div>
+                    <a class="more-link" href="#">더 알아보기 &rarr;</a>
+                </div><!--//flex-caption-->
+            </li>
+            <li class="slide slide-3">
+                <div class="flex-caption container">
+                    <h5 class="title"><a href="#">생기있는 입술라인은 물론 훔치고 싶은 탱탱함 까지 한번에!~ 입술필러(뉴라미스1cc) 8만원</a></h5>
+                    <div class="meta">강남/신사역 강남피어리의원</div>
+                    <a class="more-link" href="#">더 알아보기 &rarr;</a>
+                </div><!--//flex-caption-->
+            </li>
+            <li class="slide slide-4">
+                <div class="flex-caption container">
+                    <h5 class="title"><a href="#">퍼펙트웨이브~ 명품 LDM 물방울리프팅</a></h5>
+                    <div class="meta">강남/신사역 제이디클리닉</div>
+                    <a class="more-link" href="#">더 알아보기 &rarr;</a>
+                </div><!--//flex-caption-->
+            </li>
+        </ul><!--//slides-->
+    </div><!--//flexslider-->
+</section><!--//featured-blog-posts-->
+
+<section class="section padding-top-section">
+    <h2 class="title text-center">카테고리</h2>
+    <nav class="navbar navbar-default hospital-category">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                        data-target="#hospital-category" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div class="collapse navbar-collapse" id="hospital-category">
+                <ul class="nav navbar-nav">
+                    <li><a role="button">전체</a></li>
+                    <li><a role="button">쁘띠시술</a></li>
+                    <li><a role="button">피부</a></li>
+                    <li><a role="button">다이어트</a></li>
+                    <li><a role="button">리프</a></li>
+                    <li><a role="button">반영구화장</a></li>
+                    <li><a role="button">헤어라인</a></li>
+                    <li><a role="button">눈</a></li>
+                    <li><a role="button">코</a></li>
+                    <li><a role="button">치아/입</a></li>
+                    <li><a role="button">지방이식</a></li>
+                    <li><a role="button">가슴</a></li>
+                    <li><a role="button">안면윤곽</a></li>
+                    <li><a role="button">이마</a></li>
+                    <li><a role="button">양악</a></li>
+                    <li><a role="button">기타</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav><!-- hospital-categort -->
+    <div class="search-filter clearfix">
+        <div class="col-md-6">
+            <ul class="filter-sorting">
+                <li>
+                    <button class="on">업데이트순</button>
+                </li>
+                <li>
+                    <button>최신순</button>
+                </li>
+                <li>
+                    <button>인기순</button>
+                </li>
+                <li>
+                    <button>가격높은순</button>
+                </li>
+                <li>
+                    <button>가격낮은순</button>
+                </li>
+            </ul>
+        </div>
+        <div class="col-md-6">
+            <div class="dropdown address-filter">
+                <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="true">
+                    <span
+                            class="glyphicon glyphicon-map-marker">전체지역</span>
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                    <li><a href="#">전체</a></li>
+                    <li><a href="#">강남|서초|송파</a></li>
+                    <li><a href="#">강동|성동|광진</a></li>
+                    <li><a href="#">마포|중구|서대문</a></li>
+                    <li><a href="#">동작|관악|영등포</a></li>
+                    <li><a href="#">양천|강서</a></li>
+                </ul>
+            </div>
+        </div>
+    </div><!--search filter-->
+    <div class="hospital-list clearfix">
+        <ul>
+            <li>
+                <div class="item-wrapper">
+                    <div class="img-wrapper">
+                        <img src="{{ url_for('static', filename='assets/images/event/event_1.png') }}" class="hospital-image">
+                    </div>
+                    <div class="hospital-desc">
+                        <h4>다빈치 성형외과</h4>
+                        <h5>서울특별시 강남구</h5>
+                        <div>
+                            <button class="btn btn-default">전화상담</button>
+                            <button class="btn btn-default">진행중인 이벤트</button>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li >
+                <div class="item-wrapper">
+                    <div class="img-wrapper">
+                        <img src="{{ url_for('static', filename='assets/images/event/event_2.png') }}" class="hospital-image">
+                    </div>
+                    <div class="hospital-desc">
+                        <h4>다빈치 성형외과</h4>
+                        <h5>서울특별시 강남구</h5>
+                        <div>
+                            <button class="btn btn-default">전화상담</button>
+                            <button class="btn btn-default">진행중인 이벤트</button>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="item-wrapper">
+                    <div class="img-wrapper">
+                        <img src="{{ url_for('static', filename='assets/images/event/event_3.png') }}" class="hospital-image">
+                    </div>
+                    <div class="hospital-desc">
+                        <h4>다빈치 성형외과</h4>
+                        <h5>서울특별시 강남구</h5>
+                        <div>
+                            <button class="btn btn-default">전화상담</button>
+                            <button class="btn btn-default">진행중인 이벤트</button>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="item-wrapper">
+                    <div class="img-wrapper">
+                        <img src="{{ url_for('static', filename='assets/images/event/event_4.png') }}" class="hospital-image">
+                    </div>
+                    <div class="hospital-desc">
+                        <h4>다빈치 성형외과</h4>
+                        <h5>서울특별시 강남구</h5>
+                        <div>
+                            <button class="btn btn-default">전화상담</button>
+                            <button class="btn btn-default">진행중인 이벤트</button>
+                        </div>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+</section><!-- hospital list -->
 
 <!-- ******FOOTER****** -->
 <footer class="footer">
@@ -159,7 +338,7 @@
 <script type="text/javascript"
         src="{{ url_for('static', filename='assets/plugins/flexslider/jquery.flexslider-min.js') }}"></script>
 <script type="text/javascript" src="{{ url_for('static', filename='assets/js/main.js') }}"></script>
-
+<script type="text/javascript" src="{{ url_for('static', filename='assets/js/blog.js') }}"></script>
 
 </body>
 </html> 
