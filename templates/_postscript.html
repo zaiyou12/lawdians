@@ -2,9 +2,9 @@
 {% block styles %}
     {{ super() }}
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="{{url_for('static', filename='assets/css/postscript.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/postscript.css')}}">
 {% endblock styles %}
-{% block title %}{{title|default}}class="blog-page"{% endblock title %}
+{% block title %}{{title|default}}안심후기{% endblock title %}
 {% block content %}
 <div class="wrapper">
     <section class="featured-blog-posts section">

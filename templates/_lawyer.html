@@ -2,7 +2,7 @@
 {% block styles %}
     {{ super() }}
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="{{url_for('static', filename='assets/css/lawyer.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/lawyer.css')}}">
 {% endblock styles %}
 {% block body_attribs %}class="about-page"{% endblock body_attribs %}
 {%block content %}
@@ -30,7 +30,6 @@
                   <img src="{{ url_for('static', filename='assets/images/lawyer/lawyer_1.png') }}"
                                  class="img-responsive">
                 </div>
-
                     <div class=" item-content col-md-6">
                         <h3 class="item-title">차재승 변호사</h3>
                         <p class="item-small-title">서울 관악구 신림동 59길 / 02-872-1307</p>
@@ -54,7 +53,6 @@
                     <img src="{{ url_for('static', filename='assets/images/lawyer/lawyer_2.png') }}"
                                  class="img-responsive">
                 </div>
-
                     <div class="item-content col-md-6">
                         <h3 class="item-title">김평호 변호사</h3>
                         <p class="item-small-title">경기 성남구 중원구 산성대로 454번 신우빌딩 201 / 031-744-6655</p>
@@ -99,83 +97,4 @@
             </div>
           </div>
 </section>
-<<<<<<< HEAD
 {% endblock content %}
-
-=======
-
-<!-- ******FOOTER****** -->
-<footer class="footer">
-    <div class="footer-content">
-        <div class="container">
-            <div class="row">
-                <div class="footer-col links col-md-2 col-sm-4 col-xs-6">
-                    <div class="footer-col-inner">
-                        <h3 class="title">About us</h3>
-                        <ul class="list-unstyled">
-                            <li><a href="#"><i class="fa fa-caret-right"></i>안심병원</a></li>
-                            <li><a href="#"><i class="fa fa-caret-right"></i>안심변호사</a></li>
-                            <li><a href="#"><i class="fa fa-caret-right"></i>안심이벤트</a></li>
-                            <li><a href="#"><i class="fa fa-caret-right"></i>안심후기</a></li>
-                            <li><a href="#"><i class="fa fa-caret-right"></i>안심문의</a></li>
-                        </ul>
-                    </div><!--//footer-col-inner-->
-                </div><!--//foooter-col-->
-                <div class="footer-col links col-md-2 col-sm-4 col-xs-6">
-                    <div class="footer-col-inner">
-                        <h3 class="title">Product</h3>
-                        <ul class="list-unstyled">
-                            <li><a href="#"><i class="fa fa-caret-right"></i>안심병원</a></li>
-                            <li><a href="#"><i class="fa fa-caret-right"></i>안심변호사</a></li>
-                            <li><a href="#"><i class="fa fa-caret-right"></i>안심이벤트</a></li>
-                            <li><a href="#"><i class="fa fa-caret-right"></i>안심후기</a></li>
-                            <li><a href="#"><i class="fa fa-caret-right"></i>안심문의</a></li>
-                        </ul>
-                    </div><!--//footer-col-inner-->
-                </div><!--//foooter-col-->
-                <div class="footer-col col-xs-12 col-md-6 col-md-offset-2 ">
-                    <div class="footer-col-inner">
-                        <h3 class="title">Contact us</h3>
-                        <p class="adr clearfix">
-                            <i class="fa fa-map-marker pull-left"></i>
-                            <span class="adr-group pull-left">
-                                    <span class="street-address">서울 구로구 </span>
-                                    <span class="region">디지털로32가길 16</span>
-                                    <span class="postal-code">1002A호</span>
-                                    <span class="country-name">Korea</span>
-                                </span>
-                        </p>
-                        <p class="tel"><i class="fa fa-phone"></i> 070-4319-0911</p>
-                        <p class="email"><i class="fa fa-envelope-o"></i><a href="#">help@lawdians.com</a></p>
-                    </div><!--//footer-col-inner-->
-                </div><!--//contact-->
-                <div class="clearfix"></div>
-            </div><!--//row-->
-        </div><!--//container-->
-    </div><!--//footer-content-->
-    <div class="bottom-bar">
-        <div class="container">
-            <small class="copyright">Copyright @ <a href="#" target="_blank">Lawdians</a></small>
-        </div><!--//container-->
-    </div><!--//bottom-bar-->
-</footer><!--//footer-->
-
-<!-- Javascript -->
-<script type="text/javascript" src="{{ url_for('static', filename='assets/plugins/jquery-1.12.3.min.js') }}"></script>
-<script type="text/javascript"
-        src="{{ url_for('static', filename='assets/plugins/bootstrap/js/bootstrap.min.js') }}"></script>
-<script type="text/javascript"
-        src="{{ url_for('static', filename='assets/plugins/bootstrap-hover-dropdown.min.js') }}"></script>
-<script type="text/javascript" src="{{ url_for('static', filename='assets/plugins/back-to-top.js') }}"></script>
-<script type="text/javascript"
-        src="{{ url_for('static', filename='assets/plugins/jquery-placeholder/jquery.placeholder.js') }}"></script>
-<script type="text/javascript"
-        src="{{ url_for('static', filename='assets/plugins/FitVids/jquery.fitvids.js') }}"></script>
-<script type="text/javascript"
-        src="{{ url_for('static', filename='assets/plugins/flexslider/jquery.flexslider-min.js') }}"></script>
-<script type="text/javascript" src="{{ url_for('static', filename='assets/js/main.js') }}"></script>
-
-
-</body>
-</html>
->>>>>>> 639209ebd705edd48c5e44ec3cfe54311e1b70a3
