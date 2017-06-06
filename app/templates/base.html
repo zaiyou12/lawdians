@@ -5,7 +5,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="description" content="lawdians web site">
     <meta name="author" content="blackrubystudio">
-    <meta name="google-signin-client_id" content="829481343425-ccgeunhe0s275m7t25h2fe9vu6h60psq.apps.googleusercontent.com">
 {% endblock metas %}
 {% block styles %}
     {{ super() }}
@@ -25,54 +24,60 @@
     <link id="theme-style" rel="stylesheet" href=" {{ url_for('static', filename='css/styles.css') }}">
 {% endblock styles %}
 {% block body %}
-    <div class="upper-wrapper">
-        {% block navbar %}
-            <!-- ******HEADER****** -->
-            <header class="header">
-                <div class="container">
-                    <h1 class="logo">
-                        <a href="{{ url_for('index') }}"><span class="logo-icon"></span><span
-                                class="text">Lawdians</span></a>
-                    </h1><!--//logo-->
-
-                </div><!--//container-->
-            </header><!--//header-->
-        {% endblock navbar %}
-        {% block content %}
-            <!-- ******Login Section****** -->
-            <section{% block section_attribs %}{% endblock section_attribs %}>
-                <div class="container">
-                    <div class="row">
-                        <div class="form-box col-md-offset-2 col-sm-offset-0 xs-offset-0 col-xs-12 col-md-8">
-                            <div class="form-box-inner">
-                                {% block section_content %}
-                                {% endblock section_content %}
-                                <div class="row">
-                                    <div class="form-container col-xs-12 col-md-5">
-                                        {% block form %}
-                                        {% endblock form %}
-                                    </div>
-                                    <!--//form-container-->
-                                    <div class="social-btns col-md-offset-1 col-sm-offset-0 col-sm-offset-0 col-xs-12 col-md-5">
-                                        <div class="divider"><span>Or</span></div>
-                                        {% block social_btns %}
-                                        {% endblock social_btns %}
-                                    </div><!--//social-btns-->
-                                </div><!--//row-->
-                            </div><!--//form-box-inner-->
-                        </div><!--//form-box-->
-                    </div><!--//row-->
-                </div><!--//container-->
-            </section><!--//contact-section-->
-        {% endblock content %}
-    </div><!--//upper-wrapper-->
+    {% block navbar %}
+        <!-- ******HEADER****** -->
+        <header id="header" class="header navbar-fixed-top">
+            <div class="container">
+                <h1 class="logo">
+                    <a href="{{ url_for('main.index') }}"><span class="text">Lawdians</span></a>
+                </h1><!--//logo-->
+                <nav class="main-nav navbar-right" role="navigation">
+                    <div class="navbar-header">
+                        <button class="navbar-toggle" type="button" data-toggle="collapse"
+                                data-target="#navbar-collapse">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button><!--//nav-toggle-->
+                    </div><!--//navbar-header-->
+                    <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item"><a href="{{ url_for('main.index') }}">Home</a></li>
+                            <li class="nav-item"><a href="{{ url_for('main.index') }}">안심병원</a></li>
+                            <li class="nav-item"><a href="{{ url_for('main.index') }}">안심변호사</a></li>
+                            <li class="nav-item"><a href="{{ url_for('main.index') }}">안심이벤트</a></li>
+                            <li class="nav-item dropdown">
+                                <a class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="0"
+                                   data-close-others="false" href="#">고객센터 <i class="fa fa-angle-down"></i></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="{{ url_for('main.index') }}">안심후기</a></li>
+                                    <li><a href="{{ url_for('main.index') }}">안심문의</a></li>
+                                </ul>
+                            </li><!--//dropdown-->
+                            <li class="nav-item"><a href="{{ url_for('auth.login') }}">로그인</a></li>
+                            <li class="nav-item nav-item-cta last"><a class="btn btn-cta btn-cta-secondary"
+                                                                      href="{{ url_for('auth.login') }}">회원가입</a></li>
+                        </ul>
+                        <!--//nav-->
+                    </div>
+                    <!--//navabr-collapse-->
+                </nav>
+                <!--//main-nav-->
+            </div>
+            <!--//container-->
+        </header>
+        <!--//header-->
+    {% endblock navbar %}
+    {% block content %}
+    {% endblock content %}
     {% block footer %}
         <!-- ******FOOTER****** -->
         <footer class="footer">
             <div class="footer-content">
                 <div class="container">
                     <div class="row">
-                        <div class="footer-col links col-md-2 col-sm-4 col-xs-12">
+                        <div class="footer-col links col-md-2 col-sm-4 col-xs-6">
                             <div class="footer-col-inner">
                                 <h3 class="title">About us</h3>
                                 <ul class="list-unstyled">
@@ -84,7 +89,7 @@
                                 </ul>
                             </div><!--//footer-col-inner-->
                         </div><!--//foooter-col-->
-                        <div class="footer-col links col-md-2 col-sm-4 col-xs-12">
+                        <div class="footer-col links col-md-2 col-sm-4 col-xs-6">
                             <div class="footer-col-inner">
                                 <h3 class="title">Product</h3>
                                 <ul class="list-unstyled">
@@ -96,16 +101,15 @@
                                 </ul>
                             </div><!--//footer-col-inner-->
                         </div><!--//foooter-col-->
-
                         <div class="footer-col contact col-xs-12 col-md-6">
                             <div class="footer-col-inner">
                                 <h3 class="title">Contact us</h3>
                                 <p class="adr clearfix">
                                     <i class="fa fa-map-marker pull-left"></i>
                                     <span class="adr-group pull-left">
-                                    <span class="street-address">서울 구로구 </span><br>
-                                    <span class="region">디지털로32가길 16</span><br>
-                                    <span class="postal-code">1002A호</span><br>
+                                    <span class="street-address">서울 구로구 </span>
+                                    <span class="region">디지털로32가길 16</span>
+                                    <span class="postal-code">1002A호</span>
                                     <span class="country-name">Korea</span>
                                 </span>
                                 </p>
@@ -124,6 +128,7 @@
             </div><!--//bottom-bar-->
         </footer><!--//footer-->
     {% endblock footer %}
+
     {% block scripts %}
         <!-- Javascript -->
         <script type="text/javascript"
@@ -140,6 +145,6 @@
         <script type="text/javascript"
                 src="{{ url_for('static', filename='assets/plugins/flexslider/jquery.flexslider-min.js') }}"></script>
         <script type="text/javascript" src="{{ url_for('static', filename='assets/js/main.js') }}"></script>
-
+        <script type="text/javascript" src="{{ url_for('static', filename='assets/js/blog.js') }}"></script>
     {% endblock scripts %}
 {% endblock body %}

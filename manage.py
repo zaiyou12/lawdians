@@ -1,64 +1,28 @@
 import os
 
-from flask import Flask, render_template
-from flask_bootstrap import Bootstrap
-from flask_script import Manager
+from flask_migrate import MigrateCommand, Migrate
+from flask_script import Manager, Shell
 
-app = Flask(__name__)
-bootstrap = Bootstrap(app)
+from app import db, create_app
+from app.models import User, Role
+
+app = create_app(os.getenv('FLASK_CONFIG') or 'default')
 manager = Manager(app)
-
-#app.config['DEBUG'] = True
-
-# controllers
-@app.route('/')
-def index():
-    return render_template('_base.html')
+migrate = Migrate(app, db)
 
 
-@app.route('/hospital')
-def hospital():
-    return render_template('_hospital.html')
+def make_shell_context():
+    return dict(app=app, db=db, User=User, Role=Role)
+manager.add_command("shell", Shell(make_context=make_shell_context))
+manager.add_command('db', MigrateCommand)
 
 
-@app.route('/lawyer')
-def lawyer():
-    return render_template('_lawyer.html')
-
-
-@app.route('/event')
-def event():
-    return render_template('_event.html')
-
-
-@app.route('/contact')
-def contact():
-    return render_template("_contact.html")
-
-
-@app.route('/post-script')
-def post_script():
-    return render_template("_postscript.html")
-
-
-@app.route('/signup')
-def signup():
-    return render_template("_signup.html")
-
-
-@app.route('/signup_detail')
-def signup_detail():
-    return render_template("_signup_detail.html")
-
-
-@app.route('/login')
-def login():
-    return render_template("_login.html")
-
-
-@app.route('/reset-password')
-def reset_password():
-    return render_template("_reset-password.html")
+@manager.command
+def test():
+    """Run the unit tests."""
+    import unittest
+    tests = unittest.TestLoader().discover('tests')
+    unittest.TextTestRunner(verbosity=2).run(tests)
 
 
 if __name__ == "__main__":
