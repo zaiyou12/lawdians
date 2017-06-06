@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="description" content="lawdians web site">
     <meta name="author" content="blackrubystudio">
+    <meta name="google-signin-client_id" content="829481343425-ccgeunhe0s275m7t25h2fe9vu6h60psq.apps.googleusercontent.com">
 {% endblock metas %}
 {% block styles %}
     {{ super() }}
@@ -21,121 +22,124 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='assets/plugins/font-awesome/css/font-awesome.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='assets/plugins/flexslider/flexslider.css') }}">
     <!-- Theme CSS -->
-    <link id="theme-style" rel="stylesheet" href=" {{ url_for('static', filename='assets/css/styles-3.css') }}">
+    <link id="theme-style" rel="stylesheet" href=" {{ url_for('static', filename='css/styles.css') }}">
 {% endblock styles %}
 {% block body %}
-<div class="upper-wrapper">
-{% block navbar %}
-    <!-- ******HEADER****** -->
-    <header class="header">
-        <div class="container">
-            <h1 class="logo">
-                <a href="{{ url_for('index') }}"><span class="logo-icon"></span><span class="text">Lawdians</span></a>
-            </h1><!--//logo-->
+    <div class="upper-wrapper">
+        {% block navbar %}
+            <!-- ******HEADER****** -->
+            <header class="header">
+                <div class="container">
+                    <h1 class="logo">
+                        <a href="{{ url_for('index') }}"><span class="logo-icon"></span><span
+                                class="text">Lawdians</span></a>
+                    </h1><!--//logo-->
 
-        </div><!--//container-->
-    </header><!--//header-->
-{% endblock navbar %}
-{% block content %}
-    <!-- ******Login Section****** -->
-    <section{% block section_attribs %}{% endblock section_attribs %}>
-        <div class="container">
-            <div class="row">
-                <div class="form-box col-md-offset-2 col-sm-offset-0 xs-offset-0 col-xs-12 col-md-8">
-                    <div class="form-box-inner">
-                        {% block section_content %}
-                        {% endblock section_content %}
-                        <div class="row">
-                            <div class="form-container col-xs-12 col-md-5">
-                                {% block form %}
-                                {% endblock form %}
-                            </div>
-                            <!--//form-container-->
-                            <div class="social-btns col-md-offset-1 col-sm-offset-0 col-sm-offset-0 col-xs-12 col-md-5">
-                                <div class="divider"><span>Or</span></div>
-                                {% block social_btns %}
-                                {% endblock social_btns %}
-                            </div><!--//social-btns-->
-                        </div><!--//row-->
-                    </div><!--//form-box-inner-->
-                </div><!--//form-box-->
-            </div><!--//row-->
-        </div><!--//container-->
-    </section><!--//contact-section-->
-{% endblock content %}
-</div><!--//upper-wrapper-->
-{% block footer %}
-<!-- ******FOOTER****** -->
-<footer class="footer">
-    <div class="footer-content">
-        <div class="container">
-            <div class="row">
-                <div class="footer-col links col-md-2 col-sm-4 col-xs-12">
-                    <div class="footer-col-inner">
-                        <h3 class="title">About us</h3>
-                        <ul class="list-unstyled">
-                            <li><a href="#"><i class="fa fa-caret-right"></i>안심병원</a></li>
-                            <li><a href="#"><i class="fa fa-caret-right"></i>안심변호사</a></li>
-                            <li><a href="#"><i class="fa fa-caret-right"></i>안심이벤트</a></li>
-                            <li><a href="#"><i class="fa fa-caret-right"></i>안심후기</a></li>
-                            <li><a href="#"><i class="fa fa-caret-right"></i>안심문의</a></li>
-                        </ul>
-                    </div><!--//footer-col-inner-->
-                </div><!--//foooter-col-->
-                <div class="footer-col links col-md-2 col-sm-4 col-xs-12">
-                    <div class="footer-col-inner">
-                        <h3 class="title">Product</h3>
-                        <ul class="list-unstyled">
-                            <li><a href="#"><i class="fa fa-caret-right"></i>안심병원</a></li>
-                            <li><a href="#"><i class="fa fa-caret-right"></i>안심변호사</a></li>
-                            <li><a href="#"><i class="fa fa-caret-right"></i>안심이벤트</a></li>
-                            <li><a href="#"><i class="fa fa-caret-right"></i>안심후기</a></li>
-                            <li><a href="#"><i class="fa fa-caret-right"></i>안심문의</a></li>
-                        </ul>
-                    </div><!--//footer-col-inner-->
-                </div><!--//foooter-col-->
+                </div><!--//container-->
+            </header><!--//header-->
+        {% endblock navbar %}
+        {% block content %}
+            <!-- ******Login Section****** -->
+            <section{% block section_attribs %}{% endblock section_attribs %}>
+                <div class="container">
+                    <div class="row">
+                        <div class="form-box col-md-offset-2 col-sm-offset-0 xs-offset-0 col-xs-12 col-md-8">
+                            <div class="form-box-inner">
+                                {% block section_content %}
+                                {% endblock section_content %}
+                                <div class="row">
+                                    <div class="form-container col-xs-12 col-md-5">
+                                        {% block form %}
+                                        {% endblock form %}
+                                    </div>
+                                    <!--//form-container-->
+                                    <div class="social-btns col-md-offset-1 col-sm-offset-0 col-sm-offset-0 col-xs-12 col-md-5">
+                                        <div class="divider"><span>Or</span></div>
+                                        {% block social_btns %}
+                                        {% endblock social_btns %}
+                                    </div><!--//social-btns-->
+                                </div><!--//row-->
+                            </div><!--//form-box-inner-->
+                        </div><!--//form-box-->
+                    </div><!--//row-->
+                </div><!--//container-->
+            </section><!--//contact-section-->
+        {% endblock content %}
+    </div><!--//upper-wrapper-->
+    {% block footer %}
+        <!-- ******FOOTER****** -->
+        <footer class="footer">
+            <div class="footer-content">
+                <div class="container">
+                    <div class="row">
+                        <div class="footer-col links col-md-2 col-sm-4 col-xs-12">
+                            <div class="footer-col-inner">
+                                <h3 class="title">About us</h3>
+                                <ul class="list-unstyled">
+                                    <li><a href="#"><i class="fa fa-caret-right"></i>안심병원</a></li>
+                                    <li><a href="#"><i class="fa fa-caret-right"></i>안심변호사</a></li>
+                                    <li><a href="#"><i class="fa fa-caret-right"></i>안심이벤트</a></li>
+                                    <li><a href="#"><i class="fa fa-caret-right"></i>안심후기</a></li>
+                                    <li><a href="#"><i class="fa fa-caret-right"></i>안심문의</a></li>
+                                </ul>
+                            </div><!--//footer-col-inner-->
+                        </div><!--//foooter-col-->
+                        <div class="footer-col links col-md-2 col-sm-4 col-xs-12">
+                            <div class="footer-col-inner">
+                                <h3 class="title">Product</h3>
+                                <ul class="list-unstyled">
+                                    <li><a href="#"><i class="fa fa-caret-right"></i>안심병원</a></li>
+                                    <li><a href="#"><i class="fa fa-caret-right"></i>안심변호사</a></li>
+                                    <li><a href="#"><i class="fa fa-caret-right"></i>안심이벤트</a></li>
+                                    <li><a href="#"><i class="fa fa-caret-right"></i>안심후기</a></li>
+                                    <li><a href="#"><i class="fa fa-caret-right"></i>안심문의</a></li>
+                                </ul>
+                            </div><!--//footer-col-inner-->
+                        </div><!--//foooter-col-->
 
-                <div class="footer-col contact col-xs-12 col-md-6">
-                    <div class="footer-col-inner">
-                        <h3 class="title">Contact us</h3>
-                        <p class="adr clearfix">
-                            <i class="fa fa-map-marker pull-left"></i>
-                            <span class="adr-group pull-left">
+                        <div class="footer-col contact col-xs-12 col-md-6">
+                            <div class="footer-col-inner">
+                                <h3 class="title">Contact us</h3>
+                                <p class="adr clearfix">
+                                    <i class="fa fa-map-marker pull-left"></i>
+                                    <span class="adr-group pull-left">
                                     <span class="street-address">서울 구로구 </span><br>
                                     <span class="region">디지털로32가길 16</span><br>
                                     <span class="postal-code">1002A호</span><br>
                                     <span class="country-name">Korea</span>
                                 </span>
-                        </p>
-                        <p class="tel"><i class="fa fa-phone"></i>070-4319-0911</p>
-                        <p class="email"><i class="fa fa-envelope-o"></i><a href="#">help@lawdians.com</a></p>
-                    </div><!--//footer-col-inner-->
-                </div><!--//contact-->
-                <div class="clearfix"></div>
-            </div><!--//row-->
-        </div><!--//container-->
-    </div><!--//footer-content-->
-    <div class="bottom-bar">
-        <div class="container">
-            <small class="copyright">Copyright @ <a href="#" target="_blank">Lawdians</a></small>
-        </div><!--//container-->
-    </div><!--//bottom-bar-->
-</footer><!--//footer-->
-{% endblock footer %}
-{% block scripts %}
-<!-- Javascript -->
-<script type="text/javascript" src="{{ url_for('static', filename='assets/plugins/jquery-1.12.3.min.js') }}"></script>
-<script type="text/javascript"
-        src="{{ url_for('static', filename='assets/plugins/bootstrap/js/bootstrap.min.js') }}"></script>
-<script type="text/javascript"
-        src="{{ url_for('static', filename='assets/plugins/bootstrap-hover-dropdown.min.js') }}"></script>
-<script type="text/javascript" src="{{ url_for('static', filename='assets/plugins/back-to-top.js') }}"></script>
-<script type="text/javascript"
-        src="{{ url_for('static', filename='assets/plugins/jquery-placeholder/jquery.placeholder.js') }}"></script>
-<script type="text/javascript"
-        src="{{ url_for('static', filename='assets/plugins/FitVids/jquery.fitvids.js') }}"></script>
-<script type="text/javascript"
-        src="{{ url_for('static', filename='assets/plugins/flexslider/jquery.flexslider-min.js') }}"></script>
-<script type="text/javascript" src="{{ url_for('static', filename='assets/js/main.js') }}"></script>
-{% endblock scripts %}
+                                </p>
+                                <p class="tel"><i class="fa fa-phone"></i>070-4319-0911</p>
+                                <p class="email"><i class="fa fa-envelope-o"></i><a href="#">help@lawdians.com</a></p>
+                            </div><!--//footer-col-inner-->
+                        </div><!--//contact-->
+                        <div class="clearfix"></div>
+                    </div><!--//row-->
+                </div><!--//container-->
+            </div><!--//footer-content-->
+            <div class="bottom-bar">
+                <div class="container">
+                    <small class="copyright">Copyright @ <a href="#" target="_blank">Lawdians</a></small>
+                </div><!--//container-->
+            </div><!--//bottom-bar-->
+        </footer><!--//footer-->
+    {% endblock footer %}
+    {% block scripts %}
+        <!-- Javascript -->
+        <script type="text/javascript"
+                src="{{ url_for('static', filename='assets/plugins/jquery-1.12.3.min.js') }}"></script>
+        <script type="text/javascript"
+                src="{{ url_for('static', filename='assets/plugins/bootstrap/js/bootstrap.min.js') }}"></script>
+        <script type="text/javascript"
+                src="{{ url_for('static', filename='assets/plugins/bootstrap-hover-dropdown.min.js') }}"></script>
+        <script type="text/javascript" src="{{ url_for('static', filename='assets/plugins/back-to-top.js') }}"></script>
+        <script type="text/javascript"
+                src="{{ url_for('static', filename='assets/plugins/jquery-placeholder/jquery.placeholder.js') }}"></script>
+        <script type="text/javascript"
+                src="{{ url_for('static', filename='assets/plugins/FitVids/jquery.fitvids.js') }}"></script>
+        <script type="text/javascript"
+                src="{{ url_for('static', filename='assets/plugins/flexslider/jquery.flexslider-min.js') }}"></script>
+        <script type="text/javascript" src="{{ url_for('static', filename='assets/js/main.js') }}"></script>
+
+    {% endblock scripts %}
 {% endblock body %}

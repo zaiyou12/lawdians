@@ -2,10 +2,13 @@ import os
 
 from flask import Flask, render_template
 from flask_bootstrap import Bootstrap
+from flask_script import Manager
 
 app = Flask(__name__)
 bootstrap = Bootstrap(app)
+manager = Manager(app)
 
+app.config['DEBUG'] = True
 
 # controllers
 @app.route('/')
@@ -59,4 +62,4 @@ def reset_password():
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    manager.run()
