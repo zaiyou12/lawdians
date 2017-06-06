@@ -8,7 +8,7 @@ app = Flask(__name__)
 bootstrap = Bootstrap(app)
 manager = Manager(app)
 
-app.config['DEBUG'] = True
+#app.config['DEBUG'] = True
 
 # controllers
 @app.route('/')
