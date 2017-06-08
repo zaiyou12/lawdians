@@ -6,64 +6,61 @@
     {{ super() }}
     <link id="theme-style" rel="stylesheet" href=" {{ url_for('static', filename='css/register-detail.css') }}">
 {% endblock styles %}
-{% block section_content %}
-    <h2 class="title text-center">상세 회원가입</h2>
-    <p class="intro text-center">3분밖에 소요 안됩니다!</p>
-{% endblock section_content %}
 
 {% block content %}
     <div class="container">
         <div class="row">
             <div class="form-box col-md-offset-2 col-sm-offset-0 xs-offset-0 col-xs-12 col-md-8">
                 <div class="form-box-inner">
-                    <h2 class="title text-center">세부 회원가입</h2>
+                    <h2 class="title text-center">세부정보 입력하기</h2>
                     <p class="intro text-center">3분밖에 소요 안됩니다!</p>
                     <div class="row">
                         <div class="form-container">
                             <form class="signup-form" action="{{ url_for('auth.register_detail') }}" method="post">
                                 {{ form.hidden_tag() }}
-                                <div class="form-group email">
+                                <div class="form-group email {% if form.email.errors %} has-error {% endif %}">
                                     <label class="sr-only" for="signup-email">이메일</label>
                                     {{ form.email(id="signup-email", class="form-control login-email", type="email", disabled="disabled") }}
                                 </div><!--//form-group-->
-                                <div class="form-group username">
+                                <div class="form-group username {% if form.username.errors %} has-error {% endif %}">
                                     <label class="sr-only" for="signup-username">이름</label>
                                     {{ form.username(id="signup-username", class="form-control", placeholder="사용자 이름") }}
                                     <p class="help-block">{{ form.username.errors[0] }}</p>
                                 </div>
-                                <div class="form-group birth">
+                                <div class="form-group birth {% if form.birth_date.errors %} has-error {% endif %}">
                                     <label class="sr-only" for="signup-birth">생년월일</label>
                                     {{ form.birth_date(id="signup-birth", class="form-control", placeholder="생년월일   예)19820301") }}
                                     <p class="help-block">{{ form.birth_date.errors[0] }}</p>
                                 </div>
-                                <div class="form-group gender">
+                                <div class="form-group gender" {% if form.gender.errors %} has-error {% endif %}>
                                     <label class="sr-only" for="signup-gender">성별</label>
                                     {{ form.gender(class="cr-styled") }}
+                                    <p class="help-block">{{ form.gender.errors[0] }}</p>
                                 </div>
-                                <div class="form-group phone">
+                                <div class="form-group address {% if form.address.errors %} has-error {% endif %}">
+                                    <label class="sr-only" for="signup-address">주소</label>
+                                    {{ form.address(id="signup-address", class="form-control", placeholder="주소") }}
+                                    <p class="help-block">{{ form.address.errors[0] }}</p>
+                                </div>
+                                <div class="form-group phone {% if form.phone_number.errors %} has-error {% endif %}">
                                     <label class="sr-only" for="signup-phone">전화번호</label>
                                     <div class="form-group-phone">
                                         {{ form.phone_number(id="signup-phone", class="form-control", placeholder="전화번호   '-' 없이 작성해주세요.") }}
-                                        <button type="button" class="btn btn-info">인증문자 전송</button>
+                                        {{ form.phone_submit(class="btn btn-info") }}
                                     </div>
                                     <p class="help-block">{{ form.phone_number.errors[0] }}</p>
                                 </div>
-                                <div class="form-group confirm">
+                                <div class="form-group confirm {% if form.confirm.errors %} has-error {% endif %}">
                                     <label class="sr-only" for="signup-confirm">인증번호</label>
                                     <div class="form-group-phone">
                                         {{ form.confirm(id="signup-confirm", class="form-control", placeholder="인증번호") }}
-                                        <button type="button" class="btn btn-info">확인</button>
+                                        {{ form.confirm_submit(class="btn btn-info") }}
                                     </div>
                                     <p class="help-block">{{ form.confirm.errors[0] }}</p>
                                 </div>
-                                <div class="form-group address">
-                                    <label class="sr-only" for="signup-address">주소</label>
-                                    {{ form.birth_date(id="signup-address", class="form-control", placeholder="주소") }}
-                                    <p class="help-block">{{ form.address.errors[0] }}</p>
-                                </div>
-                                <div class="form-group recommend">
+                                <div class="form-group recommend {% if form.recommend.errors %} has-error {% endif %}">
                                     <label class="sr-only" for="signup-recommend">추천인</label>
-                                    {{ form.birth_date(id="signup-recommend", class="form-control", placeholder="추천인") }}
+                                    {{ form.recommend(id="signup-recommend", class="form-control", placeholder="추천인") }}
                                     <p class="help-block">{{ form.recommend.errors[0] }}</p>
                                 </div>
                                 {{ form.submit(class="btn btn-block btn-cta-primary") }}

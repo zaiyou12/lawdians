@@ -1,0 +1,27 @@
+{% extends "base_user.html" %}
+{% block body_attribs %} class="signup-page access-page has-full-screen-bg"{% endblock body_attribs %}
+{% block section_attribs %} class="signup-section access-section section"{% endblock section_attribs %}
+{% block styles %}
+    {{ super() }}
+    <link id="theme-style" rel="stylesheet" href=" {{ url_for('static', filename='css/register-detail.css') }}">
+{% endblock styles %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="form-box col-md-offset-2 col-sm-offset-0 xs-offset-0 col-xs-12 col-md-8">
+                <div class="form-box-inner">
+                    <h2 class="title text-center">이메일 계정 확인</h2>
+                    <p class="intro text-center">아직 이메일 계정이 확인되지 않았습니다.</p>
+                    <div class="row">
+                        <p>메일함을 확인하시거나 아래의 링크를 클릭하여 확인하실수 있습니다.</p>
+                        <p>다시 한번 인증메일을 받기를 원하십니까?
+                           <a href="{{ url_for('auth.resend_confirmation') }}">인증메일 받기</a>
+                        </p>
+                    </div>
+                </div><!--//form-box-inner-->
+            </div><!--//form-box-->
+        </div><!--//row-->
+    </div><!--//container-->
+    </section><!--//contact-section-->
+{% endblock content %}

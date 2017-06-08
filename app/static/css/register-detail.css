@@ -96,7 +96,7 @@ ul.cr-styled li label{
 div.form-group-phone{
     display: flex;
 }
-div.form-group-phone button{
+div.form-group-phone input.btn{
     margin-left: 10px;
     flex: 1;
     -webkit-flex: 1;
