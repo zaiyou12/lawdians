@@ -1,11 +1,13 @@
 from flask import render_template, redirect, request, url_for, flash
 from flask_login import login_user, logout_user, login_required, current_user
+
+from app.oauth import OAuthSignIn
 from . import auth
 
 from .. import db
 from ..models import User
 from .forms import LoginForm, RegistrationForm, ChangePasswordForm, PasswordResetRequestForm, PasswordResetForm, \
-    ChangeEmailForm
+    ChangeEmailForm, RegistrationDetailForm
 
 
 @auth.before_app_request
@@ -33,7 +35,7 @@ def login():
         if user is not None and user.verify_password(form.password.data):
             login_user(user, form.remember_me.data)
             return redirect(request.args.get('next') or url_for('main.index'))
-        flash('Invalid username or password.')
+        flash('잘못된 이메일이나 비밀번호가 입력되었습니다.')
     return render_template('auth/login.html', form=form)
 
 
@@ -49,16 +51,52 @@ def logout():
 def register():
     form = RegistrationForm()
     if form.validate_on_submit():
-        user = User(email=form.email.data,
-                    username=form.username.data,
-                    password=form.password.data)
+        user = User(email=form.email.data, password=form.password.data)
         db.session.add(user)
         db.session.commit()
-        token = user.generate_confirmation_token()
-        #TODO: send email
-        flash('A confirmation email has been sent to you by email.')
-        return redirect(url_for('auth.login'))
+        login_user(user, True)
+        return redirect(url_for('auth.register_detail'))
     return render_template('auth/register.html', form=form)
+
+
+@auth.route('/authorize/<provider>')
+def oauth_authorize(provider):
+    if not current_user.is_anonymous:
+        return redirect(url_for('main.index'))
+    oauth = OAuthSignIn.get_provider(provider)
+    return oauth.authorize()
+
+
+@auth.route('/callback/<provider>')
+def oauth_callback(provider):
+    if not current_user.is_anonymous:
+        return redirect(url_for('main.index'))
+    oauth = OAuthSignIn.get_provider(provider)
+    social_id, email = oauth.callback()
+    if social_id is None:
+        flash('Authentication failed.')
+        return redirect(url_for('main.index'))
+    user = User.query.filter_by(social_id=social_id).first()
+    if not user:
+        user = User(social_id=social_id, email=email)
+        db.session.add(user)
+        db.session.commit()
+    login_user(user, force=True)
+    return redirect(url_for('main.index'))
+
+
+@auth.route('/register-detail', methods=['GET', 'POST'])
+@login_required
+def register_detail():
+    form = RegistrationDetailForm()
+    if form.validate_on_submit():
+        #user = User()
+        #token = user.generate_confirmation_token()
+        # TODO: send email
+        flash('감사합니다. 이메일로 인증메일이 전송되었으니 이메일 확인을 통해 회원가입을 완료해주시기 바랍니다.')
+        return redirect(url_for('auth.login'))
+    form.email.data = current_user.email
+    return render_template('auth/register_detail.html', form=form)
 
 
 @auth.route('/confirm/<token>')
@@ -78,7 +116,7 @@ def confirm(token):
 def resend_confirmation():
     token = current_user.generate_confirmation_token()
     # TODO: send email
-    flash('A new confirmation email has been sent to you by email.')
+    flash('이메일로 새로운 인증메일이 전송되었으니 이메일 확인을 통해 회원가입을 완료해주시기 바랍니다.')
     return redirect(url_for('main.index'))
 
 

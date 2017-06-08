@@ -1,0 +1,27 @@
+{% extends "base_user.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block body_attribs %} class="login-page access-page has-full-screen-bg"{% endblock body_attribs %}
+{% block section_attribs %} class="login-section access-section section"{% endblock section_attribs %}
+{% block section_content %}
+<h2 class="title text-center">로디언즈 로그인</h2>
+{% endblock section_content %}
+{% block form %}
+    {{ wtf.quick_form(form) }}
+    <p class="lead">비밀번호를 잊어버리셨나요? <br><a class="signup-link" href="{{ url_for('auth.password_reset_request') }}">비밀번호 리셋</a></p>
+    <p class="lead">아직 계정이 없으신가요? <br><a class="signup-link" href="{{ url_for('auth.register') }}">회원가입하기</a></p>
+{% endblock form %}
+{% block social_btns %}
+<ul class="list-unstyled social-login">
+    <li>
+        <button class="facebook-btn btn" type="button"><i class="fa fa-facebook"></i>Log
+            in with Facebook
+        </button>
+    </li>
+    <li>
+        <button class="google-btn btn" type="button"><i class="fa fa-google-plus"></i>Log
+            in with Google
+        </button>
+    </li>
+</ul>
+{% endblock social_btns %}

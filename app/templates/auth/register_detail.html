@@ -1,0 +1,78 @@
+{% extends "base_user.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+{% block body_attribs %} class="signup-page access-page has-full-screen-bg"{% endblock body_attribs %}
+{% block section_attribs %} class="signup-section access-section section"{% endblock section_attribs %}
+{% block styles %}
+    {{ super() }}
+    <link id="theme-style" rel="stylesheet" href=" {{ url_for('static', filename='css/register-detail.css') }}">
+{% endblock styles %}
+{% block section_content %}
+    <h2 class="title text-center">상세 회원가입</h2>
+    <p class="intro text-center">3분밖에 소요 안됩니다!</p>
+{% endblock section_content %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="form-box col-md-offset-2 col-sm-offset-0 xs-offset-0 col-xs-12 col-md-8">
+                <div class="form-box-inner">
+                    <h2 class="title text-center">세부 회원가입</h2>
+                    <p class="intro text-center">3분밖에 소요 안됩니다!</p>
+                    <div class="row">
+                        <div class="form-container">
+                            <form class="signup-form" action="{{ url_for('auth.register_detail') }}" method="post">
+                                {{ form.hidden_tag() }}
+                                <div class="form-group email">
+                                    <label class="sr-only" for="signup-email">이메일</label>
+                                    {{ form.email(id="signup-email", class="form-control login-email", type="email", disabled="disabled") }}
+                                </div><!--//form-group-->
+                                <div class="form-group username">
+                                    <label class="sr-only" for="signup-username">이름</label>
+                                    {{ form.username(id="signup-username", class="form-control", placeholder="사용자 이름") }}
+                                    <p class="help-block">{{ form.username.errors[0] }}</p>
+                                </div>
+                                <div class="form-group birth">
+                                    <label class="sr-only" for="signup-birth">생년월일</label>
+                                    {{ form.birth_date(id="signup-birth", class="form-control", placeholder="생년월일   예)19820301") }}
+                                    <p class="help-block">{{ form.birth_date.errors[0] }}</p>
+                                </div>
+                                <div class="form-group gender">
+                                    <label class="sr-only" for="signup-gender">성별</label>
+                                    {{ form.gender(class="cr-styled") }}
+                                </div>
+                                <div class="form-group phone">
+                                    <label class="sr-only" for="signup-phone">전화번호</label>
+                                    <div class="form-group-phone">
+                                        {{ form.phone_number(id="signup-phone", class="form-control", placeholder="전화번호   '-' 없이 작성해주세요.") }}
+                                        <button type="button" class="btn btn-info">인증문자 전송</button>
+                                    </div>
+                                    <p class="help-block">{{ form.phone_number.errors[0] }}</p>
+                                </div>
+                                <div class="form-group confirm">
+                                    <label class="sr-only" for="signup-confirm">인증번호</label>
+                                    <div class="form-group-phone">
+                                        {{ form.confirm(id="signup-confirm", class="form-control", placeholder="인증번호") }}
+                                        <button type="button" class="btn btn-info">확인</button>
+                                    </div>
+                                    <p class="help-block">{{ form.confirm.errors[0] }}</p>
+                                </div>
+                                <div class="form-group address">
+                                    <label class="sr-only" for="signup-address">주소</label>
+                                    {{ form.birth_date(id="signup-address", class="form-control", placeholder="주소") }}
+                                    <p class="help-block">{{ form.address.errors[0] }}</p>
+                                </div>
+                                <div class="form-group recommend">
+                                    <label class="sr-only" for="signup-recommend">추천인</label>
+                                    {{ form.birth_date(id="signup-recommend", class="form-control", placeholder="추천인") }}
+                                    <p class="help-block">{{ form.recommend.errors[0] }}</p>
+                                </div>
+                                {{ form.submit(class="btn btn-block btn-cta-primary") }}
+                            </form>
+                        </div>
+                    </div>
+                </div><!--//form-box-inner-->
+            </div><!--//form-box-->
+        </div><!--//row-->
+    </div><!--//container-->
+    </section><!--//contact-section-->
+{% endblock content %}

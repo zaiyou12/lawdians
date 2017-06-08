@@ -1,0 +1,103 @@
+.access-section .form-group.username:before {
+  content: "\f007";
+  font-family: FontAwesome;
+  font-style: normal;
+  font-weight: normal;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  position: absolute;
+  left: 10px;
+  top: 12px;
+  color: #999;
+}
+.access-section .form-group.birth:before {
+  content: "\f073";
+  font-family: FontAwesome;
+  font-style: normal;
+  font-weight: normal;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  position: absolute;
+  left: 10px;
+  top: 12px;
+  color: #999;
+}
+.access-section .form-group.phone:before {
+  content: "\f095";
+  font-family: FontAwesome;
+  font-style: normal;
+  font-weight: normal;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  position: absolute;
+  left: 10px;
+  top: 12px;
+  color: #999;
+}
+.access-section .form-group.confirm:before {
+  content: "\f084";
+  font-family: FontAwesome;
+  font-style: normal;
+  font-weight: normal;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  position: absolute;
+  left: 10px;
+  top: 12px;
+  color: #999;
+}
+.access-section .form-group.address:before {
+  content: "\f041";
+  font-family: FontAwesome;
+  font-style: normal;
+  font-weight: normal;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  position: absolute;
+  left: 10px;
+  top: 12px;
+  color: #999;
+}
+.access-section .form-group.recommend:before {
+  content: "\f06b";
+  font-family: FontAwesome;
+  font-style: normal;
+  font-weight: normal;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  position: absolute;
+  left: 10px;
+  top: 12px;
+  color: #999;
+}
+
+ul.cr-styled{
+    list-style: none;
+}
+ul.cr-styled li{
+    display: inline-block;
+    margin: 0 15px;
+    line-height: 20px;
+    font-weight: normal;
+    cursor: pointer;
+}
+ul.cr-styled li label{
+    font-size: 14px;
+    padding-left: 5px;
+    color: #555;
+}
+
+div.form-group-phone{
+    display: flex;
+}
+div.form-group-phone button{
+    margin-left: 10px;
+    flex: 1;
+    -webkit-flex: 1;
+}

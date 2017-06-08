@@ -5,7 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="description" content="lawdians web site">
     <meta name="author" content="blackrubystudio">
-    <meta name="google-signin-client_id" content="829481343425-ccgeunhe0s275m7t25h2fe9vu6h60psq.apps.googleusercontent.com">
+    <meta name="google-signin-client_id"
+          content="829481343425-ccgeunhe0s275m7t25h2fe9vu6h60psq.apps.googleusercontent.com">
 {% endblock metas %}
 {% block styles %}
     {{ super() }}
@@ -38,9 +39,15 @@
                 </div><!--//container-->
             </header><!--//header-->
         {% endblock navbar %}
-        {% block content %}
-            <!-- ******Login Section****** -->
-            <section{% block section_attribs %}{% endblock section_attribs %}>
+        <!-- ******Login Section****** -->
+        <section{% block section_attribs %}{% endblock section_attribs %}>
+            {% for message in get_flashed_messages() %}
+                <div class="alert alert-warning">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    {{ message }}
+                </div>
+            {% endfor %}
+            {% block content %}
                 <div class="container">
                     <div class="row">
                         <div class="form-box col-md-offset-2 col-sm-offset-0 xs-offset-0 col-xs-12 col-md-8">
@@ -63,8 +70,8 @@
                         </div><!--//form-box-->
                     </div><!--//row-->
                 </div><!--//container-->
-            </section><!--//contact-section-->
-        {% endblock content %}
+                </section><!--//contact-section-->
+            {% endblock content %}
     </div><!--//upper-wrapper-->
     {% block footer %}
         <!-- ******FOOTER****** -->

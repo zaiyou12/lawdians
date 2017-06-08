@@ -2308,7 +2308,7 @@ select {
   position: relative;
 }
 .access-section .form-group.email:before {
-  content: "\f007";
+  content: "\f003";
   font-family: FontAwesome;
   font-style: normal;
   font-weight: normal;
