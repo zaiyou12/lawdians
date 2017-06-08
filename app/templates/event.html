@@ -1,0 +1,42 @@
+{% extends "base_hospital.html" %}
+{% block image_class %} class="headline-bg about-headline-bg"{% endblock image_class %}
+{% block header_title %}안심 이벤트{% endblock header_title %}
+{% block header_text %}
+<p>안심변호사와 안심병원이 함께</p>
+<p>잘하는 곳으로 가서 예뻐지자!</p>
+{% endblock header_text %}
+{% block contents_title %}추천 안심 병원{% endblock contents_title %}
+{% block slide_list %}
+<ul class="slides">
+    {% for event in events %}
+        <li class="slide slide-1">
+            <div class="flex-caption container">
+                <h3 class="title"><a href="#"> event['name'] </a></h3>
+                <div class="meta"> event['hospital'] </div>
+                <a class="more-link" href="#">더 알아보기 &rarr;</a>
+            </div><!--//flex-caption-->
+        </li>
+    {% endfor %}
+</ul>
+{% endblock slide_list %}
+{% block category_list %}
+<ul>
+    {% for event in events %}
+        <li>
+            <div class="item-wrapper">
+                <div class="img-wrapper">
+                    <img src="{{ url_for('static', filename= event['image'] ) }}" class="hospital-image">
+                </div>
+                <div class="hospital-desc">
+                    <h4> event['name'] </h4>
+                    <h5> event['hospital'] </h5>
+                    <div>
+                        <button class="btn btn-default">전화상담</button>
+                        <button class="btn btn-default">진행중인 이벤트</button>
+                    </div>
+                </div>
+            </div>
+        </li>
+    {% endfor %}
+</ul>
+{% endblock category_list %}
