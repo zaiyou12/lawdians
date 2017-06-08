@@ -1,22 +1,52 @@
 {% extends "base_user.html" %}
 {% import "bootstrap/wtf.html" as wtf %}
-{% block body_attribs %} class="signup-page access-page has-full-screen-bg"{% endblock body_attribs %}
-{% block section_attribs %} class="signup-section access-section section"{% endblock section_attribs %}
+
+{% block body_attribs %} class="login-page access-page has-full-screen-bg"{% endblock body_attribs %}
+{% block section_attribs %} class="login-section access-section section"{% endblock section_attribs %}
+
 {% block styles %}
     {{ super() }}
     <link id="theme-style" rel="stylesheet" href=" {{ url_for('static', filename='css/register-detail.css') }}">
+    <link href="{{ url_for('static', filename='css/wizard.css') }}" rel="stylesheet">
 {% endblock styles %}
 
 {% block content %}
     <div class="container">
         <div class="row">
-            <div class="form-box col-md-offset-2 col-sm-offset-0 xs-offset-0 col-xs-12 col-md-8">
+            <div class="form-box col-lg-10 col-lg-offset-1">
                 <div class="form-box-inner">
-                    <h2 class="title text-center">세부정보 입력하기</h2>
-                    <p class="intro text-center">3분밖에 소요 안됩니다!</p>
-                    <div class="row">
-                        <div class="form-container">
-                            <form class="signup-form" action="{{ url_for('auth.register_detail') }}" method="post">
+                    <h2 class="title text-center">안심성형 신청하기</h2>
+                    <p class="intro text-center">올바른 정보를 입력해주셔야 지켜드릴수 있습니다.</p>
+                    <ul class="nav nav-tabs nav-justified">
+                        <li class="active">
+                            <a href="#home-2" data-toggle="tab" aria-expanded="false">
+                                <span class="visible-xs"><i class="fa fa-pencil-square-o"></i></span>
+                                <span class="hidden-xs">1. 개인정보 확인</span>
+                            </a>
+                        </li>
+                        <li class="disabled">
+                            <a href="#profile-2" data-toggle="tab" aria-expanded="false">
+                                <span class="visible-xs"><i class="fa fa-stethoscope"></i></span>
+                                <span class="hidden-xs">2. 안심병원 선택</span>
+                            </a>
+                        </li>
+                        <li class="disabled">
+                            <a href="#messages-2" data-toggle="tab" aria-expanded="true">
+                                <span class="visible-xs"><i class="fa fa fa-university"></i></span>
+                                <span class="hidden-xs">3. 안심변호사 선택</span>
+                            </a>
+                        </li>
+                        <li class="disabled">
+                            <a href="#settings-2" data-toggle="tab" aria-expanded="false">
+                                <span class="visible-xs"><i class="fa fa-credit-card"></i></span>
+                                <span class="hidden-xs">4. 결제 및 신청</span>
+                            </a>
+                        </li>
+                    </ul>
+
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="home-2">
+                            <form class="surgery-form" action="{{ url_for('service.hospital') }}" method="post">
                                 {{ form.hidden_tag() }}
                                 <div class="form-group email {% if form.email.errors %} has-error {% endif %}">
                                     <label class="sr-only" for="signup-email">이메일</label>
@@ -58,17 +88,38 @@
                                     </div>
                                     <p class="help-block">{{ form.confirm.errors[0] }}</p>
                                 </div>
-                                <div class="form-group recommend {% if form.recommend.errors %} has-error {% endif %}">
-                                    <label class="sr-only" for="signup-recommend">추천인</label>
-                                    {{ form.recommend(id="signup-recommend", class="form-control", placeholder="추천인") }}
-                                    <p class="help-block">{{ form.recommend.errors[0] }}</p>
-                                </div>
-                                {{ form.submit(class="btn btn-block btn-cta-primary") }}
+                                <ul class="pager">
+                                    <li class="disabled">
+                                        <a>
+                                            <i class="fa fa-angle-double-left"></i>이전
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <input type="submit">
+                                            <i class="fa fa-angle-double-right"></i>다음
+                                        </input>
+                                    </li>
+                                </ul>
                             </form>
                         </div>
+                        <div class="tab-pane" id="profile-2">
+
+                        </div>
+                        <div class="tab-pane" id="messages-2">
+
+                        </div>
+                        <div class="tab-pane" id="settings-2">
+
+                        </div>
                     </div>
-                </div><!--//form-box-inner-->
-            </div><!--//form-box-->
-        </div><!--//row-->
+
+                    <br>
+                </div>
+            </div>
+        </div> <!-- End row -->
     </div><!--//container-->
 {% endblock content %}
+
+{% block scripts %}
+    {{ super() }}
+{% endblock scripts %}

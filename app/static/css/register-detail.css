@@ -101,3 +101,10 @@ div.form-group-phone input.btn{
     flex: 1;
     -webkit-flex: 1;
 }
+
+#service-hospital-list{
+  max-width: 100%;
+}
+section.padding-top-section{
+  margin-top: 0;
+}
