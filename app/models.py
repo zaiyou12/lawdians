@@ -155,7 +155,7 @@ class Hospital(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(32), unique=True)
     doctor = db.Column(db.String(8))
-    phone = db.Column(db.String(16))
+    phone = db.Column(db.String(32))
     address = db.Column(db.String(128))
     managers = db.relationship('User', backref='hospital', lazy='dynamic')
 
