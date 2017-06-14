@@ -165,7 +165,8 @@ class Hospital(db.Model):
         filepath = os.path.join(os.path.dirname(__file__), 'hospital.csv')
         with open(filepath, 'rt') as csvfile:
             reader = csv.reader(csvfile, delimiter=',')
-            for row in reader[1:]:
+            next(reader, None)
+            for row in reader:
                 hospital = Hospital(name=row[0], doctor=row[1], phone=row[2], address=row[3])
                 db.session.add(hospital)
                 try:
