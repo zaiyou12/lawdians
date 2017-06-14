@@ -8,6 +8,7 @@ class Config:
     SECRET_KEY = os.environ.get('SECRET_KEY') or 'hard to guess string'
     SQLALCHEMY_COMMIT_ON_TEARDOWN = True
     SQLALCHEMY_TRACK_MODIFICATIONS = False
+    HOSPITALS_PER_PAGE = 10
     PERMANENT_SESSION_LIFETIME = datetime.timedelta(days=1)
     SSL_DISABLE = True
     USE_EVALEX = False

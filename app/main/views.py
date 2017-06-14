@@ -1,5 +1,6 @@
-from flask import render_template
+from flask import render_template, request, current_app
 
+from ..models import Hospital
 from . import main
 
 
@@ -10,7 +11,10 @@ def index():
 
 @main.route('/hospital')
 def hospital():
-    return render_template('hospital.html')
+    page = request.args.get('page', 1, type=int)
+    pagination = Hospital.query.paginate(page, per_page=current_app.config['HOSPITALS_PER_PAGE'], error_out=False)
+    hospitals = pagination.items
+    return render_template('hospital.html', hospitals=hospitals, pagination=pagination)
 
 
 @main.route('/lawyer')

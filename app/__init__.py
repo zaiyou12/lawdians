@@ -38,4 +38,7 @@ def create_app(config_name):
     from .service import service as service_blueprint
     app.register_blueprint(service_blueprint, url_prefix='/service')
 
+    from .hos import hos as hos_blueprint
+    app.register_blueprint(hos_blueprint, url_prefix='/hospital')
+
     return app

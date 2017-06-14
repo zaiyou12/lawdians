@@ -1,4 +1,5 @@
 {% extends "base_hospital.html" %}
+{% import "_macros.html" as macros %}
 {% block image_class %} class="headline-bg"{% endblock image_class %}
 {% block header_title %}안전하게 예뻐지자{% endblock header_title %}
 {% block header_text %}
@@ -8,11 +9,11 @@
 {% block contents_title %}추천 안심 병원{% endblock contents_title %}
 {% block slide_list %}
     <ul class="slides">
-        {% for hospital in hospitals %}
+        {% for hospital in hospitals_ad %}
             <li class="slide slide-1">
                 <div class="flex-caption container">
-                    <h3 class="title"><a href="#">hospital['name']</a></h3>
-                    <div class="meta">hospital['address']</div>
+                    <h3 class="title"><a href="#">hospital.name</a></h3>
+                    <div class="meta">hospital.address</div>
                     <a class="more-link" href="#">더 알아보기 &rarr;</a>
                 </div><!--//flex-caption-->
             </li>
@@ -25,14 +26,14 @@
             <li>
                 <div class="item-wrapper">
                     <div class="img-wrapper">
-                        <img src="{{ url_for('static', filename= hospital['image'] ) }}" class="hospital-image">
+                        <img src="#" class="hospital-image">
                     </div>
                     <div class="hospital-desc">
-                        <h4> hospital['name'] </h4>
-                        <h5>{ hospital['address'] </h5>
+                        <h4>{{ hospital.name }}</h4>
+                        <h5>{{ hospital.address }}</h5>
                         <div>
-                            <button class="btn btn-default">전화상담</button>
-                            <button class="btn btn-default">진행중인 이벤트</button>
+                            <button class="btn btn-default">상세보기</button>
+                            <button class="btn btn-default">안심성형 신청</button>
                         </div>
                     </div>
                 </div>
@@ -40,3 +41,6 @@
         {% endfor %}
     </ul>
 {% endblock category_list %}
+{% block pagination %}
+    {{ macros.pagination_widget(pagination, 'main.hospital') }}
+{%  endblock pagination %}
