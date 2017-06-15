@@ -1,4 +1,5 @@
 import os
+from datetime import datetime
 
 from flask import current_app
 from flask_login import UserMixin, AnonymousUserMixin
@@ -55,12 +56,14 @@ class User(UserMixin, db.Model):
     username = db.Column(db.String(64))
     password_hash = db.Column(db.String(128))
     role_id = db.Column(db.Integer, db.ForeignKey('roles.id'))
-    hospital_id = db.Column(db.Integer, db.ForeignKey('hospitals.id'))
     confirmed = db.Column(db.Boolean, default=False)
     birth_date = db.Column(db.Date)
     gender = db.Column(db.String(8))
     address = db.Column(db.String(64))
     phone_number = db.Column(db.String(16))
+    hospital_id = db.Column(db.Integer, db.ForeignKey('hospitals.id'))
+    lawyer_id = db.Column(db.Integer, db.ForeignKey('lawyers.id'))
+    service = db.relationship('Service', backref='user', lazy='dynamic')
 
     @property
     def password(self):
@@ -158,6 +161,7 @@ class Hospital(db.Model):
     phone = db.Column(db.String(32))
     address = db.Column(db.String(128))
     managers = db.relationship('User', backref='hospital', lazy='dynamic')
+    services = db.relationship('Service', backref='hospital', lazy='dynamic')
 
     @staticmethod
     def insert_hospital():
@@ -176,6 +180,44 @@ class Hospital(db.Model):
 
     def __repr__(self):
         return '<Hospital %r>' % self.name
+
+
+class Lawyer(db.Model):
+    __tablename__ = 'lawyers'
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(32))
+    phone = db.Column(db.String(32))
+    address = db.Column(db.String(128))
+    description = db.Column(db.Text)
+    manager = db.relationship('User', backref='lawyer', lazy='dynamic')
+    services = db.relationship('Service', backref='lawyer', lazy='dynamic')
+
+    @staticmethod
+    def insert_lawyer():
+        import csv
+        filepath = os.path.join(os.path.dirname(__file__), 'lawyer.csv')
+        with open(filepath, 'rt') as csvfile:
+            reader = csv.reader(csvfile, delimiter=',')
+            next(reader, None)
+            for row in reader:
+                lawyer = Lawyer(name=row[0], phone=row[1], address=row[2], description=row[3])
+                db.session.add(lawyer)
+                try:
+                    db.session.commit()
+                except IntegrityError:
+                    db.session.rollback()
+
+    def __repr__(self):
+        return '<Lawyer %r>' % self.name
+
+
+class Service(db.Model):
+    __tablename__ = 'service'
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    hospital_id = db.Column(db.Integer, db.ForeignKey('hospitals.id'))
+    lawyer_id = db.Column(db.Integer, db.ForeignKey('lawyers.id'))
+    timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
 
 
 @login_manager.user_loader

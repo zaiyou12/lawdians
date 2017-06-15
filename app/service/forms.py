@@ -23,3 +23,7 @@ class RegisterSurgeryForm(FlaskForm):
         if field.data is not None:
             if User.query.filter_by(email=field.data).first() is None:
                 raise ValidationError('등록된 이메일이 아닙니다.')
+
+
+class ChargeForm(FlaskForm):
+    submit = SubmitField('결제')

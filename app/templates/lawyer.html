@@ -2,99 +2,105 @@
 {% block styles %}
     {{ super() }}
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="{{url_for('static', filename='css/lawyer.css')}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/lawyer.css') }}">
 {% endblock styles %}
 {% block body_attribs %}class="about-page"{% endblock body_attribs %}
-{%block content %}
-<div class="headline-bg about-headline-bg">
-</div><!--//headline-bg-->
+{% block content %}
+    <div class="headline-bg about-headline-bg">
+    </div><!--//headline-bg-->
 
-<!-- ******Description Section****** -->
-<section class="story-section section section-on-bg">
-    <h2 class="title container text-center">안전하게 예뻐지자</h2>
-    <div class="story-container container text-center">
-        <div class="story-container-inner">
-            <div class="about text-center">
-                <p>성형부작용 발생 시 고객님 곁을 지켜줄 든든한 안심지킴이</p>
-                <p>부작용 발생시 선임료 없이 대응하자.<br/>로디언즈에 등록된 착한 변호인단과 함께 부담없이 이용하자!</p>
-            </div><!--//about-->
-        </div><!--//story-container-->
-    </div><!--//container-->
-</section><!--//story-video-->
+    <!-- ******Description Section****** -->
+    <section class="story-section section section-on-bg">
+        <h2 class="title container text-center">안전하게 예뻐지자</h2>
+        <div class="story-container container text-center">
+            <div class="story-container-inner">
+                <div class="about text-center">
+                    <p>성형부작용 발생 시 고객님 곁을 지켜줄 든든한 안심지킴이</p>
+                    <p>부작용 발생시 선임료 없이 대응하자.<br/>로디언즈에 등록된 착한 변호인단과 함께 부담없이 이용하자!</p>
+                </div><!--//about-->
+            </div><!--//story-container-->
+        </div><!--//container-->
+    </section><!--//story-video-->
 
-<section class="section">
-    <h2 class="lawyer-title title text-center">안심 변호사</h2>
-    <div class="container-fluid lawyer-list-wrapper">
+    <section class="section">
+        <h2 class="lawyer-title title text-center">안심 변호사</h2>
+        <div class="container-fluid lawyer-list-wrapper">
             <div class="col-md-offset-1 item-wrapper ">
                 <div class="lawyer-list col-md-6">
-                  <img src="{{ url_for('static', filename='assets/images/lawyer/lawyer_1.png') }}"
-                                 class="img-responsive">
+                    <img src="{{ url_for('static', filename='assets/images/lawyer/lawyer_1.png') }}"
+                         class="img-responsive">
                 </div>
-                    <div class=" item-content col-md-6">
-                        <h3 class="item-title">차재승 변호사</h3>
-                        <p class="item-small-title">서울 관악구 신림동 59길 / 02-872-1307</p>
-                        <div class="item-description">
-                            <p>(現) 차재승 법률사무소</p>
-                            <p>前 주식회사 알바이오 자문변호사</p>
-                            <p>前 법무법인 에이치스 </p>
-                            <p>前 동작다문화지원센터 자문변호사</p>
-                            <p>前 도산법학회 정회원</p>
-                            <p>前 염동렬 국회의원실</p>
-                            <p>前 인하대학교 법학전문대학원 졸업</p>
-                        </div>
-                        <div class="item-btn btn-group" role="group">
-                            <button type="button" class="btn btn-default">상담하기</button>
-                            <button type="button" class="btn btn-default">서비스 신청</button>
-                        </div>
+                <div class=" item-content col-md-6">
+                    <h3 class="item-title">차재승 변호사</h3>
+                    <p class="item-small-title">서울 관악구 신림동 59길 / 02-872-1307</p>
+                    <div class="item-description">
+                        <p>(現) 차재승 법률사무소</p>
+                        <p>前 주식회사 알바이오 자문변호사</p>
+                        <p>前 법무법인 에이치스 </p>
+                        <p>前 동작다문화지원센터 자문변호사</p>
+                        <p>前 도산법학회 정회원</p>
+                        <p>前 염동렬 국회의원실</p>
+                        <p>前 인하대학교 법학전문대학원 졸업</p>
                     </div>
-            </div>
-            <div class="col-md-offset-1 item-wrapper">
-                <div class="lawyer-list col-md-6">
-                    <img src="{{ url_for('static', filename='assets/images/lawyer/lawyer_2.png') }}"
-                                 class="img-responsive">
+                    <div class="item-btn btn-group" role="group">
+                        <button type="button" class="btn btn-default">상담하기</button>
+                        <a href="{{ url_for('service.register', lawyer=1) }}">
+                            <button type="button" class="btn btn-default">서비스 신청</button>
+                        </a>
+                    </div>
                 </div>
-                    <div class="item-content col-md-6">
-                        <h3 class="item-title">김평호 변호사</h3>
-                        <p class="item-small-title">경기 성남구 중원구 산성대로 454번 신우빌딩 201 / 031-744-6655</p>
-                        <div class="item-description">
-                            <p>(現) 법무법인 한울(성남사무소) 구성원 변호사</p>
-                            <p>(現) 분당차병원 의학연구윤리심의위원(IRB 위원) </p>
-                            <p>(現) 수원지방법원 성남지원 민사조정위원, 가사조정위원  </p>
-                            <p>(現) 소망재활원 운영위원 </p>
-                            <p>(現) 성남종합사회복지관 운영위원 </p>
-                            <p>(現) 성남시 지방세 심의위원회 위원</p>
-                            <p>前 대한정형외과개원의 협의회 법률고문 </p>
-                        </div>
-                        <div class="item-btn btn-group" role="group">
-                            <button type="button" class="btn btn-default">상담하기</button>
-                            <button type="button" class="btn btn-default">서비스 신청</button>
-                        </div>
-                    </div>
-
             </div>
             <div class="col-md-offset-1 item-wrapper ">
                 <div class="lawyer-list col-md-6">
                     <img src="{{ url_for('static', filename='assets/images/lawyer/lawyer_3.png') }}"
-                                 class="img-responsive">
+                         class="img-responsive">
                 </div>
-                    <div class="item-content col-md-6">
-                        <h3 class="item-title">최운영 변호사</h3>
-                        <p class="item-small-title">서울 영등포구 국제금융로 8길 34602호 </p>
-                        <div class="item-description">
-                            <p>(現) 서울시 공익변호사</p>
-                            <p>(現) 대법원 국선변호</p>
-                            <p>(現) 한국갈등해결센터 전문위원  </p>
-                            <p>(現) 불어민주당 윤리심판위원</p>
-                            <p>(現) 은정초등학교 법률고문</p>
-                            <p>前 서울북부지방법원 조정위원</p>
-                            <p>사법연수원 제42기 수료 </p>
-                        </div>
-                        <div class="item-btn btn-group" role="group">
-                            <button type="button" class="btn btn-default">상담하기</button>
-                            <button type="button" class="btn btn-default">서비스 신청</button>
-                        </div>
+                <div class="item-content col-md-6">
+                    <h3 class="item-title">최운영 변호사</h3>
+                    <p class="item-small-title">서울 영등포구 국제금융로 8길 34602호 </p>
+                    <div class="item-description">
+                        <p>(現) 서울시 공익변호사</p>
+                        <p>(現) 대법원 국선변호</p>
+                        <p>(現) 한국갈등해결센터 전문위원 </p>
+                        <p>(現) 불어민주당 윤리심판위원</p>
+                        <p>(現) 은정초등학교 법률고문</p>
+                        <p>前 서울북부지방법원 조정위원</p>
+                        <p>사법연수원 제42기 수료 </p>
                     </div>
+                    <div class="item-btn btn-group" role="group">
+                        <button type="button" class="btn btn-default">상담하기</button>
+                        <a href="{{ url_for('service.register', lawyer=2) }}">
+                            <button type="button" class="btn btn-default">서비스 신청</button>
+                        </a>
+                    </div>
+                </div>
             </div>
-          </div>
-</section>
+            <div class="col-md-offset-1 item-wrapper">
+                <div class="lawyer-list col-md-6">
+                    <img src="{{ url_for('static', filename='assets/images/lawyer/lawyer_2.png') }}"
+                         class="img-responsive">
+                </div>
+                <div class="item-content col-md-6">
+                    <h3 class="item-title">김평호 변호사</h3>
+                    <p class="item-small-title">경기 성남구 중원구 산성대로 454번 신우빌딩 201 / 031-744-6655</p>
+                    <div class="item-description">
+                        <p>(現) 법무법인 한울(성남사무소) 구성원 변호사</p>
+                        <p>(現) 분당차병원 의학연구윤리심의위원(IRB 위원) </p>
+                        <p>(現) 수원지방법원 성남지원 민사조정위원, 가사조정위원 </p>
+                        <p>(現) 소망재활원 운영위원 </p>
+                        <p>(現) 성남종합사회복지관 운영위원 </p>
+                        <p>(現) 성남시 지방세 심의위원회 위원</p>
+                        <p>前 대한정형외과개원의 협의회 법률고문 </p>
+                    </div>
+                    <div class="item-btn btn-group" role="group">
+                        <button type="button" class="btn btn-default">상담하기</button>
+                        <a href="{{ url_for('service.register', lawyer=3) }}">
+                            <button type="button" class="btn btn-default">서비스 신청</button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
 {% endblock content %}

@@ -1,5 +1,6 @@
 {% extends "base_user.html" %}
 {% import "bootstrap/wtf.html" as wtf %}
+{% import "_macros.html" as macros %}
 
 {% block body_attribs %} class="login-page access-page has-full-screen-bg"{% endblock body_attribs %}
 {% block section_attribs %} class="login-section access-section section"{% endblock section_attribs %}
@@ -46,11 +47,20 @@
                     </ul>
 
                     <div class="tab-content">
-                        <div class="tab-pane" id="home-2">
-
-                        </div>
+                        {% if selected_hospital %}
+                            <div class="text-center">
+                                <h3>기존에 선택한 병원</h3>
+                                <p>{{ selected_hospital.name }}</p>
+                                <p>{{ selected_hospital.address }}</p>
+                                <a href="{{ url_for('service.lawyer', hospital=selected_hospital.id) }}">
+                                    <button class="btn btn-info">다음</button>
+                                </a>
+                                <br/><br/>
+                            </div>
+                        {% endif %}
                         <div class="tab-pane active" id="profile-2">
                             <section class="section padding-top-section">
+                                <h3 class="text-center"> 안심병원 선택</h3>
                                 <div class="container" id="service-hospital-list">
                                     <ul class="hospital-category2">
                                         <li><a role="button">전체</a></li>
@@ -111,14 +121,36 @@
                                         </div>
                                     </div>
                                 </div><!--search filter-->
+                                <div class="hospital-list clearfix">
+                                    <ul>
+                                        {% for hospital in hospitals %}
+                                            <li>
+                                                <div class="item-wrapper">
+                                                    <div class="img-wrapper">
+                                                        <img src="#" class="hospital-image">
+                                                    </div>
+                                                    <div class="hospital-desc">
+                                                        <h4>{{ hospital.name }}</h4>
+                                                        <h5>{{ hospital.address }}</h5>
+                                                        <div>
+                                                            <button class="btn btn-default">상세보기</button>
+                                                            <a href="{{ url_for('service.lawyer', hospital=hospital.id) }}">
+                                                                <button class="btn btn-default">안심성형 신청</button>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                                <div class="text-center">
+                                    <div class="pagination">
+                                        {{ macros.pagination_widget(pagination, 'service.hospital') }}
+                                    </div>
+                                </div>
                             </section>
                         </div>
-                    </div>
-                    <div class="tab-pane" id="messages-2">
-
-                    </div>
-                    <div class="tab-pane" id="settings-2">
-
                     </div>
                 </div>
 

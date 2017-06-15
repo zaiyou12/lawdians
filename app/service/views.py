@@ -1,11 +1,11 @@
 from datetime import datetime
 
-from flask import render_template, redirect, url_for, session, flash
+from flask import render_template, redirect, url_for, session, flash, request, current_app
 from flask_login import current_user, login_required
 
 from app import db
-from ..email import send_email
-from .forms import RegisterSurgeryForm
+from ..models import Hospital, Lawyer, Service
+from .forms import RegisterSurgeryForm, ChargeForm
 from ..sms import get_rand_num, send_sms
 from . import service
 
@@ -13,6 +13,12 @@ from . import service
 @service.route('/register', methods=['GET', 'POST'])
 @login_required
 def register():
+    # Save Data
+    hospital_num = int(request.args.get('hospital', default=-1))
+    lawyer_num = int(request.args.get('lawyer', default=-1))
+    session['hospital_num'] = hospital_num
+    session['lawyer_num'] = lawyer_num
+
     form = RegisterSurgeryForm()
     if form.validate_on_submit():
         if form.phone_submit.data:
@@ -66,5 +72,51 @@ def register():
 @service.route('/hospital', methods=['GET', 'POST'])
 @login_required
 def hospital():
+    hospital_num = session.get('hospital_num')
+    selected_hospital = None
+    if hospital_num > -1:
+        selected_hospital = Hospital.query.get_or_404(hospital_num)
 
-    return render_template('service/register2.html')
+    page = request.args.get('page', 1, type=int)
+    pagination = Hospital.query.paginate(page, per_page=current_app.config['HOSPITALS_PER_PAGE'], error_out=False)
+    hospitals = pagination.items
+
+    return render_template('service/hospital.html', hospitals=hospitals, pagination=pagination,
+                           selected_hospital=selected_hospital)
+
+
+@service.route('/lawyer', methods=['GET', 'POST'])
+@login_required
+def lawyer():
+    hospital_num = int(request.args.get('hospital', default=-1))
+    session['hospital_num'] = hospital_num
+
+    lawyer_num = session.get('lawyer_num')
+    selected_lawyer = None
+    if lawyer_num > -1:
+        selected_lawyer = Lawyer.query.get_or_404(lawyer_num)
+
+    lawyers = Lawyer.query.all()
+    return render_template('service/lawyer.html', lawyers=lawyers, selected_lawyer=selected_lawyer)
+
+
+@service.route('/charge', methods=['GET', 'POST'])
+@login_required
+def charge():
+    form = ChargeForm()
+    if request.method == 'POST':
+        charged = Service(
+            user=current_user._get_current_object(), hospital=Hospital.query.get_or_404(session.get('hospital_num')),
+            lawyer=Lawyer.query.get_or_404(session.get('lawyer_num')))
+        db.session.add(charged)
+        db.session.commit()
+        flash('감사합니다. 서비스 신청이 완료되었습니다.')
+        return redirect(url_for('main.index'))
+
+    hospital_num = session.get('hospital_num')
+    lawyer_num = int(request.args.get('lawyer', default=-1))
+    session['lawyer_num'] = lawyer_num
+    selected_hospital = Hospital.query.get_or_404(hospital_num)
+    selected_lawyer = Lawyer.query.get_or_404(lawyer_num)
+    return render_template('service/charge.html', selected_hospital=selected_hospital, selected_lawyer=selected_lawyer,
+                           form=form)
