@@ -1,7 +1,9 @@
 import os
+
 COV = None
 if os.environ.get('FLASK_COVERAGE'):
     import coverage
+
     COV = coverage.coverage(branch=True, include='app/*')
     COV.start()
 
@@ -9,7 +11,7 @@ from flask_migrate import MigrateCommand, Migrate
 from flask_script import Manager, Shell
 
 from app import db, create_app
-from app.models import User, Role, Hospital, Lawyer, Service
+from app.models import User, Role, Hospital, Lawyer, Service, HospitalRegistration
 
 app = create_app(os.getenv('FLASK_CONFIG') or 'default')
 manager = Manager(app)
@@ -17,7 +19,9 @@ migrate = Migrate(app, db)
 
 
 def make_shell_context():
-    return dict(app=app, db=db, User=User, Role=Role, Hospital=Hospital, Lawyer=Lawyer, Service=Service)
+    return dict(app=app, db=db, User=User, Role=Role, Hospital=Hospital, Lawyer=Lawyer, Service=Service,
+                HospitalRegistration=HospitalRegistration)
+
 manager.add_command("shell", Shell(make_context=make_shell_context))
 manager.add_command('db', MigrateCommand)
 
@@ -53,6 +57,14 @@ def deploy():
 
     Hospital.insert_hospital()
     Lawyer.insert_lawyer()
+
+    # TODO: Fix - add hospital id temporary
+    reg = HospitalRegistration.query.first()
+    user = User.query.filter_by(email=reg.email).first()
+    hospital = Hospital.query.filter_by(name=reg.name).first()
+    user.hospital = hospital
+    db.session.add(user)
+    db.session.commit()
 
 
 if __name__ == "__main__":

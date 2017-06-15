@@ -83,3 +83,15 @@ class ChangeEmailForm(FlaskForm):
     def validate_email(self, field):
         if User.query.filter_by(email=field.data).first():
             raise ValidationError('이미 등록된 이메일입니다.')
+
+
+class HospitalRegistrationForm(FlaskForm):
+    email = StringField('가입 이메일', validators=[InputRequired(), Length(1, 64),
+                                              Email()])
+    password = PasswordField('비밀번호', validators=[InputRequired()])
+    name = StringField('병원 이름', validators=[InputRequired(), Length(1, 32)])
+    doctor = StringField('전문의 명', validators=[InputRequired(), Length(1, 8)])
+    phone = StringField('병원 전화번호', validators=[InputRequired(), Length(1, 32)])
+    address = StringField('병원 주소', validators=[InputRequired(), Length(1, 128)])
+    text = StringField('기타 요청사항', validators=[Optional()])
+    submit = SubmitField('확인')

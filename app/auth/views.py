@@ -9,9 +9,9 @@ from ..email import send_email
 from . import auth
 
 from .. import db
-from ..models import User
+from ..models import User, HospitalRegistration
 from .forms import LoginForm, RegistrationForm, ChangePasswordForm, PasswordResetRequestForm, PasswordResetForm, \
-    ChangeEmailForm, RegistrationDetailForm
+    ChangeEmailForm, RegistrationDetailForm, HospitalRegistrationForm
 
 
 @auth.before_app_request
@@ -38,6 +38,9 @@ def login():
         user = User.query.filter_by(email=form.email.data).first()
         if user is not None and user.verify_password(form.password.data):
             login_user(user, form.remember_me.data)
+            if user.hospital:
+                flash('병원 계정으로 접속하셨습니다.')
+                return redirect(url_for('hos.index'))
             return redirect(request.args.get('next') or url_for('main.index'))
         flash('잘못된 이메일이나 비밀번호가 입력되었습니다.')
     return render_template('auth/login.html', form=form)
@@ -248,3 +251,17 @@ def change_email(token):
     else:
         flash('알수없는 요청입니다.')
     return redirect(url_for('main.index'))
+
+
+@auth.route('/register/hospital', methods=['GET', 'POST'])
+def register_hospital():
+    form = HospitalRegistrationForm()
+    if form.validate_on_submit():
+        registration = HospitalRegistration(email=form.email.data, password=form.password.data, name=form.name.data,
+                                            doctor=form.doctor.data, phone=form.phone.data, address=form.address.data,
+                                            requests=form.text.data)
+        db.session.add(registration)
+        db.session.commit()
+        flash('감사합니다. 제휴병원 신청이 완료되었습니다. 빠른신간안에 연락드리겠습니다.')
+        return redirect(url_for('main.index'))
+    return render_template('/auth/register_hospital.html', form=form)

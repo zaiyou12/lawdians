@@ -219,6 +219,33 @@ class Service(db.Model):
     lawyer_id = db.Column(db.Integer, db.ForeignKey('lawyers.id'))
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
 
+    def __repr__(self):
+        return '<Service %r>' % self.timestamp
+
+
+class HospitalRegistration(db.Model):
+    __tablename__ = 'hospital_registration'
+    id = db.Column(db.Integer, primary_key=True)
+    email = db.Column(db.String(64), unique=True, index=True)
+    password_hash = db.Column(db.String(128))
+    name = db.Column(db.String(64))
+    doctor = db.Column(db.String(8))
+    address = db.Column(db.String(64))
+    phone = db.Column(db.String(32))
+    requests = db.Column(db.Text)
+    timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
+
+    @property
+    def password(self):
+        raise AttributeError('password is not a readable attribute')
+
+    @password.setter
+    def password(self, password):
+        self.password_hash = generate_password_hash(password)
+
+    def __repr__(self):
+        return '<HospitalRegistration %r>' % self.name
+
 
 @login_manager.user_loader
 def load_user(user_id):
