@@ -24,8 +24,12 @@
             <ul class="nav navbar-nav">
                 <li><a>정보 관리</a></li>
                 <li><a href="{{ url_for('hos.service') }}">서비스 신청내역 관리</a></li>
+                <li><a href="{{ url_for('hos.event') }}">안심 이벤트 관리</a></li>
                 <li><a>광고 관리</a></li>
                 <li><a>포인트 관리</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="{{ url_for('auth.logout') }}">로그아웃</a></li>
             </ul>
         </div>
     </div>

@@ -1,0 +1,34 @@
+{% extends "hos/base.html" %}
+{% import "_macros.html" as macros %}
+
+{% block page_content %}
+    <div class="page-header">
+        <h1>안심 이벤트 관리</h1>
+    </div>
+    <div>
+        <h3>안심 이벤트 현황</h3>
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered table-hover">
+                <thead>
+                <tr>
+                    <th>구분</th>
+                    <th>이벤트 명</th>
+                    <th>조회수</th>
+                    <th>신청수</th>
+                    <th>기간</th>
+                </tr>
+                </thead>
+                {% for event in events %}
+                    <tr>
+                        <td>{{ event.id }}</td>
+                        <td><a href="{{ url_for('hos.edit_event', id=event.id) }}">{{ event.head }}</a></td>
+                        <td>{{ event.hits }}</td>
+                        <td>{{ event.registration }}</td>
+                        <td>{{ event.start_date }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+        <a class="btn btn-info" href="{{ url_for('hos.register_event') }}">이벤트 신청</a>
+    </div>
+{% endblock %}

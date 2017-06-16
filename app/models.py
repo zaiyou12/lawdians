@@ -223,6 +223,21 @@ class Service(db.Model):
         return '<Service %r>' % self.timestamp
 
 
+class Event(db.Model):
+    __tablename__ = 'event'
+    id = db.Column(db.Integer, primary_key=True)
+    hospital_id = db.Column(db.Integer, db.ForeignKey('hospitals.id'))
+    head = db.Column(db.String(64))
+    body = db.Column(db.Text)
+    start_date = db.Column(db.DateTime)
+    term = db.Column(db.Integer)
+    hits = db.Column(db.Integer)
+    registrations = db.Column(db.Integer)
+
+    def __repr__(self):
+        return '<Events %r>' % self.head
+
+
 class HospitalRegistration(db.Model):
     __tablename__ = 'hospital_registration'
     id = db.Column(db.Integer, primary_key=True)
