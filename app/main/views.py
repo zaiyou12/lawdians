@@ -1,5 +1,5 @@
 from flask import render_template, request, current_app, flash, redirect, url_for
-from flask_login import current_user
+from flask_login import current_user, login_required
 
 from app import db
 from ..main.forms import EventForm
@@ -34,6 +34,7 @@ def event():
 
 
 @main.route('/event/post/<int:id>', methods=['GET', 'POST'])
+@login_required
 def event_detail(id):
     form = EventForm()
     selected_event = Event.query.get_or_404(id)
