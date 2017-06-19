@@ -57,6 +57,7 @@ def deploy():
 
     Hospital.insert_hospital()
     Lawyer.insert_lawyer()
+    User.set_hospital_admin()
 
 if __name__ == "__main__":
     manager.run()
