@@ -58,14 +58,5 @@ def deploy():
     Hospital.insert_hospital()
     Lawyer.insert_lawyer()
 
-    # TODO: Fix - add hospital id temporary
-    reg = HospitalRegistration.query.first()
-    user = User.query.filter_by(email=reg.email).first()
-    hospital = Hospital.query.filter_by(name=reg.name).first()
-    user.hospital = hospital
-    db.session.add(user)
-    db.session.commit()
-
-
 if __name__ == "__main__":
     manager.run()
