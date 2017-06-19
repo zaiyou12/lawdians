@@ -11,4 +11,3 @@ def send_email(template, email, **kwargs):
     send_data["body"] = render_template(template + '.txt', **kwargs)
     send_data["receiverList"][0]["receiveMailAddr"] = email
     res = requests.post(AuthEmail.url, json=send_data)
-    flash(res.text)

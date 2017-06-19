@@ -5,7 +5,7 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 
 
 class Config:
-    SECRET_KEY = os.environ.get('SECRET_KEY') or 'hard to guess string'
+    SECRET_KEY = os.environ.get('SECRET_KEY') or 'hard to guess string '
     SQLALCHEMY_COMMIT_ON_TEARDOWN = True
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     HOSPITALS_PER_PAGE = 10
@@ -70,7 +70,7 @@ class AuthSms:
     url = 'https://api-sms.cloud.toast.com/sms/v2.0/appKeys/tnnQCsj8Scwmuzmz/sender/auth/sms'
     sns_data = {
         "body": "",
-        "sendNo": "070-4319-0911",
+        "sendNo": "01058945555",
         "recipientList": [{
             "recipientNo": ""
         }],

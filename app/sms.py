@@ -12,7 +12,6 @@ def send_sms(template, phone_num, **kwargs):
     send_data["body"] = render_template(template+'.txt', **kwargs)
     send_data["recipientList"][0]["recipientNo"] = str(phone_num)
     res = requests.post(AuthSms.url, json=send_data)
-    flash(res.text)
 
 
 def get_rand_num():

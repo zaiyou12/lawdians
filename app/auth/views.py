@@ -139,8 +139,6 @@ def register_detail():
         form.birth_date.data = datetime.strptime(session.get('birth_date'), '%Y%m%d')
     form.gender.data = session.get('gender')
     form.phone_number.data = session.get('phone_number')
-    # TODO: Delete adding confirm number dynamically
-    form.confirm.data = session.get('rand_num')
     form.address.data = session.get('address')
     form.recommend.data = session.get('recommend')
     if session.get('checked'):
