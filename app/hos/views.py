@@ -2,8 +2,8 @@ from flask import render_template, request, current_app, redirect, url_for, abor
 from flask_login import current_user, login_required
 
 from app import db
-from .forms import EventForm
-from ..models import Service, Event, EventRegistration
+from .forms import EventForm, ProfileForm
+from ..models import Service, Event, EventRegistration, Hospital
 from . import hos
 
 
@@ -68,3 +68,24 @@ def register_event():
         flash('이벤트가 등록되었습니다.')
         return redirect(url_for('hos.event'))
     return render_template('hos/register_event.html', form=form)
+
+
+@hos.route('/edit-profile', methods=['GET', 'POST'])
+@login_required
+def edit_profile():
+    form = ProfileForm()
+    p = Hospital.query.get_or_404(current_user.hospital_id)
+    if form.validate_on_submit():
+        p.name = form.name.data
+        p.doctor = form.doctor.data
+        p.phone = form.phone.data
+        p.address = form.address.data
+        db.session.add(p)
+        db.session.commit()
+        flash('정보가 갱신되었습니다.')
+        return redirect(url_for('hos.index'))
+    form.name.data = p.name
+    form.doctor.data = p.doctor
+    form.phone.data = p.phone
+    form.address.data = p.address
+    return render_template('hos/profile.html', form=form)
