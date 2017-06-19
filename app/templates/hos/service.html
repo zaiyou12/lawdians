@@ -48,12 +48,15 @@
                 {% for event in events %}
                     <tr>
                         <td>{{ event.id }}</td>
-                        <td>{{ event.user }}</td>
-                        <td>{{ event.name }}</td>
+                        <td>{{ event.event.head }}</td>
+                        <td>{{ event.user.username }}</td>
                         <td>{{ event.timestamp }}</td>
                     </tr>
                 {% endfor %}
             </table>
+        </div>
+        <div class="pagination container text-center">
+            {{ macros.pagination_widget(pagination_event, 'hos.service') }}
         </div>
     </div>
     <div>

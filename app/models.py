@@ -64,6 +64,7 @@ class User(UserMixin, db.Model):
     hospital_id = db.Column(db.Integer, db.ForeignKey('hospitals.id'))
     lawyer_id = db.Column(db.Integer, db.ForeignKey('lawyers.id'))
     service = db.relationship('Service', backref='user', lazy='dynamic')
+    event_registrations = db.relationship('EventRegistration', backref='user', lazy='dynamic')
 
     @property
     def password(self):
@@ -162,6 +163,8 @@ class Hospital(db.Model):
     address = db.Column(db.String(128))
     managers = db.relationship('User', backref='hospital', lazy='dynamic')
     services = db.relationship('Service', backref='hospital', lazy='dynamic')
+    events = db.relationship('Event', backref='hospital', lazy='dynamic')
+    event_registrations = db.relationship('EventRegistration', backref='hospital', lazy='dynamic')
 
     @staticmethod
     def insert_hospital():
@@ -212,7 +215,7 @@ class Lawyer(db.Model):
 
 
 class Service(db.Model):
-    __tablename__ = 'service'
+    __tablename__ = 'services'
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     hospital_id = db.Column(db.Integer, db.ForeignKey('hospitals.id'))
@@ -224,7 +227,7 @@ class Service(db.Model):
 
 
 class Event(db.Model):
-    __tablename__ = 'event'
+    __tablename__ = 'events'
     id = db.Column(db.Integer, primary_key=True)
     hospital_id = db.Column(db.Integer, db.ForeignKey('hospitals.id'))
     head = db.Column(db.String(64))
@@ -232,14 +235,26 @@ class Event(db.Model):
     start_date = db.Column(db.DateTime)
     term = db.Column(db.Integer)
     hits = db.Column(db.Integer)
-    registrations = db.Column(db.Integer)
+    registrations = db.relationship('EventRegistration', backref='event', lazy='dynamic')
 
     def __repr__(self):
         return '<Events %r>' % self.head
 
 
+class EventRegistration(db.Model):
+    __tablename__ = 'event_registrations'
+    id = db.Column(db.Integer, primary_key=True)
+    event_id = db.Column(db.Integer, db.ForeignKey('events.id'))
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    hospital_id = db.Column(db.Integer, db.ForeignKey('hospitals.id'))
+    timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
+
+    def __repr__(self):
+        return '<EventRegistration %r>' % self.timestamp
+
+
 class HospitalRegistration(db.Model):
-    __tablename__ = 'hospital_registration'
+    __tablename__ = 'hospital_registrations'
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(64), unique=True, index=True)
     password_hash = db.Column(db.String(128))

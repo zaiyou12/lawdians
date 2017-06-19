@@ -3,7 +3,7 @@ from flask_login import current_user, login_required
 
 from app import db
 from .forms import EventForm
-from ..models import Service, Event
+from ..models import Service, Event, EventRegistration
 from . import hos
 
 
@@ -22,7 +22,14 @@ def service():
         page, per_page=current_app.config['SERVICE_PER_PAGE'], error_out=False
     )
     services = pagination.items
-    return render_template('hos/service.html', services=services, pagination=pagination)
+
+    page_event = request.args.get('page_event', 1, type=int)
+    pagination_event = EventRegistration.query.filter(EventRegistration.hospital_id == manager.hospital_id).paginate(
+        page_event, per_page=current_app.config['SERVICE_PER_PAGE'], error_out=False
+    )
+    events = pagination_event.items
+    return render_template('hos/service.html', services=services, pagination=pagination,
+                           events=events, pagination_event=pagination_event)
 
 
 @hos.route('/event')
