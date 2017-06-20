@@ -15,3 +15,8 @@ class ProfileForm(FlaskForm):
     phone = StringField('병원 전화번호', validators=[InputRequired(), Length(1, 32)])
     address = StringField('병원 주소', validators=[InputRequired(), Length(1, 128)])
     submit = SubmitField('확인')
+
+
+class AdsForm(FlaskForm):
+    name = StringField('광고 이름', validators=[InputRequired(), Length(1, 64)])
+    submit = SubmitField('확인')

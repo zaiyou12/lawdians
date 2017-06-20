@@ -170,6 +170,7 @@ class Hospital(db.Model):
     services = db.relationship('Service', backref='hospital', lazy='dynamic')
     events = db.relationship('Event', backref='hospital', lazy='dynamic')
     event_registrations = db.relationship('EventRegistration', backref='hospital', lazy='dynamic')
+    ads = db.relationship('HospitalAd', backref='hospital', lazy='dynamic')
 
     @staticmethod
     def insert_hospital():
@@ -280,6 +281,19 @@ class HospitalRegistration(db.Model):
 
     def __repr__(self):
         return '<HospitalRegistration %r>' % self.name
+
+
+class HospitalAd(db.Model):
+    __tablename__ = 'HospitalAds'
+    id = db.Column(db.Integer, primary_key=True)
+    hospital_id = db.Column(db.Integer, db.ForeignKey('hospitals.id'))
+    name = db.Column(db.String(64))
+    is_hospital_ad = db.Column(db.Boolean, default=True)
+    is_confirmed = db.Column(db.Boolean, default=False)
+    timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
+
+    def __repr__(self):
+        return '<HospitalAd %r>' % self.name
 
 
 @login_manager.user_loader

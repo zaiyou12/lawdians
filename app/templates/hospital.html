@@ -9,11 +9,11 @@
 {% block contents_title %}추천 안심 병원{% endblock contents_title %}
 {% block slide_list %}
     <ul class="slides">
-        {% for hospital in hospitals_ad %}
+        {% for ad in hospitals_ad %}
             <li class="slide slide-1">
                 <div class="flex-caption container">
-                    <h3 class="title"><a href="#">hospital.name</a></h3>
-                    <div class="meta">hospital.address</div>
+                    <h3 class="title"><a href="#">{{ ad.name }}</a></h3>
+                    <div class="meta">{{ ad.hospital.name }}</div>
                     <a class="more-link" href="#">더 알아보기 &rarr;</a>
                 </div><!--//flex-caption-->
             </li>

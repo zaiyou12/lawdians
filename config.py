@@ -70,7 +70,7 @@ class AuthSms:
     url = 'https://api-sms.cloud.toast.com/sms/v2.0/appKeys/tnnQCsj8Scwmuzmz/sender/auth/sms'
     sns_data = {
         "body": "",
-        "sendNo": "01058945555",
+        "sendNo": "01058420112",
         "recipientList": [{
             "recipientNo": ""
         }],

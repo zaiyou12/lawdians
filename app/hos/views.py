@@ -2,8 +2,8 @@ from flask import render_template, request, current_app, redirect, url_for, abor
 from flask_login import current_user, login_required
 
 from app import db
-from .forms import EventForm, ProfileForm
-from ..models import Service, Event, EventRegistration, Hospital
+from .forms import EventForm, ProfileForm, AdsForm
+from ..models import Service, Event, EventRegistration, Hospital, HospitalAd
 from . import hos
 
 
@@ -89,3 +89,39 @@ def edit_profile():
     form.phone.data = p.phone
     form.address.data = p.address
     return render_template('hos/profile.html', form=form)
+
+
+@hos.route('/ads')
+@login_required
+def ads():
+    current_ads = HospitalAd.query.filter(HospitalAd.hospital_id == current_user.hospital_id)
+    return render_template('hos/ads.html', ads=current_ads)
+
+
+@hos.route('/ads/register', methods=['GET', 'POST'])
+@login_required
+def register_ads():
+    form = AdsForm()
+    if form.validate_on_submit():
+        new_ad = HospitalAd(hospital_id=current_user.hospital_id, name=form.name.data)
+        db.session.add(new_ad)
+        flash('광고가 등록되었습니다.')
+        return redirect(url_for('hos.ads'))
+    return render_template('hos/register_ads.html', form=form)
+
+
+@hos.route('/ads/edit/<int:id>', methods=['GET', 'POST'])
+@login_required
+def edit_ads(id):
+    selected_ads = HospitalAd.query.get_or_404(id)
+    if current_user.hospital_id != selected_ads.hospital_id:
+        abort(403)
+
+    form = AdsForm()
+    if form.validate_on_submit():
+        selected_ads.name = form.name.data
+        db.session.add(selected_ads)
+        flash('광고가 수정되었습니다.')
+        return redirect(url_for('hos.ads'))
+    form.name.data = selected_ads.name
+    return render_template('hos/register_event.html', form=form)

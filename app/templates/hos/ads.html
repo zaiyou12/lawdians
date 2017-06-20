@@ -1,0 +1,38 @@
+{% extends "hos/base.html" %}
+{% import "_macros.html" as macros %}
+
+{% block page_content %}
+    <div class="page-header">
+        <h1>병원 광고 관리</h1>
+    </div>
+    <div>
+        <h3>광고 현황</h3>
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered table-hover">
+                <thead>
+                <tr>
+                    <th>구분</th>
+                    <th>광고페이지</th>
+                    <th>광고 명</th>
+                    <th>조회수</th>
+                    <th>클릭수</th>
+                    <th>기간</th>
+                    <th>상태</th>
+                </tr>
+                </thead>
+                {% for ad in ads %}
+                    <tr>
+                        <td>{{ ad.id }}</td>
+                        <td></td>
+                        <td><a href="{{ url_for('hos.edit_ads', id=ad.id) }}">{{ ad.name }}</a></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+        <a class="btn btn-info" href="{{ url_for('hos.register_ads') }}">광고 신청</a>
+    </div>
+{% endblock %}

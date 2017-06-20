@@ -3,7 +3,7 @@ from flask_login import current_user, login_required
 
 from app import db
 from ..main.forms import EventForm
-from ..models import Hospital, Event, EventRegistration
+from ..models import Hospital, Event, EventRegistration, HospitalAd
 from . import main
 
 
@@ -17,7 +17,9 @@ def hospital():
     page = request.args.get('page', 1, type=int)
     pagination = Hospital.query.paginate(page, per_page=current_app.config['HOSPITALS_PER_PAGE'], error_out=False)
     hospitals = pagination.items
-    return render_template('hospital.html', hospitals=hospitals, pagination=pagination)
+
+    hospitals_ad = HospitalAd.query.limit(3)
+    return render_template('hospital.html', hospitals=hospitals, pagination=pagination, hospitals_ad=hospitals_ad)
 
 
 @main.route('/lawyer')
