@@ -41,4 +41,7 @@ def create_app(config_name):
     from .hos import hos as hos_blueprint
     app.register_blueprint(hos_blueprint, url_prefix='/hospital')
 
+    from .law import law as law_blueprint
+    app.register_blueprint(law_blueprint, url_prefix='/lawyer')
+
     return app

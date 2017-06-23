@@ -1,0 +1,33 @@
+{% extends "law/base.html" %}
+{% import "_macros.html" as macros %}
+
+{% block page_content %}
+    <div class="page-header">
+        <h1>선임 내역</h1>
+    </div>
+    <div>
+        <h3>안심성형 신청</h3>
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered table-hover">
+                <thead>
+                <tr>
+                    <th>구분</th>
+                    <th>성명</th>
+                    <th>신청 부위</th>
+                    <th>신청일</th>
+                    <th>안심병원</th>
+                </tr>
+                </thead>
+                {% for service in services %}
+                    <tr>
+                        <td>{{ service.id }}</td>
+                        <td>{{ service.user.username }}</td>
+                        <td></td>
+                        <td>{{ service.timestamp }}</td>
+                        <td>{{ service.hospital.name }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+{% endblock %}

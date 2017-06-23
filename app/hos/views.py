@@ -81,7 +81,6 @@ def edit_profile():
         p.phone = form.phone.data
         p.address = form.address.data
         db.session.add(p)
-        db.session.commit()
         flash('정보가 갱신되었습니다.')
         return redirect(url_for('hos.index'))
     form.name.data = p.name

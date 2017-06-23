@@ -15,7 +15,8 @@ class Config:
     PERMANENT_SESSION_LIFETIME = datetime.timedelta(days=1)
     SSL_DISABLE = True
     USE_EVALEX = False
-    LAWDIANS_ADMIN = os.environ.get('LAWDIANS_ADMIN')
+    LAWDIANS_HOSPITAL = os.environ.get('LAWDIANS_HOSPITAL')
+    LAWDIANS_LAWYER = os.environ.get('LAWDIANS_LAWYER')
 
     @staticmethod
     def init_app(app):

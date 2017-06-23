@@ -41,6 +41,9 @@ def login():
             if user.hospital:
                 flash('병원 계정으로 접속하셨습니다.')
                 return redirect(url_for('hos.index'))
+            elif user.lawyer:
+                flash('변호사 계정으로 접속하셨습니다.')
+                return redirect(url_for('law.index'))
             return redirect(request.args.get('next') or url_for('main.index'))
         flash('잘못된 이메일이나 비밀번호가 입력되었습니다.')
     return render_template('auth/login.html', form=form)

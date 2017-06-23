@@ -75,9 +75,11 @@ class User(UserMixin, db.Model):
         self.password_hash = generate_password_hash(password)
 
     @staticmethod
-    def set_hospital_admin():
-        for user in User.query.filter_by(email=current_app.config['LAWDIANS_ADMIN']):
+    def set_manager():
+        for user in User.query.filter_by(email=current_app.config['LAWDIANS_HOSPITAL']):
             user.hospital_id = 2
+        for user in User.query.filter_by(email=current_app.config['LAWDIANS_LAWYER']):
+            user.lawyer_id = 2
 
     def verify_password(self, password):
         return check_password_hash(self.password_hash, password)
