@@ -50,7 +50,7 @@
                         <td>{{ event.id }}</td>
                         <td>{{ event.event.head }}</td>
                         <td>{{ event.user.username }}</td>
-                        <td>{{ event.timestamp.strftime('%Y-%m-%d %H:%M:%S') }}</td>
+                        <td>{{ moment(event.timestamp).format('YYYY-MM-DD, h:mm a') }}</td>
                     </tr>
                 {% endfor %}
             </table>

@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, DateField, RadioField, SubmitField
-from wtforms.validators import InputRequired, Length, Optional, Email, DataRequired, ValidationError
+from wtforms import StringField, DateField, RadioField, SubmitField, PasswordField
+from wtforms.validators import InputRequired, Length, Optional, DataRequired, ValidationError
 
 from app.models import User
 
@@ -26,4 +26,11 @@ class RegisterSurgeryForm(FlaskForm):
 
 
 class ChargeForm(FlaskForm):
+    card_num = StringField('카드번호', validators=[InputRequired('카드 번호를 입력해주세요')],
+                           render_kw={"placeholder": "카드번호(dddd-dddd-dddd-dddd)"})
+    expiration_date = StringField('카드 유효기간', validators=[InputRequired('카드 유효기간을 입력해주세요.')],
+                                  render_kw={"placeholder": "카드 유효기간(YYYY-MM)"})
+    birth = StringField('생년월일', validators=[InputRequired('생년월일을 입력해주세요.')],
+                        render_kw={"placeholder": "생년월일6자리(법인카드의 경우 사업자등록번호10자리)"})
+    pwd_2digit = PasswordField('비밀번호 앞 2자리', validators=[InputRequired('비밀번호 앞 2자리를 입력해주세요.'), Length(2, 2)])
     submit = SubmitField('결제')

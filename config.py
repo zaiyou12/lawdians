@@ -1,6 +1,8 @@
 import os
 import datetime
 
+from iamport import Iamport
+
 basedir = os.path.abspath(os.path.dirname(__file__))
 
 
@@ -64,6 +66,19 @@ config = {
 
     'default': DevelopmentConfig
 }
+
+
+class Payment:
+    iamport = Iamport(imp_key=os.environ.get('imp_key'),
+                      imp_secret=os.environ.get('imp_secret'))
+    payload = {
+        'merchant_uid': 'INIBillTst',
+        'amount': 5000,
+        'card_number': '',
+        'expiry': '',
+        'birth': '',
+        'pwd_2digit': ''
+    }
 
 
 class AuthSms:

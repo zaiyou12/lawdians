@@ -3,48 +3,50 @@
 {% block title %}Lawdians{% endblock %}
 
 {% block head %}
-{{ super() }}
-<link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
-<link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+    {{ super() }}
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+    <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+    {{ moment.include_jquery() }}
+    {{ moment.include_moment() }}
 {% endblock %}
 
 {% block navbar %}
-<div class="navbar navbar-inverse" role="navigation">
-    <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="{{ url_for('hos.index') }}">Lawdians</a>
-        </div>
-        <div class="navbar-collapse collapse">
-            <ul class="nav navbar-nav">
-                <li><a href="{{ url_for('hos.edit_profile') }}">정보 관리</a></li>
-                <li><a href="{{ url_for('hos.service') }}">서비스 신청내역 관리</a></li>
-                <li><a href="{{ url_for('hos.event') }}">안심 이벤트 관리</a></li>
-                <li><a href="{{ url_for('hos.ads') }}">광고 관리</a></li>
-                <li><a>포인트 관리</a></li>
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="{{ url_for('auth.logout') }}">로그아웃</a></li>
-            </ul>
+    <div class="navbar navbar-inverse" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="{{ url_for('hos.index') }}">Lawdians</a>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="{{ url_for('hos.edit_profile') }}">정보 관리</a></li>
+                    <li><a href="{{ url_for('hos.service') }}">서비스 신청내역 관리</a></li>
+                    <li><a href="{{ url_for('hos.event') }}">안심 이벤트 관리</a></li>
+                    <li><a href="{{ url_for('hos.ads') }}">광고 관리</a></li>
+                    <li><a>포인트 관리</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="{{ url_for('auth.logout') }}">로그아웃</a></li>
+                </ul>
+            </div>
         </div>
     </div>
-</div>
 {% endblock %}
 
 {% block content %}
-<div class="container">
-    {% for message in get_flashed_messages() %}
-    <div class="alert alert-warning">
-        <button type="button" class="close" data-dismiss="alert">&times;</button>
-        {{ message }}
-    </div>
-    {% endfor %}
+    <div class="container">
+        {% for message in get_flashed_messages() %}
+            <div class="alert alert-warning">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                {{ message }}
+            </div>
+        {% endfor %}
 
-    {% block page_content %}{% endblock %}
-</div>
+        {% block page_content %}{% endblock %}
+    </div>
 {% endblock %}

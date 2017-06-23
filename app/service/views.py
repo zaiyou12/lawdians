@@ -1,9 +1,11 @@
 from datetime import datetime
 
+import requests
 from flask import render_template, redirect, url_for, session, flash, request, current_app
 from flask_login import current_user, login_required
 
 from app import db
+from ..payment import simple_payment
 from ..models import Hospital, Lawyer, Service
 from .forms import RegisterSurgeryForm, ChargeForm
 from ..sms import get_rand_num, send_sms
@@ -104,15 +106,21 @@ def lawyer():
 @login_required
 def charge():
     form = ChargeForm()
-    if request.method == 'POST':
-        charged = Service(
-            user=current_user._get_current_object(), hospital=Hospital.query.get_or_404(session.get('hospital_num')),
-            lawyer=Lawyer.query.get_or_404(session.get('lawyer_num')))
-        db.session.add(charged)
-        db.session.commit()
-        flash('감사합니다. 서비스 신청이 완료되었습니다.')
-        return redirect(url_for('main.index'))
-
+    if form.validate_on_submit():
+        ##TODO: 결제 진행 결제가 성공일시 서비스 등록
+        response = simple_payment(amount=5000, card_number=form.card_num.data, expiry=form.expiration_date.data,
+                                  birth=form.birth.data, pwd_2digit=form.pwd_2digit.data)
+        if response is None:
+            return redirect(url_for('service.charge'))
+        else:
+            charged = Service(
+                user=current_user._get_current_object(),
+                hospital=Hospital.query.get_or_404(session.get('hospital_num')),
+                lawyer=Lawyer.query.get_or_404(session.get('lawyer_num')))
+            db.session.add(charged)
+            db.session.commit()
+            flash('감사합니다. 서비스 신청이 완료되었습니다.')
+            return redirect(url_for('main.index'))
     hospital_num = session.get('hospital_num')
     lawyer_num = int(request.args.get('lawyer', default=-1))
     session['lawyer_num'] = lawyer_num

@@ -54,7 +54,9 @@
                                     <h3>선택한 변호사</h3>
                                     <p>{{ selected_lawyer.name }}</p>
                                     <p>{{ selected_lawyer.address }}</p>
-                                    {{ form.submit(class='btn btn-info') }}
+                                </div>
+                                <div>
+                                    {{ wtf.quick_form(form) }}
                                 </div>
                             </div>
                         </div>
