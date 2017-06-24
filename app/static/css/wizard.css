@@ -1,0 +1,106 @@
+.nav.nav-tabs + .tab-content, .tabs-vertical-env .tab-content {
+    background: #FFF;
+    padding: 30px;
+    margin-bottom: 30px;
+    box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.1);
+}
+
+.nav.nav-tabs > li.active > a, .tabs-vertical-env .nav.tabs-vertical li.active > a {
+    border: 0;
+    background-color: #fff;
+    border-top: 2px solid #D8D6D6;
+}
+
+.nav.nav-tabs > li > a {
+    border: none;
+    background-color: #eee;
+    margin-right: 5px;
+    padding-left: 20px;
+    padding-right: 20px;
+    cursor: pointer;
+    border-radius: 0;
+    border-top: 2px solid #eee;
+}
+
+.nav.nav-tabs > li:last-of-type a {
+    margin-right: 0px;
+}
+
+.nav.nav-tabs {
+    border-bottom: 0;
+}
+
+.nav-tabs.nav-justified > .active > a, .nav-tabs.nav-justified > .active > a:hover, .nav-tabs.nav-justified > .active > a:focus, .tabs-vertical-env .nav.tabs-vertical li.active > a {
+    border: none;
+    border-top: 2px solid #D8D6D6;
+}
+
+.tabs-vertical-env {
+    margin-bottom: 30px;
+}
+
+.tabs-vertical-env .nav.tabs-vertical {
+    min-width: 120px;
+    width: 150px;
+}
+
+.tabs-vertical-env .nav.tabs-vertical, .tabs-vertical-env .tab-content {
+    display: table-cell;
+    vertical-align: top;
+}
+
+.panel-group .panel .panel-heading a[data-toggle=collapse].collapsed:before, .panel-group .panel .panel-heading .accordion-toggle.collapsed:before {
+    content: '\f067';
+}
+
+.panel-group .panel .panel-heading a[data-toggle=collapse]:before, .panel-group .panel .panel-heading .accordion-toggle:before {
+    float: right;
+    display: block;
+    content: '\f068';
+    font-family: 'FontAwesome';
+    font-size: 14px;
+    width: 25px;
+    text-align: right;
+}
+
+.panel-group .panel .panel-heading a[data-toggle=collapse], .panel-group .panel .panel-heading .accordion-toggle {
+    display: block;
+}
+
+.tabs-vertical-env .nav.tabs-vertical li > a {
+    background-color: #eee;
+    margin-bottom: 5px;
+    text-align: center;
+    white-space: nowrap;
+}
+
+.panel-group .panel .panel-heading + .panel-collapse .panel-body {
+    border-top: 1px solid #DDDDDD;
+    margin-top: 15px;
+}
+
+.panel-group.panel-group-joined .panel + .panel, .panel-group-joined .panel-group .panel + .panel {
+    margin-top: 0;
+    border-top: 1px solid #ddd;
+}
+
+.table > thead > tr > td.middle-align, .table > tbody > tr > td.middle-align, .table > tfood > tr > td.middle-align, .table > thead > tr > th.middle-align, .table > tbody > tr > th.middle-align, .table > tfood > tr > th.middle-align {
+    vertical-align: middle;
+}
+
+.nav-tabs > li.active {
+    border: none;
+}
+
+/* Modal-use */
+.modal-content .nav.nav-tabs + .tab-content, .tabs-vertical-env .tab-content, .modal-content .panel-group {
+    margin-bottom: 0px;
+}
+
+.modal-content .panel {
+    border-top: none;
+}
+
+form.surgery-form {
+    margin-top: 30px;
+}
