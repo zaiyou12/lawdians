@@ -1,0 +1,48 @@
+{% extends "base_hospital.html" %}
+{% import "_macros.html" as macros %}
+{% block image_class %} class="headline-bg"{% endblock image_class %}
+{% block header_title %}안전하게 예뻐지자{% endblock header_title %}
+{% block header_text %}
+    <p>전문분야는 따로 있는 </p>
+    <p>잘하는 곳으로 가서 예뻐지자!</p>
+{% endblock header_text %}
+{% block contents_title %}추천 안심 병원{% endblock contents_title %}
+{% block slide_list %}
+    <ul class="slides">
+        {% for ad in hospitals_ad %}
+            <li class="slide slide-1">
+                <div class="flex-caption container">
+                    <h3 class="title"><a href="#">{{ ad.name }}</a></h3>
+                    <div class="meta">{{ ad.hospital.name }}</div>
+                    <a class="more-link" href="#">더 알아보기 &rarr;</a>
+                </div><!--//flex-caption-->
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock slide_list %}
+{% block category_list %}
+    <ul>
+        {% for hospital in hospitals %}
+            <li>
+                <div class="item-wrapper">
+                    <div class="img-wrapper">
+                        <img src="#" class="hospital-image">
+                    </div>
+                    <div class="hospital-desc">
+                        <h4>{{ hospital.name }}</h4>
+                        <h5>{{ hospital.address }}</h5>
+                        <div>
+                            <button class="btn btn-default">상세보기</button>
+                            <a href="{{ url_for('service.register', hospital=hospital.id) }}">
+                                <button class="btn btn-default">안심성형 신청</button>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock category_list %}
+{% block pagination %}
+    {{ macros.pagination_widget(pagination, 'main.hospital') }}
+{%  endblock pagination %}

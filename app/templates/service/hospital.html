@@ -1,0 +1,166 @@
+{% extends "base_user.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+{% import "_macros.html" as macros %}
+
+{% block body_attribs %} class="login-page access-page has-full-screen-bg"{% endblock body_attribs %}
+{% block section_attribs %} class="login-section access-section section"{% endblock section_attribs %}
+
+{% block styles %}
+    {{ super() }}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/hospital.css') }}">
+    <link id="theme-style" rel="stylesheet" href=" {{ url_for('static', filename='css/register-detail.css') }}">
+    <link href="{{ url_for('static', filename='css/wizard.css') }}" rel="stylesheet">
+{% endblock styles %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="form-box col-lg-10 col-lg-offset-1">
+                <div class="form-box-inner">
+                    <h2 class="title text-center">안심성형 신청하기</h2>
+                    <p class="intro text-center">올바른 정보를 입력해주셔야 지켜드릴수 있습니다.</p>
+                    <ul class="nav nav-tabs nav-justified">
+                        <li class="disabled">
+                            <a href="#home-2" data-toggle="tab" aria-expanded="false">
+                                <span class="visible-xs"><i class="fa fa-pencil-square-o"></i></span>
+                                <span class="hidden-xs">1. 개인정보 확인</span>
+                            </a>
+                        </li>
+                        <li class="active">
+                            <a href="#profile-2" data-toggle="tab" aria-expanded="false">
+                                <span class="visible-xs"><i class="fa fa-stethoscope"></i></span>
+                                <span class="hidden-xs">2. 안심병원 선택</span>
+                            </a>
+                        </li>
+                        <li class="disabled">
+                            <a href="#messages-2" data-toggle="tab" aria-expanded="true">
+                                <span class="visible-xs"><i class="fa fa fa-university"></i></span>
+                                <span class="hidden-xs">3. 안심변호사 선택</span>
+                            </a>
+                        </li>
+                        <li class="disabled">
+                            <a href="#settings-2" data-toggle="tab" aria-expanded="false">
+                                <span class="visible-xs"><i class="fa fa-credit-card"></i></span>
+                                <span class="hidden-xs">4. 결제 및 신청</span>
+                            </a>
+                        </li>
+                    </ul>
+
+                    <div class="tab-content">
+                        {% if selected_hospital %}
+                            <div class="text-center">
+                                <h3>기존에 선택한 병원</h3>
+                                <p>{{ selected_hospital.name }}</p>
+                                <p>{{ selected_hospital.address }}</p>
+                                <a href="{{ url_for('service.lawyer', hospital=selected_hospital.id) }}">
+                                    <button class="btn btn-info">다음</button>
+                                </a>
+                                <br/><br/>
+                            </div>
+                        {% endif %}
+                        <div class="tab-pane active" id="profile-2">
+                            <section class="section padding-top-section">
+                                <h3 class="text-center"> 안심병원 선택</h3>
+                                <div class="container" id="service-hospital-list">
+                                    <ul class="hospital-category2">
+                                        <li><a role="button">전체</a></li>
+                                        <li><a role="button">쁘띠시술</a></li>
+                                        <li><a role="button">피부</a></li>
+                                        <li><a role="button">다이어트</a></li>
+                                        <li><a role="button">리프</a></li>
+                                        <li><a role="button">반영구화장</a></li>
+                                        <li><a role="button">헤어라인</a></li>
+                                        <li><a role="button">눈</a></li>
+                                        <li><a role="button">코</a></li>
+                                        <li><a role="button">치아/입</a></li>
+                                        <li><a role="button">지방이식</a></li>
+                                        <li><a role="button">가슴</a></li>
+                                        <li><a role="button">안면윤곽</a></li>
+                                        <li><a role="button">이마</a></li>
+                                        <li><a role="button">양악</a></li>
+                                        <li><a role="button">기타</a></li>
+                                    </ul>
+                                </div>
+                                <div class="search-filter clearfix">
+                                    <div class="col-md-6">
+                                        <ul class="filter-sorting">
+                                            <li>
+                                                <button class="on">업데이트순</button>
+                                            </li>
+                                            <li>
+                                                <button>최신순</button>
+                                            </li>
+                                            <li>
+                                                <button>인기순</button>
+                                            </li>
+                                            <li>
+                                                <button>가격높은순</button>
+                                            </li>
+                                            <li>
+                                                <button>가격낮은순</button>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="dropdown address-filter">
+                                            <button class="btn btn-default dropdown-toggle" type="button"
+                                                    id="dropdownMenu1"
+                                                    data-toggle="dropdown"
+                                                    aria-haspopup="true" aria-expanded="true">
+                                                <span class="glyphicon glyphicon-map-marker">전체지역</span>
+                                                <span class="caret"></span>
+                                            </button>
+                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                                <li><a href="#">전체</a></li>
+                                                <li><a href="#">강남|서초|송파</a></li>
+                                                <li><a href="#">강동|성동|광진</a></li>
+                                                <li><a href="#">마포|중구|서대문</a></li>
+                                                <li><a href="#">동작|관악|영등포</a></li>
+                                                <li><a href="#">양천|강서</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div><!--search filter-->
+                                <div class="hospital-list clearfix">
+                                    <ul>
+                                        {% for hospital in hospitals %}
+                                            <li>
+                                                <div class="item-wrapper">
+                                                    <div class="img-wrapper">
+                                                        <img src="#" class="hospital-image">
+                                                    </div>
+                                                    <div class="hospital-desc">
+                                                        <h4>{{ hospital.name }}</h4>
+                                                        <h5>{{ hospital.address }}</h5>
+                                                        <div>
+                                                            <button class="btn btn-default">상세보기</button>
+                                                            <a href="{{ url_for('service.lawyer', hospital=hospital.id) }}">
+                                                                <button class="btn btn-default">안심성형 신청</button>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                                <div class="text-center">
+                                    <div class="pagination">
+                                        {{ macros.pagination_widget(pagination, 'service.hospital') }}
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                </div>
+
+                <br>
+            </div>
+        </div>
+    </div> <!-- End row -->
+    </div><!--//container-->
+{% endblock content %}
+
+{% block scripts %}
+    {{ super() }}
+{% endblock scripts %}

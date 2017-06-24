@@ -1,0 +1,154 @@
+{% extends "base_user.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block body_attribs %} class="login-page access-page has-full-screen-bg"{% endblock body_attribs %}
+{% block section_attribs %} class="login-section access-section section"{% endblock section_attribs %}
+
+{% block styles %}
+    {{ super() }}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/lawyer.css') }}">
+    <link id="theme-style" rel="stylesheet" href=" {{ url_for('static', filename='css/register-detail.css') }}">
+    <link href="{{ url_for('static', filename='css/wizard.css') }}" rel="stylesheet">
+{% endblock styles %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="form-box col-lg-10 col-lg-offset-1">
+                <div class="form-box-inner">
+                    <h2 class="title text-center">안심성형 신청하기</h2>
+                    <p class="intro text-center">올바른 정보를 입력해주셔야 지켜드릴수 있습니다.</p>
+                    <ul class="nav nav-tabs nav-justified">
+                        <li class="disabled">
+                            <a href="#home-2" data-toggle="tab" aria-expanded="false">
+                                <span class="visible-xs"><i class="fa fa-pencil-square-o"></i></span>
+                                <span class="hidden-xs">1. 개인정보 확인</span>
+                            </a>
+                        </li>
+                        <li class="disabled">
+                            <a href="#profile-2" data-toggle="tab" aria-expanded="false">
+                                <span class="visible-xs"><i class="fa fa-stethoscope"></i></span>
+                                <span class="hidden-xs">2. 안심병원 선택</span>
+                            </a>
+                        </li>
+                        <li class="active">
+                            <a href="#messages-2" data-toggle="tab" aria-expanded="true">
+                                <span class="visible-xs"><i class="fa fa fa-university"></i></span>
+                                <span class="hidden-xs">3. 안심변호사 선택</span>
+                            </a>
+                        </li>
+                        <li class="disabled">
+                            <a href="#settings-2" data-toggle="tab" aria-expanded="false">
+                                <span class="visible-xs"><i class="fa fa-credit-card"></i></span>
+                                <span class="hidden-xs">4. 결제 및 신청</span>
+                            </a>
+                        </li>
+                    </ul>
+
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="message-2">
+                            {% if selected_lawyer %}
+                                <div class="text-center">
+                                    <h3>기존에 선택한 변호사</h3>
+                                    <p>{{ selected_lawyer.name }}</p>
+                                    <p>{{ selected_lawyer.address }}</p>
+                                    <a href="{{ url_for('service.charge', lawyer=selected_lawyer.id) }}">
+                                        <button class="btn btn-info">다음</button>
+                                    </a>
+                                    <br/><br/>
+                                </div>
+                            {% endif %}
+                            <section class="section">
+                                <h2 class="lawyer-title title text-center">안심 변호사</h2>
+                                <div class="container-fluid lawyer-list-wrapper">
+                                    <div class="col-md-offset-1 item-wrapper ">
+                                        <div class="lawyer-list col-md-6">
+                                            <img src="{{ url_for('static', filename='assets/images/lawyer/lawyer_1.png') }}"
+                                                 class="img-responsive">
+                                        </div>
+                                        <div class=" item-content col-md-6">
+                                            <h3 class="item-title">차재승 변호사</h3>
+                                            <p class="item-small-title">서울 관악구 신림동 59길 / 02-872-1307</p>
+                                            <div class="item-description">
+                                                <p>(現) 차재승 법률사무소</p>
+                                                <p>前 주식회사 알바이오 자문변호사</p>
+                                                <p>前 법무법인 에이치스 </p>
+                                                <p>前 동작다문화지원센터 자문변호사</p>
+                                                <p>前 도산법학회 정회원</p>
+                                                <p>前 염동렬 국회의원실</p>
+                                                <p>前 인하대학교 법학전문대학원 졸업</p>
+                                            </div>
+                                            <div class="item-btn btn-group" role="group">
+                                                <button type="button" class="btn btn-default">상담하기</button>
+                                                <a href="{{ url_for('service.charge', lawyer=1) }}">
+                                                    <button type="button" class="btn btn-default">서비스 신청</button>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-offset-1 item-wrapper ">
+                                        <div class="lawyer-list col-md-6">
+                                            <img src="{{ url_for('static', filename='assets/images/lawyer/lawyer_3.png') }}"
+                                                 class="img-responsive">
+                                        </div>
+                                        <div class="item-content col-md-6">
+                                            <h3 class="item-title">최운영 변호사</h3>
+                                            <p class="item-small-title">서울 영등포구 국제금융로 8길 34602호 </p>
+                                            <div class="item-description">
+                                                <p>(現) 서울시 공익변호사</p>
+                                                <p>(現) 대법원 국선변호</p>
+                                                <p>(現) 한국갈등해결센터 전문위원 </p>
+                                                <p>(現) 불어민주당 윤리심판위원</p>
+                                                <p>(現) 은정초등학교 법률고문</p>
+                                                <p>前 서울북부지방법원 조정위원</p>
+                                                <p>사법연수원 제42기 수료 </p>
+                                            </div>
+                                            <div class="item-btn btn-group" role="group">
+                                                <button type="button" class="btn btn-default">상담하기</button>
+                                                <a href="{{ url_for('service.charge', lawyer=2) }}">
+                                                    <button type="button" class="btn btn-default">서비스 신청</button>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-offset-1 item-wrapper">
+                                        <div class="lawyer-list col-md-6">
+                                            <img src="{{ url_for('static', filename='assets/images/lawyer/lawyer_2.png') }}"
+                                                 class="img-responsive">
+                                        </div>
+                                        <div class="item-content col-md-6">
+                                            <h3 class="item-title">김평호 변호사</h3>
+                                            <p class="item-small-title">경기 성남구 중원구 산성대로 454번 신우빌딩 201 / 031-744-6655</p>
+                                            <div class="item-description">
+                                                <p>(現) 법무법인 한울(성남사무소) 구성원 변호사</p>
+                                                <p>(現) 분당차병원 의학연구윤리심의위원(IRB 위원) </p>
+                                                <p>(現) 수원지방법원 성남지원 민사조정위원, 가사조정위원 </p>
+                                                <p>(現) 소망재활원 운영위원 </p>
+                                                <p>(現) 성남종합사회복지관 운영위원 </p>
+                                                <p>(現) 성남시 지방세 심의위원회 위원</p>
+                                                <p>前 대한정형외과개원의 협의회 법률고문 </p>
+                                            </div>
+                                            <div class="item-btn btn-group" role="group">
+                                                <button type="button" class="btn btn-default">상담하기</button>
+                                                <a href="{{ url_for('service.charge', lawyer=3) }}">
+                                                    <button type="button" class="btn btn-default">서비스 신청</button>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                </div>
+
+                <br>
+            </div>
+        </div>
+    </div> <!-- End row -->
+    </div><!--//container-->
+{% endblock content %}
+
+{% block scripts %}
+    {{ super() }}
+{% endblock scripts %}

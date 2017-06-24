@@ -1,0 +1,108 @@
+{% extends "base.html" %}
+{% block styles %}
+    {{ super() }}
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/hospital.css') }}">
+{% endblock styles %}
+{% block body_attribs %}class="about-page"{% endblock body_attribs %}
+{% block content %}
+
+    <div{% block image_class %}{% endblock image_class %}>
+    </div><!--//headline-bg-->
+
+
+    <!-- ******Description Section****** -->
+    <section class="story-section section section-on-bg">
+        <h2 class="title container text-center">{% block header_title %}{% endblock header_title %}</h2>
+        <div class="story-container container text-center">
+            <div class="story-container-inner">
+                <div class="about text-center">
+                    {% block header_text %}{% endblock header_text %}
+                </div><!--//about-->
+            </div><!--//story-container-->
+        </div><!--//container-->
+    </section><!--//story-section-->
+
+    <section class="featured-blog-posts section padding-top-section">
+        <h2 class="title text-center">{% block contents_title %}{% endblock contents_title %}</h2>
+        <div class="flexslider blog-slider">
+            {% block slide_list %}
+            {% endblock slide_list %}
+        </div><!--//flexslider-->
+    </section><!--//featured-blog-posts-->
+
+    <section class="section padding-top-section">
+        <h2 class="title text-center">카테고리</h2>
+        <div class="container">
+            <ul class="hospital-category2">
+                <li><a role="button">전체</a></li>
+                <li><a role="button">쁘띠시술</a></li>
+                <li><a role="button">피부</a></li>
+                <li><a role="button">다이어트</a></li>
+                <li><a role="button">리프</a></li>
+                <li><a role="button">반영구화장</a></li>
+                <li><a role="button">헤어라인</a></li>
+                <li><a role="button">눈</a></li>
+                <li><a role="button">코</a></li>
+                <li><a role="button">치아/입</a></li>
+                <li><a role="button">지방이식</a></li>
+                <li><a role="button">가슴</a></li>
+                <li><a role="button">안면윤곽</a></li>
+                <li><a role="button">이마</a></li>
+                <li><a role="button">양악</a></li>
+                <li><a role="button">기타</a></li>
+            </ul>
+        </div>
+        <div class="search-filter clearfix">
+            <div class="col-md-6">
+                <ul class="filter-sorting">
+                    <li>
+                        <button class="on">업데이트순</button>
+                    </li>
+                    <li>
+                        <button>최신순</button>
+                    </li>
+                    <li>
+                        <button>인기순</button>
+                    </li>
+                    <li>
+                        <button>가격높은순</button>
+                    </li>
+                    <li>
+                        <button>가격낮은순</button>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-6">
+                <div class="dropdown address-filter">
+                    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1"
+                            data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="true">
+                        <span class="glyphicon glyphicon-map-marker">전체지역</span>
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                        <li><a href="#">전체</a></li>
+                        <li><a href="#">강남|서초|송파</a></li>
+                        <li><a href="#">강동|성동|광진</a></li>
+                        <li><a href="#">마포|중구|서대문</a></li>
+                        <li><a href="#">동작|관악|영등포</a></li>
+                        <li><a href="#">양천|강서</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div><!--search filter-->
+        <div class="hospital-list clearfix">
+            {% block category_list %}
+            {% endblock category_list %}
+        </div>
+        <div class="container text-center">
+            <div class="pagination">
+                {% block pagination %}
+                {% endblock pagination %}
+            </div>
+        </div>
+
+    </section>
+    <!-- hospital list -->
+{% endblock content %}

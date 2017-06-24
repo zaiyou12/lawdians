@@ -1,0 +1,11 @@
+{% extends "hos/base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block page_content %}
+    <div class="page-header">
+        <h1>병원 광고 관리</h1>
+    </div>
+    <div>
+        {{ wtf.quick_form(form) }}
+    </div>
+{% endblock page_content %}

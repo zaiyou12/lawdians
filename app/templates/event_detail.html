@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+{% block page_content %}
+    <div class="page-header">
+        <h2 class="page-header">이벤트 상세보기</h2>
+    </div>
+    <p>{{ event.head }}</p>
+    <p>{{ event.body }}</p>
+    {{ wtf.quick_form(form) }}
+    <button class="btn btn-default">뒤로가기</button>
+{% endblock page_content %}

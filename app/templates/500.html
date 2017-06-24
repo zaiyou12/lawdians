@@ -1,9 +1,22 @@
-{% extends "base.html" %}
+{% extends "base_user.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+{% block body_attribs %} class="signup-page access-page has-full-screen-bg"{% endblock body_attribs %}
+{% block section_attribs %} class="signup-section access-section section"{% endblock section_attribs %}
 
-{% block title %}Flasky - Internal Server Error{% endblock %}
-
-{% block page_content %}
-<div class="page-header">
-    <h1>Internal Server Error</h1>
-</div>
-{% endblock %}
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="form-box col-md-offset-2 col-sm-offset-0 xs-offset-0 col-xs-12 col-md-8">
+                <div class="form-box-inner">
+                    <h2 class="title text-center">500</h2>
+                    <p class="intro text-center">죄송합니다, 웹 서버가 요청사항을 수행할 수 없습니다.</p>
+                    <p class="intro text-center">새로고침을 해보시겠습니까?</p>
+                    <a class="btn btn-block btn-cta-primary" href="{{ url_for('main.index') }}"><i
+                            class="fa fa-angle-left"></i>
+                        메인페이지로 돌아가기</a>
+                </div><!--//form-box-inner-->
+            </div><!--//form-box-->
+        </div><!--//row-->
+    </div><!--//container-->
+    </section><!--//contact-section-->
+{% endblock content %}

@@ -23,7 +23,7 @@
         </div><!--//form-group-->
         {{ form.submit(class="btn btn-block btn-cta-primary") }}
         <p class="note">가입을 하시게 되시면, 저희의 서비스와 보안정책에 동의하신것으로 간주합니다.</p>
-        <p class="lead">계정이 있으신가요? <a class="login-link" id="login-link" href="{{ url_for('auth.login') }}">로그인</a>
+        <p class="lead">계정이 있으신가요?<br><a class="login-link" id="login-link" href="{{ url_for('auth.login') }}">로그인</a>
     </form>
 {% endblock form %}
 
@@ -45,6 +45,7 @@
         </li>
     </ul>
     <p class="note">걱정마세요, 당신의 동의없이 저희는 그 어떠한 정보도 올리지 않겠습니다.</p>
+    <p class="lead text-left">병원회원이신가요?<br><a href="{{ url_for('auth.register_hospital') }}">제휴병원 문의 </a>
 {% endblock social_btns %}
 
 {% block scripts %}

@@ -1,0 +1,114 @@
+{% extends "base_user.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block body_attribs %} class="login-page access-page has-full-screen-bg"{% endblock body_attribs %}
+{% block section_attribs %} class="login-section access-section section"{% endblock section_attribs %}
+
+{% block styles %}
+    {{ super() }}
+    <link id="theme-style" rel="stylesheet" href=" {{ url_for('static', filename='css/register-detail.css') }}">
+    <link href="{{ url_for('static', filename='css/wizard.css') }}" rel="stylesheet">
+{% endblock styles %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="form-box col-lg-10 col-lg-offset-1">
+                <div class="form-box-inner">
+                    <h2 class="title text-center">안심성형 신청하기</h2>
+                    <p class="intro text-center">올바른 정보를 입력해주셔야 지켜드릴수 있습니다.</p>
+                    <ul class="nav nav-tabs nav-justified">
+                        <li class="active">
+                            <a href="#home-2" data-toggle="tab" aria-expanded="false">
+                                <span class="visible-xs"><i class="fa fa-pencil-square-o"></i></span>
+                                <span class="hidden-xs">1. 개인정보 확인</span>
+                            </a>
+                        </li>
+                        <li class="disabled">
+                            <a href="#profile-2" data-toggle="tab" aria-expanded="false">
+                                <span class="visible-xs"><i class="fa fa-stethoscope"></i></span>
+                                <span class="hidden-xs">2. 안심병원 선택</span>
+                            </a>
+                        </li>
+                        <li class="disabled">
+                            <a href="#messages-2" data-toggle="tab" aria-expanded="true">
+                                <span class="visible-xs"><i class="fa fa fa-university"></i></span>
+                                <span class="hidden-xs">3. 안심변호사 선택</span>
+                            </a>
+                        </li>
+                        <li class="disabled">
+                            <a href="#settings-2" data-toggle="tab" aria-expanded="false">
+                                <span class="visible-xs"><i class="fa fa-credit-card"></i></span>
+                                <span class="hidden-xs">4. 결제 및 신청</span>
+                            </a>
+                        </li>
+                    </ul>
+
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="home-2">
+                            <form class="surgery-form" action="{{ url_for('service.hospital') }}" method="post">
+                                {{ form.hidden_tag() }}
+                                <div class="form-group email {% if form.email.errors %} has-error {% endif %}">
+                                    <label class="sr-only" for="signup-email">이메일</label>
+                                    {{ form.email(id="signup-email", class="form-control login-email", type="email", disabled="disabled") }}
+                                </div><!--//form-group-->
+                                <div class="form-group username {% if form.username.errors %} has-error {% endif %}">
+                                    <label class="sr-only" for="signup-username">이름</label>
+                                    {{ form.username(id="signup-username", class="form-control", placeholder="사용자 이름") }}
+                                    <p class="help-block">{{ form.username.errors[0] }}</p>
+                                </div>
+                                <div class="form-group birth {% if form.birth_date.errors %} has-error {% endif %}">
+                                    <label class="sr-only" for="signup-birth">생년월일</label>
+                                    {{ form.birth_date(id="signup-birth", class="form-control", placeholder="생년월일   예)19820301") }}
+                                    <p class="help-block">{{ form.birth_date.errors[0] }}</p>
+                                </div>
+                                <div class="form-group gender {% if form.gender.errors %} has-error {% endif %}">
+                                    <label class="sr-only" for="signup-gender">성별</label>
+                                    {{ form.gender(class="cr-styled") }}
+                                    <p class="help-block">{{ form.gender.errors[0] }}</p>
+                                </div>
+                                <div class="form-group address {% if form.address.errors %} has-error {% endif %}">
+                                    <label class="sr-only" for="signup-address">주소</label>
+                                    {{ form.address(id="signup-address", class="form-control", placeholder="주소") }}
+                                    <p class="help-block">{{ form.address.errors[0] }}</p>
+                                </div>
+                                <div class="form-group phone {% if form.phone_number.errors %} has-error {% endif %}">
+                                    <label class="sr-only" for="signup-phone">전화번호</label>
+                                    <div class="form-group-phone">
+                                        {{ form.phone_number(id="signup-phone", class="form-control", placeholder="전화번호   '-' 없이 작성해주세요.") }}
+                                        {{ form.phone_submit(class="btn btn-info") }}
+                                    </div>
+                                    <p class="help-block">{{ form.phone_number.errors[0] }}</p>
+                                </div>
+                                <div class="form-group confirm {% if form.confirm.errors %} has-error {% endif %}">
+                                    <label class="sr-only" for="signup-confirm">인증번호</label>
+                                    <div class="form-group-phone">
+                                        {{ form.confirm(id="signup-confirm", class="form-control", placeholder="인증번호") }}
+                                        {{ form.confirm_submit(class="btn btn-info") }}
+                                    </div>
+                                    <p class="help-block">{{ form.confirm.errors[0] }}</p>
+                                </div>
+                                <ul class="pager">
+                                    <li class="disabled">
+                                        <a>
+                                            <i class="fa fa-angle-double-left"></i>이전
+                                        </a>
+                                    </li>
+                                    <li>
+                                        {{ form.submit() }}
+                                    </li>
+                                </ul>
+                            </form>
+                        </div>
+                    </div>
+
+                    <br>
+                </div>
+            </div>
+        </div> <!-- End row -->
+    </div><!--//container-->
+{% endblock content %}
+
+{% block scripts %}
+    {{ super() }}
+{% endblock scripts %}

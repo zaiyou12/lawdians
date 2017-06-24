@@ -25,10 +25,23 @@ def create_app(config_name):
     db.init_app(app)
     login_manager.init_app(app)
 
+    if not app.debug and not app.testing and not app.config['SSL_DISABLE']:
+        from flask_sslify import SSLify
+        sslify = SSLify(app)
+
     from .main import main as main_blueprint
     app.register_blueprint(main_blueprint)
 
     from .auth import auth as auth_blueprint
     app.register_blueprint(auth_blueprint, url_prefix='/auth')
+
+    from .service import service as service_blueprint
+    app.register_blueprint(service_blueprint, url_prefix='/service')
+
+    from .hos import hos as hos_blueprint
+    app.register_blueprint(hos_blueprint, url_prefix='/hospital')
+
+    from .law import law as law_blueprint
+    app.register_blueprint(law_blueprint, url_prefix='/lawyer')
 
     return app
