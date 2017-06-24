@@ -136,7 +136,7 @@ class User(UserMixin, db.Model):
         self.email = new_email
         db.session.add(self)
         return True
-
+        
     def can(self, permissions):
         return self.role is not None and \
                (self.role.permissions & permissions) == permissions
