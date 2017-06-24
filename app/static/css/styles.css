@@ -1482,7 +1482,7 @@ select {
   -webkit-background-clip: padding-box;
   background-clip: padding-box;
 }
-.contact-other-section .other-info li .fa.fa-twitter {
+.contact-other-section .other-info li .fa.fa-envelope-o {
   font-size: 22px;
 }
 .contact-other-section .other-info li .fa.fa-phone {
