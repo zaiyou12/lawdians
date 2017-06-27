@@ -17,6 +17,10 @@ class Config:
     USE_EVALEX = False
     LAWDIANS_HOSPITAL = os.environ.get('LAWDIANS_HOSPITAL')
     LAWDIANS_LAWYER = os.environ.get('LAWDIANS_LAWYER')
+    SOCIAL_GOOGLE = {
+        'consumer_key': '134835613818-74spq0dksse67pb1asm62bft40qpuf1u.apps.googleusercontent.com',
+        'consumer_secret': os.environ.get('consumer_secret')
+    }
 
     @staticmethod
     def init_app(app):
