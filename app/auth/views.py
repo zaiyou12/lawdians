@@ -1,14 +1,15 @@
 from datetime import datetime
 
 from flask import render_template, redirect, request, url_for, flash, session
+from flask.json import jsonify
 from flask_login import login_user, logout_user, login_required, current_user
+from flask_oauthlib.client import OAuthException
 
-from app.oauth import OAuthSignIn
 from ..sms import send_sms, get_rand_num
 from ..email import send_email
 from . import auth
 
-from .. import db
+from .. import db, google, facebook
 from ..models import User, HospitalRegistration
 from .forms import LoginForm, RegistrationForm, ChangePasswordForm, PasswordResetRequestForm, PasswordResetForm, \
     ChangeEmailForm, RegistrationDetailForm, HospitalRegistrationForm
@@ -52,6 +53,8 @@ def login():
 @auth.route('/logout')
 @login_required
 def logout():
+    if 'google_token' in session:
+        session.pop('google_token', None)
     logout_user()
     flash('로그아웃 하셨습니다.')
     return redirect(url_for('main.index'))
@@ -67,32 +70,6 @@ def register():
         login_user(user, True)
         return redirect(url_for('auth.register_detail'))
     return render_template('auth/register.html', form=form)
-
-
-@auth.route('/authorize/<provider>')
-def oauth_authorize(provider):
-    if not current_user.is_anonymous:
-        return redirect(url_for('main.index'))
-    oauth = OAuthSignIn.get_provider(provider)
-    return oauth.authorize()
-
-
-@auth.route('/callback/<provider>')
-def oauth_callback(provider):
-    if not current_user.is_anonymous:
-        return redirect(url_for('main.index'))
-    oauth = OAuthSignIn.get_provider(provider)
-    social_id, email = oauth.callback()
-    if social_id is None:
-        flash('Authentication failed.')
-        return redirect(url_for('main.index'))
-    user = User.query.filter_by(social_id=social_id).first()
-    if not user:
-        user = User(social_id=social_id, email=email)
-        db.session.add(user)
-        db.session.commit()
-    login_user(user, force=True)
-    return redirect(url_for('main.index'))
 
 
 @auth.route('/register-detail', methods=['GET', 'POST'])
@@ -266,3 +243,86 @@ def register_hospital():
         flash('감사합니다. 제휴병원 신청이 완료되었습니다. 빠른신간안에 연락드리겠습니다.')
         return redirect(url_for('main.index'))
     return render_template('/auth/register_hospital.html', form=form)
+
+
+''' Google Social Login '''
+
+
+@auth.route('/google/login')
+def google_login():
+    if 'google_token' in session:
+        me = google.get('userinfo')
+        email = me.data.get('email')
+        user = User.query.filter_by(email=email).first()
+        if user is not None:
+            login_user(user, True)
+            return redirect(request.args.get('next') or url_for('main.index'))
+        else:
+            user = User(email=email, social_id=me.data.get('id'), confirmed=True)
+            db.session.add(user)
+            db.session.commit()
+            login_user(user, True)
+            return redirect(url_for('auth.register_detail'))
+    return google.authorize(callback=url_for('auth.google_authorized', _external=True))
+
+
+@auth.route('/google/authorized')
+def google_authorized():
+    resp = google.authorized_response()
+    if resp is None:
+        return 'Access denied: reason=%s error=%s' % (
+            request.args['error_reason'],
+            request.args['error_description']
+        )
+    session['google_token'] = (resp['access_token'], '')
+    return redirect(url_for('auth.google_login'))
+
+
+@google.tokengetter
+def get_google_oauth_token():
+    return session.get('google_token')
+
+
+''' Facebook Social Login'''
+
+
+@auth.route('/facebook/login')
+def facebook_login():
+    if 'facebook_token' in session:
+        me = facebook.get('/me')
+        user = User.query.filter_by(social_id=me.data.get('id')).first()
+        if user is not None:
+            login_user(user, True)
+            return redirect(request.args.get('next') or url_for('main.index'))
+        else:
+            user = User(social_id=me.data.get('id'), confirmed=True)
+            db.session.add(user)
+            db.session.commit()
+            login_user(user, True)
+            return redirect(url_for('auth.register_detail'))
+    callback = url_for(
+        'auth.facebook_authorized',
+        next=request.args.get('next') or request.referrer or None,
+        _external=True
+    )
+    return facebook.authorize(callback=callback)
+
+
+@auth.route('/facebook/authorized')
+def facebook_authorized():
+    resp = facebook.authorized_response()
+    if resp is None:
+        return 'Access denied: reason=%s error=%s' % (
+            request.args['error_reason'],
+            request.args['error_description']
+        )
+    if isinstance(resp, OAuthException):
+        return 'Access denied: %s' % resp.message
+
+    session['facebook_token'] = (resp['access_token'], '')
+    return redirect(url_for('auth.facebook_login'))
+
+
+@facebook.tokengetter
+def get_facebook_oauth_token():
+    return session.get('facebook_token')

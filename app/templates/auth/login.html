@@ -29,14 +29,18 @@
 {% block social_btns %}
     <ul class="list-unstyled social-login">
         <li>
-            <button class="facebook-btn btn" type="button"><i class="fa fa-facebook"></i>Log
-                in with Facebook
-            </button>
+            <a href="{{ url_for('auth.facebook_login') }}">
+                <button class="facebook-btn btn" type="button"><i class="fa fa-facebook"></i>Log
+                    in with Facebook
+                </button>
+            </a>
         </li>
         <li>
-            <button class="google-btn btn" type="button"><i class="fa fa-google-plus"></i>Log
-                in with Google
-            </button>
+            <a href="{{ url_for('auth.google_login') }}">
+                <button class="google-btn btn" type="button"><i class="fa fa-google-plus"></i>
+                    구글 로그인
+                </button>
+            </a>
         </li>
     </ul>
 {% endblock social_btns %}

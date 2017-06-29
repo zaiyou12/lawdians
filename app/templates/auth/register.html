@@ -1,12 +1,5 @@
 {% extends "base_user.html" %}
 {% import "bootstrap/wtf.html" as wtf %}
-{% block styles %}
-    {{ super() }}
-    <script src="https://apis.google.com/js/platform.js" async defer></script>
-    <script type="text/javascript">
-
-    </script>
-{% endblock styles %}
 {% block body_attribs %} class="signup-page access-page has-full-screen-bg"{% endblock body_attribs %}
 {% block section_attribs %} class="signup-section access-section section"{% endblock section_attribs %}
 
@@ -37,33 +30,21 @@
 {% block social_btns %}
     <ul class="list-unstyled social-login">
         <li>
-            <a href="{{ url_for('auth.oauth_authorize', provider='facebook') }}" target="_blank">
+            <a href="{{ url_for('auth.facebook_login') }}">
                 <button class="facebook-btn btn" type="button"><i class="fa fa-facebook"></i>
                     페이스북 회원가입
                 </button>
             </a>
         </li>
         <li>
-            <div class="g-signin2" data-onsuccess="onSingIn">
-                <button class="google-btn btn" type="button" data-onsuccess="google_btn_clicked"><i
+            <a href="{{ url_for('auth.google_login') }}">
+                <button
+                        class="google-btn btn" type="button" data-onsuccess="google_btn_clicked"><i
                         class="fa fa-google-plus"></i>구글 회원가입
                 </button>
-            </div>
+            </a>
         </li>
     </ul>
     <p class="note">걱정마세요, 당신의 동의없이 저희는 그 어떠한 정보도 올리지 않겠습니다.</p>
     <p class="lead text-left">병원회원이신가요?<br><a href="{{ url_for('auth.register_hospital') }}">제휴병원 문의 </a>
 {% endblock social_btns %}
-
-{% block scripts %}
-    {{ super() }}
-    <script type="text/javascript">
-        function onSignIn(googleUser) {
-            var profile = googleUser.getBasicProfile();
-            console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
-            console.log('Name: ' + profile.getName());
-            console.log('Image URL: ' + profile.getImageUrl());
-            console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
-        }
-    </script>
-{% endblock scripts %}
