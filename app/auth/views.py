@@ -1,7 +1,6 @@
 from datetime import datetime
 
 from flask import render_template, redirect, request, url_for, flash, session
-from flask.json import jsonify
 from flask_login import login_user, logout_user, login_required, current_user
 from flask_oauthlib.client import OAuthException
 
@@ -114,6 +113,8 @@ def register_detail():
         return redirect(url_for('auth.register_detail'))
     # Fill form data
     form.email.data = current_user.email
+    if current_user.social_id is not None:
+        form.email.data = 'facebook login'
     form.username.data = session.get('username')
     if session.get('birth_date'):
         form.birth_date.data = datetime.strptime(session.get('birth_date'), '%Y%m%d')
