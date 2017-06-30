@@ -9,7 +9,7 @@ from ..email import send_email
 from . import auth
 
 from .. import db, google, facebook
-from ..models import User, HospitalRegistration
+from ..models import User, HospitalRegistration, Role
 from .forms import LoginForm, RegistrationForm, ChangePasswordForm, PasswordResetRequestForm, PasswordResetForm, \
     ChangeEmailForm, RegistrationDetailForm, HospitalRegistrationForm
 
@@ -44,6 +44,9 @@ def login():
             elif user.lawyer:
                 flash('변호사 계정으로 접속하셨습니다.')
                 return redirect(url_for('law.index'))
+            elif user.role == Role.query.filter_by(permissions=0xff).first():
+                flash('어드민 계정으로 접속하셨습니다.')
+                return redirect(url_for('admin.index'))
             return redirect(request.args.get('next') or url_for('main.index'))
         flash('잘못된 이메일이나 비밀번호가 입력되었습니다.')
     return render_template('auth/login.html', form=form)
@@ -114,7 +117,7 @@ def register_detail():
     # Fill form data
     form.email.data = current_user.email
     if current_user.social_id is not None:
-        form.email.data = 'facebook login'
+        form.email.data = 'social login'
     form.username.data = session.get('username')
     if session.get('birth_date'):
         form.birth_date.data = datetime.strptime(session.get('birth_date'), '%Y%m%d')

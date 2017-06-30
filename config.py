@@ -17,6 +17,7 @@ class Config:
     USE_EVALEX = False
     LAWDIANS_HOSPITAL = os.environ.get('LAWDIANS_HOSPITAL')
     LAWDIANS_LAWYER = os.environ.get('LAWDIANS_LAWYER')
+    LAWDIANS_ADMIN = os.environ.get('LAWDIANS_ADMIN')
     GOOGLE = dict(
         consumer_key=os.environ.get('GOOGLE_ID'),
         consumer_secret=os.environ.get('GOOGLE_SECRET'),

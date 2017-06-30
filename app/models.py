@@ -80,6 +80,8 @@ class User(UserMixin, db.Model):
             user.hospital_id = 2
         for user in User.query.filter_by(email=current_app.config['LAWDIANS_LAWYER']):
             user.lawyer_id = 2
+        for user in User.query.filter_by(email=current_app.config['LAWDIANS_ADMIN']):
+            user.role = Role.query.filter_by(permissions=0xff).first()
 
     def verify_password(self, password):
         return check_password_hash(self.password_hash, password)

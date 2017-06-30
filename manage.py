@@ -55,6 +55,7 @@ def deploy():
 
     upgrade()
 
+    Role.insert_roles()
     Hospital.insert_hospital()
     Lawyer.insert_lawyer()
     User.set_manager()
