@@ -115,7 +115,16 @@ def login_to_user(id):
             session.pop('google_token', None)
         login_user(user, False)
         session['admin_login_other_user'] = datetime.now()
-        flash('해당 계정으로 로그인 하셨습니다.')
+        if user.hospital:
+            flash('병원 계정으로 접속하셨습니다.')
+            return redirect(url_for('hos.index'))
+        elif user.lawyer:
+            flash('변호사 계정으로 접속하셨습니다.')
+            return redirect(url_for('law.index'))
+        elif user.role == Role.query.filter_by(permissions=0xff).first():
+            flash('어드민 계정으로 접속하셨습니다.')
+            return redirect(url_for('admin.index'))
+        flash('유저 계정으로 로그인 하셨습니다.')
         return redirect(url_for('main.index'))
     flash('해당 계정이 존재하지 않습니다.')
     return redirect(url_for('admin.index'))
