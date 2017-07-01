@@ -31,16 +31,13 @@
                 {% for user in users %}
                     <tr>
                         <td>{{ user.id }}</td>
-                        <td><a>{{ user.email }}</a></td>
+                        <td><a href="{{ url_for('admin.edit_profile', id=user.id) }}">{{ user.email }}</a></td>
                         <td>{{ user.social_id }}</td>
                         <td>{{ user.username }}</td>
                     </tr>
                 {% endfor %}
                 </tbody>
             </table>
-        </div>
-        <div class="pagination container text-center">
-            {{ macros.pagination_widget(pagination, 'admin.id_user') }}
         </div>
     </div>
 {% endblock %}
