@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, timedelta
 
 from flask import render_template, redirect, request, url_for, flash, session
 from flask_login import login_user, logout_user, login_required, current_user
@@ -22,6 +22,12 @@ def before_request():
             and request.endpoint[:5] != 'auth.' \
             and request.endpoint != 'static':
         return redirect(url_for('auth.unconfirmed'))
+    if 'admin_login_other_user' in session:
+        record = session.get('admin_login_other_user')
+        if datetime.now() - record > timedelta(minutes=5):
+            session.pop('admin_login_other_user', None)
+            flash('보안상 타유저 계정으로 접속하는 시간을 제한합니다.')
+            logout_user()
 
 
 @auth.route('/unconfirmed')

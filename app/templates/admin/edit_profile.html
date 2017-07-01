@@ -8,4 +8,5 @@
     <div class="col-md-6">
         {{ wtf.quick_form(form) }}
     </div>
+    <a href="{{ url_for('admin.login_to_user', id=user.id) }}"><button type="button" class="btn btn-danger">해당 계정으로 로그인</button></a>
 {% endblock %}

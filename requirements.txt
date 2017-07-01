@@ -28,7 +28,6 @@ psycopg2==2.7.1
 py==1.4.34
 python-dateutil==2.6.0
 python-editor==1.0.3
-rauth==0.7.3
 requests==2.17.3
 requests-oauthlib==0.8.0
 six==1.10.0

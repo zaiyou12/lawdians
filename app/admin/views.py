@@ -1,5 +1,7 @@
-from flask import render_template, request, current_app, redirect, url_for, flash
-from flask_login import login_required
+from datetime import datetime
+
+from flask import render_template, request, current_app, redirect, url_for, flash, session
+from flask_login import login_required, login_user
 
 from app import db
 from .forms import UserForm
@@ -102,3 +104,18 @@ def edit_profile(id):
     form.hospital.data = user.hospital_id
     form.lawyer.data = user.lawyer_id
     return render_template('admin/edit_profile.html', form=form, user=user)
+
+
+@admin.route('/id/login-user/<int:id>')
+@login_required
+def login_to_user(id):
+    user = User.query.get_or_404(id)
+    if user is not None:
+        if 'google_token' in session:
+            session.pop('google_token', None)
+        login_user(user, False)
+        session['admin_login_other_user'] = datetime.now()
+        flash('해당 계정으로 로그인 하셨습니다.')
+        return redirect(url_for('main.index'))
+    flash('해당 계정이 존재하지 않습니다.')
+    return redirect(url_for('admin.index'))
