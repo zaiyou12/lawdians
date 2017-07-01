@@ -244,7 +244,7 @@ def register_hospital():
                                             requests=form.text.data)
         db.session.add(registration)
         db.session.commit()
-        flash('감사합니다. 제휴병원 신청이 완료되었습니다. 빠른신간안에 연락드리겠습니다.')
+        flash('감사합니다. 제휴병원 신청이 완료되었습니다. 빠른 시간안에 연락드리겠습니다.')
         return redirect(url_for('main.index'))
     return render_template('/auth/register_hospital.html', form=form)
 

@@ -24,7 +24,16 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li><a href="{{ url_for('admin.user') }}">계정</a></li>
+                    <li>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                           aria-expanded="false">계정<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="{{ url_for('admin.id_user') }}">유저</a></li>
+                            <li><a href="{{ url_for('admin.id_hospital') }}">병원</a></li>
+                            <li><a href="{{ url_for('admin.id_lawyer') }}">변호사</a></li>
+                            <li><a href="{{ url_for('admin.id_admin') }}">어드민</a></li>
+                        </ul>
+                    </li>
                     <li><a href="#">페이지</a></li>
                     <li><a href="#">서비스</a></li>
                     <li><a href="#">포인트</a></li>

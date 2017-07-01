@@ -12,6 +12,7 @@ from . import db, login_manager
 
 class Permission:
     SERVICE_REGISTER = 0x01
+    ADMIN_LOG_IN = 0x02
     HOSPITAL_LOG_IN = 0x10
     HOSPITAL_MANAGE = 0x20
     LAWYER_MANAGE = 0x40
@@ -33,6 +34,7 @@ class Role(db.Model):
             'HospitalEmployee': (Permission.HOSPITAL_LOG_IN, False),
             'HospitalManager': (Permission.HOSPITAL_LOG_IN | Permission.HOSPITAL_MANAGE, False),
             'Lawyer': (Permission.LAWYER_MANAGE, False),
+            'Mid-admin': (Permission.ADMIN_LOG_IN, False),
             'Administrator': (0xff, False)
         }
         for r in roles:
@@ -76,12 +78,26 @@ class User(UserMixin, db.Model):
 
     @staticmethod
     def set_manager():
-        for user in User.query.filter_by(email=current_app.config['LAWDIANS_HOSPITAL']):
-            user.hospital_id = 2
-        for user in User.query.filter_by(email=current_app.config['LAWDIANS_LAWYER']):
-            user.lawyer_id = 2
-        for user in User.query.filter_by(email=current_app.config['LAWDIANS_ADMIN']):
-            user.role = Role.query.filter_by(permissions=0xff).first()
+        users = User.query.all()
+        for u in users:
+            if u.email == current_app.config['LAWDIANS_HOSPITAL']:
+                u.hospital = Hospital.query.first()
+                u.role = Role.query.filter_by(name='HospitalManager').first()
+            elif u.email == current_app.config['LAWDIANS_LAWYER']:
+                u.lawyer = Lawyer.query.first()
+                u.role = Role.query.filter_by(name='Lawyer').first()
+            elif u.email == current_app.config['LAWDIANS_ADMIN']:
+                u.role = Role.query.filter_by(permissions=0xff).first()
+            else:
+                u.role = Role.query.filter_by(default=True).first()
+
+    def __init__(self, **kwargs):
+        super(User, self).__init__(**kwargs)
+        if self.role is None:
+            if self.email == current_app.config['FLASKY_ADMIN']:
+                self.role = Role.query.filter_by(permissions=0xff).first()
+            if self.role is None:
+                self.role = Role.query.filter_by(default=True).first()
 
     def verify_password(self, password):
         return check_password_hash(self.password_hash, password)
