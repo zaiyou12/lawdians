@@ -180,5 +180,19 @@
                 src="{{ url_for('static', filename='assets/plugins/flexslider/jquery.flexslider-min.js') }}"></script>
         <script type="text/javascript" src="{{ url_for('static', filename='assets/js/main.js') }}"></script>
         <script type="text/javascript" src="{{ url_for('static', filename='assets/js/blog.js') }}"></script>
+        <script>
+            $('#hospital-collapse .collapse').on('show.bs.collapse', function (e) {
+                $(this).closest('li').css(
+                    {'transition': 'height 350ms ease', 'height': '500'});
+                var actives = $('#hospital-collapse').find('.in, .collapsing');
+                actives.each( function (index, element) {
+                    $(element).collapse('hide');
+                })
+            })
+            $('#hospital-collapse .collapse').on('hide.bs.collapse', function (e) {
+                $(this).parent('li').css(
+                    {'transition': 'height 350ms ease', 'height': '150'});
+            })
+        </script>
     {% endblock scripts %}
 {% endblock body %}

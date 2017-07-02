@@ -95,26 +95,40 @@ div.hospital-list{
     height: auto;
     display: block;
 }
+div.hospital-list ul{
+    width: 1215.35px;
+    margin: 0 auto;
+    padding: 10px 0;
+}
 
-div.hospital-list ul li {
+div.hospital-list ul li{
+    display: inline-block;
+    width: 605.36px;
+    height: 150px;
+    vertical-align: top;
+    margin: 10px 0;
+    padding: 10px 20px;
+/*
     width: 50%;
     height: 150px;
     float: left;
     margin-top: 20px;
     padding-right: 20px;
     list-style: none;
+*/
 }
 
 div.hospital-list .item-wrapper{
     width: 100%;
     height: 150px;
-    padding: 5px;
+    padding-left: 5px;
     border: 1px solid #E4E4E4;
     display: table;
     position: relative;
 }
 
-div.hospital-list ul li .img-wrapper{
+
+div.hospital-list ul li .img-wrapper, div.panel-body div.item-wrapper div.img-wrapper{
     width: 40%;
     height: 100%;
     display: table-cell;
@@ -130,7 +144,7 @@ img.hospital-image{
 
 }
 
-div.hospital-list ul li .hospital-desc{
+div.hospital-list ul li .hospital-desc, div.panel-body div.item-wrapper div.hospital-desc{
     width: 60%;
     height: 100%;
     padding: 5px;
@@ -138,3 +152,20 @@ div.hospital-list ul li .hospital-desc{
     display: table-cell;
     vertical-align: middle;
 }
+.item-wrapper-large{
+    border: 1px solid #E4E4E4;
+    width: 208%;
+    height: 310px;
+    margin: 30px 0;
+    padding-left: 20px;
+    display: table;
+}
+.hospital-image-large{
+    width: 100%;
+    max-height: 290px;
+    vertical-align: middle;
+}
+.collapse .hospital-desc h2, .collapse .hospital-desc h3{
+    margin: 30px 0;
+}
+
