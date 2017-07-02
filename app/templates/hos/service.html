@@ -23,7 +23,7 @@
                         <td>{{ service.id }}</td>
                         <td>{{ service.user.username }}</td>
                         <td></td>
-                        <td>{{ service.timestamp }}</td>
+                        <td>{{ moment(service.timestamp).format('YYYY-MM-DD, h:mm a') }}</td>
                         <td>{{ service.lawyer.name }}</td>
                     </tr>
                 {% endfor %}

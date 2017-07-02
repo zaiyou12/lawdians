@@ -322,12 +322,12 @@ class Counsel(db.Model):
     __tablename__ = 'Counsels'
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
-    lawyer_id = db.Column(db.Integer, db.ForeignKey('lawyers.id'))
+    lawyer_id = db.Column(db.Integer, db.ForeignKey('lawyers.id'), default=-1)
     body = db.Column(db.Text)
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
 
     def __repr__(self):
-        return '<Counsel %r>' % self.name
+        return '<Counsel %r>' % self.body
 
 
 @login_manager.user_loader
