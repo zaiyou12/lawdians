@@ -1,0 +1,24 @@
+{% extends "base_user.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+{% block body_attribs %} class="signup-page access-page has-full-screen-bg"{% endblock body_attribs %}
+{% block section_attribs %} class="signup-section access-section section"{% endblock section_attribs %}
+{% block styles %}
+    {{ super() }}
+    <link id="theme-style" rel="stylesheet" href=" {{ url_for('static', filename='css/register-detail.css') }}">
+{% endblock styles %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="form-box col-md-offset-2 col-sm-offset-0 xs-offset-0 col-xs-12 col-md-8">
+                <div class="form-box-inner">
+                    <h2 class="title text-center">변호사 상담신청</h2>
+                    <p class="intro text-center">안심변호사 <strong>{{ lawyer.name }}</strong>에게 물어보세요!</p>
+                    <div class="row">
+                        {{ wtf.quick_form(form) }}
+                    </div>
+                </div><!--//form-box-inner-->
+            </div><!--//form-box-->
+        </div><!--//row-->
+    </div><!--//container-->
+{% endblock content %}

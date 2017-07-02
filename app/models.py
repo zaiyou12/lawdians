@@ -67,6 +67,7 @@ class User(UserMixin, db.Model):
     lawyer_id = db.Column(db.Integer, db.ForeignKey('lawyers.id'))
     service = db.relationship('Service', backref='user', lazy='dynamic')
     event_registrations = db.relationship('EventRegistration', backref='user', lazy='dynamic')
+    counsels = db.relationship('Counsel', backref='user', lazy='dynamic')
 
     @property
     def password(self):
@@ -220,6 +221,7 @@ class Lawyer(db.Model):
     description = db.Column(db.Text)
     manager = db.relationship('User', backref='lawyer', lazy='dynamic')
     services = db.relationship('Service', backref='lawyer', lazy='dynamic')
+    counsels = db.relationship('Counsel', backref='lawyer', lazy='dynamic')
 
     @staticmethod
     def insert_lawyer():
@@ -314,6 +316,18 @@ class HospitalAd(db.Model):
 
     def __repr__(self):
         return '<HospitalAd %r>' % self.name
+
+
+class Counsel(db.Model):
+    __tablename__ = 'Counsels'
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    lawyer_id = db.Column(db.Integer, db.ForeignKey('lawyers.id'))
+    body = db.Column(db.Text)
+    timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
+
+    def __repr__(self):
+        return '<Counsel %r>' % self.name
 
 
 @login_manager.user_loader
