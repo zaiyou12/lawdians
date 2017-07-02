@@ -17,10 +17,30 @@ class Config:
     USE_EVALEX = False
     LAWDIANS_HOSPITAL = os.environ.get('LAWDIANS_HOSPITAL')
     LAWDIANS_LAWYER = os.environ.get('LAWDIANS_LAWYER')
-    SOCIAL_GOOGLE = {
-        'consumer_key': '134835613818-74spq0dksse67pb1asm62bft40qpuf1u.apps.googleusercontent.com',
-        'consumer_secret': os.environ.get('consumer_secret')
-    }
+    LAWDIANS_ADMIN = os.environ.get('LAWDIANS_ADMIN')
+    GOOGLE = dict(
+        consumer_key=os.environ.get('GOOGLE_ID'),
+        consumer_secret=os.environ.get('GOOGLE_SECRET'),
+        request_token_params={
+            'scope': 'email'
+        },
+        base_url='https://www.googleapis.com/oauth2/v1/',
+        request_token_url=None,
+        access_token_method='POST',
+        access_token_url='https://accounts.google.com/o/oauth2/token',
+        authorize_url='https://accounts.google.com/o/oauth2/auth',
+    )
+    FACEBOOK = dict(
+        consumer_key=os.environ.get('FACEBOOK_APP_ID'),
+        consumer_secret=os.environ.get('FACEBOOK_APP_SECRET'),
+        request_token_params={'scope': 'email'},
+        base_url='https://graph.facebook.com',
+        request_token_url=None,
+        access_token_url='/oauth/access_token',
+        access_token_method='GET',
+        authorize_url='https://www.facebook.com/dialog/oauth'
+
+    )
 
     @staticmethod
     def init_app(app):

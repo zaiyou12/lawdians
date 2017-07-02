@@ -1,0 +1,12 @@
+{% extends "admin/base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block page_content %}
+    <div class="page-header">
+        <h1>계정 정보 관리</h1>
+    </div>
+    <div class="col-md-6">
+        {{ wtf.quick_form(form) }}
+    </div>
+    <a href="{{ url_for('admin.login_to_user', id=user.id) }}"><button type="button" class="btn btn-danger">해당 계정으로 로그인</button></a>
+{% endblock %}
