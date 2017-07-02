@@ -34,3 +34,8 @@ class ChargeForm(FlaskForm):
                         render_kw={"placeholder": "생년월일6자리(법인카드의 경우 사업자등록번호10자리)"})
     pwd_2digit = PasswordField('비밀번호 앞 2자리', validators=[InputRequired('비밀번호 앞 2자리를 입력해주세요.'), Length(2, 2)])
     submit = SubmitField('결제')
+
+
+class CounselForm(FlaskForm):
+    body = StringField('문의사항', validators=[InputRequired()])
+    submit = SubmitField('신청하기')

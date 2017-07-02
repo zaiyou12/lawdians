@@ -2,8 +2,8 @@ from flask import render_template, request, current_app, flash, redirect, url_fo
 from flask_login import current_user, login_required
 
 from app import db
-from ..main.forms import EventForm
-from ..models import Hospital, Event, EventRegistration, HospitalAd
+from ..main.forms import EventForm, CounselForm
+from ..models import Hospital, Event, EventRegistration, HospitalAd, Lawyer, Counsel
 from . import main
 
 
@@ -54,6 +54,16 @@ def post_script():
     return render_template('post_script.html')
 
 
-@main.route('/contact')
+@main.route('/contact', methods=['GET', 'POST'])
 def contact():
-    return render_template('contact.html')
+    form = CounselForm()
+    if form.validate_on_submit():
+        if current_user.is_authenticated:
+            c = Counsel(user_id=current_user.id, body=form.body.data)
+            db.session.add(c)
+            flash('상담 신청이 접수 되었습니다.')
+            return redirect(url_for('main.index'))
+        else:
+            flash('로그인후 이용하실수 있습니다.')
+            return redirect(url_for('main.contact'))
+    return render_template('contact.html', form=form)

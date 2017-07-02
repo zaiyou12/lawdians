@@ -3,7 +3,7 @@ from flask_login import login_required, current_user
 
 from app import db
 from .forms import ProfileForm
-from ..models import Service, Lawyer
+from ..models import Service, Lawyer, Counsel
 from . import law
 
 
@@ -38,3 +38,15 @@ def profile():
     form.address.data = p.address
     form.description.data = p.description
     return render_template('law/profile.html', form=form)
+
+
+@law.route('/counsel')
+@login_required
+def counsel():
+    manager = current_user
+    page = request.args.get('page', 1, type=int)
+    pagination = Counsel.query.filter_by(lawyer_id=manager.lawyer_id).paginate(
+        page, per_page=current_app.config['SERVICE_PER_PAGE'], error_out=False
+    )
+    counsels = pagination.items
+    return render_template('law/counsel.html', counsels=counsels, pagination=pagination)

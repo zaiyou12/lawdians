@@ -146,10 +146,11 @@ def confirm(token):
         return redirect(url_for('main.index'))
     if current_user.confirm(token):
         flash('감사합니다. 이메일 인증을 완료하였습니다.')
+        logout_user()
+        return redirect(url_for('auth.login'))
     else:
         flash('이메일 인증시간을 초과하였습니다.')
         return redirect(url_for('auth.unconfirmed'))
-    return redirect(url_for('main.index'))
 
 
 @auth.route('/confirm')
@@ -158,7 +159,7 @@ def resend_confirmation():
     token = current_user.generate_confirmation_token()
     send_email('auth/email/confirm', current_user.email, token=token)
     flash('이메일로 새로운 인증메일이 전송되었으니 이메일 확인을 통해 회원가입을 완료해주시기 바랍니다.')
-    return redirect(url_for('main.index'))
+    return redirect(url_for('main.login'))
 
 
 @auth.route('/change-password', methods=['GET', 'POST'])

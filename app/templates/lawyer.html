@@ -43,7 +43,9 @@
                         <p>前 인하대학교 법학전문대학원 졸업</p>
                     </div>
                     <div class="item-btn btn-group" role="group">
-                        <button type="button" class="btn btn-default">상담하기</button>
+                        <a href="{{ url_for('service.counsel', lawyer_id=1) }}">
+                            <button type="button" class="btn btn-default">상담하기</button>
+                        </a>
                         <a href="{{ url_for('service.register', lawyer=1) }}">
                             <button type="button" class="btn btn-default">서비스 신청</button>
                         </a>
@@ -68,7 +70,9 @@
                         <p>사법연수원 제42기 수료 </p>
                     </div>
                     <div class="item-btn btn-group" role="group">
-                        <button type="button" class="btn btn-default">상담하기</button>
+                        <a href="{{ url_for('service.counsel', lawyer_id=2) }}">
+                            <button type="button" class="btn btn-default">상담하기</button>
+                        </a>
                         <a href="{{ url_for('service.register', lawyer=2) }}">
                             <button type="button" class="btn btn-default">서비스 신청</button>
                         </a>
@@ -93,7 +97,9 @@
                         <p>前 대한정형외과개원의 협의회 법률고문 </p>
                     </div>
                     <div class="item-btn btn-group" role="group">
-                        <button type="button" class="btn btn-default">상담하기</button>
+                        <a href="{{ url_for('service.counsel', lawyer_id=3) }}">
+                            <button type="button" class="btn btn-default">상담하기</button>
+                        </a>
                         <a href="{{ url_for('service.register', lawyer=3) }}">
                             <button type="button" class="btn btn-default">서비스 신청</button>
                         </a>

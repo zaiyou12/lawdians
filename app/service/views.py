@@ -1,13 +1,12 @@
 from datetime import datetime
 
-import requests
 from flask import render_template, redirect, url_for, session, flash, request, current_app
 from flask_login import current_user, login_required
 
 from app import db
 from ..payment import simple_payment
-from ..models import Hospital, Lawyer, Service
-from .forms import RegisterSurgeryForm, ChargeForm
+from ..models import Hospital, Lawyer, Service, Counsel
+from .forms import RegisterSurgeryForm, ChargeForm, CounselForm
 from ..sms import get_rand_num, send_sms
 from . import service
 
@@ -128,3 +127,16 @@ def charge():
     selected_lawyer = Lawyer.query.get_or_404(lawyer_num)
     return render_template('service/charge.html', selected_hospital=selected_hospital, selected_lawyer=selected_lawyer,
                            form=form)
+
+
+@service.route('/counsel/<int:lawyer_id>', methods=['GET', 'POST'])
+@login_required
+def counsel(lawyer_id):
+    selected_lawyer = Lawyer.query.get_or_404(lawyer_id)
+    form = CounselForm()
+    if form.validate_on_submit():
+        c = Counsel(user_id=current_user.id, lawyer_id=lawyer_id, body=form.body.data)
+        db.session.add(c)
+        flash('상담신청이 접수 되었습니다.')
+        return redirect(url_for('main.index'))
+    return render_template('service/counsel.html', lawyer=selected_lawyer, form=form)

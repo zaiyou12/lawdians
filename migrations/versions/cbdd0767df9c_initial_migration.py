@@ -1,8 +1,8 @@
-"""initial db
+"""initial migration
 
-Revision ID: 1f79e7223eda
+Revision ID: cbdd0767df9c
 Revises: 
-Create Date: 2017-06-24 14:12:20.943584
+Create Date: 2017-07-01 22:58:33.386794
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '1f79e7223eda'
+revision = 'cbdd0767df9c'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -101,6 +101,17 @@ def upgrade():
     sa.UniqueConstraint('social_id')
     )
     op.create_index(op.f('ix_users_email'), 'users', ['email'], unique=True)
+    op.create_table('Counsels',
+    sa.Column('id', sa.Integer(), nullable=False),
+    sa.Column('user_id', sa.Integer(), nullable=True),
+    sa.Column('lawyer_id', sa.Integer(), nullable=True),
+    sa.Column('body', sa.Text(), nullable=True),
+    sa.Column('timestamp', sa.DateTime(), nullable=True),
+    sa.ForeignKeyConstraint(['lawyer_id'], ['lawyers.id'], ),
+    sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
+    sa.PrimaryKeyConstraint('id')
+    )
+    op.create_index(op.f('ix_Counsels_timestamp'), 'Counsels', ['timestamp'], unique=False)
     op.create_table('event_registrations',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('event_id', sa.Integer(), nullable=True),
@@ -134,6 +145,8 @@ def downgrade():
     op.drop_table('services')
     op.drop_index(op.f('ix_event_registrations_timestamp'), table_name='event_registrations')
     op.drop_table('event_registrations')
+    op.drop_index(op.f('ix_Counsels_timestamp'), table_name='Counsels')
+    op.drop_table('Counsels')
     op.drop_index(op.f('ix_users_email'), table_name='users')
     op.drop_table('users')
     op.drop_table('events')

@@ -5,7 +5,7 @@ from flask_login import login_required, login_user
 
 from app import db
 from .forms import UserForm
-from ..models import User, Role, HospitalRegistration, Hospital
+from ..models import User, Role, HospitalRegistration, Hospital, Counsel
 from . import admin
 
 
@@ -128,3 +128,14 @@ def login_to_user(id):
         return redirect(url_for('main.index'))
     flash('해당 계정이 존재하지 않습니다.')
     return redirect(url_for('admin.index'))
+
+
+@admin.route('/service/lawdians')
+@login_required
+def service_lawdians():
+    page = request.args.get('page', 1, type=int)
+    pagination = Counsel.query.filter_by(lawyer_id=None).paginate(
+        page, per_page=current_app.config['SERVICE_PER_PAGE'], error_out=False
+    )
+    counsels = pagination.items
+    return render_template('admin/service_lawdians.html', counsels=counsels, pagination=pagination)
