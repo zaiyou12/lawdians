@@ -67,3 +67,8 @@ def contact():
             flash('로그인후 이용하실수 있습니다.')
             return redirect(url_for('main.contact'))
     return render_template('contact.html', form=form)
+
+
+@main.route('/my-page/service')
+def my_page_service():
+    return render_template('profile_service.html')
