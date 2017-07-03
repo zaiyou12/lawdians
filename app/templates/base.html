@@ -61,7 +61,7 @@
                                        data-hover="dropdown" data-close-others="false">계정 <i
                                             class="fa fa-angle-down"></i></a>
                                     <ul class="dropdown-menu">
-                                        <li><a href="#">마이페이지</a></li>
+                                        <li><a href="{{ url_for('main.my_page_service') }}">마이페이지</a></li>
                                         <li class="divider"></li>
                                         <li><a href="{{ url_for('auth.change_password') }}">비밀번호 변경</a></li>
                                         <li><a href="{{ url_for('auth.change_email_request') }}">이메일 변경</a></li>

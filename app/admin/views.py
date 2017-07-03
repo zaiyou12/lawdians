@@ -130,11 +130,22 @@ def login_to_user(id):
     return redirect(url_for('admin.index'))
 
 
+@admin.route('/service/lawyer')
+@login_required
+def service_lawyer():
+    page = request.args.get('page', 1, type=int)
+    pagination = Counsel.query.filter(Counsel.lawyer_id > 0).paginate(
+        page, per_page=current_app.config['SERVICE_PER_PAGE'], error_out=False
+    )
+    counsels = pagination.items
+    return render_template('admin/service_lawyer.html', counsels=counsels, pagination=pagination)
+
+
 @admin.route('/service/lawdians')
 @login_required
 def service_lawdians():
     page = request.args.get('page', 1, type=int)
-    pagination = Counsel.query.filter_by(lawyer_id=None).paginate(
+    pagination = Counsel.query.filter(Counsel.lawyer_id == -1).paginate(
         page, per_page=current_app.config['SERVICE_PER_PAGE'], error_out=False
     )
     counsels = pagination.items

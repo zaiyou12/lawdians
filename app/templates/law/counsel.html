@@ -25,7 +25,7 @@
                         <td>{{ counsel.user.email }}</td>
                         <td>{{ counsel.user.phone_number }}</td>
                         <td>{{ counsel.body }}</td>
-                        <td>{{ counsel.timestamp }}</td>
+                        <td>{{ moment(counsel.timestamp).format('YYYY-MM-DD, h:mm a') }}</td>
                     </tr>
                 {% endfor %}
             </table>

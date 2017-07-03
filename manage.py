@@ -11,7 +11,7 @@ from flask_migrate import MigrateCommand, Migrate
 from flask_script import Manager, Shell
 
 from app import db, create_app
-from app.models import User, Role, Hospital, Lawyer, Service, HospitalRegistration, Event, EventRegistration
+from app.models import User, Role, Hospital, Lawyer, Service, HospitalRegistration, Event, EventRegistration, Counsel
 
 app = create_app(os.getenv('FLASK_CONFIG') or 'default')
 manager = Manager(app)
@@ -20,7 +20,8 @@ migrate = Migrate(app, db)
 
 def make_shell_context():
     return dict(app=app, db=db, User=User, Role=Role, Hospital=Hospital, Lawyer=Lawyer, Service=Service,
-                HospitalRegistration=HospitalRegistration, Event=Event, EventRegistration=EventRegistration)
+                HospitalRegistration=HospitalRegistration, Event=Event, EventRegistration=EventRegistration,
+                Counsel=Counsel)
 
 manager.add_command("shell", Shell(make_context=make_shell_context))
 manager.add_command('db', MigrateCommand)

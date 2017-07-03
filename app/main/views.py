@@ -3,7 +3,7 @@ from flask_login import current_user, login_required
 
 from app import db
 from ..main.forms import EventForm, CounselForm
-from ..models import Hospital, Event, EventRegistration, HospitalAd, Lawyer, Counsel
+from ..models import Hospital, Event, EventRegistration, HospitalAd, Lawyer, Counsel, Service
 from . import main
 
 
@@ -67,3 +67,9 @@ def contact():
             flash('로그인후 이용하실수 있습니다.')
             return redirect(url_for('main.contact'))
     return render_template('contact.html', form=form)
+
+
+@main.route('/my-page/service')
+def my_page_service():
+    services = Service.query.filter_by(user_id=current_user.id)
+    return render_template('profile_service.html', services=services)
