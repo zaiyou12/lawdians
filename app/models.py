@@ -79,6 +79,23 @@ class User(UserMixin, db.Model):
 
     @staticmethod
     def set_manager():
+        # add new manager id if do not exist
+        hos_user = User.query.filter_by(email=current_app.config['LAWDIANS_HOSPITAL']).first()
+        if hos_user is None:
+            hos_user = User(email=current_app.config['LAWDIANS_HOSPITAL'], password='1234', confirmed=True)
+        law_user = User.query.filter_by(email=current_app.config['LAWDIANS_LAWYER']).first()
+        if law_user is None:
+            law_user = User(email=current_app.config['LAWDIANS_LAWYER'], password='1234', confirmed=True)
+        admin_user = User.query.filter_by(email=current_app.config['LAWDIANS_ADMIN']).first()
+        if admin_user is None:
+            admin_user = User(email=current_app.config['LAWDIANS_ADMIN'], password='1234', confirmed=True)
+        test_user = User.query.filter_by(email=current_app.config['LAWDIANS_TESTER']).first()
+        if test_user is None:
+            test_user = User(email=current_app.config['LAWDIANS_TESTER'], password='1234', confirmed=True)
+        db.session.add_all([hos_user, law_user, admin_user, test_user])
+        db.session.commit()
+
+        # setting user for managers
         users = User.query.all()
         for u in users:
             if u.email == current_app.config['LAWDIANS_HOSPITAL']:
