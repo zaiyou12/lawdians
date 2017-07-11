@@ -4,7 +4,9 @@
     {{ super() }}
     <!-- Custom CSS -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/hospital.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/profile.css') }}"
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/profile.css') }}">
+    {{ moment.include_jquery() }}
+    {{ moment.include_moment() }}
 {% endblock styles %}
           {% block body_attribs %}class="about-page"{% endblock body_attribs %}
 {% block content %}
@@ -25,12 +27,12 @@
             </div>
             <div class="col-xs-6 col-sm-3 sidebar-offcanvas">
                 <div class="list-group">
-                    <a href="#" class="list-group-item active">안심 성형 서비스</a>
-                    <a href="#" class="list-group-item">안심 변호사 문의</a>
-                    <a href="#" class="list-group-item">안심 이벤트 신청</a>
-                    <a href="#" class="list-group-item">안심 후기 내역</a>
-                    <a href="#" class="list-group-item">역견적 신청 내역</a>
-                    <a href="#" class="list-group-item">정보 관리</a>
+                    <a href="{{ url_for('main.my_page_service') }}" class="list-group-item active">안심 성형 서비스</a>
+                    <a href="{{ url_for('main.my_page_counsel') }}" class="list-group-item">안심 변호사 문의</a>
+                    <a href="{{ url_for('main.my_page_event') }}" class="list-group-item">안심 이벤트 신청</a>
+                    <a href="#" class="list-group-item disabled">안심 후기 내역</a>
+                    <a href="#" class="list-group-item disabled">역견적 신청 내역</a>
+                    <a href="{{ url_for('main.my_page_profile') }}" class="list-group-item">정보 관리</a>
                 </div>
             </div>
         </div>

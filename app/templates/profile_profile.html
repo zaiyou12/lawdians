@@ -1,0 +1,11 @@
+{% extends "base_profile.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block page_content %}
+    <div class="page-header">
+        <h1>정보관리</h1>
+    </div>
+    <div>
+        {{ wtf.quick_form(form) }}
+    </div>
+{% endblock %}

@@ -2,7 +2,7 @@
 
 {% block page_content %}
     <div class="page-header">
-        <h1>안심성형 서비스</h1>
+        <h1>안심 변호사 문의</h1>
     </div>
     <div>
         <div class="table-responsive">
@@ -10,20 +10,18 @@
                 <thead>
                 <tr>
                     <th>구분</th>
-                    <th>신청 부위</th>
-                    <th>신청일</th>
-                    <th>안심 병원</th>
                     <th>안심 변호사</th>
+                    <th>문의 내용</th>
+                    <th>신청일</th>
                     <th>상태</th>
                 </tr>
                 </thead>
-                {% for service in services %}
+                {% for counsel in counsels %}
                     <tr>
-                        <td>{{ service.id }}</td>
-                        <td></td>
-                        <td>{{ moment(service.timestamp).format('YYYY-MM-DD, h:mm a') }}</td>
-                        <td>{{ service.hospital.name }}</td>
-                        <td>{{ service.lawyer.name }}</td>
+                        <td>{{ counsel.id }}</td>
+                        <td>{{ counsel.lawyer.name }}</td>
+                        <td>{{ counsel.body }}</td>
+                        <td>{{ moment(counsel.timestamp).format('YYYY-MM-DD, h:mm a') }}</td>
                         <td></td>
                     </tr>
                 {% endfor %}
