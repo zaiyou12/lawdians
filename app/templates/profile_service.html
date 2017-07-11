@@ -2,7 +2,7 @@
 
 {% block page_content %}
     <div class="page-header">
-        <h1>안심성형 서비스</h1>
+        <h1>안심 성형 서비스</h1>
     </div>
     <div>
         <div class="table-responsive">
@@ -24,7 +24,15 @@
                         <td>{{ moment(service.timestamp).format('YYYY-MM-DD, h:mm a') }}</td>
                         <td>{{ service.hospital.name }}</td>
                         <td>{{ service.lawyer.name }}</td>
-                        <td></td>
+                        <td>
+                            <a href="{{ url_for('main.my_page_service_detail', id=service.id) }}">
+                                {% if service.is_claimed %}
+                                    사고 접수
+                                {% else %}
+                                    안전
+                                {% endif %}
+                            </a>
+                        </td>
                     </tr>
                 {% endfor %}
             </table>

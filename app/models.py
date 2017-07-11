@@ -266,6 +266,7 @@ class Service(db.Model):
     hospital_id = db.Column(db.Integer, db.ForeignKey('hospitals.id'))
     lawyer_id = db.Column(db.Integer, db.ForeignKey('lawyers.id'))
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
+    is_claimed = db.Column(db.Boolean, default=False)
 
     def __repr__(self):
         return '<Service %r>' % self.timestamp
@@ -323,7 +324,7 @@ class HospitalRegistration(db.Model):
 
 
 class HospitalAd(db.Model):
-    __tablename__ = 'HospitalAds'
+    __tablename__ = 'hospitalAds'
     id = db.Column(db.Integer, primary_key=True)
     hospital_id = db.Column(db.Integer, db.ForeignKey('hospitals.id'))
     name = db.Column(db.String(64))
@@ -336,7 +337,7 @@ class HospitalAd(db.Model):
 
 
 class Counsel(db.Model):
-    __tablename__ = 'Counsels'
+    __tablename__ = 'counsels'
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     lawyer_id = db.Column(db.Integer, db.ForeignKey('lawyers.id'), default=-1)

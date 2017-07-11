@@ -1,0 +1,14 @@
+{% extends "base_profile.html" %}
+
+{% block page_content %}
+    <div class="page-header">
+        <h1>안심 성형 서비스 - 상세정보</h1>
+    </div>
+    <div class="page-header">
+        <h2>수술 전 등록된 사진</h2>
+    </div>
+    <div class="page-header">
+        <h2>수술 후 등록된 사진</h2>
+    </div>
+    <a href="{{ url_for('main.my_page_claim', id=id) }}"><button type="button" class="btn btn-danger">사고 접수</button></a>
+{% endblock %}

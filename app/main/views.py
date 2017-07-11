@@ -76,6 +76,24 @@ def my_page_service():
     return render_template('profile_service.html', services=services)
 
 
+@main.route('/my-page/service/<int:id>')
+@login_required
+def my_page_service_detail(id):
+    return render_template('profile_service_detail.html', id=id)
+
+
+@main.route('/my-page/claim/<int:id>')
+@login_required
+def my_page_claim(id):
+    service = Service.query.get_or_404(id)
+    if service:
+        service.is_claimed = True
+        flash('사고가 접수되었습니다, 변호사님을 통해 최대한 빨리 연락드리겠습니다.')
+    else:
+        flash('존재하지 않는 서비스입니다, 다시 한번 확인해주세요.')
+    return redirect(url_for('main.my_page_service'))
+
+
 @main.route('/my-page/counsel')
 @login_required
 def my_page_counsel():

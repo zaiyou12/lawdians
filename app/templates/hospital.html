@@ -92,3 +92,10 @@
 {% block pagination %}
     {{ macros.pagination_widget(pagination, 'main.hospital') }}
 {%  endblock pagination %}
+
+{% block content %}
+    {{ super() }}
+    <section class="section padding-top-section">
+        <h2 class="title text-center">역견적 신청</h2>
+    </section>
+{% endblock %}
