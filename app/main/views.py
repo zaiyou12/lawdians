@@ -1,4 +1,4 @@
-from flask import render_template, request, current_app, flash, redirect, url_for
+from flask import render_template, request, current_app, flash, redirect, url_for, jsonify
 from flask_login import current_user, login_required
 
 from app import db
@@ -20,6 +20,21 @@ def hospital():
 
     hospitals_ad = HospitalAd.query.limit(3)
     return render_template('hospital.html', hospitals=hospitals, pagination=pagination, hospitals_ad=hospitals_ad)
+
+
+@main.route('/hospital/category', methods=['GET', 'POST'])
+def hospital_category():
+    #flash('hospital_category()함수 도달')
+    dict_category = request.get_json()
+    category = dict_category['category']
+
+    #page = request. args.get('page', 1, type=int)
+    #pagination = Hospital.query.filter_by(category=category).paginate(page, per_page=current_app.config['HOSPITALS_PER_PAGE'], error_out=False)
+    #hospitals = pagination.items
+
+    #hospitals_ad = HospitalAd.query.limit(3)
+    return jsonify({'data': render_template('hospital_list_temp.html', category=category)})
+    #return jsonify({'data': render_template('hospital_list.html', hospitals=hospitals, pagination=pagination, hospitals_ad=hospitals_ad)})
 
 
 @main.route('/lawyer')
