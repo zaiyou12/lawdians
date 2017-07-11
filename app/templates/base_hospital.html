@@ -139,11 +139,8 @@
 
 
         $('.hospital-category2').on('click', 'a', function() {
-            alert('ajax 시도');
             var category = $(this).attr('name');
             var json = {'category': category};
-            alert('category 변수 생성, \ncategory 안에 있는 데이터는 ' + category);
-            alert('ajax 변수 생성 시도');
             var ajax = $.ajax({
                 url: "{{ url_for('main.hospital_category') }}",
                 type: "POST",
@@ -151,9 +148,7 @@
                 contentType: 'application/json',
                 data: JSON.stringify(json)
             });
-            alert('ajax 변수 생성 성공');
             ajax.done(function(data) {
-                alert('ajax 성공');
                 data = data.data;
                 $('#hospital').html(data);
             });

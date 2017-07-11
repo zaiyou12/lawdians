@@ -1,4 +1,4 @@
-from flask import render_template, request, current_app, flash, redirect, url_for, jsonify
+from flask import render_template, request, current_app, flash, redirect, url_for, jsonify, session
 from flask_login import current_user, login_required
 
 from app import db
@@ -14,8 +14,12 @@ def index():
 
 @main.route('/hospital')
 def hospital():
+    category = session.get('category')
     page = request.args.get('page', 1, type=int)
-    pagination = Hospital.query.paginate(page, per_page=current_app.config['HOSPITALS_PER_PAGE'], error_out=False)
+    query = Hospital.query
+    if category:
+        query = query.filter(Hospital.categories.any(name=category))
+    pagination = query.paginate(page, per_page=current_app.config['HOSPITALS_PER_PAGE'], error_out=False)
     hospitals = pagination.items
 
     hospitals_ad = HospitalAd.query.limit(3)
@@ -24,17 +28,17 @@ def hospital():
 
 @main.route('/hospital/category', methods=['GET', 'POST'])
 def hospital_category():
-    #flash('hospital_category()함수 도달')
     dict_category = request.get_json()
     category = dict_category['category']
 
-    #page = request. args.get('page', 1, type=int)
-    #pagination = Hospital.query.filter_by(category=category).paginate(page, per_page=current_app.config['HOSPITALS_PER_PAGE'], error_out=False)
-    #hospitals = pagination.items
+    session['category'] = category
 
-    #hospitals_ad = HospitalAd.query.limit(3)
-    return jsonify({'data': render_template('hospital_list_temp.html', category=category)})
-    #return jsonify({'data': render_template('hospital_list.html', hospitals=hospitals, pagination=pagination, hospitals_ad=hospitals_ad)})
+    page = request. args.get('page', 1, type=int)
+    pagination = Hospital.query.filter(Hospital.categories.any(name=category)).paginate(page, per_page=current_app.config['HOSPITALS_PER_PAGE'], error_out=False)
+    hospitals = pagination.items
+
+    hospitals_ad = HospitalAd.query.limit(3)
+    return jsonify({'data': render_template('hospital_list.html', hospitals=hospitals, pagination=pagination, hospitals_ad=hospitals_ad)})
 
 
 @main.route('/lawyer')
