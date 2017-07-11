@@ -1,0 +1,31 @@
+{% extends "base_profile.html" %}
+
+{% block page_content %}
+    <div class="page-header">
+        <h1>안심 변호사 문의</h1>
+    </div>
+    <div>
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered table-hover">
+                <thead>
+                <tr>
+                    <th>구분</th>
+                    <th>안심 변호사</th>
+                    <th>문의 내용</th>
+                    <th>신청일</th>
+                    <th>상태</th>
+                </tr>
+                </thead>
+                {% for counsel in counsels %}
+                    <tr>
+                        <td>{{ counsel.id }}</td>
+                        <td>{{ counsel.lawyer.name }}</td>
+                        <td>{{ counsel.body }}</td>
+                        <td>{{ moment(counsel.timestamp).format('YYYY-MM-DD, h:mm a') }}</td>
+                        <td></td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+{% endblock %}

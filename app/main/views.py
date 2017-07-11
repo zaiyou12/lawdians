@@ -2,8 +2,8 @@ from flask import render_template, request, current_app, flash, redirect, url_fo
 from flask_login import current_user, login_required
 
 from app import db
-from ..main.forms import EventForm, CounselForm
-from ..models import Hospital, Event, EventRegistration, HospitalAd, Lawyer, Counsel, Service
+from ..main.forms import EventForm, CounselForm, ProfileForm
+from ..models import Hospital, Event, EventRegistration, HospitalAd, Lawyer, Counsel, Service, User
 from . import main
 
 
@@ -85,6 +85,59 @@ def contact():
 
 
 @main.route('/my-page/service')
+@login_required
 def my_page_service():
-    services = Service.query.filter_by(user_id=current_user.id)
+    services = Service.query.filter_by(user_id=current_user.id).all()
     return render_template('profile_service.html', services=services)
+
+
+@main.route('/my-page/service/<int:id>')
+@login_required
+def my_page_service_detail(id):
+    return render_template('profile_service_detail.html', id=id)
+
+
+@main.route('/my-page/claim/<int:id>')
+@login_required
+def my_page_claim(id):
+    service = Service.query.get_or_404(id)
+    if service:
+        service.is_claimed = True
+        flash('사고가 접수되었습니다, 변호사님을 통해 최대한 빨리 연락드리겠습니다.')
+    else:
+        flash('존재하지 않는 서비스입니다, 다시 한번 확인해주세요.')
+    return redirect(url_for('main.my_page_service'))
+
+
+@main.route('/my-page/counsel')
+@login_required
+def my_page_counsel():
+    counsels = Counsel.query.filter_by(user_id=current_user.id).all()
+    return render_template('profile_counsel.html', counsels=counsels)
+
+
+@main.route('/my-page/event')
+@login_required
+def my_page_event():
+    events = EventRegistration.query.filter_by(user_id=current_user.id).all()
+    return render_template('profile_event.html', events=events)
+
+
+@main.route('/my-page/profile', methods=['GET', 'POST'])
+@login_required
+def my_page_profile():
+    form = ProfileForm()
+    user = User.query.filter_by(id=current_user.id).first()
+    if form.validate_on_submit():
+        user.username = form.username.data
+        user.birth_date = form.birth_date.data
+        user.gender = form.gender.data
+        user.address = form.address.data
+        db.session.add(user)
+        flash('정보가 변경되었습니다.')
+        return redirect(url_for('main.my_page_profile'))
+    form.username.data = user.username
+    form.birth_date.data = user.birth_date
+    form.gender.data = user.gender
+    form.address.data = user.address
+    return render_template('profile_profile.html', user=user, form=form)

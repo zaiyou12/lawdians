@@ -9,6 +9,10 @@ from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 
 from . import db, login_manager
 
+hospital_category = db.Table('hospital_categories',
+                             db.Column('hospital_id', db.Integer, db.ForeignKey('hospitals.id')),
+                             db.Column('category_id', db.Integer, db.ForeignKey('categories.id')))
+
 
 class Permission:
     SERVICE_REGISTER = 0x01
@@ -79,6 +83,23 @@ class User(UserMixin, db.Model):
 
     @staticmethod
     def set_manager():
+        # add new manager id if do not exist
+        hos_user = User.query.filter_by(email=current_app.config['LAWDIANS_HOSPITAL']).first()
+        if hos_user is None:
+            hos_user = User(email=current_app.config['LAWDIANS_HOSPITAL'], password='1234', confirmed=True)
+        law_user = User.query.filter_by(email=current_app.config['LAWDIANS_LAWYER']).first()
+        if law_user is None:
+            law_user = User(email=current_app.config['LAWDIANS_LAWYER'], password='1234', confirmed=True)
+        admin_user = User.query.filter_by(email=current_app.config['LAWDIANS_ADMIN']).first()
+        if admin_user is None:
+            admin_user = User(email=current_app.config['LAWDIANS_ADMIN'], password='1234', confirmed=True)
+        test_user = User.query.filter_by(email=current_app.config['LAWDIANS_TESTER']).first()
+        if test_user is None:
+            test_user = User(email=current_app.config['LAWDIANS_TESTER'], password='1234', confirmed=True)
+        db.session.add_all([hos_user, law_user, admin_user, test_user])
+        db.session.commit()
+
+        # setting user for managers
         users = User.query.all()
         for u in users:
             if u.email == current_app.config['LAWDIANS_HOSPITAL']:
@@ -155,18 +176,13 @@ class User(UserMixin, db.Model):
         self.email = new_email
         db.session.add(self)
         return True
-        
+
     def can(self, permissions):
         return self.role is not None and \
                (self.role.permissions & permissions) == permissions
 
     def is_administrator(self):
         return self.can(Permission.ADMINISTER)
-
-    def __init__(self, **kwargs):
-        super(User, self).__init__(**kwargs)
-        if self.role is None:
-            self.role = Role.query.filter_by(default=True).first()
 
     def __repr__(self):
         return '<User %r>' % self.username
@@ -192,6 +208,9 @@ class Hospital(db.Model):
     events = db.relationship('Event', backref='hospital', lazy='dynamic')
     event_registrations = db.relationship('EventRegistration', backref='hospital', lazy='dynamic')
     ads = db.relationship('HospitalAd', backref='hospital', lazy='dynamic')
+    categories = db.relationship('Category', secondary=hospital_category,
+                                 backref=db.backref('hospitals', lazy='dynamic'),
+                                 lazy='dynamic')
 
     @staticmethod
     def insert_hospital():
@@ -203,6 +222,23 @@ class Hospital(db.Model):
             for row in reader:
                 hospital = Hospital(name=row[0], doctor=row[1], phone=row[2], address=row[3])
                 db.session.add(hospital)
+                try:
+                    db.session.commit()
+                except IntegrityError:
+                    db.session.rollback()
+
+    @staticmethod
+    def add_random_category():
+        import csv
+        filepath = os.path.join(os.path.dirname(__file__), 'random_category.csv')
+        with open(filepath, 'rt') as csvfile:
+            reader = csv.reader(csvfile, delimiter=',')
+            categories = Category.query.all()
+            hospitals = Hospital.query.all()
+            for row in reader:
+                hos = hospitals[int(row[0])]
+                hos.categories.append(categories[int(row[1])])
+                db.session.add(hos)
                 try:
                     db.session.commit()
                 except IntegrityError:
@@ -249,6 +285,7 @@ class Service(db.Model):
     hospital_id = db.Column(db.Integer, db.ForeignKey('hospitals.id'))
     lawyer_id = db.Column(db.Integer, db.ForeignKey('lawyers.id'))
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
+    is_claimed = db.Column(db.Boolean, default=False)
 
     def __repr__(self):
         return '<Service %r>' % self.timestamp
@@ -306,7 +343,7 @@ class HospitalRegistration(db.Model):
 
 
 class HospitalAd(db.Model):
-    __tablename__ = 'HospitalAds'
+    __tablename__ = 'hospitalAds'
     id = db.Column(db.Integer, primary_key=True)
     hospital_id = db.Column(db.Integer, db.ForeignKey('hospitals.id'))
     name = db.Column(db.String(64))
@@ -319,7 +356,7 @@ class HospitalAd(db.Model):
 
 
 class Counsel(db.Model):
-    __tablename__ = 'Counsels'
+    __tablename__ = 'counsels'
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     lawyer_id = db.Column(db.Integer, db.ForeignKey('lawyers.id'), default=-1)
@@ -330,8 +367,32 @@ class Counsel(db.Model):
         return '<Counsel %r>' % self.body
 
 
+class Category(db.Model):
+    __tablename__ = 'categories'
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(8), unique=True)
+
+    @staticmethod
+    def insert_category():
+        import csv
+        filepath = os.path.join(os.path.dirname(__file__), 'category.csv')
+        with open(filepath, 'rt') as csvfile:
+            reader = csv.reader(csvfile, delimiter=',')
+            for row in reader:
+                category = Category(name=row[0])
+                db.session.add(category)
+                try:
+                    db.session.commit()
+                except IntegrityError:
+                    db.session.rollback()
+
+    def __repr__(self):
+        return '<Category %r>' % self.name
+
+
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(int(user_id))
+
 
 login_manager.anonymous_user = AnonymousUser
