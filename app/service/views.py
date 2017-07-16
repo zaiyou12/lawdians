@@ -106,7 +106,6 @@ def lawyer():
 def charge():
     form = ChargeForm()
     if form.validate_on_submit():
-        ##TODO: 결제 진행 결제가 성공일시 서비스 등록
         response = simple_payment(amount=5000, card_number=form.card_num.data, expiry=form.expiration_date.data,
                                   birth=form.birth.data, pwd_2digit=form.pwd_2digit.data)
         if response is None:

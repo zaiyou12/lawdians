@@ -305,6 +305,7 @@ class Event(db.Model):
     term = db.Column(db.Integer)
     hits = db.Column(db.Integer)
     registrations = db.relationship('EventRegistration', backref='event', lazy='dynamic')
+    is_confirmed = db.Column(db.Boolean, default=False)
 
     def __repr__(self):
         return '<Events %r>' % self.head
@@ -352,6 +353,9 @@ class HospitalAd(db.Model):
     hospital_id = db.Column(db.Integer, db.ForeignKey('hospitals.id'))
     name = db.Column(db.String(64))
     is_hospital_ad = db.Column(db.Boolean, default=True)
+    start_date = db.Column(db.DateTime)
+    term = db.Column(db.Integer)
+    hits = db.Column(db.Integer)
     is_confirmed = db.Column(db.Boolean, default=False)
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
 
@@ -422,6 +426,54 @@ class Offer(db.Model):
 
     def __repr__(self):
         return '<Offer %r>' % self.body
+
+
+class EventPriceTable(db.Model):
+    __tablename__ = 'event_price_tables'
+    id = db.Column(db.Integer, primary_key=True)
+    delta_date = db.Column(db.Integer, unique=True)
+    price = db.Column(db.Integer)
+
+    @staticmethod
+    def set_event_price_tables():
+        import csv
+        filepath = os.path.join(os.path.dirname(__file__), 'event_price_table.csv')
+        with open(filepath, 'rt') as csvfile:
+            reader = csv.reader(csvfile, delimiter=',')
+            for row in reader:
+                price = EventPriceTable(delta_date=row[0], price=row[1])
+                db.session.add(price)
+                try:
+                    db.session.commit()
+                except IntegrityError:
+                    db.session.rollback()
+
+    def __repr__(self):
+        return '<EventPriceTable %r>' % self.delta_date
+
+
+class AdsPriceTable(db.Model):
+    __tablename__ = 'ads_price_tables'
+    id = db.Column(db.Integer, primary_key=True)
+    delta_date = db.Column(db.Integer, unique=True)
+    price = db.Column(db.Integer)
+
+    @staticmethod
+    def set_ads_price_tables():
+        import csv
+        filepath = os.path.join(os.path.dirname(__file__), 'ads_price_table.csv')
+        with open(filepath, 'rt') as csvfile:
+            reader = csv.reader(csvfile, delimiter=',')
+            for row in reader:
+                price = AdsPriceTable(delta_date=row[0], price=row[1])
+                db.session.add(price)
+                try:
+                    db.session.commit()
+                except IntegrityError:
+                    db.session.rollback()
+
+    def __repr__(self):
+        return '<AdsPriceTable %r>' % self.delta_date
 
 
 @login_manager.user_loader

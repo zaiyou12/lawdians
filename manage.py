@@ -12,7 +12,7 @@ from flask_script import Manager, Shell
 
 from app import db, create_app
 from app.models import User, Role, Hospital, Lawyer, Service, HospitalRegistration, Event, EventRegistration, Counsel, \
-    Category, hospital_category, Auction, Offer
+    Category, hospital_category, Auction, Offer, EventPriceTable, AdsPriceTable
 
 app = create_app(os.getenv('FLASK_CONFIG') or 'default')
 manager = Manager(app)
@@ -62,6 +62,9 @@ def deploy():
     Lawyer.insert_lawyer()
     User.set_manager()
     Category.insert_category()
+    EventPriceTable.set_event_price_tables()
+    AdsPriceTable.set_ads_price_tables()
+
     Hospital.add_random_category()
 
 if __name__ == "__main__":

@@ -15,7 +15,9 @@
                     <th>이벤트 명</th>
                     <th>조회수</th>
                     <th>신청수</th>
+                    <th>날짜</th>
                     <th>기간</th>
+                    <th>승인 여부</th>
                 </tr>
                 </thead>
                 {% for event in events %}
@@ -24,7 +26,11 @@
                         <td><a href="{{ url_for('hos.edit_event', id=event.id) }}">{{ event.head }}</a></td>
                         <td>{{ event.hits }}</td>
                         <td>{{ event.registration }}</td>
-                        <td>{{ event.start_date }}</td>
+                        <td>{{ moment(event.start_date).format('YYYY-MM-DD, h:mm a') }} ~
+                            {{ moment(event.start_date + datetime.timedelta(days=event.term)).format('YYYY-MM-DD, h:mm a') }}
+                        </td>
+                        <td>{{ event.term }} 일</td>
+                        <td>{% if event.is_confirmed %}승인{% else %}대기중{% endif %}</td>
                     </tr>
                 {% endfor %}
             </table>

@@ -16,7 +16,8 @@ def simple_payment(amount, card_number, expiry, birth, pwd_2digit):
     try:
         response = Payment.iamport.pay_onetime(**send_data)
     except Iamport.ResponseError as e:
-        flash(e.message)
+        flash("code: " + e.code)
+        flash("message: " + e.message)
         return None
     else:
         return response

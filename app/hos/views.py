@@ -3,7 +3,8 @@ from flask_login import current_user, login_required
 
 from app import db
 from .forms import EventForm, ProfileForm, AdsForm, OfferForm
-from ..models import Service, Event, EventRegistration, Hospital, HospitalAd, Auction, Category, Offer
+from ..models import Service, Event, EventRegistration, Hospital, HospitalAd, Auction, Category, Offer, EventPriceTable, \
+    AdsPriceTable
 from . import hos
 
 
@@ -78,8 +79,9 @@ def auction_offer(id):
 @hos.route('/event')
 @login_required
 def event():
+    import datetime
     events = Event.query.filter(Event.hospital_id == current_user.hospital_id)
-    return render_template('hos/event.html', events=events)
+    return render_template('hos/event.html', events=events, datetime=datetime)
 
 
 @hos.route('/event/edit/<int:id>', methods=['GET', 'POST'])
@@ -92,11 +94,15 @@ def edit_event(id):
     if form.validate_on_submit():
         selected_event.head = form.head.data
         selected_event.body = form.body.data
+        selected_event.start_date = form.start_date.data
+        selected_event.term = EventPriceTable.query.get_or_404(form.delta_date.data).delta_date
         db.session.add(selected_event)
         flash('이벤트가 수정되었습니다.')
         return redirect(url_for('hos.event'))
     form.head.data = selected_event.head
     form.body.data = selected_event.body
+    form.start_date.data = selected_event.start_date
+    form.delta_date.data = EventPriceTable.query.filter_by(delta_date=selected_event.term).first().id
     return render_template('hos/register_event.html', form=form)
 
 
@@ -106,7 +112,8 @@ def register_event():
     form = EventForm()
     if form.validate_on_submit():
         e = Event(hospital_id=current_user.hospital_id, head=form.head.data,
-                  body=form.body.data)
+                  body=form.body.data, start_date=form.start_date.data,
+                  term=EventPriceTable.query.get_or_404(form.delta_date.data).delta_date)
         db.session.add(e)
         flash('이벤트가 등록되었습니다.')
         return redirect(url_for('hos.event'))
@@ -136,8 +143,9 @@ def edit_profile():
 @hos.route('/ads')
 @login_required
 def ads():
+    import datetime
     current_ads = HospitalAd.query.filter(HospitalAd.hospital_id == current_user.hospital_id)
-    return render_template('hos/ads.html', ads=current_ads)
+    return render_template('hos/ads.html', ads=current_ads, datetime=datetime)
 
 
 @hos.route('/ads/register', methods=['GET', 'POST'])
@@ -145,7 +153,9 @@ def ads():
 def register_ads():
     form = AdsForm()
     if form.validate_on_submit():
-        new_ad = HospitalAd(hospital_id=current_user.hospital_id, name=form.name.data)
+        new_ad = HospitalAd(hospital_id=current_user.hospital_id, name=form.name.data,
+                            start_date=form.start_date.data, is_hospital_ad=form.place.data,
+                            term=AdsPriceTable.query.get_or_404(form.delta_date.data).delta_date)
         db.session.add(new_ad)
         flash('광고가 등록되었습니다.')
         return redirect(url_for('hos.ads'))
@@ -162,8 +172,14 @@ def edit_ads(id):
     form = AdsForm()
     if form.validate_on_submit():
         selected_ads.name = form.name.data
+        selected_ads.start_date = form.start_date.data
+        selected_ads.is_hospital_ad = form.place.data
+        selected_ads.term = AdsPriceTable.query.get_or_404(form.delta_date.data).delta_date
         db.session.add(selected_ads)
         flash('광고가 수정되었습니다.')
         return redirect(url_for('hos.ads'))
     form.name.data = selected_ads.name
+    form.start_date.data = selected_ads.start_date
+    form.place.data = selected_ads.is_hospital_ad
+    form.delta_date.data = AdsPriceTable.query.filter_by(delta_date=selected_ads.term).first().id
     return render_template('hos/register_event.html', form=form)

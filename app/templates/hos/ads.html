@@ -14,21 +14,22 @@
                     <th>구분</th>
                     <th>광고페이지</th>
                     <th>광고 명</th>
-                    <th>조회수</th>
                     <th>클릭수</th>
+                    <th>날짜</th>
                     <th>기간</th>
-                    <th>상태</th>
+                    <th>승인 여부</th>
                 </tr>
                 </thead>
                 {% for ad in ads %}
                     <tr>
                         <td>{{ ad.id }}</td>
-                        <td></td>
+                        <td>{% if ad.is_hospital_ad %}안심병원{% else %}이벤트{% endif %}</td>
                         <td><a href="{{ url_for('hos.edit_ads', id=ad.id) }}">{{ ad.name }}</a></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                        <td>{{ ad.hits }}</td>
+                        <td>{{ moment(ad.start_date).format('YYYY-MM-DD, h:mm a') }} ~
+                            {{ moment(ad.start_date + datetime.timedelta(days=ad.term)).format('YYYY-MM-DD, h:mm a') }}</td>
+                        <td>{{ ad.term }} 일</td>
+                        <td>{% if ad.is_confirmed %}승인{% else %}대기중{% endif %}</td>
                     </tr>
                 {% endfor %}
             </table>
