@@ -46,7 +46,9 @@ def service_auction():
         auction_list = Auction.query.filter_by(category_id=c.id).filter_by(is_closed=False).all()
         auctions.extend(auction_list)
     auctions.sort(key=lambda x: x.timestamp, reverse=True)
-    return render_template('hos/service_auction.html', auctions=auctions)
+
+    offers = Offer.query.filter_by(hospital_id=current_user.hospital.id).filter_by(is_selected=True).all()
+    return render_template('hos/service_auction.html', auctions=auctions, offers=offers)
 
 
 @hos.route('/service/auction/<int:id>', methods=['GET', 'POST'])
@@ -58,11 +60,10 @@ def auction_offer(id):
         return redirect(url_for('hos.service_auction'))
 
     form = OfferForm()
-    manager = current_user
-    offer = Offer.query.filter_by(auction_id=id).filter_by(hospital_id=manager.id).first()
+    offer = Offer.query.filter_by(auction_id=id).filter_by(hospital_id=current_user.hospital.id).first()
     if form.validate_on_submit():
         if offer is None:
-            offer = Offer(auction_id=id, hospital_id=manager.id)
+            offer = Offer(auction_id=id, hospital_id=current_user.hospital.id)
         offer.price = form.price.data
         offer.body = form.body.data
         db.session.add(offer)

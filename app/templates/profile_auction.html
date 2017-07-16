@@ -1,0 +1,70 @@
+{% extends "base_profile.html" %}
+
+{% block page_content %}
+    <div class="page-header">
+        <h1>안심병원 제안 내역</h1>
+    </div>
+    <div>
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered table-hover">
+                <thead>
+                <tr>
+                    <th>구분</th>
+                    <th>카테고리</th>
+                    <th>내용</th>
+                    <th>안심 병원</th>
+                    <th>신청 금액</th>
+                    <th>신청 내용</th>
+                    <th>신청 시간</th>
+                    <th>선택</th>
+                </tr>
+                </thead>
+                {% for offer in offers %}
+                    <tr>
+                        <td>{{ offer.id }}</td>
+                        <td>{{ offer.auction.category.name_kor }}</td>
+                        <td>{{ offer.auction.body }}</td>
+                        <td>{{ offer.hospital.name }}</td>
+                        <td>{{ offer.price }}</td>
+                        <td>{{ offer.body }}</td>
+                        <td>{{ moment(offer.timestamp).format('YYYY-MM-DD, h:mm a') }}</td>
+                        <td><a href="{{ url_for('main.auction_selected', id=offer.id) }}">
+                            <button type="button" class="btn btn-info">선택하기</button></a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+    <div class="page-header">
+        <h1>역견적 체택 내역</h1>
+    </div>
+    <div>
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered table-hover">
+                <thead>
+                <tr>
+                    <th>구분</th>
+                    <th>카테고리</th>
+                    <th>내용</th>
+                    <th>안심 병원</th>
+                    <th>신청 금액</th>
+                    <th>신청 내용</th>
+                    <th>신청 시간</th>
+                </tr>
+                </thead>
+                {% for selected_offer in selected_offers %}
+                    <tr>
+                        <td>{{ selected_offer.id }}</td>
+                        <td>{{ selected_offer.auction.category.name_kor }}</td>
+                        <td>{{ selected_offer.auction.body }}</td>
+                        <td>{{ selected_offer.hospital.name }}</td>
+                        <td>{{ selected_offer.price }}</td>
+                        <td>{{ selected_offer.body }}</td>
+                        <td>{{ moment(selected_offer.timestamp).format('YYYY-MM-DD, h:mm a') }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+{% endblock %}

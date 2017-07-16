@@ -3,7 +3,7 @@ from flask_login import current_user, login_required
 
 from app import db
 from ..main.forms import EventForm, CounselForm, ProfileForm, AuctionForm
-from ..models import Hospital, Event, EventRegistration, HospitalAd, Lawyer, Counsel, Service, User, Auction
+from ..models import Hospital, Event, EventRegistration, HospitalAd, Lawyer, Counsel, Service, User, Auction, Offer
 from . import main
 
 
@@ -157,3 +157,35 @@ def my_page_profile():
     form.gender.data = user.gender
     form.address.data = user.address
     return render_template('profile_profile.html', user=user, form=form)
+
+
+@main.route('/my-page/auction')
+@login_required
+def my_page_auction():
+    offers = []
+    selected_offers = []
+    auctions = Auction.query.filter_by(user_id=current_user.id).filter_by(is_closed=False).all()
+    closed_auctions = Auction.query.filter_by(user_id=current_user.id).filter_by(is_closed=True).all()
+
+    for auction in auctions:
+        offer_list = Offer.query.filter_by(auction_id=auction.id).filter_by(is_selected=False).all()
+        offers.extend(offer_list)
+    for closed_auction in closed_auctions:
+        offer_list = Offer.query.filter_by(auction_id=closed_auction.id).filter_by(is_selected=True).all()
+        selected_offers.extend(offer_list)
+    return render_template('profile_auction.html', offers=offers, selected_offers=selected_offers)
+
+
+@main.route('/my-page/auction-selected/<int:id>')
+@login_required
+def auction_selected(id):
+    offer = Offer.query.get_or_404(id)
+    if offer is None:
+        flash('존재하지 않는 제안입니다.')
+    else:
+        offer.is_selected = True
+        auction = offer.auction
+        auction.is_closed = True
+        db.session.add_all([offer, auction])
+        flash('제안이 체택되었습니다.')
+    return redirect(url_for('main.my_page_auction'))
