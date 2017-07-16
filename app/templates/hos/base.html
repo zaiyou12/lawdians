@@ -25,7 +25,15 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li><a href="{{ url_for('hos.edit_profile') }}">정보 관리</a></li>
-                    <li><a href="{{ url_for('hos.service') }}">서비스 신청내역 관리</a></li>
+                    <li>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                           aria-expanded="false">서비스 신청 내역<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="{{ url_for('hos.service') }}">안심 성형</a></li>
+                            <li><a href="{{ url_for('hos.service_event') }}">안심 이벤트</a></li>
+                            <li><a href="{{ url_for('hos.service_auction') }}">역견적</a></li>
+                        </ul>
+                    </li>
                     <li><a href="{{ url_for('hos.event') }}">안심 이벤트 관리</a></li>
                     <li><a href="{{ url_for('hos.ads') }}">광고 관리</a></li>
                     <li><a>포인트 관리</a></li>

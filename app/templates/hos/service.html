@@ -34,32 +34,6 @@
         </div>
     </div>
     <div>
-        <h3>안심이벤트 신청</h3>
-        <div class="table-responsive">
-            <table class="table table-striped table-bordered table-hover">
-                <thead>
-                <tr>
-                    <th>구분</th>
-                    <th>이벤트명</th>
-                    <th>성명</th>
-                    <th>신청일</th>
-                </tr>
-                </thead>
-                {% for event in events %}
-                    <tr>
-                        <td>{{ event.id }}</td>
-                        <td>{{ event.event.head }}</td>
-                        <td>{{ event.user.username }}</td>
-                        <td>{{ moment(event.timestamp).format('YYYY-MM-DD, h:mm a') }}</td>
-                    </tr>
-                {% endfor %}
-            </table>
-        </div>
-        <div class="pagination container text-center">
-            {{ macros.pagination_widget(pagination_event, 'hos.service') }}
-        </div>
-    </div>
-    <div>
         <h3>역견적 신청</h3>
         <div class="table-responsive">
             <table class="table table-striped table-bordered table-hover">

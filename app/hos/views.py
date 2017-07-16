@@ -2,8 +2,8 @@ from flask import render_template, request, current_app, redirect, url_for, abor
 from flask_login import current_user, login_required
 
 from app import db
-from .forms import EventForm, ProfileForm, AdsForm
-from ..models import Service, Event, EventRegistration, Hospital, HospitalAd
+from .forms import EventForm, ProfileForm, AdsForm, OfferForm
+from ..models import Service, Event, EventRegistration, Hospital, HospitalAd, Auction, Category, Offer
 from . import hos
 
 
@@ -22,14 +22,56 @@ def service():
         page, per_page=current_app.config['SERVICE_PER_PAGE'], error_out=False
     )
     services = pagination.items
+    return render_template('hos/service.html', services=services, pagination=pagination)
 
+
+@hos.route('/service/event')
+@login_required
+def service_event():
+    manager = current_user
     page_event = request.args.get('page_event', 1, type=int)
     pagination_event = EventRegistration.query.filter(EventRegistration.hospital_id == manager.hospital_id).paginate(
         page_event, per_page=current_app.config['SERVICE_PER_PAGE'], error_out=False
     )
     events = pagination_event.items
-    return render_template('hos/service.html', services=services, pagination=pagination,
-                           events=events, pagination_event=pagination_event)
+    return render_template('hos/service_event.html', events=events, pagination_event=pagination_event)
+
+
+@hos.route('/service/auction')
+@login_required
+def service_auction():
+    auctions = []
+    categories = current_user.hospital.categories.all()
+    for c in categories:
+        auction_list = Auction.query.filter_by(category_id=c.id).filter_by(is_closed=False).all()
+        auctions.extend(auction_list)
+    auctions.sort(key=lambda x: x.timestamp, reverse=True)
+    return render_template('hos/service_auction.html', auctions=auctions)
+
+
+@hos.route('/service/auction/<int:id>', methods=['GET', 'POST'])
+@login_required
+def auction_offer(id):
+    auction = Auction.query.get_or_404(id)
+    if auction is None:
+        flash('존재하지 않는 역견적입니다.')
+        return redirect(url_for('hos.service_auction'))
+
+    form = OfferForm()
+    manager = current_user
+    offer = Offer.query.filter_by(auction_id=id).filter_by(hospital_id=manager.id).first()
+    if form.validate_on_submit():
+        if offer is None:
+            offer = Offer(auction_id=id, hospital_id=manager.id)
+        offer.price = form.price.data
+        offer.body = form.body.data
+        db.session.add(offer)
+        flash('제안을 등록하였습니다.')
+        return redirect(url_for('hos.service_auction'))
+    if offer:
+        form.price.data = offer.price
+        form.body.data = offer.body
+    return render_template('hos/auction_offer.html', form=form, auction=auction)
 
 
 @hos.route('/event')

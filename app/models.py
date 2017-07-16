@@ -347,7 +347,7 @@ class HospitalRegistration(db.Model):
 
 
 class HospitalAd(db.Model):
-    __tablename__ = 'hospitalAds'
+    __tablename__ = 'hospital_ads'
     id = db.Column(db.Integer, primary_key=True)
     hospital_id = db.Column(db.Integer, db.ForeignKey('hospitals.id'))
     name = db.Column(db.String(64))
@@ -376,6 +376,7 @@ class Category(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(8), unique=True)
     name_kor = db.Column(db.String(8))
+    auctions = db.relationship('Auction', backref='category', lazy='dynamic')
 
     @staticmethod
     def insert_category():
@@ -398,11 +399,15 @@ class Category(db.Model):
 class Auction(db.Model):
     __tablename__ = 'auctions'
     id = db.Column(db.Integer, primary_key=True)
-    category = db.Column(db.Integer)
+    category_id = db.Column(db.Integer, db.ForeignKey('categories.id'))
     body = db.Column(db.Text)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     offer = db.relationship('Offer', backref='auction', lazy='dynamic')
+    timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
     is_closed = db.Column(db.Boolean, default=False)
+
+    def __repr__(self):
+        return '<Auction %r>' % self.body
 
 
 class Offer(db.Model):
@@ -410,7 +415,13 @@ class Offer(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     auction_id = db.Column(db.Integer, db.ForeignKey('auctions.id'))
     hospital_id = db.Column(db.Integer, db.ForeignKey('hospitals.id'))
+    price = db.Column(db.Integer)
     body = db.Column(db.Text)
+    is_selected = db.Column(db.Boolean, default=False)
+    timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
+
+    def __repr__(self):
+        return '<Offer %r>' % self.body
 
 
 @login_manager.user_loader

@@ -1,0 +1,15 @@
+{% extends "hos/base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block page_content %}
+    <div class="page-header">
+        <h1>역견적 제안</h1>
+    </div>
+    <div>
+        <h3>신청내용</h3>
+        <p>{{ auction.body }}</p>
+    </div>
+    <div>
+        {{ wtf.quick_form(form) }}
+    </div>
+{% endblock page_content %}

@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField
+from wtforms import StringField, SubmitField, IntegerField
 from wtforms.validators import InputRequired, Length
 
 
@@ -20,3 +20,9 @@ class ProfileForm(FlaskForm):
 class AdsForm(FlaskForm):
     name = StringField('광고 이름', validators=[InputRequired(), Length(1, 64)])
     submit = SubmitField('확인')
+
+
+class OfferForm(FlaskForm):
+    price = IntegerField('제시 금액', validators=[InputRequired()])
+    body = StringField('제시 내용', validators=[InputRequired()])
+    submit = SubmitField('전송')

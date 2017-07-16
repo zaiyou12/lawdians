@@ -17,7 +17,7 @@ def hospital():
     form = AuctionForm()
     if form.validate_on_submit():
         if current_user.is_authenticated:
-            auction = Auction(category=form.category.data, body=form.body.data,
+            auction = Auction(category_id=form.category.data, body=form.body.data,
                               user_id=current_user.id)
             db.session.add(auction)
             flash('역견적이 등록되었습니다.')
