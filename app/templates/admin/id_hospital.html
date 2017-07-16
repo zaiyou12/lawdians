@@ -35,7 +35,7 @@
                             <td><a href="{{ url_for('admin.edit_profile', id=user.id) }}">{{ user.email }}</a></td>
                             <td>{{ user.social_id }}</td>
                             <td>{{ user.username }}</td>
-                            <td>{{ user.hospital.name }}</td>
+                            <td><a href="{{ url_for('admin.hospital_detail', id=user.hospital.id) }}">{{ user.hospital.name }}</a></td>
                         </tr>
                     {% endfor %}
                 </tbody>

@@ -109,10 +109,6 @@
 {% block scripts %}
     {{ super() }}
     <script type="text/javascript">
-
-
-
-
         $('#hospital-collapse .collapse').on('show.bs.collapse', function (e) {
             $(this).closest('li').css(
                 {'transition': 'height 350ms ease', 'height': '500'});
@@ -125,18 +121,6 @@
             $(this).parent('li').css(
                 {'transition': 'height 350ms ease', 'height': '150'});
         })
-
-
-
-
-
-        $('#temp').on('click', function() {
-            alert("안녕(테스트용)");
-        });
-
-
-
-
 
         $('.hospital-category2').on('click', 'a', function() {
             var category = $(this).attr('name');
@@ -157,12 +141,6 @@
                 console.log(error);
             });
         });
-
-
-
-        alert('병원페이지에 들어왔닫');
-
-
 
     </script>
 {% endblock scripts %}

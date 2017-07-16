@@ -1,8 +1,8 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, SelectField, DateField, RadioField, SubmitField, IntegerField
-from wtforms.validators import Email, Length, DataRequired, Optional
+from wtforms import StringField, SelectField, DateField, RadioField, SubmitField, IntegerField, SelectMultipleField
+from wtforms.validators import Email, Length, DataRequired, Optional, InputRequired
 
-from app.models import Role
+from ..models import Role, Category
 
 
 class UserForm(FlaskForm):
@@ -24,3 +24,17 @@ class UserForm(FlaskForm):
         self.role.choices = [(role.id, role.name)
                              for role in Role.query.order_by(Role.name).all()]
         self.user = user
+
+
+class HospitalForm(FlaskForm):
+    name = StringField('병원 이름', validators=[InputRequired(), Length(1, 32)])
+    doctor = StringField('전문의 명', validators=[InputRequired(), Length(1, 8)])
+    phone = StringField('병원 전화번호', validators=[InputRequired(), Length(1, 32)])
+    address = StringField('병원 주소', validators=[InputRequired(), Length(1, 128)])
+    category = SelectMultipleField('분류', coerce=int)
+    submit = SubmitField('확인')
+
+    def __init__(self, *args, **kwargs):
+        super(HospitalForm, self).__init__(*args, **kwargs)
+        self.category.choices = [(category.id, category.name_kor) for category
+                                 in Category.query.all()]

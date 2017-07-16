@@ -113,6 +113,8 @@ class User(UserMixin, db.Model):
                 u.role = Role.query.filter_by(permissions=0xff).first()
             else:
                 u.role = Role.query.filter_by(default=True).first()
+            db.session.add(u)
+            db.session.commit()
 
     def __init__(self, **kwargs):
         super(User, self).__init__(**kwargs)
@@ -253,7 +255,7 @@ class Hospital(db.Model):
 class Lawyer(db.Model):
     __tablename__ = 'lawyers'
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(32))
+    name = db.Column(db.String(32), unique=True)
     phone = db.Column(db.String(32))
     address = db.Column(db.String(128))
     description = db.Column(db.Text)

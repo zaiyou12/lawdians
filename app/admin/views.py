@@ -4,8 +4,8 @@ from flask import render_template, request, current_app, redirect, url_for, flas
 from flask_login import login_required, login_user
 
 from app import db
-from .forms import UserForm
-from ..models import User, Role, HospitalRegistration, Hospital, Counsel
+from .forms import UserForm, HospitalForm
+from ..models import User, Role, HospitalRegistration, Hospital, Counsel, Category
 from . import admin
 
 
@@ -24,12 +24,47 @@ def id_user():
 
 
 @admin.route('/id/hospital')
+@login_required
 def id_hospital():
     r = Role.query.filter_by(name='HospitalManager').first()
     users = User.query.filter_by(role_id=r.id).all()
 
     registrations = HospitalRegistration.query.all()
     return render_template('admin/id_hospital.html', users=users, registrations=registrations)
+
+
+@admin.route('/id/hospital/<int:id>', methods=['GET', 'POST'])
+@login_required
+def hospital_detail(id):
+    hos = Hospital.query.get_or_404(id)
+    if hos is None:
+        flash('존재하지 않는 병원입니다. 다시 한번 확인해주세요.')
+        redirect(url_for('admin.route'))
+
+    form = HospitalForm()
+    if form.validate_on_submit():
+        hos.name = form.name.data
+        hos.doctor = form.doctor.data
+        hos.phone = form.phone.data
+        hos.address = form.address.data
+        hos.categories = []
+        category_list = form.category.data
+        for id in category_list:
+            c = Category.query.get_or_404(id)
+            if c:
+                hos.categories.append(c)
+        db.session.add(hos)
+        flash('정보가 갱신되었습니다.')
+        return redirect(url_for('admin.id_hospital'))
+    form.name.data = hos.name
+    form.doctor.data = hos.doctor
+    form.phone.data = hos.phone
+    form.address.data = hos.address
+    categories = []
+    for c in hos.categories.all():
+        categories.append(c.id)
+    form.category.data = categories
+    return render_template('admin/hospital_detail.html', hos=hos, form=form)
 
 
 @admin.route('id/hospital/registration/<int:id>')
