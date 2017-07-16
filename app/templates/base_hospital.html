@@ -35,38 +35,38 @@
         <h2 class="title text-center">카테고리</h2>
         <div class="container">
             <ul class="hospital-category2">
-                <li><a role="button">전체</a></li>
-                <li><a role="button">쁘띠시술</a></li>
-                <li><a role="button">피부</a></li>
-                <li><a role="button">다이어트</a></li>
-                <li><a role="button">리프</a></li>
-                <li><a role="button">반영구화장</a></li>
-                <li><a role="button">헤어라인</a></li>
-                <li><a role="button">눈</a></li>
-                <li><a role="button">코</a></li>
-                <li><a role="button">치아/입</a></li>
-                <li><a role="button">지방이식</a></li>
-                <li><a role="button">가슴</a></li>
-                <li><a role="button">안면윤곽</a></li>
-                <li><a role="button">이마</a></li>
-                <li><a role="button">양악</a></li>
-                <li><a role="button">기타</a></li>
+                <li><button id="temp" class="category" name="all">전체</button></li>
+                <li><a role="button" class="category" name="fillar">쁘띠시술</a></li>
+                <li><a role="button" class="category" name="skin">피부</a></li>
+                <li><a role="button" class="category" name="diet">다이어트</a></li>
+                <li><a role="button" class="category" name="lifting">리프</a></li>
+                <li><a role="button" class="category" name="tatoo">반영구화장</a></li>
+                <li><a role="button" class="category" name="hairtransplant">헤어라인</a></li>
+                <li><a role="button" class="category" name="eye">눈</a></li>
+                <li><a role="button" class="category" name="nose">코</a></li>
+                <li><a role="button" class="category" name="lip">치아/입</a></li>
+                <li><a role="button" class="category" name="fatgrafting">지방이식</a></li>
+                <li><a role="button" class="category" name="breast">가슴</a></li>
+                <li><a role="button" class="category" name="facialcontouring">안면윤곽</a></li>
+                <li><a role="button" class="category" name="forehead">이마</a></li>
+                <li><a role="button" class="category" name="jaw">양악</a></li>
+                <li><a role="button" class="category" name="etc">기타</a></li>
             </ul>
         </div>
         <div class="search-filter clearfix">
             <div class="col-md-6">
                 <ul class="filter-sorting">
                     <li>
-                        <button class="on">최신순</button>
+                        <button class="on" name="latest">최신순</button>
                     </li>
                     <li>
-                        <button>인기순</button>
+                        <button name="popular">인기순</button>
                     </li>
                     <li>
-                        <button>조회순</button>
+                        <button name="click">조회순</button>
                     </li>
                     <li>
-                        <button>후기순</button>
+                        <button name="review">후기순</button>
                     </li>
                 </ul>
             </div>
@@ -89,17 +89,80 @@
                 </div>
             </div>
         </div><!--search filter-->
-        <div class="hospital-list clearfix">
-            {% block category_list %}
-            {% endblock category_list %}
-        </div>
-        <div class="container text-center">
-            <div class="pagination">
-                {% block pagination %}
-                {% endblock pagination %}
+        <div id="hospital">
+            <div class="hospital-list clearfix">
+                {% block category_list %}
+                {% endblock category_list %}
+            </div>
+            <div class="container text-center">
+                <div class="pagination">
+                    {% block pagination %}
+                    {% endblock pagination %}
+                </div>
             </div>
         </div>
 
     </section>
     <!-- hospital list -->
 {% endblock content %}
+
+{% block scripts %}
+    {{ super() }}
+    <script type="text/javascript">
+
+
+
+
+        $('#hospital-collapse .collapse').on('show.bs.collapse', function (e) {
+            $(this).closest('li').css(
+                {'transition': 'height 350ms ease', 'height': '500'});
+            var actives = $('#hospital-collapse').find('.in, .collapsing');
+            actives.each( function (index, element) {
+                $(element).collapse('hide');
+            })
+        })
+        $('#hospital-collapse .collapse').on('hide.bs.collapse', function (e) {
+            $(this).parent('li').css(
+                {'transition': 'height 350ms ease', 'height': '150'});
+        })
+
+
+
+
+
+        $('#temp').on('click', function() {
+            alert("안녕(테스트용)");
+        });
+
+
+
+
+
+        $('.hospital-category2').on('click', 'a', function() {
+            var category = $(this).attr('name');
+            var json = {'category': category};
+            var ajax = $.ajax({
+                url: "{{ url_for('main.hospital_category') }}",
+                type: "POST",
+                dataType: "json",
+                contentType: 'application/json',
+                data: JSON.stringify(json)
+            });
+            ajax.done(function(data) {
+                data = data.data;
+                $('#hospital').html(data);
+            });
+            ajax.fail(function(error) {
+                alert('실패');
+                console.log(error);
+            });
+        });
+
+
+
+        alert('병원페이지에 들어왔닫');
+
+
+
+    </script>
+{% endblock scripts %}

@@ -1,4 +1,4 @@
-from flask import render_template, request, current_app, flash, redirect, url_for
+from flask import render_template, request, current_app, flash, redirect, url_for, jsonify, session
 from flask_login import current_user, login_required
 
 from app import db
@@ -25,13 +25,32 @@ def hospital():
         else:
             flash('로그인이 필요한 서비스입니다.')
             return redirect(url_for('auth.login'))
+    category = session.get('category')
     page = request.args.get('page', 1, type=int)
-    pagination = Hospital.query.paginate(page, per_page=current_app.config['HOSPITALS_PER_PAGE'], error_out=False)
+    query = Hospital.query
+    if category:
+        query = query.filter(Hospital.categories.any(name=category))
+    pagination = query.paginate(page, per_page=current_app.config['HOSPITALS_PER_PAGE'], error_out=False)
     hospitals = pagination.items
 
     hospitals_ad = HospitalAd.query.limit(3)
     return render_template('hospital.html', hospitals=hospitals, pagination=pagination, hospitals_ad=hospitals_ad,
                            form=form)
+
+
+@main.route('/hospital/category', methods=['GET', 'POST'])
+def hospital_category():
+    dict_category = request.get_json()
+    category = dict_category['category']
+
+    session['category'] = category
+
+    page = request. args.get('page', 1, type=int)
+    pagination = Hospital.query.filter(Hospital.categories.any(name=category)).paginate(page, per_page=current_app.config['HOSPITALS_PER_PAGE'], error_out=False)
+    hospitals = pagination.items
+
+    hospitals_ad = HospitalAd.query.limit(3)
+    return jsonify({'data': render_template('hospital_list.html', hospitals=hospitals, pagination=pagination, hospitals_ad=hospitals_ad)})
 
 
 @main.route('/lawyer')
