@@ -2,8 +2,8 @@ from flask import render_template, request, current_app, flash, redirect, url_fo
 from flask_login import current_user, login_required
 
 from app import db
-from ..main.forms import EventForm, CounselForm, ProfileForm
-from ..models import Hospital, Event, EventRegistration, HospitalAd, Lawyer, Counsel, Service, User
+from ..main.forms import EventForm, CounselForm, ProfileForm, AuctionForm
+from ..models import Hospital, Event, EventRegistration, HospitalAd, Lawyer, Counsel, Service, User, Auction
 from . import main
 
 
@@ -12,14 +12,26 @@ def index():
     return render_template('index.html')
 
 
-@main.route('/hospital')
+@main.route('/hospital', methods=['GET', 'POST'])
 def hospital():
+    form = AuctionForm()
+    if form.validate_on_submit():
+        if current_user.is_authenticated:
+            auction = Auction(category=form.category.data, body=form.body.data,
+                              user_id=current_user.id)
+            db.session.add(auction)
+            flash('역견적이 등록되었습니다.')
+            return redirect(url_for('main.hospital'))
+        else:
+            flash('로그인이 필요한 서비스입니다.')
+            return redirect(url_for('auth.login'))
     page = request.args.get('page', 1, type=int)
     pagination = Hospital.query.paginate(page, per_page=current_app.config['HOSPITALS_PER_PAGE'], error_out=False)
     hospitals = pagination.items
 
     hospitals_ad = HospitalAd.query.limit(3)
-    return render_template('hospital.html', hospitals=hospitals, pagination=pagination, hospitals_ad=hospitals_ad)
+    return render_template('hospital.html', hospitals=hospitals, pagination=pagination, hospitals_ad=hospitals_ad,
+                           form=form)
 
 
 @main.route('/lawyer')

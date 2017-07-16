@@ -72,6 +72,7 @@ class User(UserMixin, db.Model):
     service = db.relationship('Service', backref='user', lazy='dynamic')
     event_registrations = db.relationship('EventRegistration', backref='user', lazy='dynamic')
     counsels = db.relationship('Counsel', backref='user', lazy='dynamic')
+    auction_id = db.relationship('Auction', backref='user', lazy='dynamic')
 
     @property
     def password(self):
@@ -116,7 +117,7 @@ class User(UserMixin, db.Model):
     def __init__(self, **kwargs):
         super(User, self).__init__(**kwargs)
         if self.role is None:
-            if self.email == current_app.config['FLASKY_ADMIN']:
+            if self.email == current_app.config['LAWDIANS_ADMIN']:
                 self.role = Role.query.filter_by(permissions=0xff).first()
             if self.role is None:
                 self.role = Role.query.filter_by(default=True).first()
@@ -211,6 +212,7 @@ class Hospital(db.Model):
     categories = db.relationship('Category', secondary=hospital_category,
                                  backref=db.backref('hospitals', lazy='dynamic'),
                                  lazy='dynamic')
+    offers = db.relationship('Offer', backref='hospital', lazy='dynamic')
 
     @staticmethod
     def insert_hospital():
@@ -371,6 +373,7 @@ class Category(db.Model):
     __tablename__ = 'categories'
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(8), unique=True)
+    name_kor = db.Column(db.String(8))
 
     @staticmethod
     def insert_category():
@@ -379,7 +382,7 @@ class Category(db.Model):
         with open(filepath, 'rt') as csvfile:
             reader = csv.reader(csvfile, delimiter=',')
             for row in reader:
-                category = Category(name=row[0])
+                category = Category(name=row[0], name_kor=row[1])
                 db.session.add(category)
                 try:
                     db.session.commit()
@@ -388,6 +391,24 @@ class Category(db.Model):
 
     def __repr__(self):
         return '<Category %r>' % self.name
+
+
+class Auction(db.Model):
+    __tablename__ = 'auctions'
+    id = db.Column(db.Integer, primary_key=True)
+    category = db.Column(db.Integer)
+    body = db.Column(db.Text)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    offer = db.relationship('Offer', backref='auction', lazy='dynamic')
+    is_closed = db.Column(db.Boolean, default=False)
+
+
+class Offer(db.Model):
+    __tablename__ = 'offers'
+    id = db.Column(db.Integer, primary_key=True)
+    auction_id = db.Column(db.Integer, db.ForeignKey('auctions.id'))
+    hospital_id = db.Column(db.Integer, db.ForeignKey('hospitals.id'))
+    body = db.Column(db.Text)
 
 
 @login_manager.user_loader
