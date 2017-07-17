@@ -23,7 +23,7 @@
                 {% for ad in ads %}
                     <tr>
                         <td>{{ ad.id }}</td>
-                        <td>{% if ad.is_hospital_ad %}안심병원{% else %}이벤트{% endif %}</td>
+                        <td>{% if ad.is_hospital_ad %}안심 병원{% else %}안심 이벤트{% endif %}</td>
                         <td><a href="{{ url_for('hos.edit_ads', id=ad.id) }}">{{ ad.name }}</a></td>
                         <td>{{ ad.hits }}</td>
                         <td>{{ moment(ad.start_date).format('YYYY-MM-DD, h:mm a') }} ~

@@ -5,7 +5,7 @@ from flask_login import login_required, login_user
 
 from app import db
 from .forms import UserForm, HospitalForm
-from ..models import User, Role, HospitalRegistration, Hospital, Counsel, Category
+from ..models import User, Role, HospitalRegistration, Hospital, Counsel, Category, Event, HospitalAd
 from . import admin
 
 
@@ -185,3 +185,43 @@ def service_lawdians():
     )
     counsels = pagination.items
     return render_template('admin/service_lawdians.html', counsels=counsels, pagination=pagination)
+
+
+@admin.route('/page/event')
+@login_required
+def page_event():
+    events = Event.query.filter_by(is_confirmed=False).all()
+    return render_template('admin/page_event.html', events=events)
+
+
+@admin.route('/confirm/event/<int:id>')
+@login_required
+def event_confirmed(id):
+    event = Event.query.get_or_404(id)
+    if event:
+        event.is_confirmed = True
+        db.session.add(event)
+        flash('이벤트가 승인되었습니다.')
+    else:
+        flash('존재하지 않는 이벤트입니다.')
+    return redirect(url_for('admin.page_event'))
+
+
+@admin.route('/page/ads')
+@login_required
+def page_ads():
+    ads = HospitalAd.query.filter_by(is_confirmed=False).all()
+    return render_template('admin/page_ads.html', ads=ads)
+
+
+@admin.route('/confirm/ads/<int:id>')
+@login_required
+def ads_confirmed(id):
+    ads = HospitalAd.query.get_or_404(id)
+    if ads:
+        ads.is_confirmed = True
+        db.session.add(ads)
+        flash('광고가 승인되었습니다.')
+    else:
+        flash('존재하지 않는 광고입니다.')
+    return redirect(url_for('admin.page_ads'))
