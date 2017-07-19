@@ -2,9 +2,9 @@
 
 {% block page_content %}
     <div class="page-header">
-        <h1>현재 포인트: </h1>
-        <a href="{{ url_for('service.charge_point') }}"><button type="button" class="btn btn-info">포인트 충전</button></a>
+        <h1>현재 포인트: {{ sum }}원</h1>
     </div>
+    <a href="{{ url_for('service.charge_point') }}"><button type="button" class="btn btn-info">포인트 충전</button></a>
     <div class="page-header">
         <h1>포인트 관리</h1>
     </div>
@@ -22,8 +22,8 @@
                 {% for point in points %}
                     <tr>
                         <td>{{ point.id }}</td>
-                        <td>{{ point.auction.category.name_kor }}</td>
-                        <td>{{ point.auction.body }}</td>
+                        <td>{{ point.point }}</td>
+                        <td>{{ point.body }}</td>
                         <td>{{ moment(point.timestamp).format('YYYY-MM-DD, h:mm a') }}</td>
                     </tr>
                 {% endfor %}

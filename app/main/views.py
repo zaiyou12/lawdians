@@ -1,9 +1,11 @@
 from flask import render_template, request, current_app, flash, redirect, url_for, jsonify, session
 from flask_login import current_user, login_required
+from sqlalchemy import desc
 
 from app import db
 from ..main.forms import EventForm, CounselForm, ProfileForm, AuctionForm
-from ..models import Hospital, Event, EventRegistration, HospitalAd, Lawyer, Counsel, Service, User, Auction, Offer
+from ..models import Hospital, Event, EventRegistration, HospitalAd, Lawyer, Counsel, Service, User, Auction, Offer, \
+    Point
 from . import main
 
 
@@ -194,5 +196,8 @@ def auction_selected(id):
 @main.route('/my-page/point')
 @login_required
 def my_page_point():
-    user = current_user.id
-    return render_template('profile_point.html')
+    points = current_user.points.order_by(desc(Point.timestamp))
+    sum = 0
+    for point in points:
+        sum += point.point
+    return render_template('profile_point.html', points=points, sum=sum)
