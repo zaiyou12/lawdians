@@ -22,7 +22,7 @@
                                 <option value="{{ point.price }}">{{ point.price }} 원</option>
                             {% endfor %}
                         </select>
-                        <button id="btn" type="button" class="btn btn-info">충전하기</button>
+                        <button onclick="check_payment_test()" type="button" class="btn btn-info">충전하기</button>
                     </div>
                 </div>
             </div>
@@ -35,4 +35,71 @@
     {{ super() }}
     <script type="text/javascript" src="https://service.iamport.kr/js/iamport.payment-1.1.2.js"></script>
     <script type="text/javascript" src="{{ url_for('static', filename='js/payment_point.js') }}"></script>
+    <script type="text/javascript">
+        function check_payment() {
+            var select_value = $('#pointSelector').val();
+
+            // use the value here
+            IMP.request_pay({
+                pg: 'html5_inicis',
+                pay_method: 'card',
+                merchant_uid: 'merchant_' + new Date().getTime(),
+                name: '주문명:결제테스트',
+                amount: select_value,
+                buyer_tel: '010-1234-5678'
+            }, function (rsp) {
+                if (rsp.success) {
+                    //[1] 서버단에서 결제정보 조회를 위해 jQuery ajax로 imp_uid 전달하기
+                    var json = {
+                        imp_uid: rsp.imp_uid,
+                        amount: select_value,
+                        body: '포인트 충전'
+                    };
+                    var ajax = $.ajax({
+                        url: "{{ url_for('service.payment_complete') }}",
+                        type: "POST",
+                        dataType: "html",
+                        contentType: 'application/json',
+                        data: JSON.stringify(json)
+                    });
+                    ajax.done(function (data) {
+                        $("html").empty();
+                        $("html").append(data);
+                    });
+                    ajax.fail(function (error) {
+                        alert('결제 실패: ' + error);
+                    });
+                } else {
+                    var msg = '결제에 실패하였습니다.\n';
+                    msg += '에러내용 : ' + rsp.error_msg;
+
+                    alert(msg);
+                }
+            });
+        }
+
+        function check_payment_test() {
+            var select_value = $('#pointSelector').val();
+            var json = {
+                imp_uid: '1111',
+                amount: select_value,
+                body: '포인트 충전'
+            };
+            var ajax = $.ajax({
+                url: "{{ url_for('service.payment_complete') }}",
+                type: "POST",
+                dataType: "html",
+                contentType: 'application/json',
+                data: JSON.stringify(json)
+            });
+            ajax.done(function (data) {
+                $("html").empty();
+                $("html").append(data);
+            });
+            ajax.fail(function (error) {
+                error = error.data;
+                alert('결제 실패: ' + error);
+            });
+        }
+    </script>
 {% endblock scripts %}

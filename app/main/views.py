@@ -195,5 +195,4 @@ def auction_selected(id):
 @login_required
 def my_page_point():
     user = current_user.id
-
     return render_template('profile_point.html')

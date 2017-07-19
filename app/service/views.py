@@ -1,11 +1,11 @@
 from datetime import datetime
 
-from flask import render_template, redirect, url_for, session, flash, request, current_app
+from flask import render_template, redirect, url_for, session, flash, request, current_app, jsonify
 from flask_login import current_user, login_required
 
 from app import db
-from ..payment import simple_payment
-from ..models import Hospital, Lawyer, Service, Counsel, ChargePointTable
+from ..payment import simple_payment, is_payment_completed
+from ..models import Hospital, Lawyer, Service, Counsel, ChargePointTable, Role, Point
 from .forms import RegisterSurgeryForm, ChargeForm, CounselForm
 from ..sms import get_rand_num, send_sms
 from . import service
@@ -146,3 +146,28 @@ def counsel(lawyer_id):
 def charge_point():
     points = ChargePointTable.query.order_by(ChargePointTable.price).all()
     return render_template('service/charge_point.html', points=points)
+
+
+@service.route('/payments/complete', methods=['POST'])
+@login_required
+def payment_complete():
+    dict_payment = request.get_json()
+    imp_uid = dict_payment['imp_uid']
+    amount = dict_payment['amount']
+    body = dict_payment['body']
+
+    if is_payment_completed(current_user, imp_uid, amount, body):
+        msg = '결제가 성공했습니다.'
+        flash(msg)
+        role = current_user.role
+        if role == Role.query.filter_by(name='HospitalManager').first():
+            return redirect(url_for('hospital.index'))
+        elif role == Role.query.filter_by(name='Lawyer').first():
+            return redirect(url_for('lawyer.index'))
+        elif role == Role.query.filter_by(permissions=0xff).first():
+            return redirect(url_for('admin.index'))
+        return redirect(url_for('main.index'))
+    else:
+        msg = '결제가 실패하였습니다.'
+        flash(msg)
+        return redirect(url_for('service.charge_point'))

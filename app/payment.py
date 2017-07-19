@@ -3,6 +3,8 @@ from copy import deepcopy
 from flask import flash
 from iamport import Iamport
 
+from app import db
+from .models import Point
 from config import Payment
 
 
@@ -21,3 +23,25 @@ def simple_payment(amount, card_number, expiry, birth, pwd_2digit):
         return None
     else:
         return response
+
+
+def is_payment_completed(current_user, product_price, imp_uid, body):
+    iamport = Payment.iamport
+
+    point = Point(user_id=current_user.id, point=product_price, body=body)
+    db.session.add(point)
+    db.session.commit()
+
+    '''   
+        if iamport.is_paid(product_price, imp_uid=imp_uid):
+            point = Point(user_id=current_user.id, point=product_price, body=body)
+            db.session.add(point)
+            db.session.commit()
+            # TODO: add payment to RecommendBonus Table
+            return True
+        else:
+            return False
+    '''
+
+    return True
+
