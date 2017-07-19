@@ -73,6 +73,7 @@ class User(UserMixin, db.Model):
     event_registrations = db.relationship('EventRegistration', backref='user', lazy='dynamic')
     counsels = db.relationship('Counsel', backref='user', lazy='dynamic')
     auction_id = db.relationship('Auction', backref='user', lazy='dynamic')
+    points = db.relationship('Point', backref='user', lazy='dynamic')
 
     @property
     def password(self):
@@ -474,6 +475,59 @@ class AdsPriceTable(db.Model):
 
     def __repr__(self):
         return '<AdsPriceTable %r>' % self.delta_date
+
+
+class ChargePointTable(db.Model):
+    __tablename__ = 'charge_point_tables'
+    id = db.Column(db.Integer, primary_key=True)
+    price = db.Column(db.Integer, unique=True)
+
+    @staticmethod
+    def set_charge_point_tables():
+        import csv
+        filepath = os.path.join(os.path.dirname(__file__), 'charge_point.csv')
+        with open(filepath, 'rt') as csvfile:
+            reader = csv.reader(csvfile, delimiter=',')
+            for row in reader:
+                point = ChargePointTable(price=row[0])
+                db.session.add(point)
+                try:
+                    db.session.commit()
+                except IntegrityError:
+                    db.session.rollback()
+
+    def __repr__(self):
+        return '<ChargePointTable %r>' % self.price
+
+
+class RecommendBonus(db.Model):
+    __tablename__ = 'recommend_bonuses'
+    id = db.Column(db.Integer, primary_key=True)
+    bonus = db.Column(db.Integer, unique=True)
+
+    @staticmethod
+    def set_recommend_bonus(i):
+        b = RecommendBonus(bonus=i)
+        db.session.add(b)
+        try:
+            db.session.commit()
+        except IntegrityError:
+            db.session.rollback()
+
+    def __repr__(self):
+        return '<RecommendBonus %r>' % self.bonus
+
+
+class Point(db.Model):
+    __tablename__ = 'points'
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    point = db.Column(db.Integer)
+    body = db.Column(db.String(128))
+    timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
+
+    def __repr__(self):
+        return '<Point %r>' % self.point
 
 
 @login_manager.user_loader

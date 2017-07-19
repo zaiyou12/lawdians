@@ -8,7 +8,7 @@ IMP.request_pay({
     pay_method : 'card',
     merchant_uid : 'merchant_' + new Date().getTime(),
     name : '주문명:결제테스트',
-    amount : 14000,
+    amount : 100,
     buyer_tel : '010-1234-5678',
 }, function(rsp) {
     var msg='';

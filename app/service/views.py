@@ -5,7 +5,7 @@ from flask_login import current_user, login_required
 
 from app import db
 from ..payment import simple_payment
-from ..models import Hospital, Lawyer, Service, Counsel
+from ..models import Hospital, Lawyer, Service, Counsel, ChargePointTable
 from .forms import RegisterSurgeryForm, ChargeForm, CounselForm
 from ..sms import get_rand_num, send_sms
 from . import service
@@ -101,7 +101,7 @@ def lawyer():
     return render_template('service/lawyer.html', lawyers=lawyers, selected_lawyer=selected_lawyer)
 
 
-@service.route('/charge', methods=['GET', 'POST'])
+@service.route('/payment', methods=['GET', 'POST'])
 @login_required
 def charge():
     form = ChargeForm()
@@ -139,3 +139,10 @@ def counsel(lawyer_id):
         flash('상담신청이 접수 되었습니다.')
         return redirect(url_for('main.index'))
     return render_template('service/counsel.html', lawyer=selected_lawyer, form=form)
+
+
+@service.route('/charge', methods=['GET', 'POST'])
+@login_required
+def charge_point():
+    points = ChargePointTable.query.order_by(ChargePointTable.price).all()
+    return render_template('service/charge_point.html', points=points)

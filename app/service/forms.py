@@ -1,8 +1,8 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, DateField, RadioField, SubmitField, PasswordField
+from wtforms import StringField, DateField, RadioField, SubmitField, PasswordField, SelectField
 from wtforms.validators import InputRequired, Length, Optional, DataRequired, ValidationError
 
-from app.models import User
+from app.models import User, ChargePointTable
 
 
 class RegisterSurgeryForm(FlaskForm):
@@ -39,3 +39,4 @@ class ChargeForm(FlaskForm):
 class CounselForm(FlaskForm):
     body = StringField('문의사항', validators=[InputRequired()])
     submit = SubmitField('신청하기')
+

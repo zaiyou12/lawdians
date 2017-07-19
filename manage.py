@@ -12,7 +12,7 @@ from flask_script import Manager, Shell
 
 from app import db, create_app
 from app.models import User, Role, Hospital, Lawyer, Service, HospitalRegistration, Event, EventRegistration, Counsel, \
-    Category, hospital_category, Auction, Offer, EventPriceTable, AdsPriceTable
+    Category, hospital_category, Auction, Offer, EventPriceTable, AdsPriceTable, RecommendBonus, ChargePointTable
 
 app = create_app(os.getenv('FLASK_CONFIG') or 'default')
 manager = Manager(app)
@@ -22,7 +22,9 @@ migrate = Migrate(app, db)
 def make_shell_context():
     return dict(app=app, db=db, User=User, Role=Role, Hospital=Hospital, Lawyer=Lawyer, Service=Service,
                 HospitalRegistration=HospitalRegistration, Event=Event, EventRegistration=EventRegistration,
-                Counsel=Counsel, Category=Category, hospital_category=hospital_category, Auction=Auction, Offer=Offer)
+                Counsel=Counsel, Category=Category, hospital_category=hospital_category, Auction=Auction, Offer=Offer,
+                RecommendBonus=RecommendBonus)
+
 
 manager.add_command("shell", Shell(make_context=make_shell_context))
 manager.add_command('db', MigrateCommand)
@@ -56,16 +58,25 @@ def deploy():
     from flask_migrate import upgrade
 
     upgrade()
-
     Role.insert_roles()
+
+    # Setting initial value
     Hospital.insert_hospital()
     Lawyer.insert_lawyer()
+
+    # Setting admin users
     User.set_manager()
+
+    # Setting default value
     Category.insert_category()
     EventPriceTable.set_event_price_tables()
     AdsPriceTable.set_ads_price_tables()
+    ChargePointTable.set_charge_point_tables()
 
+    # Setting for test
     Hospital.add_random_category()
+    RecommendBonus.set_recommend_bonus(5)
+
 
 if __name__ == "__main__":
     manager.run()

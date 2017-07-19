@@ -1,8 +1,8 @@
 """init
 
-Revision ID: 332aa7a648ca
+Revision ID: 41ebf94a66a3
 Revises: 
-Create Date: 2017-07-17 00:42:07.361509
+Create Date: 2017-07-19 12:24:51.998784
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '332aa7a648ca'
+revision = '41ebf94a66a3'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -28,9 +28,15 @@ def upgrade():
     op.create_table('categories',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('name', sa.String(length=8), nullable=True),
-    sa.Column('name_kor', sa.String(length=8), nullable=True),
+    sa.Column('name_kor', sa.String(length=16), nullable=True),
     sa.PrimaryKeyConstraint('id'),
     sa.UniqueConstraint('name')
+    )
+    op.create_table('charge_point_tables',
+    sa.Column('id', sa.Integer(), nullable=False),
+    sa.Column('price', sa.Integer(), nullable=True),
+    sa.PrimaryKeyConstraint('id'),
+    sa.UniqueConstraint('price')
     )
     op.create_table('event_price_tables',
     sa.Column('id', sa.Integer(), nullable=False),
@@ -71,6 +77,12 @@ def upgrade():
     sa.PrimaryKeyConstraint('id'),
     sa.UniqueConstraint('name')
     )
+    op.create_table('recommend_bonuses',
+    sa.Column('id', sa.Integer(), nullable=False),
+    sa.Column('bonus', sa.Integer(), nullable=True),
+    sa.PrimaryKeyConstraint('id'),
+    sa.UniqueConstraint('bonus')
+    )
     op.create_table('roles',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('name', sa.String(length=64), nullable=True),
@@ -88,6 +100,7 @@ def upgrade():
     sa.Column('start_date', sa.DateTime(), nullable=True),
     sa.Column('term', sa.Integer(), nullable=True),
     sa.Column('hits', sa.Integer(), nullable=True),
+    sa.Column('is_confirmed', sa.Boolean(), nullable=True),
     sa.ForeignKeyConstraint(['hospital_id'], ['hospitals.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
@@ -96,6 +109,9 @@ def upgrade():
     sa.Column('hospital_id', sa.Integer(), nullable=True),
     sa.Column('name', sa.String(length=64), nullable=True),
     sa.Column('is_hospital_ad', sa.Boolean(), nullable=True),
+    sa.Column('start_date', sa.DateTime(), nullable=True),
+    sa.Column('term', sa.Integer(), nullable=True),
+    sa.Column('hits', sa.Integer(), nullable=True),
     sa.Column('is_confirmed', sa.Boolean(), nullable=True),
     sa.Column('timestamp', sa.DateTime(), nullable=True),
     sa.ForeignKeyConstraint(['hospital_id'], ['hospitals.id'], ),
@@ -164,6 +180,16 @@ def upgrade():
     sa.PrimaryKeyConstraint('id')
     )
     op.create_index(op.f('ix_event_registrations_timestamp'), 'event_registrations', ['timestamp'], unique=False)
+    op.create_table('points',
+    sa.Column('id', sa.Integer(), nullable=False),
+    sa.Column('user_id', sa.Integer(), nullable=True),
+    sa.Column('point', sa.Integer(), nullable=True),
+    sa.Column('body', sa.String(length=128), nullable=True),
+    sa.Column('timestamp', sa.DateTime(), nullable=True),
+    sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
+    sa.PrimaryKeyConstraint('id')
+    )
+    op.create_index(op.f('ix_points_timestamp'), 'points', ['timestamp'], unique=False)
     op.create_table('services',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('user_id', sa.Integer(), nullable=True),
@@ -199,6 +225,8 @@ def downgrade():
     op.drop_table('offers')
     op.drop_index(op.f('ix_services_timestamp'), table_name='services')
     op.drop_table('services')
+    op.drop_index(op.f('ix_points_timestamp'), table_name='points')
+    op.drop_table('points')
     op.drop_index(op.f('ix_event_registrations_timestamp'), table_name='event_registrations')
     op.drop_table('event_registrations')
     op.drop_index(op.f('ix_counsels_timestamp'), table_name='counsels')
@@ -213,12 +241,14 @@ def downgrade():
     op.drop_table('events')
     op.drop_index(op.f('ix_roles_default'), table_name='roles')
     op.drop_table('roles')
+    op.drop_table('recommend_bonuses')
     op.drop_table('lawyers')
     op.drop_table('hospitals')
     op.drop_index(op.f('ix_hospital_registrations_timestamp'), table_name='hospital_registrations')
     op.drop_index(op.f('ix_hospital_registrations_email'), table_name='hospital_registrations')
     op.drop_table('hospital_registrations')
     op.drop_table('event_price_tables')
+    op.drop_table('charge_point_tables')
     op.drop_table('categories')
     op.drop_table('ads_price_tables')
     # ### end Alembic commands ###

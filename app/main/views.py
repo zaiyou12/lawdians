@@ -189,3 +189,11 @@ def auction_selected(id):
         db.session.add_all([offer, auction])
         flash('제안이 체택되었습니다.')
     return redirect(url_for('main.my_page_auction'))
+
+
+@main.route('/my-page/point')
+@login_required
+def my_page_point():
+    user = current_user.id
+
+    return render_template('profile_point.html')

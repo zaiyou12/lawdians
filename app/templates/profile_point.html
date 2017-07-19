@@ -1,0 +1,33 @@
+{% extends "base_profile.html" %}
+
+{% block page_content %}
+    <div class="page-header">
+        <h1>현재 포인트: </h1>
+        <a href="{{ url_for('service.charge_point') }}"><button type="button" class="btn btn-info">포인트 충전</button></a>
+    </div>
+    <div class="page-header">
+        <h1>포인트 관리</h1>
+    </div>
+    <div>
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered table-hover">
+                <thead>
+                <tr>
+                    <th>구분</th>
+                    <th>포인트</th>
+                    <th>내용</th>
+                    <th>날짜</th>
+                </tr>
+                </thead>
+                {% for point in points %}
+                    <tr>
+                        <td>{{ point.id }}</td>
+                        <td>{{ point.auction.category.name_kor }}</td>
+                        <td>{{ point.auction.body }}</td>
+                        <td>{{ moment(point.timestamp).format('YYYY-MM-DD, h:mm a') }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+{% endblock %}
