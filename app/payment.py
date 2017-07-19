@@ -25,7 +25,7 @@ def simple_payment(amount, card_number, expiry, birth, pwd_2digit):
         return response
 
 
-def is_payment_completed(current_user, product_price, imp_uid, body):
+def is_payment_completed(current_user, imp_uid, product_price, body):
     iamport = Payment.iamport
 
     point = Point(user_id=current_user.id, point=product_price, body=body)
