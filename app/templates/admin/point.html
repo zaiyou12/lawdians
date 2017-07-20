@@ -1,10 +1,7 @@
-{% extends "base_profile.html" %}
+{% extends "admin/base.html" %}
+{% import "_macros.html" as macros %}
 
 {% block page_content %}
-    <div class="page-header">
-        <h1>현재 포인트: {{ point_sum }}원</h1>
-    </div>
-    <a href="{{ url_for('service.charge_point') }}"><button type="button" class="btn btn-info">포인트 충전</button></a>
     <div class="page-header">
         <h1>포인트 관리</h1>
     </div>
@@ -14,6 +11,7 @@
                 <thead>
                 <tr>
                     <th>구분</th>
+                    <th>유저</th>
                     <th>포인트</th>
                     <th>내용</th>
                     <th>날짜</th>
@@ -22,12 +20,17 @@
                 {% for point in points %}
                     <tr>
                         <td>{{ point.id }}</td>
+                        <td>{% if point.user.hospital_id %}{{ point.user.hospital.name }}
+                            {% else %}{{ point.user.username }}{% endif %}</td>
                         <td>{{ point.point }}</td>
                         <td>{{ point.body }}</td>
                         <td>{{ moment(point.timestamp).format('YYYY-MM-DD, h:mm a') }}</td>
                     </tr>
                 {% endfor %}
             </table>
+        </div>
+        <div class="pagination container text-center">
+            {{ macros.pagination_widget(pagination, 'admin.admin_point') }}
         </div>
     </div>
 {% endblock %}

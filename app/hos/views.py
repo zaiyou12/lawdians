@@ -1,10 +1,11 @@
 from flask import render_template, request, current_app, redirect, url_for, abort, flash
 from flask_login import current_user, login_required
+from sqlalchemy import desc
 
 from app import db
 from .forms import EventForm, ProfileForm, AdsForm, OfferForm
 from ..models import Service, Event, EventRegistration, Hospital, HospitalAd, Auction, Category, Offer, EventPriceTable, \
-    AdsPriceTable
+    AdsPriceTable, Point
 from . import hos
 
 
@@ -183,3 +184,13 @@ def edit_ads(id):
     form.place.data = selected_ads.is_hospital_ad
     form.delta_date.data = AdsPriceTable.query.filter_by(delta_date=selected_ads.term).first().id
     return render_template('hos/register_event.html', form=form)
+
+
+@hos.route('/hospital')
+@login_required
+def hospital_point():
+    points = current_user.points.order_by(desc(Point.timestamp))
+    point_sum = 0
+    for point in points:
+        point_sum += point.point
+    return render_template('hos/point.html', points=points, point_sum=point_sum)

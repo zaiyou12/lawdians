@@ -197,7 +197,7 @@ def auction_selected(id):
 @login_required
 def my_page_point():
     points = current_user.points.order_by(desc(Point.timestamp))
-    sum = 0
+    point_sum = 0
     for point in points:
-        sum += point.point
-    return render_template('profile_point.html', points=points, sum=sum)
+        point_sum += point.point
+    return render_template('profile_point.html', points=points, point_sum=point_sum)

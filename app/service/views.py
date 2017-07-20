@@ -161,7 +161,7 @@ def payment_complete():
         flash(msg)
         role = current_user.role
         if role == Role.query.filter_by(name='HospitalManager').first():
-            return redirect(url_for('hospital.index'))
+            return redirect(url_for('hos.index'))
         elif role == Role.query.filter_by(name='Lawyer').first():
             return redirect(url_for('lawyer.index'))
         elif role == Role.query.filter_by(permissions=0xff).first():

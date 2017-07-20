@@ -1,11 +1,12 @@
 from datetime import datetime
 
 from flask import render_template, request, current_app, redirect, url_for, flash, session
-from flask_login import login_required, login_user
+from flask_login import login_required, login_user, current_user
+from sqlalchemy import desc
 
 from app import db
 from .forms import UserForm, HospitalForm
-from ..models import User, Role, HospitalRegistration, Hospital, Counsel, Category, Event, HospitalAd
+from ..models import User, Role, HospitalRegistration, Hospital, Counsel, Category, Event, HospitalAd, Point
 from . import admin
 
 
@@ -225,3 +226,14 @@ def ads_confirmed(id):
     else:
         flash('존재하지 않는 광고입니다.')
     return redirect(url_for('admin.page_ads'))
+
+
+@admin.route('point')
+@login_required
+def admin_point():
+    page = request.args.get('page', 1, type=int)
+    pagination = Point.query.order_by(desc(Point.timestamp)).paginate(
+        page, per_page=current_app.config['SERVICE_PER_PAGE'], error_out=False
+    )
+    points = pagination.items
+    return render_template('admin/point.html', points=points, pagination=pagination)
