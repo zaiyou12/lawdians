@@ -1,0 +1,16 @@
+<div class="lawyer_mainimg"><img src="../static/img/main/law01.jpg"/></div>
+<div class="layer_txt">
+    <p class="ltxt_tit"><b>{{ lawyer.name }}</b> 변호사</p>
+    <p class="ltxt_address">{{ lawyer.address }} / {{ lawyer.phone }}</p>
+    <p class="ltxt_info">
+        {{ lawyer.description|safe }}
+    </p>
+    <div class="lawbt">
+        <a href="{{ url_for('service.counsel', lawyer_id=lawyer.id) }}">
+            <div class="bt_blue02">바로상담받기</div>
+        </a>
+        <a href="{{ url_for('service.register', lawyer=lawyer.id) }}">
+            <div class="bt_blue01">서비스신청</div>
+        </a>
+    </div>
+</div>

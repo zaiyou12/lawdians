@@ -65,7 +65,7 @@ div.hospital_info_warp div.hospital_info div.htxt_area { width:54%; padding:20px
 div.hospital_info_warp div.hospital_info div.htxt_area p.hinfo { font-size:14px;  }
 div.hospital_info_warp div.hospital_info div.htxt_area p.hintro { padding-bottom:8px; }
 div.hbt_warp { bottom:10px; left:10px; }
-div.hospital_info_warp div.hospital_info div.htxt_area p.p_no { bottom:40px; }
+div.hospital_info_warp div.hospital_info div.htxt_area p.p_no { bottom:60px; }
 
 div.hospital_info_warp div.hospital_info div.medal { left:12%; }
 div.hospital_info_warp div.hospital_info div.medal img { width:34%; }
@@ -257,6 +257,20 @@ div.mypage_tab ul li a { border-bottom:0 }
 }
 
 
+
+
+
+
+@media (max-width:740px) {
+div.nav_warp div.navi ul.nav { display:none; }
+div.nav_warp div.navi_m { display:block; position:relative; }
+div.nav_warp div.navi_m ul.nav { position:absolute; background:url('../img/main/nav_m.png') no-repeat top right;     right: 0;top: -47px;width: 28px;
+    height: 50px; }
+div.nav_warp div.navi_m ul.nav li { display:none; }
+
+
+}
+
 @media (max-width:700px) {
 div.login_bg div.login_box { margin:50px auto 4%; width:auto; }
 
@@ -349,13 +363,6 @@ input.confirm_bt{ width:28% !important }
 
 @media (max-width:600px) {
 
-
-div.nav_warp div.navi ul.nav { display:none; }
-div.nav_warp div.navi_m { display:block; position:relative; }
-div.nav_warp div.navi_m ul.nav { position:absolute; background:url('../img/main/nav_m.png') no-repeat top right;     right: 0;top: -47px;width: 28px;
-    height: 50px; }
-div.nav_warp div.navi_m ul.nav li { display:none; }
-
 table.mypage_t tbody th, 
 table.mypage_t tbody td, 
 table.mypage_tbasic tbody td, 
@@ -364,6 +371,13 @@ table.mypage_tbasic tbody td { font-size:13px; }
 
 div.regi_htap ul li.on,
 div.regi_htap ul li { width:50%; }
+
+
+div.login_full ul.lawyer_intro li { width:auto; margin-bottom:5px; }
+
+
+
+
 
 }
 
@@ -374,7 +388,9 @@ div.lawyer_bg ul.lawyer_intro li p.lawyer_name { font-size:15px; }
 div.lawyer_bg ul.lawyer_intro li { border:2px solid #ccc; }
 div.lawyer_bg ul.lawyer_intro li:hover { border:2px solid #29b6f6; } 
 
-
+div.login_full div.hospital_info_warp div.hospital_info { width:99%; }
+div.login_full div.hospital_info_warp div.hospital_info.right,
+div.login_full div.hospital_info_warp div.hospital_info.left { float:left; }
 
 
 
@@ -529,7 +545,7 @@ div.sub_visual p.svisual_tit { font-size:20px; }
 div.sub_visual p.svisual_txt { font-size:13px; }
 
 
-
+div.login_full div.hospital_info_warp div.hospital_info div.htxt_area { padding:14px; }
 
 
 

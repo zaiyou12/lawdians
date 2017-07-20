@@ -216,6 +216,9 @@ class Hospital(db.Model):
                                  backref=db.backref('hospitals', lazy='dynamic'),
                                  lazy='dynamic')
     offers = db.relationship('Offer', backref='hospital', lazy='dynamic')
+    hits = db.Column(db.Integer, default=0)
+    has_medal_1 = db.Column(db.Boolean, default=False)
+    has_medal_2 = db.Column(db.Boolean, default=False)
 
     @staticmethod
     def insert_hospital():

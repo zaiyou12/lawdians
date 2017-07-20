@@ -19,7 +19,9 @@ def index():
             return redirect(url_for('lawyer.index'))
         elif role == Role.query.filter_by(permissions=0xff).first():
             return redirect(url_for('admin.index'))
-    return render_template('index.html')
+    hospitals = Hospital.query.limit(4)
+    main_lawyer = Lawyer.query.first()
+    return render_template('index.html', hospitals=hospitals, lawyer=main_lawyer)
 
 
 @main.route('/hospital', methods=['GET', 'POST'])
@@ -46,6 +48,14 @@ def hospital():
     hospitals_ad = HospitalAd.query.limit(3)
     return render_template('hospital.html', hospitals=hospitals, pagination=pagination, hospitals_ad=hospitals_ad,
                            form=form)
+
+
+@main.route('/lawyer-info', methods=['POST'])
+def lawyer_info():
+    dict_lawyer = request.get_json()
+    lawyer_num = dict_lawyer['lawyer']
+    selected_lawyer = Lawyer.query.get_or_404(int(lawyer_num))
+    return jsonify({'data': render_template('lawyer_list.html', lawyer=selected_lawyer)})
 
 
 @main.route('/hospital/category', methods=['GET', 'POST'])
