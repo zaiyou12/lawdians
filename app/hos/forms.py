@@ -15,7 +15,7 @@ class EventForm(FlaskForm):
 
     def __init__(self, *args, **kwargs):
         super(EventForm, self).__init__(*args, **kwargs)
-        self.delta_date.choices = [(price.id, str(price.delta_date)+' 일')
+        self.delta_date.choices = [(price.id, str(price.delta_date)+' 일 - '+format(price.price, ",")+'원')
                                    for price in EventPriceTable.query.order_by(EventPriceTable.delta_date).all()]
 
 
@@ -37,7 +37,7 @@ class AdsForm(FlaskForm):
 
     def __init__(self, *args, **kwargs):
         super(AdsForm, self).__init__(*args, **kwargs)
-        self.delta_date.choices = [(price.id, str(price.delta_date)+' 일')
+        self.delta_date.choices = [(price.id, str(price.delta_date)+' 일 - '+format(price.price, ",")+'원')
                                    for price in AdsPriceTable.query.order_by(AdsPriceTable.delta_date).all()]
         self.place.choices = [(True, '안심 병원'), (False, '안심 이벤트')]
 

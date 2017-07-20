@@ -1,4 +1,4 @@
-from flask import render_template, request, current_app, redirect, url_for, abort, flash
+from flask import render_template, request, current_app, redirect, url_for, abort, flash, Markup
 from flask_login import current_user, login_required
 from sqlalchemy import desc
 
@@ -111,14 +111,26 @@ def edit_event(id):
 @login_required
 def register_event():
     form = EventForm()
+
+    # calculate user's point
+    points = current_user.points.order_by(desc(Point.timestamp))
+    point_sum = 0
+    for point in points:
+        point_sum += point.point
+
     if form.validate_on_submit():
+        paid_price = EventPriceTable.query.get_or_404(form.delta_date.data).price
+        if point_sum < paid_price:
+            flash(Markup('포인트가 부족합니다. <a href="/hospital/point">여기</a>를 클릭하시면 포인트를 충전하실수 있습니다.'))
+            return redirect(url_for('hos.register_event'))
         e = Event(hospital_id=current_user.hospital_id, head=form.head.data,
                   body=form.body.data, start_date=form.start_date.data,
                   term=EventPriceTable.query.get_or_404(form.delta_date.data).delta_date)
-        db.session.add(e)
+        used_point = Point(user_id=current_user.id, point=-paid_price, body='병원 안심이벤트 등록')
+        db.session.add_all([e, used_point])
         flash('이벤트가 등록되었습니다.')
         return redirect(url_for('hos.event'))
-    return render_template('hos/register_event.html', form=form)
+    return render_template('hos/register_event.html', form=form, point_sum=format(point_sum, ","))
 
 
 @hos.route('/edit-profile', methods=['GET', 'POST'])
@@ -153,14 +165,26 @@ def ads():
 @login_required
 def register_ads():
     form = AdsForm()
+
+    # calculate user's point
+    points = current_user.points.order_by(desc(Point.timestamp))
+    point_sum = 0
+    for point in points:
+        point_sum += point.point
+
     if form.validate_on_submit():
+        paid_price = AdsPriceTable.query.get_or_404(form.delta_date.data).price
+        if point_sum < paid_price:
+            flash(Markup('포인트가 부족합니다. <a href="/hospital/point">여기</a>를 클릭하시면 포인트를 충전하실수 있습니다.'))
+            return redirect(url_for('hos.register_ads'))
         new_ad = HospitalAd(hospital_id=current_user.hospital_id, name=form.name.data,
                             start_date=form.start_date.data, is_hospital_ad=form.place.data,
                             term=AdsPriceTable.query.get_or_404(form.delta_date.data).delta_date)
-        db.session.add(new_ad)
+        used_point = Point(user_id=current_user.id, point=-paid_price, body='병원 광고비 집행')
+        db.session.add_all([new_ad, used_point])
         flash('광고가 등록되었습니다.')
         return redirect(url_for('hos.ads'))
-    return render_template('hos/register_ads.html', form=form)
+    return render_template('hos/register_ads.html', form=form, point_sum=format(point_sum, ","))
 
 
 @hos.route('/ads/edit/<int:id>', methods=['GET', 'POST'])
@@ -186,7 +210,7 @@ def edit_ads(id):
     return render_template('hos/register_event.html', form=form)
 
 
-@hos.route('/hospital')
+@hos.route('/point')
 @login_required
 def hospital_point():
     points = current_user.points.order_by(desc(Point.timestamp))

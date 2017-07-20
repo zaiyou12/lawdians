@@ -22,7 +22,7 @@
                 {% for point in points %}
                     <tr>
                         <td>{{ point.id }}</td>
-                        <td>{{ point.point }}</td>
+                        <td>{{ '{0:,}'.format(point.point) }}</td>
                         <td>{{ point.body }}</td>
                         <td>{{ moment(point.timestamp).format('YYYY-MM-DD, h:mm a') }}</td>
                     </tr>
