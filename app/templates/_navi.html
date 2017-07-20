@@ -1,0 +1,29 @@
+<div class="nav_warp">
+    <div class="content">
+        <div class="nav_top">
+            <ul>
+                <li><a href="{{ url_for('auth.login') }}">로그인</a></li>
+                <li><a href="{{ url_for('auth.register') }}">회원가입</a></li>
+            </ul>
+        </div>
+        <div class="navi">
+            <h1 class="logo"><a href="{{ url_for('main.index') }}"><img src="../static/img/main/logo.png"/></a></h1>
+            <ul class="nav">
+                <li><a href="{{ url_for('main.hospital') }}">안심병원</a></li>
+                <li><a href="{{ url_for('main.lawyer') }}">안심변호사</a></li>
+                <li><a href="{{ url_for('main.event') }}">안심이벤트</a></li>
+                <li><a href="{{ url_for('main.post_script') }}">안심후기</a></li>
+                <li><a href="{{ url_for('main.contact') }}">문의하기</a></li>
+            </ul>
+        </div>
+        <div class="navi_m">
+            <ul class="nav">
+                <li><a href="{{ url_for('main.hospital') }}">안심병원</a></li>
+                <li><a href="{{ url_for('main.lawyer') }}">안심변호사</a></li>
+                <li><a href="{{ url_for('main.event') }}">안심이벤트</a></li>
+                <li><a href="{{ url_for('main.post_script') }}">안심후기</a></li>
+                <li><a href="{{ url_for('main.contact') }}">문의하기</a></li>
+            </ul>
+        </div>
+    </div>
+</div>

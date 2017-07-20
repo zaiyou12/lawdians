@@ -1,162 +1,142 @@
-{% extends "base.html" %}
-{% import "bootstrap/wtf.html" as wtf %}
-{% block title %}{{title|default}}안심문의{% endblock title %}
-{% block content %}
-<div class="headline-bg contact-headline-bg">
-    </div><!--//headline-bg-->
+{% include '_header.html' %}
+{% include '_navi.html' %}
 
-    <!-- ******Contact Section****** -->
-    <section class="contact-section section section-on-bg">
-        <div class="container">
-            <h2 class="title text-center">안심문의</h2>
-            <p class="intro text-center">직접 문의하시거나 아래의 FAQs를 참고하시면 됩니다.</p>
-            <form id="contact-form" class="contact-form" method="post" action="">
-                <div class="row text-center">
-                    <div class="contact-form-inner col-md-offset-2 col-sm-offset-0 xs-offset-0 col-xs-12 col-md-8">
-                        <div class="row">
-                            {{ wtf.quick_form(form) }}
-                        </div><!--//row-->
-                    </div>
-                </div><!--//row-->
-                <div id="form-messages"></div>
-            </form><!--//contact-form-->
-        </div><!--//container-->
-    </section><!--//contact-section-->
 
-    <!-- ******Other Contact Section****** -->
-    <section class="contact-other-section section">
-        <div class="container text-center">
-            <h2 class="title">다른 문의 방법</h2>
-            <p class="intro">전화나 이메일를 통하여 다른 방식으로 문의주셔도 됩니다. </p>
-            <div class="row">
-                <ul class="other-info list-unstyled col-md-6 col-sm-10 col-xs-12 col-md-offset-3 col-sm-offset-1 xs-offset-0">
-                    <li><i class="fa fa-envelope-o"></i><a href="#">help@lawdians.com</a></li>
-                    <li><i class="fa fa-phone"></i><a href="tel:+0800123456">070-4319-0911</a></li>
-                    <li><i class="fa fa-map-marker"></i>서울 구로구 <br/> 디지털로32가길 16<br/>1002A호<br/>Korea</li>
-                </ul>
-            </div><!--//row-->
-        </div><!--//container-->
-    </section><!--//contact-other-section-->
+<div class="sub_visual">
+	<p class="svisual_tit">로디언즈 <b>안심문의</b></p>
+	<p class="svisual_txt">로디언즈에게 궁금한점을 문의하세요<br />로디언즈 문의를 통해 궁금한 점을 직접 문의하거나<br />아래의 FAQ를 참고하시면 됩니다</p>
+</div>
 
-    <!-- ******FAQ Section****** -->
-    <section class="faq section has-bg-color">
-        <div class="container">
-            <h2 class="title text-center">Frequently Asked Questions</h2>
-            <div class="row">
-                <div class="col-md-8 col-sm-10 col-xs-12 col-md-offset-2 col-sm-offset-1 col-xs-offset-0">
-                    <div class="panel">
-                        <div class="panel-heading">
-                            <h4 class="panel-title"><a data-parent="#accordion"
-                                                       data-toggle="collapse" class="panel-toggle" href="#faq1"><i
-                                    class="fa fa-plus-square"></i>'안심 서비스'란 무엇인가요?</a></h4>
-                        </div>
 
-                        <div class="panel-collapse collapse" id="faq1">
-                            <div class="panel-body">
-                                안심서비스는 안심하고 성형수술을 할 수 있도록 '안심성형 서비스', '안심병원 찾기 ', '안심가격정보', '착한후기' 등의 다양한 정보와 컨텐츠를 제공하는
-                                로디언즈의 특화된 서비스를 말합니다
-                            </div>
-                        </div>
-                    </div><!--//panel-->
+<div class="contact_bg">
+	<div class="content3">
+		<h3 class="bl01 white">로디언즈 <b>안심문의</b></h3>
+		<p class="sub_txt white">로디언즈에게 궁금한 점을 문의해보세요</p>
+		<textarea class="contact_textbox" placeholder="로디언즈에게 궁금한점을 이곳에 써주세요 "></textarea>
+		<div class="bt_blue01"><a href="">문의하기</a></div>
+	</div>
+</div>
 
-                    <div class="panel">
-                        <div class="panel-heading">
-                            <h4 class="panel-title"><a data-parent="#accordion"
-                                                       data-toggle="collapse" class="panel-toggle" href="#faq2"><i
-                                    class="fa fa-plus-square"></i>'안심성형서비스'란 무엇인가요?</a></h4>
-                        </div>
+<div class="contact_info">
+	<div class="content3">
+		<h3 class="bl01 black"><b>다른 문의방법</b></h3>
+		<p class="sub_txt">전화나 이메일를 통하여 다른 방식으로 문의주셔도 됩니다</p>
+		
+		<div class="cbox mgT30">
+			<dl>
+				<dd class="cbox_icon01"></dd>
+				<dt><a href="mailto:help@lawdians.com">help@lawdians.com</a></dt>
+			</dl>
+		</div>
+		<div class="cbox">
+			<dl>
+				<dd class="cbox_icon02"></dd>
+				<dt>070.4319.0911</dt>
+			</dl>
+		</div>
+		<div class="cbox">
+			<dl>
+				<dd class="cbox_icon03"></dd>
+				<dt>서울특별시 구로구 디지털로 32가길 16 1002A호 로디언즈</dt>
+			</dl>
+		</div>	
+	</div>
+</div>
+	
+	
+<div class="contact_info2">
+	<div class="content3">
+		<h3 class="bl01 black"><b>FAQ</b></h3>
+		<p class="sub_txt">로디언즈에 대해 궁금한 점을 FAQ로 알아보세요</p>
+		
+		
+		
+		<div class="info_box">
+			<dl>
+				<dt class="on">'안심 서비스'란 무엇인가요?
+					<div>
+						<a href="#"><img src="../static/img/sub/his_on.png" alt="click"></a>
+					</div>
+				</dt>
+				<dd style="display:block;">
+					안심서비스는 안심하고 성형수술을 할 수 있도록 '안심성형 서비스', '안심병원 찾기 ', '안심가격정보', '착한후기' 등의 다양한 정보와 컨텐츠를 제공하는 로디언즈의 특화된 서비스를 말합니다
+				</dd>
+			</dl>
 
-                        <div class="panel-collapse collapse" id="faq2">
-                            <div class="panel-body">
-                                성형수술 예정 부위의 '사진'과 수술 전 다양한 검사를 받은 '서류'등을 미리 등록해놓고 성형수술 후 사고 혹은 부작용이 발생되었을 때 제휴된 착한변호사를
-                                통하여 병원과의 분쟁 및 소송 진행에 대응하도록 도와주는 서비스입니다.
-                            </div>
-                        </div>
-                    </div><!--//panel-->
+			<dl>
+				<dt>'안심성형서비스'란 무엇인가요?
+					<div>
+						<a href="#"><img src="../static/img/sub/his_off.png" alt="click"></a>
+					</div>
+				</dt>
+				<dd style="display:none;">
+					성형수술 예정 부위의 '사진'과 수술 전 다양한 검사를 받은 '서류'등을 미리 등록해놓고 성형수술 후 사고 혹은 부작용이 발생되었을 때 제휴된 착한변호사를 통하여 병원과의 분쟁 및 소송 진행에 대응하도록 도와주는 서비스입니다.
+				</dd>
+			</dl>
+			
+			<dl>
+				<dt>'착한 변호사'란 무엇인가요?
+					<div>
+						<a href="#"><img src="../static/img/sub/his_off.png" alt="click"></a>
+					</div>
+				</dt>
+				<dd style="display:none;">
+					착한 변호사란 로디언즈 안심성형 서비스를 신청하신 회원님들이 성형수술 부작용이 발생하였을 때 일체의 착수금을 지급하지 않고 소송 실비(인지대, 송달료, 감정료 등)만을 부담하여 병원과의 분쟁 조정 및 소송을 진행할 수 있도록 로디언즈와 업무 협력관계를 맺은 변호사를 일컫습니다.
+				</dd>
+			</dl>
 
-                    <div class="panel">
-                        <div class="panel-heading">
-                            <h4 class="panel-title"><a data-parent="#accordion"
-                                                       data-toggle="collapse" class="panel-toggle" href="#faq3"><i
-                                    class="fa fa-plus-square"></i>'착한 변호사'란 무엇인가요?</a></h4>
-                        </div>
+			<dl>
+				<dt>'착한 변호사'의 선임 비용은 어떻게 되나요?
+					<div>
+						<a href="#"><img src="../static/img/sub/his_off.png" alt="click"></a>
+					</div>
+				</dt>
+				<dd style="display:none;">
+					착한 변호사 선임은 착수금 무료이며, 성형수술의 부작용이 발생되었을 때 소송 실비(인지대, 송달료, 감정료 등)만을 받고 진행해드리고 있습니다. 회원님께서 추후 재판에서 승소하였을 경우에만 승소금액의 10~20%를 착한변호사에게 성공보수로 지급하게 되니 회원님께서는 성형 중 부작용이 발생되면 큰 부담 없이 대응할 수 있을 것입니다.
+				</dd>
+			</dl>
 
-                        <div class="panel-collapse collapse" id="faq3">
-                            <div class="panel-body">
-                                착한 변호사란 로디언즈 안심성형 서비스를 신청하신 회원님들이 성형수술 부작용이 발생하였을 때 일체의 착수금을 지급하지 않고 소송 실비(인지대, 송달료, 감정료
-                                등)만을 부담하여 병원과의 분쟁 조정 및 소송을 진행할 수 있도록 로디언즈와 업무 협력관계를 맺은 변호사를 일컫습니다.
-                            </div>
-                        </div>
-                    </div><!--//panel-->
+			<dl>
+				<dt>'안심 병원 찾기'란 무엇인가요?
+					<div>
+						<a href="#"><img src="../static/img/sub/his_off.png" alt="click"></a>
+					</div>
+				</dt>
+				<dd style="display:none;">
+					안심병원찾기는 '대한미용성형외과학회', '대한성형외과학회'에 등록되어 있는 성형외과 등의 검증된 전문병원을 찾을 수 있는 서비스입니다. 이와 덧붙여 다양한 병원의 시설 특징 등을 한눈에 볼 수 있으며 해당 병원의 이벤트 정보 역시 알아볼 수 있는 로디언즈의 서비스 입니다.
+				</dd>
+			</dl>
 
-                    <div class="panel">
-                        <div class="panel-heading">
-                            <h4 class="panel-title"><a data-parent="#accordion"
-                                                       data-toggle="collapse" class="panel-toggle" href="#faq4"><i
-                                    class="fa fa-plus-square"></i>'착한 변호사'의 선임 비용은 어떻게 되나요?</a></h4>
-                        </div>
+			<dl>
+				<dt>'안심가격정보'란 무엇인가요?
+					<div>
+						<a href="#"><img src="../static/img/sub/his_off.png" alt="click"></a>
+					</div>
+				</dt>
+				<dd>
+					각 병원들이 제공하는 성형금액정보를 오픈하여 고객에게 다양한 이벤트 및 올바른 성형가격을 안내해드리는 로디언즈만의 특화된 서비스입니다.
+				</dd>
+			</dl>
 
-                        <div class="panel-collapse collapse" id="faq4">
-                            <div class="panel-body">
-                                착한 변호사 선임은 착수금 무료이며, 성형수술의 부작용이 발생되었을 때 소송 실비(인지대, 송달료, 감정료 등)만을 받고 진행해드리고 있습니다. 회원님께서
-                                추후 재판에서 승소하였을 경우에만 승소금액의 10~20%를 착한변호사에게 성공보수로 지급하게 되니 회원님께서는 성형 중 부작용이 발생되면 큰 부담 없이 대응할
-                                수 있을 것입니다.
-                            </div>
-                        </div>
-                    </div><!--//panel-->
-
-                    <div class="panel">
-                        <div class="panel-heading">
-                            <h4 class="panel-title"><a data-parent="#accordion"
-                                                       data-toggle="collapse" class="panel-toggle" href="#faq5"><i
-                                    class="fa fa-plus-square"></i>'안심 병원 찾기'란 무엇인가요?</a></h4>
-                        </div>
-
-                        <div class="panel-collapse collapse" id="faq5">
-                            <div class="panel-body">
-                                안심병원찾기는 '대한미용성형외과학회', '대한성형외과학회'에 등록되어 있는 성형외과 등의 검증된 전문병원을 찾을 수 있는 서비스입니다.
-                                이와 덧붙여 다양한 병원의 시설 특징 등을 한눈에 볼 수 있으며 해당 병원의 이벤트 정보 역시 알아볼 수 있는 로디언즈의 서비스 입니다.
-                            </div>
-                        </div>
-                    </div><!--//panel-->
-
-                    <div class="panel">
-                        <div class="panel-heading">
-                            <h4 class="panel-title"><a data-parent="#accordion"
-                                                       data-toggle="collapse" class="panel-toggle" href="#faq6"><i
-                                    class="fa fa-plus-square"></i>'안심가격정보'란 무엇인가요?</a></h4>
-                        </div>
-
-                        <div class="panel-collapse collapse" id="faq6">
-                            <div class="panel-body">
-                                각 병원들이 제공하는 성형금액정보를 오픈하여 고객에게 다양한 이벤트 및 올바른 성형가격을 안내해드리는 로디언즈만의 특화된 서비스입니다.
-                            </div>
-                        </div>
-                    </div><!--//panel-->
-
-                    <div class="panel">
-                        <div class="panel-heading">
-                            <h4 class="panel-title"><a data-parent="#accordion"
-                                                       data-toggle="collapse" class="panel-toggle" href="#faq7"><i
-                                    class="fa fa-plus-square"></i>성형 부작용 같은데 수술 받은 병원에서는 정상이라고 하는데 어떻게 해야 하나요?</a></h4>
-                        </div>
-
-                        <div class="panel-collapse collapse" id="faq7">
-                            <div class="panel-body">
-                                타 병원에서 성형수술 부작용임을 진단받은 서류를 발급하여 [Emergency! 사고접수]에 접수 후 안심성형 서비스 신청 시 미리 선임된 착한 변호사와
-                                부작용에 대한 대응 절차를 논의하고 진행하시면 됩니다. 착한 변호사를 선임하지 않고 개별적으로 법률대리인 선임이 완료된 경우에는 선임하신 법률대리인에게
-                                회원님의 분쟁 조정 및 소송 진행에 필요한 서류를 제공하여 드립니다.
-                            </div>
-                        </div>
-                    </div><!--//panel-->
-                </div>
-            </div><!--//row-->
-            <div class="contact-lead text-center">
-                <h4 class="title">그외 질문사항이 있나요?</h4>
-                <a class="btn btn-cta btn-cta-secondary" href="#">직접 문의하기</a>
-            </div>
-        </div><!--//container-->
-    </section><!--//faq-->
-
-</div><!--//wrapper-->
-{% endblock content %}
+			<dl>
+				<dt>성형 부작용 같은데 수술 받은 병원에서는 정상이라고 하는데 어떻게 해야 하나요?
+					<div>
+						<a href="#"><img src="../static/img/sub/his_off.png" alt="click"></a>
+					</div>
+				</dt>
+				<dd>
+					타 병원에서 성형수술 부작용임을 진단받은 서류를 발급하여 [Emergency! 사고접수]에 접수 후 안심성형 서비스 신청 시 미리 선임된 착한 변호사와 부작용에 대한 대응 절차를 논의하고 진행하시면 됩니다. 착한 변호사를 선임하지 않고 개별적으로 법률대리인 선임이 완료된 경우에는 선임하신 법률대리인에게 회원님의 분쟁 조정 및 소송 진행에 필요한 서류를 제공하여 드립니다.
+				</dd>
+			</dl>
+		</div>
+	
+	
+	
+	
+	
+	
+	</div>
+</div>
+	
+	
+{% include '_footer.html' %}

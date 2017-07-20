@@ -1,0 +1,477 @@
+/* common */
+html { overflow-y:scroll; height:100%; overflow-x:hidden; }
+html, body { margin:0; padding:0; height:100%; font-size:13px; font-family:'Nanum Gothic','나눔고딕'; font-weight:400; color:#000; }
+img { border:none; vertical-align:top; max-width:100%; height:auto !important;}
+img.over-img { max-width:none !important; }
+button { font-family:'Nanum Gothic'; font-size:13px; }
+
+html,body,h1,h2,h3,h4,h5,h6,ul,ol,li,div,span,img,iframe,input,button,a,dl,dt,dd,p{margin:0;padding:0}
+ul,ol,li{list-style:none}
+h1,h2,h3,h4,h5,h6{font-weight:400}
+
+a:hover { text-decoration:none; color:#000; }
+a:visited { text-decoration:none; color:#000; }
+a:active{ text-decoration:none; color:#000; }
+a:link{ text-decoration:none; color:#000; }
+
+table{padding:0; margin:0; border-collapse:collapse; border-spacing:0}
+
+img { max-width:100%; }
+input {vertical-align:middle;}
+input[type="text"],input[type="password"] {border:1px solid #ccc;padding:4px 5px 5px 5px;}\
+input[type="text"] {
+	-webkit-appearance: none;
+	-webkit-border-radius: 0;
+}
+
+label {vertical-align:middle; margin:0; padding:0;}
+button {cursor:pointer;vertical-align:middle}
+select {vertical-align:middle;height:24px;border:1px solid #ccc}
+input[type="hidden"] {display:none}
+
+
+.content { width:1200px; margin:0 auto; }
+.content2 { width:950px; margin:0 auto; }
+.left { float:left; }
+.right { float:right; }
+.w50 { width:49%; }
+
+
+/* navi */
+div.nav_warp { overflow:hidden; background:#03a9f4; }
+div.nav_warp ul li a { color:#fff; }
+
+div.nav_warp div.nav_top { overflow:hidden; }
+div.nav_warp div.nav_top ul { float:right; padding:10px 0 0; }
+div.nav_warp div.nav_top ul li { font-size:12px; float:left; }
+div.nav_warp div.nav_top ul li:first-child { padding-right:24px; border-right:1px solid #acdafa; }
+div.nav_warp div.nav_top ul li:last-child { padding-left:24px; }
+
+div.nav_warp div.navi { padding:20px 0 15px; }
+div.nav_warp div.navi h1.logo { display:inline-block; }
+div.nav_warp div.navi ul.nav { display:inline-block; float:right; padding-top:4px;}
+div.nav_warp div.navi ul.nav li { padding-left:50px; float:left; }
+div.nav_warp div.navi ul.nav li a { color:#fff; font-size:22px; }
+div.nav_warp div.navi ul.nav li a.on,
+div.nav_warp div.navi ul.nav li a:hover { font-weight:600; }
+
+div.nav_warp div.navi_m{ display:none; }
+
+
+
+/* footer */
+div.footer { padding:20px 0; text-align:center; border-top:1px solid #ddd; }
+div.footer p { font-size:12px; padding:1px 0; color:#9a9a9a; }
+
+/* 메인이미지 */
+div.main_img { overflow:hidden; position:relative; }
+div.main_img ul.mainimg { height:538px; }
+div.main_img ul.mainimg li.main01 { background:url('../img/main/main_img01.png') no-repeat top center #e6e5e9; height:100%; }
+
+div.mainimg_txt { position:absolute; top:calc(50% - 27%); }
+div.mainimg_txt p.main_subtit { font-size:26px; padding:0 0 6px 4px; color:#333; }
+div.mainimg_txt p.main_stit { font-size:50px; }
+div.mainimg_txt p.txt { font-size:16px; line-height:26px; padding:15px 0 0 4px; }
+div.miainimg_bt { display:inline-block; margin-top:60px; background:#0091ea; color:#fff; font-weight:500; font-size:26px;padding:15px 60px; }
+div.miainimg_bt a { color:#fff; }
+
+/* 메인배너 */
+div.banner { border-top:1px solid #ddd; border-bottom:1px solid #ddd; padding:20px 0; position:relative; }
+div.banner ul { overflow:hidden; }
+div.banner ul li { text-align:center; float:left; width:12.5%; height:80px; }
+div.banner ul li.bn01 { background:url('../img/main/banner01.png') no-repeat center center; }
+div.banner ul li.bn02 { background:url('../img/main/banner02.png') no-repeat center center; }
+div.banner ul li.bn03 { background:url('../img/main/banner03.png') no-repeat center center; }
+div.banner ul li.bn04 { background:url('../img/main/banner04.png') no-repeat center center; }
+div.banner ul li.bn05 { background:url('../img/main/banner05.png') no-repeat center center;  }
+div.banner ul li.bn06 { background:url('../img/main/banner06.png') no-repeat center center; }
+div.banner ul li.bn07 { background:url('../img/main/banner07.png') no-repeat center center; }
+div.banner ul li.bn08 { background:url('../img/main/banner08.png') no-repeat center center; }
+div.banner ul li.bn09 { background:url('../img/main/banner09.png') no-repeat center center; }
+div.banner ul li.bn01:hover { background:url('../img/main/banner01_hover.png') no-repeat center center; }
+div.banner ul li.bn02:hover { background:url('../img/main/banner02_hover.png') no-repeat center center; }
+div.banner ul li.bn03:hover { background:url('../img/main/banner03_hover.png') no-repeat center center; }
+div.banner ul li.bn04:hover { background:url('../img/main/banner04_hover.png') no-repeat center center; }
+div.banner ul li.bn05:hover { background:url('../img/main/banner05_hover.png') no-repeat center center; }
+div.banner ul li.bn06:hover { background:url('../img/main/banner06_hover.png') no-repeat center center; }
+div.banner ul li.bn07:hover { background:url('../img/main/banner07_hover.png') no-repeat center center; }
+div.banner ul li.bn08:hover { background:url('../img/main/banner08_hover.png') no-repeat center center; }
+div.banner ul li.bn09:hover { background:url('../img/main/banner09_hover.png') no-repeat center center; }
+
+div.bn_arrow a img.right { position:absolute; right:50px; top:32%; }
+div.bn_arrow a img.left { position:absolute; left:50px; top:32%; }
+
+
+/* section01 */
+div.section01 { padding:70px 0; overflow:hidden; }
+div.section01 p.stit { padding-top:20px; }
+p.stit { font-size:26px; color:#03a9f4; padding-bottom:30px; }
+h2.main { font-size:50px; background:url('../img/main/h2_tit.png') no-repeat top left; padding-top:55px; }
+p.txt { font-size:16px; line-height:26px; padding:15px 0 0;  }
+
+/* section01_1 */
+div.section01_1 { background:#b0e7fc; overflow:hidden; box-shadow:0 -4px 8px #eee; }
+div.section01_1 dl { width:25%; float:left; padding:44px 0; }
+div.section01_1 dl dt { font-size:16px; color:#fff; line-height:22px; text-align:center; }
+div.section01_1 dl dt span { font-size:20px; color:#fff; font-weight:600; display:block; text-align:center; padding:30px 0 25px; }
+
+div.section01_1 dl.icon01,
+div.section01_1 dl.icon03 { background:#03a9f4; }
+div.section01_1 dl.icon02,
+div.section01_1 dl.icon04 { background:#4fc3f7; }
+
+div.section01_1 dl dd { height:100px; }
+div.section01_1 dl.icon01 dd.icon01 { background:url('../img/main/icon01.png') no-repeat center;  }
+div.section01_1 dl.icon02 dd.icon02 { background:url('../img/main/icon02.png') no-repeat center; }
+div.section01_1 dl.icon03 dd.icon03 { background:url('../img/main/icon03.png') no-repeat center; }
+div.section01_1 dl.icon04 dd.icon04 { background:url('../img/main/icon04.png') no-repeat center; }
+
+div.section01_1 dl:hover { background:#fff; }
+div.section01_1 dl:hover dt span { color:#0091ea; }
+div.section01_1 dl:hover dt { color:#000; }
+div.section01_1 dl:hover.icon01 dd.icon01 { background:url('../img/main/icon01_on.png') no-repeat center; }
+div.section01_1 dl:hover.icon02 dd.icon02 { background:url('../img/main/icon02_on.png') no-repeat center; }
+div.section01_1 dl:hover.icon03 dd.icon03 { background:url('../img/main/icon03_on.png') no-repeat center; }
+div.section01_1 dl:hover.icon04 dd.icon04 { background:url('../img/main/icon04_on.png') no-repeat center; }
+
+
+/* section02 */
+div.section02 { background:url('../img/main/main02_bg.jpg') no-repeat top center; background-size:cover; text-align:center; padding:100px 0; }
+h2.main2 { font-size:50px; background:url('../img/main/h2_tit.png') no-repeat top center; padding-top:55px; }
+
+ul.hospital { overflow:hidden; margin-top:50px; }
+ul.hospital li { width:23%; float:left; margin:0 1%; border-bottom:3px solid #afafaf; background:#fff; height:440px; }
+ul.hospital li:hover { border-bottom:3px solid #4fc3f7; }
+
+ul.hospital li dl { padding:30px 14px 0; height:116px; }
+ul.hospital li dl dd.htit { font-size:20px; color:#03a9f4; padding:0 0 8px; font-weight:600; }
+ul.hospital li dl dt.hinfo { font-size:16px; line-height:22px; }
+
+div.bt_blue01 a { background:#03a9f4; color:#fff; font-size:16px; display:inline-block; padding:8px 20px; }
+
+div.hospital_warp { position:relative; }
+div.hospital_arrow a img.right { position:absolute; right:-3%; top:32%; }
+div.hospital_arrow a img.left { position:absolute; left:-3%; top:32%; }
+
+
+/* section03 */
+div.section03 { padding:70px 0; text-align:center; margin:0 auto; }
+div.lawyer { overflow:hidden; margin:50px 0 0; }
+div.lawyer div.lawyer_main { margin:0 auto 20px; width:69%; position:relative; }
+div.lawyer div.lawyer_thum div.thum { width:24%; float:left; margin:0 0.5%; cursor:pointer; }
+
+div.lawyer div.lawyer_main div.lawyer_mainimg { margin:0 auto; }
+div.lawyer div.lawyer_main div.layer_txt { width:50%; height: 85.6%; position:absolute; top:0; right:0; background:url('../img/main/law_bg.png') repeat; padding:30px 25px; text-align:left; }
+div.lawyer div.lawyer_main div.layer_txt p.ltxt_tit { font-size:36px; color:#fff; }
+div.lawyer div.lawyer_main div.layer_txt p.ltxt_address { font-size:16px; color:#fff; border-bottom:1px solid #999; padding-bottom:20px; margin-bottom:20px; }
+div.lawyer div.lawyer_main div.layer_txt p.ltxt_info { font-size:14px; line-height:28px; color:#fff; }
+
+div.lawbt { position:absolute; bottom:20px; }
+div.lawbt div.bt_blue01 { background:#4fc3f7; color:#fff; font-size:16px; display:inline-block; padding:8px 0; width:160px; text-align:center; }
+div.lawbt div.bt_blue02 { background:#03a9f4; color:#fff; font-size:16px; display:inline-block; padding:8px 0; width:160px; text-align:center; }
+
+/* section04 */
+div.section04 { background:url('../img/main/main04_bg.jpg') no-repeat top center; background-size:cover; padding:70px 0; text-align:center; margin:0 auto; }
+
+h2.main2_w { font-size:50px; background:url('../img/main/h2_tit.png') no-repeat top center; padding-top:55px; color:#fff; }
+p.stit_w { font-size:26px; color:#fff; padding-bottom:30px; }
+p.txt_w { font-size:16px; line-height:26px; padding:15px 0 0; color:#fff; }
+
+div.mcontact_bt { display:inline-block; background:#03a9f4; color:#fff; font-size:20px; font-weight:600; padding:10px 50px; margin-top:50px; }
+
+
+/* 안심병원 */
+div.sub_visual { background:url('../img/sub/sub_visual.jpg') no-repeat top center; background-size:cover; text-align:center; height:200px; }
+div.sub_visual p.svisual_tit { font-size:36px; padding:40px 0 10px; }
+div.sub_visual p.svisual_txt { font-size:16px; line-height:22px; }
+
+div.sub_visual2 { background:url('../img/sub/sub_visual.jpg') no-repeat top center; background-size:cover; text-align:center; height:150px; }
+div.sub_visual2 p.svisual_tit { font-size:36px; padding:40px 0 10px; }
+div.sub_visual2 p.svisual_txt { font-size:16px; line-height:22px; }
+
+
+div.hospital_bg { background:url('../img/sub/hospital_bg.jpg') no-repeat top center; background-size:cover; text-align:center; padding:70px 0; }
+
+h3.bl01 { background:url('../img/sub/h3_bl01.jpg') no-repeat top center; font-size:26px; padding-top:20px; color:#03a9f4; }
+h3.bl01.black { color:#000; }
+p.sub_txt { font-size:16px; padding:10px 0 0; }
+
+div.hospital_category { text-align:center; padding:70px 0; }
+div.h_list { overflow:hidden; border-top:2px solid #03a9f4; margin-top:50px; box-shadow:0 0px 5px #ddd;  }
+div.h_list ul { overflow:hidden; border-right:1px solid #ddd; border-left:1px solid #ddd; }
+div.h_list ul li { width:12.5%; float:left; }
+div.h_list ul li a { display:inline-block; width:100%; padding:14px 0; border-right:1px solid #ddd; border-bottom:1px solid #ddd; }
+div.h_list ul li a:hover { background:#03a9f4; color:#fff; }
+div.h_list ul li a.on { background:#4fc3f7; color:#fff; }
+
+div.select { overflow:hidden; margin:20px 0 30px; }
+div.select select.h_select { border:1px solid #4fc3f7; padding:6px 8px; float:left; width:180px; height:40px; }
+div.select ul { float:right; display:inline-block; }
+div.select ul li { float:left; display:inline-block; padding:0 20px; border-right:1px solid #ddd; }
+div.select ul li:last-child { padding:0 0 0 20px; border-right:0; }
+div.select ul li.on { color:#03a9f4; font-weight:600; }
+
+div.hospital_info_warp { overflow:hidden; }
+div.hospital_info_warp div.hospital_info { /* box-shadow:0 0 10px #ccc; */ position:relative; border:1px solid #ddd; margin-bottom:20px; overflow: hidden; }
+div.hospital_info_warp div.hospital_info img,
+div.hospital_info_warp div.hospital_info div.htxt_area { float:left; }
+div.hospital_info_warp div.hospital_info div.htxt_area  { position:relative; text-align:left; padding:20px 20px 0; height:230px; }
+div.hospital_info_warp div.hospital_info div.htxt_area p.hintro { font-size:14px; padding-bottom:20px; }
+div.hospital_info_warp div.hospital_info div.htxt_area p.htit { font-size:20px; color:#03a9f4; font-weight:600; padding-bottom:5px; }
+div.hospital_info_warp div.hospital_info div.htxt_area p.hinfo { font-size:16px; }
+div.hospital_info_warp div.hospital_info div.htxt_area p.p_no { position:absolute; bottom:60px;  }
+div.hospital_info_warp div.hospital_info div.htxt_area p.p_no span { color:#03a9f4; font-size:12px; }
+div.hospital_info_warp div.hospital_info div.htxt_area div.hbt_warp { position:absolute; bottom:20px; left:20px; }
+div.hospital_info_warp div.hospital_info div.htxt_area div.hbt_warp div.bt_blue03 { background:#03a9f4; padding:5px 8px; color:#fff; font-size:16px; text-align:center; float:left; display:inline-block; cursor:pointer; }
+div.hospital_info_warp div.hospital_info div.htxt_area div.hbt_warp div.bt_blue04 { background:#4fc3f7; padding:5px 8px; color:#fff; font-size:16px; text-align:center; float:left; display:inline-block; margin-left:5px; cursor:pointer; }
+
+div.hbt_warp div.bt_blue03 { background:#03a9f4; padding:5px 8px; color:#fff; font-size:16px; text-align:center; float:left; display:inline-block; cursor:pointer; }
+div.hbt_warp div.bt_blue04 { background:#4fc3f7; padding:5px 8px; color:#fff; font-size:16px; text-align:center; float:left; display:inline-block; margin-left:5px; cursor:pointer; }
+
+
+div.hospital_info_warp div.hospital_info div.medal { position:absolute; left:22%; }
+
+div.hospital_category02 { text-align:center; padding:70px 0; background:#f7f7f7; }
+div.hcategory02_warp { margin-top:50px; overflow:hidden; }
+div.hcategory02_warp dl { overflow:hidden; margin-bottom:10px; }
+div.hcategory02_warp dl dd { width:20%; float:left; line-height:34px; }
+div.hcategory02_warp dl dt { width:80%; float:left; }
+div.hcategory02_warp dl dt select.hcategory02_list { width:100%; height:34px; padding:0 10px; }
+div.hcategory02_warp dl dt input.hcategory02_txt { width:100%; height:34px; padding:0 10px; }
+
+div.hospital_info_detail { width:96.5%%; border:1px solid #ddd; padding:20px; overflow:hidden; margin:0 0 20px; }
+div.hospital_info_detail img { float:left; width:50%; }
+div.hospital_info_detail div.htxt_area { float:right; width:44%; text-align:left; padding:20px 20px 0; }
+div.hospital_info_detail div.htxt_area p.hintro { font-size:14px; padding-bottom:20px; }
+div.hospital_info_detail div.htxt_area p.htit { font-size:20px; color:#03a9f4; font-weight:600; padding-bottom:30px; }
+div.hospital_info_detail div.htxt_area p.hinfo { font-size:16px; padding: 5px 0 8px; }
+div.hospital_info_detail div.htxt_area p.p_no {  padding: 0 0 5px; }
+div.hospital_info_detail div.htxt_area p.p_no span { color:#03a9f4; font-size:12px; }
+div.hospital_info_detail div.htxt_area div.hbt_warp {  }
+
+
+/* 페이징 */
+.board_page { text-align:center; margin:50px 0 0; }
+.board_page .paging_comm { display: table; display: inline-block; height: 22px; margin: 0 auto}
+
+.paging_comm b,
+.paging_comm span, 
+.paging_comm a { text-decoration:none; color:#000; display: inline; float: left; padding:0 10px; margin: 0 2px; border:1px solid #ccc; height:24px; line-height:24px; color:#666;}
+.paging_comm b { background:#03a9f4; color:#fff; border-color:#0092d4;}
+
+.paging_comm .frist,
+.paging_comm .prev,
+.paging_comm .next,
+.paging_comm .last { width:24px; overflow:hidden; padding:0; background:no-repeat 50% 50%; font-size:0; text-indent:-5000px;}
+.paging_comm .frist  { background-image:url("../img/sub/icon_first.gif");}
+.paging_comm .prev  { background-image:url("../img/sub/icon_prev.gif");}
+.paging_comm .next  { background-image:url("../img/sub/icon_next.gif");}
+.paging_comm .last { background-image:url("../img/sub/icon_last.gif");}
+
+
+/* 안심변호사 */
+div.lawyer_bg { background:url('../img/sub/lowyer_bg.jpg') no-repeat top center; background-size:cover; text-align:center; padding:70px 0; overflow:hidden; }
+div.lawyer_bg ul.lawyer_intro { overflow:hidden; margin-top:50px; }
+div.lawyer_bg ul.lawyer_intro li { width:31%; float:left; margin:0 0.5%; border:3px solid #ccc; background:#fff; }
+div.lawyer_bg ul.lawyer_intro li p.lawyer_name { font-size:26px; padding:30px 0; }
+div.lawyer_bg ul.lawyer_intro li:hover { border:3px solid #29b6f6; } 
+div.lawyer_bg ul.lawyer_intro li:hover p.lawyer_name { color:#29b6f6; }
+
+div.lawyer_info { padding:70px 0; }
+div.lawyer_info div.lawyer_infobox { overflow:hidden; margin-bottom:30px; box-shadow:0 0 10px #ccc; }
+div.lawyer_info div.lawyer_infobox div.img,
+div.lawyer_info div.lawyer_infobox div.txt { float:left; }
+div.lawyer_info div.lawyer_infobox div.img { width:50%; }
+div.lawyer_info div.lawyer_infobox div.txt { width:45%; padding:30px; }
+div.lawyer_info div.lawyer_infobox div.txt p.ltxt_tit { font-size:36px; }
+div.lawyer_info div.lawyer_infobox div.txt p.ltxt_address { font-size:16px; }
+div.lawyer_info div.lawyer_infobox div.txt p.ltxt_info { font-size:16px; line-height:34px; border-bottom:1px solid #ddd; border-top:1px solid #ddd; padding:30px 0; margin:30px 0; }
+div.lawyer_info div.lawyer_infobox div.txt div.lawbt2 {  }
+div.lawyer_info div.lawyer_infobox div.txt div.lawbt2 div.bt_blue02 { background:#fff; padding:8px 20px; color:#000; border:1px solid #ddd; font-size:16px; text-align:center; float:left; display:inline-block; cursor:pointer; }
+div.lawyer_info div.lawyer_infobox div.txt div.lawbt2 div.bt_blue01 { background:#039be5; padding:8px 20px; color:#fff; border:1px solid #039be5; font-size:16px; text-align:center; float:left; display:inline-block; cursor:pointer; margin-left:5px; }
+
+
+div.lawyer_info div.lawyer_infobox:hover { background:#29b6f6; }
+div.lawyer_info div.lawyer_infobox:hover div.txt p.ltxt_tit,
+div.lawyer_info div.lawyer_infobox:hover div.txt p.ltxt_address,
+div.lawyer_info div.lawyer_infobox:hover div.txt p.ltxt_info { color:#fff; }
+div.lawyer_info div.lawyer_infobox:hover div.txt div.lawbt2 div.bt_blue02 { background:#29b6f6; border:1px solid #fff; color:#fff; }
+
+
+/* 안심이벤트 */
+div.eventbox { box-shadow:0 0 10px #ccc; margin-bottom:20px; }
+div.eventbox a { display:inline-block; }
+div.eventbox div.event_txtbox { padding:20px; text-align:left; position:relative; }
+div.eventbox div.event_txtbox p.hospital_name { font-size:16px; color:#858585; padding-bottom:8px; }
+div.eventbox div.event_txtbox p.event_price { font-size:26px; color:#03a9f4; padding-bottom:4px; }
+div.eventbox div.event_txtbox p.event_period { font-size:12px; color:#858585; }
+div.eventbox div.event_txtbox p.event_period span { color:#03a9f4; }
+
+div.eventbox div.event_txtbox img.like { position:absolute; right:20px; top:20px; }
+div.eventbox div.event_txtbox p.location { position:absolute; right:20px; bottom:20px; color:#888; font-size:16px; } 
+div.eventbox div.event_txtbox p.location img { padding-right:4px; }
+
+/* 안심이벤트 뷰 */
+div.hospital_view { background:#f7f7f7; padding:50px 0; overflow:hidden; }
+p.location { font-size:14px; color:#888; }
+p.location span { color:#03a9f4; }
+
+div.view_box { background:#fff; border:1px solid #ccc; overflow:hidden; padding:30px; margin-top:20px; }
+div.view_box div.event_txtbox p.hospital_name { font-size:16px; color:#888; padding:0 0 8px; }
+div.view_box div.event_txtbox p.hospital_name span { color:#03a9f4; }
+div.view_box div.event_txtbox p.event_period { font-size:12px; color:#888; }
+div.view_box div.event_txtbox p.event_period span { color:#03a9f4; }
+div.view_box div.event_txtbox p.event_tit { font-size:27px; font-weight:600; padding:90px 0 0; }
+div.view_box div.event_txtbox p.event_price { font-size:24px; color:#03a9f4; font-weight:600; }
+div.view_box div.event_txtbox p.event_price span { color:#888; }
+
+div.view_box div.event_txtbox { position:relative; height:435px; }
+div.view_box div.event_txtbox div.bt_warp { position:absolute; right:0; bottom:0; width:100%; }
+div.view_box div.event_txtbox div.bt_warp p.p_no { font-size:12px; color:#888; padding-bottom:10px; }
+div.view_box div.event_txtbox div.bt_warp p.p_no span { color:#03a9f4; }
+div.view_box div.event_txtbox div.bt_warp select.event_selview { width:100%; border:1px solid #ddd; padding:0 10px; height:40px; }
+div.view_box div.event_txtbox div.event_buybt { width:100%; background:#03a9f4; color:#fff; padding:14px 0; text-align:center; font-weight:600; margin-top:10px; }
+
+
+/* 안심후기 */
+div.review_warp { padding:70px 0; text-align:center; }
+
+div.reviewbox_warp { overflow:hidden; margin:50px auto 0; }
+div.reviewbox_warp div.rbox { width:23.5%; margin:0.5%; float:left; border:1px solid #ddd; border-radius:6px; }
+div.reviewbox_warp div.rbox div.rbox_img { height:240px; background:url('../img/sub/rbox_img_test.jpg') no-repeat top center; }
+div.reviewbox_warp div.rbox div.txtbox { text-align:left; padding:24px;}
+div.reviewbox_warp div.rbox div.txtbox p.tit { font-size:16px; color:#03a9f4; padding:0 0 10px; font-weight:600; }
+div.reviewbox_warp div.rbox div.txtbox p.txt { font-size:14px; line-height:22px; border-bottom:1px solid #ddd; padding:0 0 10px; margin:0 0 10px; }
+div.reviewbox_warp div.rbox div.txtbox p.date { font-size:12px; color:#888; }
+
+/* 안심후기 뷰 */
+div.review_viewwarp { padding:50px 0; overflow:hidden; }
+
+table.review { border-top:2px solid #03a9f4; border-bottom:1px solid #999; }
+table.review tbody th { background:#f7f7f7; text-align:left; border-right:1px solid #ddd; padding:12px 0 12px 12px; }
+table.review tbody td { padding:12px 10px; }
+table.review tbody th,
+table.review tbody td { font-size:14px; border-bottom:1px solid #ddd;}
+table.review tbody th.bdL { border-left:1px solid #ddd; }
+table.review tbody td.view_txt { padding:30px; line-height:26px; }
+
+/* 문의하기 */
+div.content3 { width:680px; margin:0 auto; }
+div.contact_bg { background:url('../img/sub/contact_bg.jpg') no-repeat top center; background-size:cover;padding:70px 0; text-align:center; }
+
+h3.bl01.white,
+p.sub_txt.white { color:#fff; }
+textarea.contact_textbox { width:100%; padding:20px; height:200px; font-family:'Nanum Gothic'; margin:30px 0; }
+
+div.contact_info { padding:70px 0; text-align:center; }
+div.contact_info div.cbox { margin:10px auto; border:1px solid #ccc; }
+div.contact_info div.cbox dl { overflow:hidden; }
+div.contact_info div.cbox dl dd { width:12%; float:left; padding:10px 0; height:54px; }
+div.contact_info div.cbox dl dt { width:84%; float:left; padding:10px; text-align:left; font-size:18px; height:40px; line-height:40px; }
+
+div.contact_info div.cbox dl dd.cbox_icon01 { background:url('../img/sub/mail.png') no-repeat center #03a9f4; height:40px; }
+div.contact_info div.cbox dl dd.cbox_icon02 { background:url('../img/sub/phone.png') no-repeat center #03a9f4; height:40px;}
+div.contact_info div.cbox dl dd.cbox_icon03 { background:url('../img/sub/location02.png') no-repeat center #03a9f4; height:40px; }
+
+.mgT30 { margin-top:30px !important; }
+
+div.contact_info2 { padding:70px 0; text-align:center; background:#f3f3f3; }
+.info_box { margin-top:30px; }
+.info_box dl { margin:10px 0; }
+.info_box dt { height:43px; position:relative; line-height:43px; padding-left:20px; border-bottom:1px solid #ccc; font-size:16px; background:#e6e6e6; text-align:left; }
+.info_box dt.on { color:#fff; background:#03a9f4; font-weight:600; }
+.info_box dt div { position:absolute; right:17px; top:15px; }
+.info_box dd { background:#fff; color:#555; padding:20px 30px; display:none; overflow:hidden; text-align:left; font-size:14px; line-height:22px; }
+
+
+
+/* 로그인 */
+div.login_bg { background:url('../img/sub/login_bg.jpg') no-repeat top center; background-size:cover; padding:70px 0; }
+div.login_bg div.login_box { width:700px; background:#fff; padding:30px; margin:50px auto; text-align:center; overflow:hidden; border-radius:6px; }
+
+div.login_bg div.login_box h3 { font-size:32px; color:#03a9f4; padding:10px 0; font-weight:600; }
+div.login_bg div.login_box p { font-size:16px; padding:0 0 30px; }
+
+div.login_bg div.login_box div.login_left { width:45%; float:left; text-align:left; padding:0 4% 0 0; border-right:1px solid #ddd; }
+div.login_bg div.login_box div.login_left input { width:100%; height:40px; padding:5px; border:1px solid #ccc; }
+div.login_bg div.login_box div.login_left div.email,
+div.login_bg div.login_box div.login_left div.password { margin-bottom:10px; }
+div.login_bt { width:100%; color:#fff; background:#03a9f4; font-size:16px; padding:10px 0; text-align:center; clear:both; }
+
+div.login_bg div.login_box p.login_infotxt { font-size:14px; line-height:22px; padding:30px 0; }
+div.login_bg div.login_box p.login_infotxt span.gologin { display:block; margin-top:20px; }
+div.login_bg div.login_box p.login_infotxt span.gologin a { color:#03a9f4; }
+
+div.login_bg div.login_box div.login_right { width:47%; float:right; text-align:left; }
+div.facebook_login,
+div.google_login { height:40px; margin-bottom:10px; line-height:40px; overflow:hidden; color:#fff; }
+div.facebook_login img,
+div.google_login img { width:12%; padding-right:15px; }
+
+div.facebook_login { background:#3b5998; }
+div.google_login { background:#dd4b39; }
+
+div.login_bg div.login_box p.login_infotxt2 { font-size:14px; line-height:22px; padding:30px 0 0; }
+div.login_bg div.login_box p.login_infotxt2 span.gologin { display:block; margin-top:5px; }
+div.login_bg div.login_box p.login_infotxt2 span.gologin a { color:#03a9f4; }
+
+
+div.login_bg div.login_box div.login_full { width:100%; }
+div.login_bg div.login_box div.login_full input { width:100%; height:40px; padding:5px; border:1px solid #ccc; margin-bottom:10px; }
+
+ul.cr-styled {  }
+ul.cr-styled li { float:left; margin-right:30px; }
+
+
+input[type=checkbox],
+input[type=radio] { width:14px !important; padding:0 !important; margin:0 !important;  }
+
+input.phone,
+input.confirm { width:80% !important; float:left; }
+input.phone_bt,
+input.confirm_bt { width:18% !important; margin-left:2%; float:right; background:#03a9f4; color:#fff; }
+ul.regi_htap { border:#03a9f4 !important; color: #fff; }
+
+
+
+/* 안심병원신청 */
+div.register_hbt_next { background:#03a9f4; color:#fff; display:inline-block; padding:10px 20px; }
+div.regi_htap ul { overflow:hidden; width:100%; margin-bottom:20px; border-left:1px solid #ddd; }
+div.regi_htap ul li { width:25%; float:left; border-top:3px solid #ddd; }
+div.regi_htap ul li.on { width:25%; float:left; border-top:3px solid #03a9f4; }
+div.regi_htap ul li a { display:block; padding:14px 0; text-align:center; border-right:1px solid #ddd; }
+
+
+
+/* 마이페이지 */
+div.mypage { padding:40px 0; text-align:center;  }
+div.mypage_tab { overflow:hidden; border-left:1px solid #ddd; margin:0 0 50px; }
+div.mypage_tab ul { overflow:hidden; }
+div.mypage_tab ul li { width:16.6%; float:left; text-align:center; }
+div.mypage_tab ul li a { display:block; padding:14px 0; border-right:1px solid #ddd; border-top:1px solid #ddd; border-bottom:1px solid #ddd; }
+div.mypage_tab ul li a.on { background:#03a9f4; color:#fff; }
+
+
+table.mypage_t,
+table.mypage_tbasic { width:100%; border-top:2px solid #03a9f4; margin:30px auto 0; }
+table.mypage_t tbody th { font-weight:400; border-bottom:1px solid #ddd; border-left:1px solid #ddd; background:#f9f9f9; }
+table.mypage_t tbody th:first-child { border-left:0; }
+table.mypage_t tbody td { border-left:1px solid #ddd; border-bottom:1px solid #ddd; }
+table.mypage_t tbody th,
+table.mypage_t tbody td,
+table.mypage_tbasic tbody td,
+table.mypage_tbasic thead th,
+table.mypage_tbasic tbody td { font-size:14px; padding:10px 8px; }
+table.mypage_t tbody td  input { width:100%; }
+
+table.mypage_tbasic thead th { font-weight:400; border-left:1px solid #ddd; border-bottom:1px solid #ddd; background:#f9f9f9; }
+table.mypage_tbasic thead th:first-child,
+table.mypage_tbasic tbody td:first-child { border-left:0; }
+table.mypage_tbasic tbody td { border-bottom:1px solid #ddd; border-left:1px solid #ddd; }
+
+
+
+
+
+
+

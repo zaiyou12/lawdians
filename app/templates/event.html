@@ -1,44 +1,122 @@
-{% extends "base_hospital.html" %}
-{% import "_macros.html" as macros %}
-{% block image_class %} class="headline-bg about-headline-bg"{% endblock image_class %}
-{% block header_title %}안심 이벤트{% endblock header_title %}
-{% block header_text %}
-<p>안심변호사와 안심병원이 함께</p>
-<p>잘하는 곳으로 가서 예뻐지자!</p>
-{% endblock header_text %}
-{% block contents_title %}추천 안심 병원{% endblock contents_title %}
-{% block slide_list %}
-<ul class="slides">
-    {% for event in ad_events %}
-        <li class="slide slide-1">
-            <div class="flex-caption container">
-                <h3 class="title"><a href="#"> event['name'] </a></h3>
-                <div class="meta"> event['hospital'] </div>
-                <a class="more-link" href="#">더 알아보기 &rarr;</a>
-            </div><!--//flex-caption-->
-        </li>
-    {% endfor %}
-</ul>
-{% endblock slide_list %}
-{% block category_list %}
-<ul>
-    {% for event in events %}
-        <li>
-            <div class="item-wrapper">
-                <a href="{{ url_for('main.event_detail', id=event.id) }}">
-                <div class="img-wrapper">
-                    <img src="{{ url_for('static', filename= event['image'] ) }}" class="hospital-image">
-                </div>
-                <div class="hospital-desc">
-                    <h4>{{ event.head }}</h4>
-                    <h5>{{ event.hospital.name }}</h5>
-                </div>
-                </a>
-            </div>
-        </li>
-    {% endfor %}
-</ul>
-{% endblock category_list %}
-{% block pagination %}
-    {{ macros.pagination_widget(pagination, 'main.hospital') }}
-{%  endblock pagination %}
+{% include '_header.html' %}
+{% include '_navi.html' %}
+
+<div class="sub_visual">
+	<p class="svisual_tit">로디언즈 <b>안심이벤트</b></p>
+	<p class="svisual_txt">로디언즈가 추천하는 안심변호사와 안심병원이 함께 예뻐지자!<br />로디언즈 안심병원의 이벤트를 한 눈에 볼 수 있습니다</p>
+</div>
+
+
+<div class="hospital_category">
+	<div class="content2">
+		<h3 class="bl01">안심이벤트</h3>
+		<p class="sub_txt">로디언즈가 엄선한 추천 안심병원의 이벤트를 만나보세요</p>
+		
+		<div class="h_list">
+			<ul>
+				<li><a href="" class="on">전체</a></li>
+				<li><a href="">쁘띠시술</a></li>
+				<li><a href="">피부</a></li>
+				<li><a href="">다이어트</a></li>
+				<li><a href="">리프</a></li>
+				<li><a href="">반영구화장</a></li>
+				<li><a href="">헤어라인</a></li>
+				<li><a href="">눈</a></li>
+				<li><a href="">코</a></li>
+				<li><a href="">치아/입</a></li>
+				<li><a href="">지방이식</a></li>
+				<li><a href="">가슴</a></li>
+				<li><a href="">안면윤곽</a></li>
+				<li><a href="">이마</a></li>
+				<li><a href="">양악</a></li>
+				<li><a href="">기타</a></li>
+			</ul>
+		</div>
+					
+		<div class="select">
+			<ul>
+				<li class="on"><a>최신순</a></li>
+				<li><a>인기순</a></li>
+				<li><a>후기순</a></li>
+			</ul>
+		</div>
+		
+		
+		<div class="event_warp">
+			<div class="eventbox left w50">
+				<a href="/sub/event_view.html">
+					<img src="../static/img/sub/event01.jpg" />
+					<div class="event_txtbox">
+						<p class="hospital_name">충남대학교병원 성형외과</p>
+						<p class="event_price">월 8만원</p>
+						<p class="event_period">이벤트기간 &nbsp; <span>~2017.07.31</span></p>
+						<img src="../img/sub/like.png" class="like" />
+						<p class="location"><img src="../img/sub/location.png" />대전시 중구</p>
+					</div>
+				</a>
+			</div>
+			<div class="eventbox right w50">
+				<a href="">
+					<img src="../img/sub/event02.jpg" />
+					<div class="event_txtbox">
+						<p class="hospital_name">충남대학교병원 성형외과</p>
+						<p class="event_price">월 8만원</p>
+						<p class="event_period">이벤트기간 &nbsp; <span>~2017.07.31</span></p>
+						<img src="../img/sub/like.png" class="like" />
+						<p class="location"><img src="../img/sub/location.png" />대전시 중구</p>
+					</div>
+				</a>
+			</div>
+			
+			<div class="eventbox left w50">
+				<a href="">
+					<img src="../img/sub/event01.jpg" />
+					<div class="event_txtbox">
+						<p class="hospital_name">충남대학교병원 성형외과</p>
+						<p class="event_price">월 8만원</p>
+						<p class="event_period">이벤트기간 &nbsp; <span>~2017.07.31</span></p>
+						<img src="../img/sub/like.png" class="like" />
+						<p class="location"><img src="../img/sub/location.png" />대전시 중구</p>
+					</div>
+				</a>
+			</div>
+			<div class="eventbox right w50">
+				<a href="">
+					<img src="../img/sub/event02.jpg" />
+					<div class="event_txtbox">
+						<p class="hospital_name">충남대학교병원 성형외과</p>
+						<p class="event_price">월 8만원</p>
+						<p class="event_period">이벤트기간 &nbsp; <span>~2017.07.31</span></p>
+						<img src="../img/sub/like.png" class="like" />
+						<p class="location"><img src="../img/sub/location.png" />대전시 중구</p>
+					</div>
+				</a>
+			</div>
+		
+		</div>
+		
+		
+		
+		<!-- paging -->
+		<div class="board_page">
+			<span class="paging_comm"><span class="frist">First</span>
+			<span class="prev">Previous</span>
+			<b>1</b>
+			<a href="">2</a>
+			<a href="">3</a>
+			<a href="">4</a>
+			<a href="">5</a>
+			<a href="">6</a>
+			<a href="">7</a>
+			<a href="">8</a>
+			<a href="">9</a>
+			<a class="next" href="" title="Next page">Next</a>
+			<a class="last" href="" title="Next page">Next</a>
+			</span>
+		</div>
+		
+	</div>
+</div>
+
+
+{% include '_footer.html' %}

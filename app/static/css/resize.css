@@ -1,0 +1,597 @@
+
+@media (max-width:1400px) {
+div.bn_arrow a img.left { left: 20px; }
+div.bn_arrow a img.right { right: 20px; }
+
+}
+
+
+
+@media (max-width:1300px) {
+div.nav_warp div.navi ul.nav li { padding-left:40px; }
+div.nav_warp div.navi ul.nav li a { font-size:18px; }
+
+.content,
+.content2 { width:900px; }
+
+div.section01 div.right iframe { width:100%; }
+div.section01_1 dl dt > br { display:none; }
+div.section01_1 dl { width:20%; padding:44px 20px; }
+
+h2.main,
+h2.main2,
+h2.main2_w { font-size:36px; }
+p.stit,
+p.stit_w { font-size:22px; padding-bottom:20px; font-weight:500; }
+
+div.banner ul li.bn01,
+div.banner ul li.bn02,
+div.banner ul li.bn03,
+div.banner ul li.bn04,
+div.banner ul li.bn05,
+div.banner ul li.bn06,
+div.banner ul li.bn07,
+div.banner ul li.bn08,
+div.banner ul li.bn09,
+div.banner ul li.bn01:hover,
+div.banner ul li.bn02:hover,
+div.banner ul li.bn03:hover,
+div.banner ul li.bn04:hover,
+div.banner ul li.bn05:hover,
+div.banner ul li.bn06:hover,
+div.banner ul li.bn07:hover,
+div.banner ul li.bn08:hover,
+div.banner ul li.bn09:hover { background-size:contain; }
+	
+div.lawyer div.lawyer_main { width:100%; overflow:hidden; }
+div.lawyer div.lawyer_main div.lawyer_mainimg img { float:left; }
+
+ul.hospital li {height:400px; }
+ul.hospital li dl { height:136px; }
+
+
+div.lawyer_info div.lawyer_infobox div.txt { width:44%; padding:20px; }
+div.lawyer_info div.lawyer_infobox div.txt p.ltxt_info { font-size:14px; line-height:29px; border-bottom:0; padding:12px 0 0; margin:12px 0 24px; }	
+div.lawyer_info div.lawyer_infobox div.txt p.ltxt_tit { font-size:24px; padding-bottom:4px; }	
+
+div.lawyer_info div.lawyer_infobox div.txt div.lawbt2 div.bt_blue01,
+div.lawyer_info div.lawyer_infobox div.txt div.lawbt2 div.bt_blue02,
+div.hbt_warp div.bt_blue03,
+div.hbt_warp div.bt_blue04 { font-size:14px; }
+	
+
+div.hospital_info_warp div.hospital_info > img { width:40%; }
+div.hospital_info_warp div.hospital_info div.htxt_area { width:54%; padding:20px 10px; height:112px; }
+div.hospital_info_warp div.hospital_info div.htxt_area p.hinfo { font-size:14px;  }
+div.hospital_info_warp div.hospital_info div.htxt_area p.hintro { padding-bottom:8px; }
+div.hbt_warp { bottom:10px; left:10px; }
+div.hospital_info_warp div.hospital_info div.htxt_area p.p_no { bottom:40px; }
+
+div.hospital_info_warp div.hospital_info div.medal { left:12%; }
+div.hospital_info_warp div.hospital_info div.medal img { width:34%; }
+
+
+div.reviewbox_warp div.rbox { width:23.4%; }
+div.reviewbox_warp div.rbox div.rbox_img { height:200px; }
+div.reviewbox_warp div.rbox div.txtbox { padding:20px; }
+div.reviewbox_warp div.rbox div.txtbox p.txt { line-height:23px; text-overflow:ellipsis; white-space:pre-line; height:63px; width:100%; overflow:hidden; }
+
+
+
+
+
+
+
+
+
+
+
+	
+}
+
+
+
+@media (max-width:980px) {
+
+.content,
+.content2 { width:760px; }
+div.nav_warp div.navi ul.nav li { padding-left:30px; }
+div.nav_warp div.navi ul.nav li a { font-size:17px; }
+
+div.banner ul li { width:25%; }
+div.banner ul li.bn05, 
+div.banner ul li.bn06, 
+div.banner ul li.bn07, 
+div.banner ul li.bn08 { display:none; }
+div.bn_arrow { display:none; }
+
+div.section01_1 dl { width:44%; padding:20px; }
+div.section01_1 dl.icon01,
+div.section01_1 dl.icon04 { background:#03a9f4; }
+div.section01_1 dl.icon02,
+div.section01_1 dl.icon03 { background:#4fc3f7; }
+
+div.section01_1 dl:hover { background:#fff; }
+div.section01_1 dl:hover dt span { color:#0091ea; }
+div.section01_1 dl:hover dt { color:#000; }
+div.section01_1 dl:hover.icon01 dd.icon01 { background:url('../img/main/icon01_on.png') no-repeat center; }
+div.section01_1 dl:hover.icon02 dd.icon02 { background:url('../img/main/icon02_on.png') no-repeat center; }
+div.section01_1 dl:hover.icon03 dd.icon03 { background:url('../img/main/icon03_on.png') no-repeat center; }
+div.section01_1 dl:hover.icon04 dd.icon04 { background:url('../img/main/icon04_on.png') no-repeat center; }
+
+div.section01_1 dl dt span { padding:30px 0 10px; }
+div.section01_1 dl dt > br { display:block; }
+
+div.section02 { padding:50px 0; }
+ul.hospital { margin-top:30px; }
+ul.hospital li { width:31.2%; margin:1% 1%; height:470px; }
+ul.hospital li:last-child { display:none; }
+ul.hospital li img { width:100%; }
+ul.hospital li dl { height:80px; }
+div.hospital_arrow a img.left,
+div.hospital_arrow a img.right { top:47%; }
+
+div.section03 { padding:50px 0; }
+
+div.lawyer_bg,
+div.lawyer_info { padding:40px 0; }
+div.lawyer_bg ul.lawyer_intro { margin-top:30px; }
+div.lawyer_info div.lawyer_infobox div.txt { padding:20px 20px 0; }
+div.lawyer_info div.lawyer_infobox div.txt p.ltxt_info { margin:8px 0 15px; line-height:24px; padding:8px 0 0; }
+div.lawyer_bg ul.lawyer_intro li p.lawyer_name { font-size:20px; padding:15px 0; }
+div.lawyer_info div.lawyer_infobox div.txt p.ltxt_address { font-size:14px; }
+
+div.sub_visual p.svisual_tit { font-size:28px; }
+div.sub_visual p.svisual_txt { font-size:15px; line-height:24px; }
+
+
+div.hospital_info_warp div.hospital_info > img { width:100%; }
+div.hospital_info_warp div.hospital_info div.htxt_area { width:95%; height:140px; }
+
+div.hospital_info_warp div.hospital_info div.medal { left:0; }
+div.hospital_info_warp div.hospital_info div.medal img { width:auto; }
+
+
+div.review_warp { padding:50px 0; }
+div.reviewbox_warp div.rbox div.rbox_img { height: 160px; }
+
+div.view_box div.event_txtbox {  height:342px; }
+div.view_box div.event_txtbox p.event_tit { padding:50px 0 0; }
+
+
+
+
+
+
+}
+
+
+@media (max-width:800px) {
+	
+div.nav_warp div.navi ul.nav { padding-top:12px; }
+div.nav_warp div.navi ul.nav li { padding-left:22px; }
+div.nav_warp div.navi ul.nav li a { font-size:15px; }
+
+div.main_img ul.mainimg { height:400px; }
+div.main_img ul.mainimg li.main01 { background-size:cover; }
+div.mainimg_txt p.main_subtit { font-size:22px; }
+div.mainimg_txt p.main_stit { font-size:40px; }
+div.miainimg_bt { font-size:20px; padding:12px 40px; margin-top: 30px; }
+
+
+
+.content,
+.content2  { width:inherit; padding:0 4%; }
+div.section01 div.right iframe { margin-top:30px; }
+
+div.section01 { padding:40px 0; text-align:center; }
+div.section01 h2.main { background:url(../img/main/h2_tit.png) no-repeat top center; }
+div.section01 div.right iframe { width:100%; height:41%; }
+
+
+ul.hospital li+li+li { display:none; }
+ul.hospital li { width:48%; height:460px; padding:0 0 30px; }
+ul.hospital li dl { height:108px; }
+
+div.lawyer div.lawyer_main div.layer_txt p.ltxt_tit { font-size:20px; }
+div.lawyer div.lawyer_main div.layer_txt p.ltxt_address { font-size:14px; padding:4px 0 10px; margin-bottom:10px; }
+div.lawyer_info div.lawyer_infobox div.txt p.ltxt_info { font-size:13px; line-height:22px; }
+
+
+h2.main, h2.main2,
+h2.main2_w { font-size:26px; }
+div.mcontact_bt { font-size:18px; font-weight:400; }
+
+div.contact_info div.cbox dl dt { font-size:16px; }
+
+
+
+
+}
+
+
+@media (max-width:800px) and (max-height:1280px) {
+
+.section01 div.left,
+.section01 div.right  { width:100%; }
+
+
+}
+
+
+@media (max-width:700px) {
+
+ul.hospital li { height: 410px; }
+ul.hospital li dl { padding:20px 14px; }
+
+
+
+
+}
+
+
+@media (max-width:768px) {
+h2.main, h2.main2, h2.main2_w { font-size:30px; }
+p.stit, p.stit_w { font-size:20px; }
+
+ul.hospital li+li+li { display:none; }
+ul.hospital li { width:48%; height:426px; padding:0 0 30px; }
+ul.hospital li dl { height:85px; }
+
+div.lawyer_info div.lawyer_infobox div.img { width:100%; }
+div.lawyer_info div.lawyer_infobox div.img img { background-size:cover; width:100%; }
+div.lawyer_info div.lawyer_infobox div.txt { width:100%; }
+div.lawyer_info div.lawyer_infobox div.txt p.ltxt_tit { font-size:20px; }
+
+div.lawyer_info div.lawyer_infobox div.txt { padding:20px; }
+div.lawyer_info div.lawyer_infobox div.txt p.ltxt_info { line-height:30px; margin:10px 0 15px; padding:10px 0 0; }
+
+div.h_list ul li { width:25%; }
+
+
+div.mypage_tab ul { border-bottom: 1px solid #ddd; }
+div.mypage_tab ul li { width:33.3%; }
+div.mypage_tab ul li a { border-bottom:0 }
+
+
+}
+
+
+@media (max-width:700px) {
+div.login_bg div.login_box { margin:50px auto 4%; width:auto; }
+
+
+
+
+}
+
+@media (max-width:640px) {
+
+div.content3 { width:90%; pdding:0 4%; }
+
+div.main_img ul.mainimg { height: 300px; }
+div.mainimg_txt p.main_subtit { font-size:19px; }
+div.mainimg_txt p.main_stit { font-size:36px; }	
+div.mainimg_txt p.txt { font-size:14px; line-height:22px; }
+div.miainimg_bt { font-size:16px; padding:10px 30px; font-weight:400; margin-top:30px; }
+	
+ul.hospital { margin:30px auto 0; width:90%; }
+ul.hospital li { padding:0; height:382px; }
+ul.hospital li dl { height:72px; }
+ul.hospital li dl dd.htit { font-size:15px; }
+ul.hospital li dl dt.hinfo { font-size:13px; }
+
+
+div.section01_1 dl dt span { font-size:17px; padding:15px 0 10px; }
+div.section01_1 dl dt { font-size: 13px; line-height:20px; }
+
+div.section01_1 dl { width:42%; }
+p.stit, p.stit_w,
+p.stit, p.stit { font-weight:400; }
+div.lawyer div.lawyer_main div.layer_txt { width:91%; float:left; position:initial; height:auto; }
+div.lawbt { position:initial; }
+div.lawbt div.bt_blue01,
+div.lawbt div.bt_blue02 { font-size:14px; }
+div.lawyer div.lawyer_main div.layer_txt p.ltxt_info { margin:0 0 15px; }
+h2.main, h2.main2,
+h2.main2_w { font-size:26px; }
+p.stit,
+p.stit_w { font-size:18px; }
+
+div.mcontact_bt { font-size:16px; }
+div.lawyer_bg ul.lawyer_intro li p.lawyer_name { font-size:16px; }
+div.eventbox div.event_txtbox p.event_price { font-size:20px; }
+div.eventbox div.event_txtbox p.location { font-size:13px; }
+div.eventbox div.event_txtbox { padding: 10px; }
+div.eventbox div.event_txtbox img.like { top:10px; right:10px; }
+div.eventbox div.event_txtbox p.location { bottom:10px; right:10px; }
+div.eventbox div.event_txtbox p.hospital_name { font-size:16px; }
+div.hospital_view { padding:30px 0; }
+div.view_box div.event_txtbox p.hospital_name { font-size:14px; }
+
+div.view_box div.event_txtbox p.event_price { font-size:20px; }
+div.view_box div.event_txtbox p.event_tit { padding:20px 0 0; font-size:20px; }
+div.view_box { padding:15px; }
+div.view_box div.event_txtbox { height:247px; }
+div.view_box div.event_txtbox div.bt_warp select.event_selview { height:36px; }
+div.view_box div.event_txtbox div.event_buybt { padding:10px; margin-top:6px; }
+
+div.reviewbox_warp { margin:30px auto 0; }
+div.reviewbox_warp div.rbox { width:48.5%; }
+
+.info_box dt { padding-left:14px; font-size:14px; }
+.info_box dd { padding:20px; font-size:13px;   }
+div.contact_info div.cbox dl dt { font-size:14px; }
+
+
+div.login_bg { padding:50px 4%; margin:0 auto; }
+div.login_bg { margin:0 auto; }
+div.login_bg div.login_box { width:auto; }
+div.login_bg div.login_box div.login_left { width: 100%; border-right:0; }
+div.login_bg div.login_box div.login_right { width: 100%; margin-top:20px; }
+div.facebook_login img,
+div.google_login img { width:9%; padding:0 10px; }
+div.login_bg div.login_box p.login_infotxt,
+div.login_bg div.login_box p.login_infotxt2 { padding:20px 0 0; }
+
+input.phone,
+input.confirm { width:70% !important }
+input.phone_bt, 
+input.confirm_bt{ width:28% !important }
+
+
+
+
+
+
+
+}
+
+@media (max-width:600px) {
+
+
+div.nav_warp div.navi ul.nav { display:none; }
+div.nav_warp div.navi_m { display:block; position:relative; }
+div.nav_warp div.navi_m ul.nav { position:absolute; background:url('../img/main/nav_m.png') no-repeat top right;     right: 0;top: -47px;width: 28px;
+    height: 50px; }
+div.nav_warp div.navi_m ul.nav li { display:none; }
+
+table.mypage_t tbody th, 
+table.mypage_t tbody td, 
+table.mypage_tbasic tbody td, 
+table.mypage_tbasic thead th, 
+table.mypage_tbasic tbody td { font-size:13px; }
+
+div.regi_htap ul li.on,
+div.regi_htap ul li { width:50%; }
+
+}
+
+
+@media (max-width:540px) {
+
+div.lawyer_bg ul.lawyer_intro li p.lawyer_name { font-size:15px; }
+div.lawyer_bg ul.lawyer_intro li { border:2px solid #ccc; }
+div.lawyer_bg ul.lawyer_intro li:hover { border:2px solid #29b6f6; } 
+
+
+
+
+
+}
+
+
+@media (max-width:420px) {
+.none420 { display:none; }
+.block420 { display:table-column; }
+
+div.main_img ul.mainimg li.main01 { background: url(../img/main/main_img01_m.jpg) no-repeat top right #e6e5e9; height: 100%; background-size: cover; }
+
+div.mainimg_txt p.main_subtit { font-size: 15px; }
+div.mainimg_txt p.main_stit { font-size:28px; }
+div.miainimg_bt { font-size:14px; padding:10px 26px; margin-top:15px; }
+
+div.main_img ul.mainimg { height:250px; }
+div.mainimg_txt { top:calc(50% - 34%); }
+
+div.section01 { padding:30px 0; }
+div.section01_1 dl { padding:14px; }
+div.section01_1 dl dt br { display:none; }
+h2.main, h2.main2, h2.main2_w { font-size:26px; }
+p.txt { font-size:16px; line-height:26px; }
+ul.hospital li dl { height:85px; }
+ul.hospital li { height:320px; }
+div.lawyer { margin:30px 0 0; }
+div.lawyer div.lawyer_main div.layer_txt { padding:30px 25px; }
+div.section04 { padding:50px 0; }
+div.footer { padding: 20px; }
+
+div.sub_visual p.svisual_tit,
+div.sub_visual2 p.svisual_tit { font-size: 26px; }
+div.sub_visual p.svisual_txt,
+div.sub_visual2 p.svisual_txt  { font-size: 14px; line-height: 20px; }
+div.sub_visual { height:170px; }
+div.sub_visual2 { height:140px; }
+div.hospital_bg { padding:40px 0; }
+h3.bl01 { font-size:24px; }
+div.h_list { margin-top:20px; }
+div.hospital_category  { padding:40px 0; }
+p.sub_txt { font-size: 16px; }
+div.select select.h_select { width:140px; height:40px; }
+div.select ul { margin-top:11px; }
+
+div.hospital_info_warp div.hospital_info div.htxt_area { position:static; height:auto;  }
+div.hbt_warp { position:static; }
+div.hospital_info_warp div.hospital_info div.htxt_area p.hinfo { padding:0 0 20px; }
+div.hospital_info_warp div.hospital_info div.htxt_area p.p_no { position:static; padding:0 0 7px; }
+div.hospital_info_warp div.hospital_info div.htxt_area { width:78%; padding:16px; }
+div.hospital_info_warp div.hospital_info div.htxt_area p.htit { font-size:18px; line-height:26px; }
+div.hospital_info_warp div.hospital_info div.htxt_area p.hintro { line-height:18px; }
+div.hospital_info_warp div.hospital_info div.htxt_area p.p_no { display:none; }
+div.hbt_warp div.bt_blue03,
+div.hbt_warp div.bt_blue04 { width:100%; }
+div.hbt_warp div.bt_blue04 { margin:5px 0 0 0; }
+
+div.lawyer_info div.lawyer_infobox div.txt { width:89%; }
+
+div.eventbox div.event_txtbox p.hospital_name { font-size:14px; }
+.w50 { width:99%; }
+
+div.view_box div.event_txtbox p.hospital_name { padding:10px 0; }
+div.view_box { margin-top:10px; }
+div.view_box div.event_txtbox div.event_buybt { width:94%; }
+div.view_box div.event_txtbox p.event_price { padding:7px 0 0; }
+div.bt_blue01 a { font-size:14px; }
+div.reviewbox_warp div.rbox { width:47.5%; }
+
+div.contact_info div.cbox dl dd { display:inline-block; float:left; width:18%; }
+div.contact_info div.cbox dl dt { width:74%; }
+div.contact_info,
+div.contact_info2 { padding:40px 0; }
+
+
+
+div.facebook_login img,
+div.google_login img { width:14%; }
+
+
+div.mypage_tab ul li {
+    width: 50%;
+}
+
+
+input.phone,
+input.confirm,
+input.phone_bt, 
+input.confirm_bt{ width:100% !important }
+
+
+
+
+
+
+
+}
+
+@media (max-width:400px) {
+
+div.lawbt div.bt_blue01,
+div.lawbt div.bt_blue02 { width:100%; }
+div.lawbt div.bt_blue01 { margin-top:5px; }
+
+div.lawyer div.lawyer_main div.layer_txt { width: 86%; }
+
+h2.main, h2.main2, h2.main2_w { font-size: 20px; }
+p.txt_w {  font-size: 14px; }
+div.mcontact_bt { font-size: 14px; margin-top:30px; }
+
+div.sub_visual p.svisual_tit { font-size: 24px; }
+
+.w50 { width: 98%; }
+
+div.h_list ul li a { padding:10px 0; }
+p.sub_txt { font-size: 14px; }
+div.select select.h_select { width: 120px; height: 34px; }
+
+div.section01_1 dl { width: 41%; }
+div.section01_1 dl dt span { padding:10px 0 6px; }
+div.h_list ul li { width: 50%; }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+}
+
+
+
+@media (max-width:360px) {
+	
+div.section01_1 dl dt span { font-size:15px; }
+div.section01_1 dl { padding: 10px; width:42%; }
+
+div.section01_1 dl { padding: 14px; }
+
+div.sub_visual p.svisual_tit { font-size:20px; }
+div.sub_visual p.svisual_txt { font-size:13px; }
+
+
+
+
+
+
+
+}
+
+
+@media (max-width:320px) {
+div.section01_1 dl { width: 39%; }
+div.section02 { padding:30px 0; }
+ul.hospital li dl {
+    height: 103px;
+}
+ul.hospital li {
+    height: 296px;
+}
+ul.hospital li dl {
+    padding: 16px 10px;
+}
+
+div.section03 {
+    padding: 30px 0;
+}
+p.txt {
+    font-size: 14px;
+    line-height: 20px;
+}
+
+div.lawyer div.lawyer_main div.layer_txt p.ltxt_address {
+font-size: 13px; }
+div.lawyer div.lawyer_main div.layer_txt p.ltxt_info {
+font-size: 13px; }
+div.lawyer div.lawyer_main div.layer_txt {
+    width: 82%;
+}
+div.sub_visual p.svisual_tit {
+    padding: 30px 0 10px;
+}
+div.lawyer_bg { display: none; }
+div.sub_visual { padding:0 20px; }
+div.view_box div.event_txtbox p.event_tit { font-size: 18px; }
+div.reviewbox_warp div.rbox div.txtbox {
+    padding: 14px;
+}
+table.review tbody td.view_txt {
+    padding: 16px;
+    line-height: 24px;
+}
+
+div.login_bg { padding: 10px 4%; }
+div.facebook_login img,
+div.google_login img { width:19%; }
+
+
+
+}
+
+
+
+
+
+
+
+
+

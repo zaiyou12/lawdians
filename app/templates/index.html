@@ -1,186 +1,174 @@
-{% extends "base.html" %}
-{% block body_attribs %} class="home-page"{% endblock body_attribs %}
-{% block content %}
-    <div class="bg-slider-wrapper">
-        <div class="flexslider bg-slider">
-            <ul class="slides">
-                <li class="slide slide-1"></li>
-                <li class="slide slide-2"></li>
-            </ul>
-        </div>
-    </div><!--//bg-slider-wrapper-->        
-    
-    <section class="promo section section-on-bg">
-        <div class="container text-center">                
-            <h2 class="title">안전하게 예뻐지자!</h2>
-            <p class="intro">로디언즈와 함께 안전하게 예뻐지세요.</p>
-            <p><a class="btn btn-cta btn-cta-primary" href="{{ url_for('service.register') }}">서비스 신청하기</a></p>
-        </div><!--//container-->
-    </section><!--//promo-->
-    
-    <div class="sections-wrapper">   
-     
-        <!-- ******Why Section****** -->
-        <section id="why" class="section why">
-            <div class="container">
-                <h2 class="title text-center">로디언즈가 어떻게 도움이 될수 있을까요?</h2>
-                <p class="intro text-center">성형부작용은 안심대응 서비스로 대비하고, 성형병원 찾기는 안심 병원찾기로 안내받고,<br/>성형가격 비교로 더 이상 돌아다니지 않아도 됩니다.</p>
-                <div class="row item">
-                    <div class="content col-xs-12 col-md-4">
-                        <h3 class="title">안심 성형 서비스</h3>
-                        <div class="desc">
-                            <p>수술 부작용, 이제 걱정 끝!</p>
-                            <p>안심 성형 서비스는 이러 이러한 서비스 입니다.</p>
-                        </div>
-                        <div class="quote">
-                            <div class="quote-profile">
-                                <img class="img-responsive img-circle" src="{{ url_for('static', filename='assets/images/people/profile-s-3.png') }}" alt="" />
-                            </div><!--//profile-->
-                            <div class="quote-content">
-                                <blockquote><p>로디언즈 너무너무 친절하고 세심히 관리해주시네요.</p></blockquote>
-                                <p class="source"><a href="#">@테스트</a>, 서울</p>
-                            </div><!--//quote-content-->
-                        </div><!--//quote-->
-                    </div><!--//content-->
-                    <figure class="figure col-md-offset-1 col-sm-offset-0 col-xs-offset-0 col-xs-12 col-md-7">
-                        <img class="img-responsive" src="{{ url_for('static', filename='assets/images/figures/figure-1.jpg') }}" alt="" />
-                        <figcaption class="figure-caption">(안심성형 서비스 소개 이미지) </figcaption>
-                    </figure>
-                </div><!--//item-->
-                
-                <div class="row item">
-                    <div class="content col-md-push-8 col-sm-push-0 col-xs-push-0 col-xs-12 col-md-4">
-                        <h3 class="title">안심 병원</h3>
-                        <div class="desc">
-                            <p>까다로운 조건을 통과한 안심병원들.</p>
-                            <p>안심병원은 이러이러한 병원들의 명칭입니다.</p>
-                            <p> <a href="download.html">안심병원 보러가기</a></p>
-                        </div>
-                        <div class="quote">
-                            <div class="quote-profile">
-                                <img class="img-responsive img-circle" src="{{ url_for('static', filename='assets/images/people/profile-s-4.png') }}" alt="" />
-                            </div><!--//profile-->
-                            <div class="quote-content">
-                                <blockquote><p>로디언즈 너무 좋습니다.</p></blockquote>
-                                <p class="source">@로디언즈, 대전</p>
-                            </div><!--//quote-content-->
-                        </div><!--//quote-->
-                    </div><!--//content-->
-                    <figure class="figure col-md-pull-4 col-sm-pull-0 col-xs-pull-0 col-xs-12 col-md-7">
-                        <img class="img-responsive" src="{{ url_for('static', filename='assets/images/figures/figure-2.jpg') }}" alt="" />
-                    </figure>
-                </div><!--//item-->
-                
-                <div class="row item ">
-                    <div class="content col-xs-12 col-md-4">
-                        <h3 class="title">안심 변호사</h3>
-                        <div class="desc">
-                            <p>성형부작용 발생 시 고객님 곁을 지켜줄 든든한 안심지킴이</p>
-                            <p>100% 선임료 무료, 오직 실비만을 받고 고객의 편에서 비용은 소송이 끝난 후 승소비용 15% (패소시 비용 청구 없음)</p>
-                        </div>
-                        <div class="quote">
-                            <div class="quote-profile">
-                                <img class="img-responsive img-circle" src="{{ url_for('static', filename='assets/images/people/profile-s-3.png') }}" alt="" />
-                            </div><!--//profile-->
-                            <div class="quote-content">
-                                <blockquote><p>로디언즈 너무너무 친절하고 세심히 관리해주시네요.</p></blockquote>
-                                <p class="source"><a href="#">@테스트</a>, 서울</p>
-                            </div><!--//quote-content-->          
-                        </div><!--//quote-->                        
-                    </div><!--//content-->
-                    <figure class="figure col-md-offset-1 col-sm-offset-0 col-xs-offset-0 col-xs-12 col-md-7">
-                        <img class="img-responsive" src="{{ url_for('static', filename='assets/images/figures/figure-3.jpg') }}" alt="" />
-                        <figcaption class="figure-caption">(변호사 사진) </figcaption>
+{% include '_header.html' %}
+{% include '_navi.html' %}
 
-                    </figure>
-                </div><!--//item-->
-                
-                <div class="row item last-item">
-                    <div class="content col-md-push-8 col-sm-push-0 col-xs-push-0 col-xs-12 col-md-4">
-                        <h3 class="title">안심 후기</h3>
-                        <div class="desc">
-                            <p>믿을 수 있는 후기로, 부작용 없는 더 좋은 병원을 찾아보세요!</p>
-                            <p>다른 성형외과는 수술안심책임제가 있는데 제가 수술한 곳에는 없어서 내심 걱정이 되었어요. 어린나이에 하는 쌍꺼풀 수술도 아니고 게다가 눈매교정에 절개 뒤와 밑트임까지 하니 잘못되면 정말 어쩌나 했어요. </p>
-                        </div>
-                        
-                        <div class="quote">
-                            <div class="quote-profile">
-                                <img class="img-responsive img-circle" src="{{ url_for('static', filename='assets/images/people/profile-s-4.png') }}" alt="" />
-                            </div><!--//profile-->
-                            <div class="quote-content">
-                                <blockquote><p>로디언즈 너무 좋습니다.</p></blockquote>
-                                <p class="source">@로디언즈, 대전</p>
-                            </div><!--//quote-content-->
-                        </div><!--//quote-->
-                    </div><!--//content-->
-                    <figure class="figure col-md-pull-4 col-sm-pull-0 col-xs-pull-0 col-xs-12 col-md-7">
-                        <img class="img-responsive" src="{{ url_for('static', filename='assets/images/figures/figure-4.jpg') }}" alt="" />
-                    </figure>
-                </div><!--//item-->
+<div class="main_img">
+	<ul class="mainimg">
+		<li class="main01"></li>
+	</ul>
+	<div class="content">
+		<div class="mainimg_txt">
+			<p class="main_subtit">안&nbsp; 심&nbsp; 뷰&nbsp; 티&nbsp; 서&nbsp; 비&nbsp; 스 <b>로 디 언 즈</b></p>
+			<p class="main_stit">안전하게 예뻐지자!</p>
+			<p class="txt">로디언즈는 안심하고 성형수술을 <span class="block420"><br /></span>받을 수 있도록 <span class="none420"><br /></span>고객에게 안심병원과 <span class="block420"><br /></span>안심변호사를 연계해주는 서비스입니다.</p>
+			<div class="miainimg_bt"><a href="{{ url_for('main.contact') }}">바로상담받기</a></div>
+		</div>
+	</div>
+</div>
 
-            </div><!--//container-->
-        </section><!--//why-->  
-        
-        <!-- ******Testimonials Section****** -->
-        <section class="section testimonials">
-            <div class="container">
-                <h2 class="title text-center">사용자의 후기들</h2>
-                <div id="testimonials-carousel" class="carousel slide" data-ride="carousel">
-                    <ol class="carousel-indicators">
-                        <li data-target="#testimonials-carousel" data-slide-to="0" class="active"></li>
-                        <li data-target="#testimonials-carousel" data-slide-to="1"></li>
-                        <li data-target="#testimonials-carousel" data-slide-to="2"></li>
-                    </ol><!--//carousel-indicators-->
-                    <div class="carousel-inner">
-                        <div class="item active">
-                            <figure class="profile"><img src="{{ url_for('static', filename='assets/images/people/profile-m-1.png') }}" alt="" /></figure>
-                            <div class="content">
-                                <blockquote>
-                                <i class="fa fa-quote-left"></i>
-                                <p>다른 성형외과는 수술안심책임제가 있는데 제가 수술한 곳에는 없어서 내심 걱정이 되었어요.어린나이에 하는 쌍꺼풀 수술도 아니고 게다가 눈매교정에 절개 뒤와 밑트임까지 하니 잘못되면 정말 어쩌나 했어요. </p>
-                                </blockquote>
-                                <p class="source">김ㅇㅇ<br /><span class="title">대전, 17년 3월 수술</span></p>
-                            </div><!--//content-->                         
-                        </div><!--//item-->                        
-                        <div class="item">
-                            <figure class="profile"><img src="{{ url_for('static', filename='assets/images/people/profile-m-2.png') }}" alt="" /></figure>
-                            <div class="content">
-                                <blockquote>
-                                <i class="fa fa-quote-left"></i>
-                                <p>그러다 로디언즈를 소개받고 얼른 등록했는데 정말 안심이 되었어요.물론 수술이 잘되는게 더 중요하지만 믿는 곳이 잇으니 더 두려움 없이 수술을 받을 수 있었답니다. </p>
-                                </blockquote>
-                                <p class="source">이ㅇㅇ<br /><span class="title">서울 17년 8월 수술</span></p>
-                            </div><!--//content-->                         
-                        </div><!--//item-->  
-                        <div class="item">
-                            <figure class="profile"><img src="{{ url_for('static', filename='assets/images/people/profile-m-3.png') }}" alt="" /></figure>
-                            <div class="content">
-                                <blockquote>
-                                <i class="fa fa-quote-left"></i>
-                                <p>제가 수술한 곳에 아는 직원이 있으니 로디언즈를 추천해 보려고 하고요. 저와 함께 등록하신 분도 만족도가 높아요. 다른 분들이 수술을 한다고 하면 꼭 소개할 생각이에요.</p>
-                                </blockquote>
-                                <p class="source">정ㅇㅇ<br /><span class="title">서울 17년 1월 수술</span></p>
-                            </div><!--//content-->                         
-                        </div><!--//item-->                                         
-                    </div><!--//carousel-inner-->
-                    
-                </div><!--//carousel-->
-            </div><!--//container-->
-        </section><!--//testimonials-->
-        
-        <!-- ******CTA Section****** -->
-        <section id="cta-section" class="section cta-section text-center home-cta-section">
-            <div class="container">
-               <h2 class="title">안심성형 서비스를 신청할 준비가 되셨나요?</h2>
-               <p class="intro"><span class="counting">200</span>이상의 안심병원들이 준비중에 있습니다.</p>
-               <p><a class="btn btn-cta btn-cta-primary" href="#">서비스 신청하기</a></p>
-            </div><!--//container-->
-        </section><!--//cta-section-->
-        
-    </div><!--//section-wrapper-->
+<div class="banner">
+	<div class="content">
+		<div class="bn_arrow">
+			<a><img src="../static/img/main/bn_left.png" alt="left" class="left" /></a>
+			<a><img src="../static/img/main/bn_right.png" alt="right" class="right" /></a>
+		</div>
+		<ul>
+			<li class="bn01"><a href=""></a></li>
+			<li class="bn02"><a href=""></a></li>
+			<li class="bn03"><a href=""></a></li>
+			<li class="bn04"><a href=""></a></li>
+			<li class="bn05"><a href=""></a></li>
+			<li class="bn06"><a href=""></a></li>
+			<li class="bn07"><a href=""></a></li>
+			<li class="bn08"><a href=""></a></li>
+			<!-- <li class="bn09"><a href=""></a></li> -->
+		</ul>
+	</div>
+</div>
 
-{% endblock content %}
+<div class="section01">
+	<div class="content">
+		<div class="left w50">
+			<p class="stit">안심 뷰티 서비스 로디언즈</p>
+			<h2 class="main"><b>왜</b> 로디언즈일까요?</h2>
+			<p class="txt">로디언즈는 부작용을 걱정하지 않고, 안심하고 성형수술을 받을 수 있도록 소비자에게 로디언즈가 엄선한  안심병원과 안심변호사를 연계해주는 서비스입니다.</p>
+		</div>
+		<div class="right w50">
+			<iframe width="560" height="314" src="https://www.youtube.com/embed/JayrPkBkL8c" frameborder="0" allowfullscreen></iframe>
+		</div>
+	</div>
+</div>
+
+
+<div class="section01_1">
+	<div class="content">
+		<dl class="icon01">
+			<dd class="icon01"></dd>
+			<dt><span>서비스 선택</span>한번에 전문병원을 둘러보고 <br />적합한 병원을 선택할 수 있습니다</dt>
+		</dl>
+		<dl class="icon02">
+			<dd class="icon02"></dd>
+			<dt><span>소비자정보 등록</span>성형할 소비자의 정보만 등록하면 <br />누구나 안심성형을 할 수 있습니다</dt>
+		</dl>
+		<dl class="icon03">
+			<dd class="icon03"></dd>
+			<dt><span>안심변호사 선택</span>성형 부작용이 나타나면 로디언즈의 <br />안심변호사에게 맡겨주세요!</dt>
+		</dl>
+		<dl class="icon04">
+			<dd class="icon04"></dd>
+			<dt><span>안전하게 안심성형</span>간단한 절차로 안전하게, <br />안심병원에서 안심성형하면 끝!</dt>
+		</dl>
+	</div>
+</div>
+
+
+<div class="section02">
+	<div class="content">
+		<p class="stit">로디언즈 안심 병원안내</p>
+		<h2 class="main2">로디언즈 <b>안심병원</b></h2>
+		<p class="txt">원하는 부위, 잘하는 병원, 투명한 가격비교로 로디언즈에서 안심하고 안전하게 예뻐지자!</p>
+
+		<div class="hospital_warp">
+			<div class="hospital_arrow">
+				<a><img src="../static/img/main/harrow_left.png" alt="left" class="left" /></a>
+				<a><img src="../static/img/main/harrow_right.png" alt="right" class="right" /></a>
+			</div>
+			<ul class="hospital">
+				<li>
+					<img src="../static/img/main/hospital01.jpg" />
+					<dl>
+						<dd class="htit">충남대학교병원 성형외과</dd>
+						<dt class="hinfo">대전시 중구 문화로 282 (대사동)</dt>
+					</dl>
+					<div class="bt_blue01"><a href="">안심성형신청</a></div>
+				</li>
+				<li>
+					<img src="../static/img/main/hospital02.jpg" />
+					<dl>
+						<dd class="htit">성균관대학교 삼성창원병원</dd>
+						<dt class="hinfo">경남 창원시 마산회원구 팔용로 158 (합성동)</dt>
+					</dl>
+					<div class="bt_blue01"><a href="">안심성형신청</a></div>
+				</li>
+				<li>
+					<img src="../static/img/main/hospital03.jpg" />
+					<dl>
+						<dd class="htit">단국대학교병원 성형외과</dd>
+						<dt class="hinfo">충남 천안시 동남구 망향로 201 (안서동)</dt>
+					</dl>
+					<div class="bt_blue01"><a href="">안심성형신청</a></div>
+				</li>
+				<li>
+					<img src="../static/img/main/hospital04.jpg" />
+					<dl>
+						<dd class="htit">마린 성형외과</dd>
+						<dt class="hinfo">부산시 해운대구 구남로29번길 32, 3층 (중동)</dt>
+					</dl>
+					<div class="bt_blue01"><a href="">안심성형신청</a></div>
+				</li>
+			</ul>
+		</div>
+	</div>
+</div>
 
 
 
+<div class="section03">
+	<div class="content">
+		<p class="stit">로디언즈 안심 변호사안내</p>
+		<h2 class="main2">로디언즈 <b>안심변호사</b></h2>
+		<p class="txt">원하는 부위, 잘하는 병원, 투명한 가격비교로 로디언즈에서 안심하고 안전하게 예뻐지자!</p>
 
+		<div class="lawyer">
+			<div class="lawyer_main">
+				<div class="lawyer_mainimg"><img src="../static/img/main/law01.jpg" /></div>
+				<div class="layer_txt">
+					<p class="ltxt_tit"><b>차재승</b> 변호사</p>
+					<p class="ltxt_address">서울 관악구 신림동 59길 / 02-872-1307</p>
+					<p class="ltxt_info">
+						(現) 차재승 법률사무소<br />
+						前 주식회사 알바이오 자문변호사<br />
+						前 법무법인 에이치스<br />
+						前 동작다문화지원센터 자문변호사<br />
+						前 도산법학회 정회원<br />
+						前 염동렬 국회의원실<br />
+						前 인하대학교 법학전문대학원 졸업
+					</p>
+					<div class="lawbt">
+						<div class="bt_blue02">바로상담받기</div>
+						<div class="bt_blue01">서비스신청</div>
+					</div>
+				</div>
+			</div>
+			<div class="lawyer_thum">
+				<div class="thum"><img src="../static/img/main/law01_thum.jpg" /></div>
+				<div class="thum"><img src="../static/img/main/law02_thum.jpg" /></div>
+				<div class="thum"><img src="../static/img/main/law03_thum.jpg" /></div>
+				<div class="thum"><img src="../static/img/main/law01_thum.jpg" /></div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+<div class="section04">
+	<div class="content">
+		<p class="stit_w">로디언즈 서비스 문의하기</p>
+		<h2 class="main2_w">안심성형 신청 전, 궁금한 점을 문의해보세요!<br/></h2>
+		<p class="txt_w">궁금한 점을 직접 문의하시거나 아래의 FAQ를 참고하시면 됩니다</p>
+        <div class="miainimg_bt"><a href="{{ url_for('main.contact') }}">서비스 문의하기</a></div>
+
+	</div>
+</div>
+
+{% include '_footer.html' %}
