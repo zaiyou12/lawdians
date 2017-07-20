@@ -5,8 +5,9 @@ from flask_login import login_required, login_user, current_user
 from sqlalchemy import desc
 
 from app import db
-from .forms import UserForm, HospitalForm
-from ..models import User, Role, HospitalRegistration, Hospital, Counsel, Category, Event, HospitalAd, Point
+from .forms import UserForm, HospitalForm, LawyerForm
+from ..models import User, Role, HospitalRegistration, Hospital, Counsel, Category, Event, HospitalAd, Point, Lawyer, \
+    Service, EventRegistration, Auction
 from . import admin
 
 
@@ -14,6 +15,12 @@ from . import admin
 @login_required
 def index():
     return render_template('admin/index.html')
+
+
+'''
+    Admin
+    User
+'''
 
 
 @admin.route('/id/user')
@@ -40,7 +47,7 @@ def hospital_detail(id):
     hos = Hospital.query.get_or_404(id)
     if hos is None:
         flash('존재하지 않는 병원입니다. 다시 한번 확인해주세요.')
-        redirect(url_for('admin.route'))
+        redirect(url_for('admin.index'))
 
     form = HospitalForm()
     if form.validate_on_submit():
@@ -55,7 +62,7 @@ def hospital_detail(id):
             if c:
                 hos.categories.append(c)
         db.session.add(hos)
-        flash('정보가 갱신되었습니다.')
+        flash('정보가 수정되었습니다.')
         return redirect(url_for('admin.id_hospital'))
     form.name.data = hos.name
     form.doctor.data = hos.doctor
@@ -166,26 +173,90 @@ def login_to_user(id):
     return redirect(url_for('admin.index'))
 
 
-@admin.route('/service/lawyer')
-@login_required
-def service_lawyer():
-    page = request.args.get('page', 1, type=int)
-    pagination = Counsel.query.filter(Counsel.lawyer_id > 0).paginate(
-        page, per_page=current_app.config['SERVICE_PER_PAGE'], error_out=False
-    )
-    counsels = pagination.items
-    return render_template('admin/service_lawyer.html', counsels=counsels, pagination=pagination)
+'''
+    Admin
+    Page
+'''
 
 
-@admin.route('/service/lawdians')
+@admin.route('/page/hospital')
 @login_required
-def service_lawdians():
+def page_hospital():
     page = request.args.get('page', 1, type=int)
-    pagination = Counsel.query.filter(Counsel.lawyer_id == -1).paginate(
+    pagination = Hospital.query.paginate(
         page, per_page=current_app.config['SERVICE_PER_PAGE'], error_out=False
     )
-    counsels = pagination.items
-    return render_template('admin/service_lawdians.html', counsels=counsels, pagination=pagination)
+    hospitals = pagination.items
+    return render_template('admin/page_hospital.html', hospitals=hospitals, pagination=pagination)
+
+
+@admin.route('/page/edit/hospital/<int:id>', methods=['GET', 'POST'])
+@login_required
+def edit_page_hospital(id):
+    hos = Hospital.query.get_or_404(id)
+    if hos is None:
+        flash('존재하지 않는 병원입니다. 다시 한번 확인해주세요.')
+        redirect(url_for('admin.index'))
+
+    form = HospitalForm()
+    if form.validate_on_submit():
+        hos.name = form.name.data
+        hos.doctor = form.doctor.data
+        hos.phone = form.phone.data
+        hos.address = form.address.data
+        hos.categories = []
+        category_list = form.category.data
+        for id in category_list:
+            c = Category.query.get_or_404(id)
+            if c:
+                hos.categories.append(c)
+        db.session.add(hos)
+        flash('정보가 수정되었습니다.')
+        return redirect(url_for('admin.page_hospital'))
+    form.name.data = hos.name
+    form.doctor.data = hos.doctor
+    form.phone.data = hos.phone
+    form.address.data = hos.address
+    categories = []
+    for c in hos.categories.all():
+        categories.append(c.id)
+    form.category.data = categories
+    return render_template('admin/hospital_detail.html', hos=hos, form=form)
+
+
+@admin.route('/page/lawyer')
+@login_required
+def page_lawyer():
+    page = request.args.get('page', 1, type=int)
+    pagination = Lawyer.query.paginate(
+        page, per_page=current_app.config['SERVICE_PER_PAGE'], error_out=False
+    )
+    lawyers = pagination.items
+    return render_template('admin/page_lawyer.html', lawyers=lawyers, pagination=pagination)
+
+
+@admin.route('/page/edit/lawyer/<int:id>', methods=['GET', 'POST'])
+@login_required
+def edit_page_lawyer(id):
+    law = Lawyer.query.get_or_404(id)
+    if law is None:
+        flash('존재하지 않는 변호사입니다. 다시 한번 확인해주세요.')
+        redirect(url_for('admin.index'))
+
+    form = LawyerForm()
+    if form.validate_on_submit():
+        law.name = form.name.data
+        law.phone = form.phone.data
+        law.address = form.address.data
+        law.description = form.description.data
+        db.session.add(law)
+        flash('정보가 수정되었습니다.')
+        return redirect(url_for('admin.page_lawyer'))
+    form.name.data = law.name
+    form.phone.data = law.phone
+    form.address.data = law.address
+    form.description.data = law.description
+    return render_template('admin/lawyer_detail.html', form=form)
 
 
 @admin.route('/page/event')
@@ -226,6 +297,67 @@ def ads_confirmed(id):
     else:
         flash('존재하지 않는 광고입니다.')
     return redirect(url_for('admin.page_ads'))
+
+
+'''
+    Admin
+    Service
+'''
+
+
+@admin.route('/service/service')
+@login_required
+def service_service():
+    page = request.args.get('page', 1, type=int)
+    pagination = Service.query.paginate(
+        page, per_page=current_app.config['SERVICE_PER_PAGE'], error_out=False
+    )
+    services = pagination.items
+    return render_template('admin/service_service.html', services=services, pagination=pagination)
+
+
+@admin.route('/service/event')
+@login_required
+def service_event():
+    page = request.args.get('page', 1, type=int)
+    pagination = EventRegistration.query.paginate(
+        page, per_page=current_app.config['SERVICE_PER_PAGE'], error_out=False
+    )
+    registrations = pagination.items
+    return render_template('admin/service_event.html', registrations=registrations, pagination=pagination)
+
+
+@admin.route('/service/auction')
+@login_required
+def service_auction():
+    page = request.args.get('page', 1, type=int)
+    pagination = Auction.query.paginate(
+        page, per_page=current_app.config['SERVICE_PER_PAGE'], error_out=False
+    )
+    auctions = pagination.items
+    return render_template('admin/service_auction.html', auctions=auctions, pagination=pagination)
+
+
+@admin.route('/service/lawyer')
+@login_required
+def service_lawyer():
+    page = request.args.get('page', 1, type=int)
+    pagination = Counsel.query.filter(Counsel.lawyer_id > 0).paginate(
+        page, per_page=current_app.config['SERVICE_PER_PAGE'], error_out=False
+    )
+    counsels = pagination.items
+    return render_template('admin/service_lawyer.html', counsels=counsels, pagination=pagination)
+
+
+@admin.route('/service/lawdians')
+@login_required
+def service_lawdians():
+    page = request.args.get('page', 1, type=int)
+    pagination = Counsel.query.filter(Counsel.lawyer_id == -1).paginate(
+        page, per_page=current_app.config['SERVICE_PER_PAGE'], error_out=False
+    )
+    counsels = pagination.items
+    return render_template('admin/service_lawdians.html', counsels=counsels, pagination=pagination)
 
 
 @admin.route('point')

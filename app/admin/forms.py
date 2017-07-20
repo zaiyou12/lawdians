@@ -38,3 +38,11 @@ class HospitalForm(FlaskForm):
         super(HospitalForm, self).__init__(*args, **kwargs)
         self.category.choices = [(category.id, category.name_kor) for category
                                  in Category.query.all()]
+
+
+class LawyerForm(FlaskForm):
+    name = StringField('이름', validators=[InputRequired(), Length(1, 32)])
+    phone = StringField('전화번호', validators=[InputRequired(), Length(1, 32)])
+    address = StringField('주소', validators=[InputRequired(), Length(1, 128)])
+    description = StringField('설명', validators=[InputRequired()])
+    submit = SubmitField('확인')

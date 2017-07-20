@@ -5,12 +5,20 @@ from sqlalchemy import desc
 from app import db
 from ..main.forms import EventForm, CounselForm, ProfileForm, AuctionForm
 from ..models import Hospital, Event, EventRegistration, HospitalAd, Lawyer, Counsel, Service, User, Auction, Offer, \
-    Point
+    Point, Role
 from . import main
 
 
 @main.route('/')
 def index():
+    if current_user.is_authenticated:
+        role = current_user.role
+        if role == Role.query.filter_by(name='HospitalManager').first():
+            return redirect(url_for('hos.index'))
+        elif role == Role.query.filter_by(name='Lawyer').first():
+            return redirect(url_for('lawyer.index'))
+        elif role == Role.query.filter_by(permissions=0xff).first():
+            return redirect(url_for('admin.index'))
     return render_template('index.html')
 
 

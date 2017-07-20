@@ -159,13 +159,6 @@ def payment_complete():
     if is_payment_completed(current_user, imp_uid=imp_uid, product_price=amount, body=body):
         msg = '결제가 성공했습니다.'
         flash(msg)
-        role = current_user.role
-        if role == Role.query.filter_by(name='HospitalManager').first():
-            return redirect(url_for('hos.index'))
-        elif role == Role.query.filter_by(name='Lawyer').first():
-            return redirect(url_for('lawyer.index'))
-        elif role == Role.query.filter_by(permissions=0xff).first():
-            return redirect(url_for('admin.index'))
         return redirect(url_for('main.index'))
     else:
         msg = '결제가 실패하였습니다.'
