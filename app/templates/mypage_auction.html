@@ -1,0 +1,107 @@
+{% include '_header.html' %}
+{% include '_navi.html' %}
+
+
+
+<div class="sub_visual2">
+	<p class="svisual_tit">로디언즈 <b>마이페이지</b></p>
+	<p class="svisual_txt">내 정보를 관리하세요</p>
+</div>
+
+
+<div class="mypage">
+	<div class="content">
+	
+		<div class="mypage_tab">
+			<ul>
+				<li><a href="{{ url_for('main.my_page_service') }}">안심 성형 서비스</a></li>
+				<li><a href="{{ url_for('main.my_page_counsel') }} ">안심 변호사 문의</a></li>
+				<li><a href="{{ url_for('main.my_page_event') }}">안심 이벤트 신청</a></li>
+				<li><a href="{{ url_for('main.my_page_auction') }}" class="on">역견적 신청 내역</a></li>
+                <li><a href="{{ url_for('main.my_page_point') }}">포인트 관리</a></li>
+				<li><a href="{{ url_for('main.my_page_profile') }}">정보 관리</a></li>
+			</ul>
+		</div>	
+				
+		<h3 class="bl01 black">안심병원 제안 내역</h3>		
+		<table class="mypage_tbasic">
+			<colgroup>
+				<col width="7%">
+				<col width="14.3%">
+				<col width="14.3%">
+				<col width="14.3%">
+				<col width="14.3%">
+				<col width="14.3%">
+				<col width="14.3%">
+				<col width="7%">
+			</colgroup>
+			<thead>
+				<th>구분</th>
+				<th>카테고리</th>
+				<th>내용</th>
+				<th>안심병원</th>
+				<th>신청금액</th>
+				<th>신청내용</th>
+				<th>신청시간</th>
+				<th>선택</th>
+			</thead>
+			<tbody>
+				{% for offer in offers %}
+                    <tr>
+                        <td>{{ offer.id }}</td>
+                        <td>{{ offer.auction.category.name_kor }}</td>
+                        <td>{{ offer.auction.body }}</td>
+                        <td>{{ offer.hospital.name }}</td>
+                        <td>{{ offer.price }}</td>
+                        <td>{{ offer.body }}</td>
+                        <td>{{ moment(offer.timestamp).format('YYYY-MM-DD, h:mm a') }}</td>
+                        <td><a href="{{ url_for('main.auction_selected', id=offer.id) }}">
+                            <button type="button" class="btn btn-info">선택하기</button></a>
+                        </td>
+                    </tr>
+                {% endfor %}
+			</tbody>
+		</table>
+		
+		
+		<h3 class="bl01 black mgT30">역견적 채택 내역</h3>		
+		<table class="mypage_tbasic">
+			<colgroup>
+				<col width="7%">
+				<col width="14.3%">
+				<col width="14.3%">
+				<col width="14.3%">
+				<col width="14.3%">
+				<col width="14.3%">
+				<col width="14.3%">
+				<col width="7%">
+			</colgroup>
+			<thead>
+				<th>구분</th>
+				<th>카테고리</th>
+				<th>내용</th>
+				<th>안심병원</th>
+				<th>신청금액</th>
+				<th>신청내용</th>
+				<th>신청시간</th>
+				<th>선택</th>
+			</thead>
+			<tbody>
+				{% for selected_offer in selected_offers %}
+                    <tr>
+                        <td>{{ selected_offer.id }}</td>
+                        <td>{{ selected_offer.auction.category.name_kor }}</td>
+                        <td>{{ selected_offer.auction.body }}</td>
+                        <td>{{ selected_offer.hospital.name }}</td>
+                        <td>{{ selected_offer.price }}</td>
+                        <td>{{ selected_offer.body }}</td>
+                        <td>{{ moment(selected_offer.timestamp).format('YYYY-MM-DD, h:mm a') }}</td>
+                    </tr>
+                {% endfor %}
+			</tbody>
+		</table>
+		
+	</div>
+</div>
+	
+{% include '_footer.html' %}

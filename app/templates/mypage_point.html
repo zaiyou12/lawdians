@@ -1,0 +1,51 @@
+{% include '_header.html' %}
+{% include '_navi.html' %}
+
+<div class="sub_visual2">
+    <p class="svisual_tit">로디언즈 <b>마이페이지</b></p>
+    <p class="svisual_txt">내 정보를 관리하세요</p>
+</div>
+
+
+<div class="mypage">
+    <div class="content">
+
+        <div class="mypage_tab">
+            <ul>
+                <li><a href="{{ url_for('main.my_page_service') }}">안심 성형 서비스</a></li>
+                <li><a href="{{ url_for('main.my_page_counsel') }} ">안심 변호사 문의</a></li>
+                <li><a href="{{ url_for('main.my_page_event') }}">안심 이벤트 신청</a></li>
+                <li><a href="{{ url_for('main.my_page_auction') }}">역견적 신청 내역</a></li>
+                <li><a href="{{ url_for('main.my_page_point') }}" class="on">포인트 관리</a></li>
+                <li><a href="{{ url_for('main.my_page_profile') }}">정보 관리</a></li>
+            </ul>
+        </div>
+
+        <h3 class="bl01 black">포인트</h3>
+
+        <table class="mypage_tbasic">
+            <colgroup>
+                <col width="10%">
+                <col width="26.6%">
+                <col width="26.6%">
+                <col width="26.6%">
+            </colgroup>
+            <thead>
+            <th>구분</th>
+            <th>포인트</th>
+            <th>내용</th>
+            <th>날짜</th>
+            </thead>
+            <tbody>
+            {% for point in points %}
+                <tr>
+                    <td>{{ point.id }}</td>
+                    <td>{{ point.point }}</td>
+                    <td>{{ point.body }}</td>
+                    <td>{{ moment(point.timestamp).format('YYYY-MM-DD, h:mm a') }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>

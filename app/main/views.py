@@ -135,7 +135,7 @@ def contact():
 @login_required
 def my_page_service():
     services = Service.query.filter_by(user_id=current_user.id).all()
-    return render_template('profile_service.html', services=services)
+    return render_template('mypage_service.html', services=services)
 
 
 @main.route('/my-page/service/<int:id>')
@@ -160,14 +160,14 @@ def my_page_claim(id):
 @login_required
 def my_page_counsel():
     counsels = Counsel.query.filter_by(user_id=current_user.id).all()
-    return render_template('profile_counsel.html', counsels=counsels)
+    return render_template('mypage_counsel.html', counsels=counsels)
 
 
 @main.route('/my-page/event')
 @login_required
 def my_page_event():
     events = EventRegistration.query.filter_by(user_id=current_user.id).all()
-    return render_template('profile_event.html', events=events)
+    return render_template('mypage_event.html', events=events)
 
 
 @main.route('/my-page/profile', methods=['GET', 'POST'])
@@ -175,7 +175,7 @@ def my_page_event():
 def my_page_profile():
     form = ProfileForm()
     user = User.query.filter_by(id=current_user.id).first()
-    if form.validate_on_submit():
+    if request.method == 'POST':
         user.username = form.username.data
         user.birth_date = form.birth_date.data
         user.gender = form.gender.data
@@ -187,7 +187,7 @@ def my_page_profile():
     form.birth_date.data = user.birth_date
     form.gender.data = user.gender
     form.address.data = user.address
-    return render_template('profile_profile.html', user=user, form=form)
+    return render_template('mypage_profile.html', user=user, form=form)
 
 
 @main.route('/my-page/auction')
@@ -204,7 +204,7 @@ def my_page_auction():
     for closed_auction in closed_auctions:
         offer_list = Offer.query.filter_by(auction_id=closed_auction.id).filter_by(is_selected=True).all()
         selected_offers.extend(offer_list)
-    return render_template('profile_auction.html', offers=offers, selected_offers=selected_offers)
+    return render_template('mypage_auction.html', offers=offers, selected_offers=selected_offers)
 
 
 @main.route('/my-page/auction-selected/<int:id>')
@@ -229,4 +229,4 @@ def my_page_point():
     point_sum = 0
     for point in points:
         point_sum += point.point
-    return render_template('profile_point.html', points=points, point_sum=point_sum)
+    return render_template('mypage_point.html', points=points, point_sum=point_sum)

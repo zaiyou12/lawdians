@@ -1,0 +1,65 @@
+{% include '_header.html' %}
+{% include '_navi.html' %}
+
+
+<div class="sub_visual2">
+    <p class="svisual_tit">로디언즈 <b>마이페이지</b></p>
+    <p class="svisual_txt">내 정보를 관리하세요</p>
+</div>
+
+
+<div class="mypage">
+    <div class="content">
+
+        <div class="mypage_tab">
+            <ul>
+                <li><a href="{{ url_for('main.my_page_service') }}" class="on">안심 성형 서비스</a></li>
+                <li><a href="{{ url_for('main.my_page_counsel') }}">안심 변호사 문의</a></li>
+                <li><a href="{{ url_for('main.my_page_event') }}">안심 이벤트 신청</a></li>
+                <li><a href="{{ url_for('main.my_page_auction') }}">역견적 신청 내역</a></li>
+                <li><a href="{{ url_for('main.my_page_point') }}">포인트 관리</a></li>
+                <li><a href="{{ url_for('main.my_page_profile') }}">정보 관리</a></li>
+            </ul>
+        </div>
+
+        <h3 class="bl01 black">정보관리</h3>
+
+        <form action="{{ url_for('main.my_page_profile') }}" method="post">
+            <table class="mypage_t">
+                <colgroup>
+                    <col width="10%">
+                    <col width="40%">
+                    <col width="10%">
+                    <col width="40%">
+                </colgroup>
+                <tbody>
+                <tr>
+                    <th>이름</th>
+                    <td>{{ form.username(class="table_input",placeholder="사용자 이름", type="text") }}</td>
+                    <th>생년월일</th>
+                    <td>{{ form.birth_date(id="table-input", class="able-input", placeholder="생년월일   예)19820301") }}</td>
+                    {% if form.username.errors[0] %}<p class="help-block">{{ form.username.errors[0] }}</p>{% endif %}
+
+                    {% if form.birth_date.errors[0] %}
+                        <p class="help-block">{{ form.birth_date.errors[0] }}</p>{% endif %}
+                </tr>
+                <tr>
+                    <th>성별</th>
+                    <td>
+                        <div class="form-group gender">
+                            {{ form.gender(class="cr-styled") }}
+                        </div>
+                    </td>
+                    <th>주소</th>
+                    <td>{{ form.address(id="signup-address", class="table-input", placeholder="주소") }}</td>
+                </tr>
+                </tbody>
+            </table>
+            {{ form.submit(class="bt_blue01 mgT30") }}
+        </form>
+
+
+    </div>
+</div>
+
+{% include '_footer.html' %}

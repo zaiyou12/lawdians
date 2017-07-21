@@ -1,0 +1,58 @@
+{% include '_header.html' %}
+{% include '_navi.html' %}
+
+
+<div class="sub_visual2">
+	<p class="svisual_tit">로디언즈 <b>마이페이지</b></p>
+	<p class="svisual_txt">내 정보를 관리하세요</p>
+</div>
+
+
+<div class="mypage">
+	<div class="content">
+	
+		<div class="mypage_tab">
+			<ul>
+				<li><a href="{{ url_for('main.my_page_service') }}">안심 성형 서비스</a></li>
+				<li><a href="{{ url_for('main.my_page_counsel') }} " class="on">안심 변호사 문의</a></li>
+				<li><a href="{{ url_for('main.my_page_event') }}">안심 이벤트 신청</a></li>
+				<li><a href="{{ url_for('main.my_page_auction') }}">역견적 신청 내역</a></li>
+                <li><a href="{{ url_for('main.my_page_point') }}">포인트 관리</a></li>
+				<li><a href="{{ url_for('main.my_page_profile') }}">정보 관리</a></li>
+			</ul>
+		</div>	
+				
+		<h3 class="bl01 black">안심 변호사 문의</h3>
+		
+		<table class="mypage_tbasic">
+			<colgroup>
+				<col width="10%">
+				<col width="26.6%">
+				<col width="26.6%">
+				<col width="26.6%">
+				<col width="10%">
+			</colgroup>
+			<thead>
+				<th>구분</th>
+				<th>안심변호사</th>
+				<th>문의내용</th>
+				<th>신청일</th>
+				<th>상태</th>
+			</thead>
+			<tbody>
+				{% for counsel in counsels %}
+                    <tr>
+                        <td>{{ counsel.id }}</td>
+                        <td>{{ counsel.lawyer.name }}</td>
+                        <td>{{ counsel.body }}</td>
+                        <td>{{ moment(counsel.timestamp).format('YYYY-MM-DD, h:mm a') }}</td>
+                        <td></td>
+                    </tr>
+                {% endfor %}
+			</tbody>
+		</table>
+		
+		
+	</div>
+</div>
+{% include '_footer.html' %}
