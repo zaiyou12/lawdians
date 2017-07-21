@@ -1,112 +1,99 @@
-{% extends "base.html" %}
-{% block styles %}
-    {{ super() }}
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/lawyer.css') }}">
-{% endblock styles %}
-{% block body_attribs %}class="about-page"{% endblock body_attribs %}
-{% block content %}
-    <div class="headline-bg about-headline-bg">
-    </div><!--//headline-bg-->
+{% include '_header.html' %}
+{% include '_navi.html' %}
 
-    <!-- ******Description Section****** -->
-    <section class="story-section section section-on-bg">
-        <h2 class="title container text-center">안전하게 예뻐지자</h2>
-        <div class="story-container container text-center">
-            <div class="story-container-inner">
-                <div class="about text-center">
-                    <p>성형부작용 발생 시 고객님 곁을 지켜줄 든든한 안심지킴이</p>
-                    <p>부작용 발생시 선임료 없이 대응하자.<br/>로디언즈에 등록된 착한 변호인단과 함께 부담없이 이용하자!</p>
-                </div><!--//about-->
-            </div><!--//story-container-->
-        </div><!--//container-->
-    </section><!--//story-video-->
+<div class="sub_visual">
+	<p class="svisual_tit">로디언즈 <b>안심변호사</b></p>
+	<p class="svisual_txt">성형부작용 발생 시 고객님 곁을 지켜줄 든든한 안심지킴이<br />부작용 발생시 선임료 없이 대응하자.<br />로디언즈에 등록된 착한 변호인단과 함께 부담없이 이용하자!</p>
+</div>
 
-    <section class="section">
-        <h2 class="lawyer-title title text-center">안심 변호사</h2>
-        <div class="container-fluid lawyer-list-wrapper">
-            <div class="col-md-offset-1 item-wrapper ">
-                <div class="lawyer-list col-md-6">
-                    <img src="{{ url_for('static', filename='assets/images/lawyer/lawyer_1.png') }}"
-                         class="img-responsive">
-                </div>
-                <div class=" item-content col-md-6">
-                    <h3 class="item-title">차재승 변호사</h3>
-                    <p class="item-small-title">서울 관악구 신림동 59길 / 02-872-1307</p>
-                    <div class="item-description">
-                        <p>(現) 차재승 법률사무소</p>
-                        <p>前 주식회사 알바이오 자문변호사</p>
-                        <p>前 법무법인 에이치스 </p>
-                        <p>前 동작다문화지원센터 자문변호사</p>
-                        <p>前 도산법학회 정회원</p>
-                        <p>前 염동렬 국회의원실</p>
-                        <p>前 인하대학교 법학전문대학원 졸업</p>
-                    </div>
-                    <div class="item-btn btn-group" role="group">
-                        <a href="{{ url_for('service.counsel', lawyer_id=1) }}">
-                            <button type="button" class="btn btn-default">상담하기</button>
-                        </a>
-                        <a href="{{ url_for('service.register', lawyer=1) }}">
-                            <button type="button" class="btn btn-default">서비스 신청</button>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-offset-1 item-wrapper ">
-                <div class="lawyer-list col-md-6">
-                    <img src="{{ url_for('static', filename='assets/images/lawyer/lawyer_3.png') }}"
-                         class="img-responsive">
-                </div>
-                <div class="item-content col-md-6">
-                    <h3 class="item-title">최운영 변호사</h3>
-                    <p class="item-small-title">서울 영등포구 국제금융로 8길 34602호 </p>
-                    <div class="item-description">
-                        <p>(現) 서울시 공익변호사</p>
-                        <p>(現) 대법원 국선변호</p>
-                        <p>(現) 한국갈등해결센터 전문위원 </p>
-                        <p>(現) 불어민주당 윤리심판위원</p>
-                        <p>(現) 은정초등학교 법률고문</p>
-                        <p>前 서울북부지방법원 조정위원</p>
-                        <p>사법연수원 제42기 수료 </p>
-                    </div>
-                    <div class="item-btn btn-group" role="group">
-                        <a href="{{ url_for('service.counsel', lawyer_id=2) }}">
-                            <button type="button" class="btn btn-default">상담하기</button>
-                        </a>
-                        <a href="{{ url_for('service.register', lawyer=2) }}">
-                            <button type="button" class="btn btn-default">서비스 신청</button>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-offset-1 item-wrapper">
-                <div class="lawyer-list col-md-6">
-                    <img src="{{ url_for('static', filename='assets/images/lawyer/lawyer_2.png') }}"
-                         class="img-responsive">
-                </div>
-                <div class="item-content col-md-6">
-                    <h3 class="item-title">김평호 변호사</h3>
-                    <p class="item-small-title">경기 성남구 중원구 산성대로 454번 신우빌딩 201 / 031-744-6655</p>
-                    <div class="item-description">
-                        <p>(現) 법무법인 한울(성남사무소) 구성원 변호사</p>
-                        <p>(現) 분당차병원 의학연구윤리심의위원(IRB 위원) </p>
-                        <p>(現) 수원지방법원 성남지원 민사조정위원, 가사조정위원 </p>
-                        <p>(現) 소망재활원 운영위원 </p>
-                        <p>(現) 성남종합사회복지관 운영위원 </p>
-                        <p>(現) 성남시 지방세 심의위원회 위원</p>
-                        <p>前 대한정형외과개원의 협의회 법률고문 </p>
-                    </div>
-                    <div class="item-btn btn-group" role="group">
-                        <a href="{{ url_for('service.counsel', lawyer_id=3) }}">
-                            <button type="button" class="btn btn-default">상담하기</button>
-                        </a>
-                        <a href="{{ url_for('service.register', lawyer=3) }}">
-                            <button type="button" class="btn btn-default">서비스 신청</button>
-                        </a>
-                    </div>
-                </div>
-            </div>
 
-        </div>
-    </section>
-{% endblock content %}
+<div class="lawyer_bg">
+	<div class="content">
+		<h3 class="bl01 black">로디언즈 <b>안심변호사</b></h3>
+		<p class="sub_txt">로디언즈에 등록된 안심변호인단을 만나보세요</p>
+		
+		<ul class="lawyer_intro">
+			<li>
+				<img src="../static/img/sub/lowyer01.jpg" alt="차재승 변호사" />
+				<p class="lawyer_name">차재승 변호사</p>
+			</li>
+			<li>
+				<img src="../static/img/sub/lowyer02.jpg" alt="최운영 변호사" />
+				<p class="lawyer_name">최운영 변호사</p>
+			</li>
+			<li>
+				<img src="../static/img/sub/lowyer03.jpg" alt="김평호 변호사" />
+				<p class="lawyer_name">김평호 변호사</p>
+			</li>
+		</ul>
+
+	</div>
+</div>
+
+
+<div class="lawyer_info">
+	<div class="content">
+		<div class="lawyer_infobox">
+			<div class="img"><img src="../static/img/sub/lowyer01.jpg" alt="차재승 변호사" /></div>
+			<div class="txt">
+				<p class="ltxt_tit"><b>차재승</b> 변호사</p>
+				<p class="ltxt_address">서울 관악구 신림동 59길 / 02-872-1307</p>
+				<p class="ltxt_info">
+					(現) 차재승 법률사무소<br />
+					前 주식회사 알바이오 자문변호사<br />
+					前 법무법인 에이치스<br />
+					前 동작다문화지원센터 자문변호사<br />
+					前 도산법학회 정회원<br />
+					前 염동렬 국회의원실<br />
+					前 인하대학교 법학전문대학원 졸업
+				</p>
+				<div class="lawbt2">
+                    <a href="{{ url_for('service.counsel', lawyer_id=1) }}"><div class="bt_blue02">바로상담받기</div></a>
+					<a href="{{ url_for('service.register', lawyer=1) }}"><div class="bt_blue01">서비스신청</div></a>
+				</div>
+			</div>
+		</div>
+		<div class="lawyer_infobox">
+			<div class="img"><img src="../static/img/sub/lowyer02.jpg" alt="최운영 변호사" /></div>
+			<div class="txt">
+				<p class="ltxt_tit"><b>최운영</b> 변호사</p>
+				<p class="ltxt_address">서울 영등포구 국제금융로 8길 34602호 </p>
+				<p class="ltxt_info">
+					(現) 서울시 공익변호사<br />
+					(現) 대법원 국선변호<br />
+					(現) 한국갈등해결센터 전문위원<br />
+					(現) 불어민주당 윤리심판위원<br />
+					(現) 은정초등학교 법률고문<br />
+					前 서울북부지방법원 조정위원<br />
+					사법연수원 제42기 수료
+				</p>
+				<div class="lawbt2">
+					<a href="{{ url_for('service.counsel', lawyer_id=2) }}"><div class="bt_blue02">바로상담받기</div></a>
+					<a href="{{ url_for('service.register', lawyer=2) }}"><div class="bt_blue01">서비스신청</div></a>
+				</div>
+			</div>
+		</div>
+		<div class="lawyer_infobox">
+			<div class="img"><img src="../static/img/sub/lowyer03.jpg" alt="김평호 변호사" /></div>
+			<div class="txt">
+				<p class="ltxt_tit"><b>김평호</b> 변호사</p>
+				<p class="ltxt_address">경기 성남구 중원구 산성대로 454번 신우빌딩 201 / 031-744-6655</p>
+				<p class="ltxt_info">
+					(現) 법무법인 한울(성남사무소) 구성원 변호사<br />
+					(現) 분당차병원 의학연구윤리심의위원(IRB 위원)<br />
+					(現) 수원지방법원 성남지원 민사조정위원, 가사조정위원<br />
+					(現) 소망재활원 운영위원<br />
+					(現) 성남종합사회복지관 운영위원<br />
+					(現) 성남시 지방세 심의위원회 위원<br />
+					前 대한정형외과개원의 협의회 법률고문
+				</p>
+				<div class="lawbt2">
+					<a href="{{ url_for('service.counsel', lawyer_id=3) }}"><div class="bt_blue02">바로상담받기</div></a>
+					<a href="{{ url_for('service.register', lawyer=3) }}"><div class="bt_blue01">서비스신청</div></a>
+				</div>
+			</div>
+		</div>
+			</div>
+</div>
+
+{% include '_footer.html' %}
