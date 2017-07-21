@@ -1,122 +1,103 @@
 {% include '_header.html' %}
 {% include '_navi.html' %}
+{% import "_macros.html" as macros %}
 
 <div class="sub_visual">
-	<p class="svisual_tit">로디언즈 <b>안심이벤트</b></p>
-	<p class="svisual_txt">로디언즈가 추천하는 안심변호사와 안심병원이 함께 예뻐지자!<br />로디언즈 안심병원의 이벤트를 한 눈에 볼 수 있습니다</p>
+    <p class="svisual_tit">로디언즈 <b>안심이벤트</b></p>
+    <p class="svisual_txt">로디언즈가 추천하는 안심변호사와 안심병원이 함께 예뻐지자!<br/>로디언즈 안심병원의 이벤트를 한 눈에 볼 수 있습니다</p>
 </div>
 
 
 <div class="hospital_category">
-	<div class="content2">
-		<h3 class="bl01">안심이벤트</h3>
-		<p class="sub_txt">로디언즈가 엄선한 추천 안심병원의 이벤트를 만나보세요</p>
-		
-		<div class="h_list">
-			<ul>
-				<li><a href="" class="on">전체</a></li>
-				<li><a href="">쁘띠시술</a></li>
-				<li><a href="">피부</a></li>
-				<li><a href="">다이어트</a></li>
-				<li><a href="">리프</a></li>
-				<li><a href="">반영구화장</a></li>
-				<li><a href="">헤어라인</a></li>
-				<li><a href="">눈</a></li>
-				<li><a href="">코</a></li>
-				<li><a href="">치아/입</a></li>
-				<li><a href="">지방이식</a></li>
-				<li><a href="">가슴</a></li>
-				<li><a href="">안면윤곽</a></li>
-				<li><a href="">이마</a></li>
-				<li><a href="">양악</a></li>
-				<li><a href="">기타</a></li>
-			</ul>
-		</div>
-					
-		<div class="select">
-			<ul>
-				<li class="on"><a>최신순</a></li>
-				<li><a>인기순</a></li>
-				<li><a>후기순</a></li>
-			</ul>
-		</div>
-		
-		
-		<div class="event_warp">
-			<div class="eventbox left w50">
-				<a href="/sub/event_view.html">
-					<img src="../static/img/sub/event01.jpg" />
-					<div class="event_txtbox">
-						<p class="hospital_name">충남대학교병원 성형외과</p>
-						<p class="event_price">월 8만원</p>
-						<p class="event_period">이벤트기간 &nbsp; <span>~2017.07.31</span></p>
-						<img src="../img/sub/like.png" class="like" />
-						<p class="location"><img src="../img/sub/location.png" />대전시 중구</p>
-					</div>
-				</a>
-			</div>
-			<div class="eventbox right w50">
-				<a href="">
-					<img src="../img/sub/event02.jpg" />
-					<div class="event_txtbox">
-						<p class="hospital_name">충남대학교병원 성형외과</p>
-						<p class="event_price">월 8만원</p>
-						<p class="event_period">이벤트기간 &nbsp; <span>~2017.07.31</span></p>
-						<img src="../img/sub/like.png" class="like" />
-						<p class="location"><img src="../img/sub/location.png" />대전시 중구</p>
-					</div>
-				</a>
-			</div>
-			
-			<div class="eventbox left w50">
-				<a href="">
-					<img src="../img/sub/event01.jpg" />
-					<div class="event_txtbox">
-						<p class="hospital_name">충남대학교병원 성형외과</p>
-						<p class="event_price">월 8만원</p>
-						<p class="event_period">이벤트기간 &nbsp; <span>~2017.07.31</span></p>
-						<img src="../img/sub/like.png" class="like" />
-						<p class="location"><img src="../img/sub/location.png" />대전시 중구</p>
-					</div>
-				</a>
-			</div>
-			<div class="eventbox right w50">
-				<a href="">
-					<img src="../img/sub/event02.jpg" />
-					<div class="event_txtbox">
-						<p class="hospital_name">충남대학교병원 성형외과</p>
-						<p class="event_price">월 8만원</p>
-						<p class="event_period">이벤트기간 &nbsp; <span>~2017.07.31</span></p>
-						<img src="../img/sub/like.png" class="like" />
-						<p class="location"><img src="../img/sub/location.png" />대전시 중구</p>
-					</div>
-				</a>
-			</div>
-		
-		</div>
-		
-		
-		
-		<!-- paging -->
-		<div class="board_page">
-			<span class="paging_comm"><span class="frist">First</span>
-			<span class="prev">Previous</span>
-			<b>1</b>
-			<a href="">2</a>
-			<a href="">3</a>
-			<a href="">4</a>
-			<a href="">5</a>
-			<a href="">6</a>
-			<a href="">7</a>
-			<a href="">8</a>
-			<a href="">9</a>
-			<a class="next" href="" title="Next page">Next</a>
-			<a class="last" href="" title="Next page">Next</a>
-			</span>
-		</div>
-		
-	</div>
+    <div class="content2">
+        <h3 class="bl01">안심이벤트</h3>
+        <p class="sub_txt">로디언즈가 엄선한 추천 안심병원의 이벤트를 만나보세요</p>
+
+        <div class="h_list">
+            <!--
+            <ul>
+                <li><a role="button" class="category on" name="all" id="all">전체</a></li>
+                <li><a role="button" class="category" name="fillar" id="fillar">쁘띠시술</a></li>
+                <li><a role="button" class="category" name="skin" id="skin">피부</a></li>
+                <li><a role="button" class="category" name="diet" id="diet">다이어트</a></li>
+                <li><a role="button" class="category" name="lifting" id="lifting">리프</a></li>
+                <li><a role="button" class="category" name="tatoo" id="tatoo">반영구화장</a></li>
+                <li><a role="button" class="category" name="hairtransplant" id="hairtransplant">헤어라인</a></li>
+                <li><a role="button" class="category" name="eye" id="eye">눈</a></li>
+                <li><a role="button" class="category" name="nose" id="nose">코</a></li>
+                <li><a role="button" class="category" name="lip" id="lip">치아/입</a></li>
+                <li><a role="button" class="category" name="fatgrafting" id="fatgrafting">지방이식</a></li>
+                <li><a role="button" class="category" name="breast" id="breast">가슴</a></li>
+                <li><a role="button" class="category" name="facialcontouring" id="facialcontouring">안면윤곽</a></li>
+                <li><a role="button" class="category" name="forehead" id="forehead">이마</a></li>
+                <li><a role="button" class="category" name="jaw" id="jaw">양악</a></li>
+                <li><a role="button" class="category" name="etc" id="etc">기타</a></li>
+            </ul>
+            -->
+        </div>
+
+        <div class="select">
+
+        </div>
+
+
+        <div class="event_warp">
+            {% for event in events %}
+                <div class="eventbox w50">
+                    <a href="#">
+                        <img src="../static/img/sub/event01.jpg"/>
+                        <div class="event_txtbox">
+                            <p class="hospital_name">{{ event.hospital.name }}</p>
+                            <p class="event_price">{{ event.price_text }}</p>
+                            <p class="event_period">이벤트기간 &nbsp;
+                                <span>~{{ moment(event.start_date+datetime.timedelta(days=event.term)).format('YYYY-MM-DD') }}</span>
+                            </p>
+                            <p class="location"><img
+                                    src="../static/img/sub/location.png"/>{{ event.hospital.address[7:15] }}</p>
+                        </div>
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="container text-center">
+            <div class="pagination">
+                {{ macros.pagination_widget(pagination, 'main.event') }}
+            </div>
+        </div>
+    </div>
 </div>
 
 
 {% include '_footer.html' %}
+{% if scroll %}
+    <script type="text/javascript">
+        document.getElementById('{{ scroll }}').scrollIntoView();
+        jQuery('.category').removeClass('on');
+        var button = document.getElementById('{{ category }}');
+        button.className += " on";
+    </script>
+{% endif %}
+<script type="text/javascript">
+    $('.h_list').on('click', 'a', function () {
+        var category = $(this).attr('name');
+        var json = {'category': category};
+        var ajax = $.ajax({
+            url: "{{ url_for('main.hospital_category') }}",
+            type: "POST",
+            dataType: "json",
+            contentType: 'application/json',
+            data: JSON.stringify(json)
+        });
+        ajax.done(function (data) {
+            jQuery('.category').removeClass('on');
+            var button = document.getElementById(category);
+            button.className += " on";
+            data = data.data;
+            $('#hospital_info_warp').html(data);
+        });
+        ajax.fail(function (error) {
+            alert('실패');
+            console.log(error);
+        });
+    });
+</script>

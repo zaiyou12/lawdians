@@ -310,6 +310,7 @@ class Event(db.Model):
     hits = db.Column(db.Integer)
     registrations = db.relationship('EventRegistration', backref='event', lazy='dynamic')
     is_confirmed = db.Column(db.Boolean, default=False)
+    price_text = db.Column(db.String(16))
 
     def __repr__(self):
         return '<Events %r>' % self.head
@@ -531,6 +532,18 @@ class Point(db.Model):
 
     def __repr__(self):
         return '<Point %r>' % self.point
+
+
+class PostScript(db.Model):
+    __tablename__ = 'postscripts'
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    hospital_id = db.Column(db.Integer, db.ForeignKey('hospitals.id'))
+    body = db.Column(db.Text)
+    timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
+
+    def __repr__(self):
+        return '<PostScript %r>' % self.timestamp
 
 
 @login_manager.user_loader

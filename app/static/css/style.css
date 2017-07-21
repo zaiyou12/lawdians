@@ -301,8 +301,9 @@ div.lawyer_info div.lawyer_infobox:hover div.txt div.lawbt2 div.bt_blue02 { back
 
 
 /* 안심이벤트 */
-div.eventbox { box-shadow:0 0 10px #ccc; margin-bottom:20px; }
+div.eventbox { box-shadow:0 0 10px #ccc; margin-bottom:20px; float:right; }
 div.eventbox a { display:inline-block; }
+div.eventbox:nth-child(odd) {float:left;}
 div.eventbox div.event_txtbox { padding:20px; text-align:left; position:relative; }
 div.eventbox div.event_txtbox p.hospital_name { font-size:16px; color:#858585; padding-bottom:8px; }
 div.eventbox div.event_txtbox p.event_price { font-size:26px; color:#03a9f4; padding-bottom:4px; }
@@ -363,7 +364,7 @@ div.contact_bg { background:url('../img/sub/contact_bg.jpg') no-repeat top cente
 
 h3.bl01.white,
 p.sub_txt.white { color:#fff; }
-textarea.contact_textbox { width:100%; padding:20px; height:200px; font-family:'Nanum Gothic'; margin:30px 0; }
+.contact_textbox { width:100%; padding:20px; height:200px; font-family:'Nanum Gothic'; margin:30px 0; }
 
 div.contact_info { padding:70px 0; text-align:center; }
 div.contact_info div.cbox { margin:10px auto; border:1px solid #ccc; }

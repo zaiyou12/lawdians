@@ -93,7 +93,9 @@ def event():
     page = request.args.get('page', 1, type=int)
     pagination = Event.query.paginate(page, per_page=current_app.config['HOSPITALS_PER_PAGE'], error_out=False)
     events = pagination.items
-    return render_template('event.html', events=events, pagination=pagination)
+
+    import datetime
+    return render_template('event.html', events=events, pagination=pagination, datetime=datetime)
 
 
 @main.route('/event/post/<int:id>', methods=['GET', 'POST'])
@@ -126,7 +128,7 @@ def contact():
             return redirect(url_for('main.index'))
         else:
             flash('로그인후 이용하실수 있습니다.')
-            return redirect(url_for('main.contact'))
+            return redirect(url_for('auth.login'))
     return render_template('contact.html', form=form)
 
 

@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField, RadioField, DateField, SelectField, TextField
-from wtforms.validators import InputRequired, Length
+from wtforms import StringField, SubmitField, RadioField, DateField, SelectField, TextAreaField
+from wtforms.validators import InputRequired, Length, length
 
 from ..models import Category
 
@@ -11,7 +11,7 @@ class EventForm(FlaskForm):
 
 
 class CounselForm(FlaskForm):
-    body = StringField('문의사항', validators=[InputRequired()])
+    body = TextAreaField('문의사항', validators=[InputRequired()])
     submit = SubmitField('신청하기')
 
 
@@ -26,7 +26,7 @@ class ProfileForm(FlaskForm):
 
 class AuctionForm(FlaskForm):
     category = SelectField('분류', coerce=int)
-    body = StringField('세부내용', validators=[InputRequired('데이터를 입력해주세요.')])
+    body = TextAreaField('세부내용', validators=[InputRequired('데이터를 입력해주세요.'), length(max=10)])
     submit = SubmitField('신청하기')
 
     def __init__(self, *args, **kwargs):
