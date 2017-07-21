@@ -20,7 +20,11 @@
                                 {{ form.hidden_tag() }}
                                 <div class="form-group email {% if form.email.errors %} has-error {% endif %}">
                                     <label class="sr-only" for="signup-email">이메일</label>
-                                    {{ form.email(id="signup-email", class="form-control login-email", type="email", disabled="disabled") }}
+                                    {% if is_facebook %}
+                                        {{ form.email(id="signup-email", class="form-control login-email", type="email") }}
+                                    {% else %}
+                                        {{ form.email(id="signup-email", class="form-control login-email", type="email", disabled="disabled") }}
+                                    {% endif %}
                                 </div><!--//form-group-->
                                 <div class="form-group username {% if form.username.errors %} has-error {% endif %}">
                                     <label class="sr-only" for="signup-username">이름</label>

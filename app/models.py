@@ -74,6 +74,7 @@ class User(UserMixin, db.Model):
     counsels = db.relationship('Counsel', backref='user', lazy='dynamic')
     auction_id = db.relationship('Auction', backref='user', lazy='dynamic')
     points = db.relationship('Point', backref='user', lazy='dynamic')
+    recommend_user_id = db.Column(db.Integer)
 
     @property
     def password(self):

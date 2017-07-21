@@ -84,6 +84,7 @@ def register():
 @login_required
 def register_detail():
     form = RegistrationDetailForm()
+    is_facebook = request.args.get('is_facebook', default=False)
     if form.validate_on_submit():
         if form.phone_submit.data:
             session['phone_number'] = form.phone_number.data
@@ -122,8 +123,6 @@ def register_detail():
         return redirect(url_for('auth.register_detail'))
     # Fill form data
     form.email.data = current_user.email
-    if current_user.social_id is not None:
-        form.email.data = 'social login'
     form.username.data = session.get('username')
     if session.get('birth_date'):
         form.birth_date.data = datetime.strptime(session.get('birth_date'), '%Y%m%d')
@@ -136,7 +135,7 @@ def register_detail():
         form.phone_submit.render_kw = {'disabled': 'disabled'}
         form.confirm.render_kw = {'disabled': 'disabled'}
         form.confirm_submit.render_kw = {'disabled': 'disabled'}
-    return render_template('auth/register_detail.html', form=form)
+    return render_template('auth/register_detail.html', form=form, is_facebook=is_facebook)
 
 
 @auth.route('/confirm/<token>')
@@ -310,7 +309,7 @@ def facebook_login():
             db.session.add(user)
             db.session.commit()
             login_user(user, True)
-            return redirect(url_for('auth.register_detail'))
+            return redirect(url_for('auth.register_detail', is_facebook=True))
     callback = url_for(
         'auth.facebook_authorized',
         next=request.args.get('next') or request.referrer or None,

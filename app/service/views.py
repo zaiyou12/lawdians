@@ -80,7 +80,9 @@ def hospital():
         selected_hospital = Hospital.query.get_or_404(hospital_num)
 
     page = request.args.get('page', 1, type=int)
-    pagination = Hospital.query.order_by(Hospital.name).paginate(page, per_page=current_app.config['HOSPITALS_PER_PAGE'], error_out=False)
+    pagination = Hospital.query.order_by(Hospital.name).paginate(page,
+                                                                 per_page=current_app.config['HOSPITALS_PER_PAGE'],
+                                                                 error_out=False)
     hospitals = pagination.items
 
     return render_template('service/register_hospital02.html', hospitals=hospitals, pagination=pagination,
@@ -125,8 +127,8 @@ def charge():
     session['lawyer_num'] = lawyer_num
     selected_hospital = Hospital.query.get_or_404(hospital_num)
     selected_lawyer = Lawyer.query.get_or_404(lawyer_num)
-    return render_template('service/register_hospital04.html', selected_hospital=selected_hospital, selected_lawyer=selected_lawyer,
-                           form=form)
+    return render_template('service/register_hospital04.html', selected_hospital=selected_hospital,
+                           selected_lawyer=selected_lawyer, form=form)
 
 
 @service.route('/counsel/<int:lawyer_id>', methods=['GET', 'POST'])

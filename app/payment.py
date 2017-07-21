@@ -4,7 +4,7 @@ from flask import flash
 from iamport import Iamport
 
 from app import db
-from .models import Point
+from .models import Point, User, RecommendBonus
 from config import Payment
 
 
@@ -29,6 +29,13 @@ def is_payment_completed(current_user, imp_uid, product_price, body):
     iamport = Payment.iamport
 
     point = Point(user_id=current_user.id, point=product_price, body=body)
+    if current_user.recommend_user_id:
+        recommend_user = User.query.get_or_404(current_user.recommend_user_id)
+        if recommend_user:
+            bonus = product_price * RecommendBonus.query.first().bonus / 100
+            bonus_point = Point(user_id=current_user.recommend_user_id, point=bonus, body='추천인 보너스')
+            db.session.add(bonus_point)
+            db.session.commit()
     db.session.add(point)
     db.session.commit()
 

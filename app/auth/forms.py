@@ -25,7 +25,7 @@ class RegistrationForm(FlaskForm):
 
 
 class RegistrationDetailForm(FlaskForm):
-    email = StringField()
+    email = StringField(validators=[(DataRequired('이메일을 입력해주세요.'))])
     username = StringField(validators=[InputRequired("사용자 이름을 입력해주세요."), Length(1, 32)])
     birth_date = DateField(validators=[InputRequired(message='생년월일을 입력해주시기 바랍니다.')], format='%Y%m%d')
     gender = RadioField('성별', choices=[('men', '남자'), ('women', '여자')], default='men',
