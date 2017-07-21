@@ -1,8 +1,8 @@
 """init
 
-Revision ID: de731d3fc7f5
+Revision ID: d18f4807469c
 Revises: 
-Create Date: 2017-07-21 09:22:58.241928
+Create Date: 2017-07-21 17:28:29.300803
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'de731d3fc7f5'
+revision = 'd18f4807469c'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -27,7 +27,7 @@ def upgrade():
     )
     op.create_table('categories',
     sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('name', sa.String(length=8), nullable=True),
+    sa.Column('name', sa.String(length=16), nullable=True),
     sa.Column('name_kor', sa.String(length=16), nullable=True),
     sa.PrimaryKeyConstraint('id'),
     sa.UniqueConstraint('name')
@@ -104,6 +104,7 @@ def upgrade():
     sa.Column('term', sa.Integer(), nullable=True),
     sa.Column('hits', sa.Integer(), nullable=True),
     sa.Column('is_confirmed', sa.Boolean(), nullable=True),
+    sa.Column('price_text', sa.String(length=16), nullable=True),
     sa.ForeignKeyConstraint(['hospital_id'], ['hospitals.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
@@ -141,6 +142,7 @@ def upgrade():
     sa.Column('phone_number', sa.String(length=16), nullable=True),
     sa.Column('hospital_id', sa.Integer(), nullable=True),
     sa.Column('lawyer_id', sa.Integer(), nullable=True),
+    sa.Column('recommend_user_id', sa.Integer(), nullable=True),
     sa.ForeignKeyConstraint(['hospital_id'], ['hospitals.id'], ),
     sa.ForeignKeyConstraint(['lawyer_id'], ['lawyers.id'], ),
     sa.ForeignKeyConstraint(['role_id'], ['roles.id'], ),
@@ -193,6 +195,17 @@ def upgrade():
     sa.PrimaryKeyConstraint('id')
     )
     op.create_index(op.f('ix_points_timestamp'), 'points', ['timestamp'], unique=False)
+    op.create_table('postscripts',
+    sa.Column('id', sa.Integer(), nullable=False),
+    sa.Column('user_id', sa.Integer(), nullable=True),
+    sa.Column('hospital_id', sa.Integer(), nullable=True),
+    sa.Column('body', sa.Text(), nullable=True),
+    sa.Column('timestamp', sa.DateTime(), nullable=True),
+    sa.ForeignKeyConstraint(['hospital_id'], ['hospitals.id'], ),
+    sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
+    sa.PrimaryKeyConstraint('id')
+    )
+    op.create_index(op.f('ix_postscripts_timestamp'), 'postscripts', ['timestamp'], unique=False)
     op.create_table('services',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('user_id', sa.Integer(), nullable=True),
@@ -228,6 +241,8 @@ def downgrade():
     op.drop_table('offers')
     op.drop_index(op.f('ix_services_timestamp'), table_name='services')
     op.drop_table('services')
+    op.drop_index(op.f('ix_postscripts_timestamp'), table_name='postscripts')
+    op.drop_table('postscripts')
     op.drop_index(op.f('ix_points_timestamp'), table_name='points')
     op.drop_table('points')
     op.drop_index(op.f('ix_event_registrations_timestamp'), table_name='event_registrations')
