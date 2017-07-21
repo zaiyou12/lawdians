@@ -2,7 +2,7 @@ from random import randint
 from copy import deepcopy
 
 import requests
-from flask import render_template, flash
+from flask import render_template
 
 from config import AuthSms
 

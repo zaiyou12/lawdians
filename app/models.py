@@ -383,7 +383,7 @@ class Counsel(db.Model):
 class Category(db.Model):
     __tablename__ = 'categories'
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(8), unique=True)
+    name = db.Column(db.String(16), unique=True)
     name_kor = db.Column(db.String(16))
     auctions = db.relationship('Auction', backref='category', lazy='dynamic')
 

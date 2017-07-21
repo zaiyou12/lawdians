@@ -1,5 +1,3 @@
-from datetime import datetime
-
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, BooleanField, SubmitField, DateField, RadioField
 from wtforms.validators import Length, Email, EqualTo, InputRequired, Optional, DataRequired

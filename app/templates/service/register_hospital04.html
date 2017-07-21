@@ -1,0 +1,122 @@
+{% include '_header.html' %}
+{% include '_navi.html' %}
+
+<div class="login_bg">
+
+    <div class="login_box">
+        <h3>안심성형 신청하기</h3>
+        <p>올바른 정보를 입력해주셔야 지켜드릴수 있습니다.</p>
+        <div class="login_full">
+            <div class="regi_htap">
+                <ul>
+                    <li><a>1.개인정보 확인</a></li>
+                    <li><a>2.안심병원 선택</a></li>
+                    <li><a>3.안심변호사 선택</a></li>
+                    <li class="on"><a>4.결제 및 신청</a></li>
+                </ul>
+            </div>
+
+            <div class="register_box">
+                <p class="register_tit">선택한 병원</p>
+                <p class="register_txt"><span>충남대학교병원 성형외과</span>대전시 중구 문화로 282 (대사동)</p>
+            </div>
+
+            <div class="register_box">
+                <p class="register_tit">선택한 변호사</p>
+                <p class="register_txt"><span>차재승</span>서울 관악구 신림동 59길 / 02-872-1307</p>
+            </div>
+
+            <div class="form-group ">
+                <input class="form-control" id="signupbirth" name="" placeholder="카드번호(dddd-dddd-dddd-dddd)" type="text"
+                       value="">
+            </div>
+
+            <div class="form-group ">
+                <input class="form-control" id="-birth" name="" placeholder="카드 유호기간(YY-MM)" type="text" value="">
+            </div>
+
+            <div class="form-group birth ">
+                <input class="form-control" id="signup-birth" name="birth_date"
+                       placeholder="생년월일6자리(법인카드의 경우 사업자등록번호 10자리)" type="text" value="">
+            </div>
+
+            <div class="form-group ">
+                <input class="form-control" id="signup-" name="" placeholder="비밀번호 앞 2자리" type="text" value="">
+            </div>
+
+
+            <div class="register_hbt_next">결제</div>
+        </div>
+    </div>
+</div>
+{% include '_footer.html' %}
+<script type="text/javascript" src="https://service.iamport.kr/js/iamport.payment-1.1.2.js"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/payment_point.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/iamport.js') }}"></script>
+<script type="text/javascript">
+    function check_payment() {
+        var select_value = $('#pointSelector').val();
+
+        // use the value here
+        IMP.request_pay({
+            pg: 'html5_inicis',
+            pay_method: 'card',
+            merchant_uid: 'merchant_' + new Date().getTime(),
+            name: '주문명:결제테스트',
+            amount: select_value,
+            buyer_tel: '010-1234-5678'
+        }, function (rsp) {
+            if (rsp.success) {
+                //[1] 서버단에서 결제정보 조회를 위해 jQuery ajax로 imp_uid 전달하기
+                var json = {
+                    imp_uid: rsp.imp_uid,
+                    amount: select_value,
+                    body: '포인트 충전'
+                };
+                var ajax = $.ajax({
+                    url: "{{ url_for('service.payment_complete') }}",
+                    type: "POST",
+                    dataType: "html",
+                    contentType: 'application/json',
+                    data: JSON.stringify(json)
+                });
+                ajax.done(function (data) {
+                    $("html").empty();
+                    $("html").append(data);
+                });
+                ajax.fail(function (error) {
+                    alert('결제 실패: ' + error);
+                });
+            } else {
+                var msg = '결제에 실패하였습니다.\n';
+                msg += '에러내용 : ' + rsp.error_msg;
+
+                alert(msg);
+            }
+        });
+    }
+
+    function check_payment_test() {
+        var select_value = $('#pointSelector').val();
+        var json = {
+            imp_uid: '1111',
+            amount: select_value,
+            body: '포인트 충전'
+        };
+        var ajax = $.ajax({
+            url: "{{ url_for('service.payment_complete') }}",
+            type: "POST",
+            dataType: "html",
+            contentType: 'application/json',
+            data: JSON.stringify(json)
+        });
+        ajax.done(function (data) {
+            $("html").empty();
+            $("html").append(data);
+        });
+        ajax.fail(function (error) {
+            error = error.data;
+            alert('결제 실패: ' + error);
+        });
+    }
+</script>

@@ -1,11 +1,13 @@
 <div class="nav_warp">
     <div class="content">
+        {% if current_user.is_authenticated == False %}
         <div class="nav_top">
             <ul>
                 <li><a href="{{ url_for('auth.login') }}">로그인</a></li>
                 <li><a href="{{ url_for('auth.register') }}">회원가입</a></li>
             </ul>
         </div>
+        {% endif %}
         <div class="navi">
             <h1 class="logo"><a href="{{ url_for('main.index') }}"><img src="../static/img/main/logo.png"/></a></h1>
             <ul class="nav">

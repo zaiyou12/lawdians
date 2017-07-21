@@ -432,17 +432,18 @@ input[type=radio] { width:14px !important; padding:0 !important; margin:0 !impor
 input.phone,
 input.confirm { width:80% !important; float:left; }
 input.phone_bt,
-input.confirm_bt { width:18% !important; margin-left:2%; float:right; background:#03a9f4; color:#fff; }
+.confirm_bt { width:18% !important; margin-left:2%; float:right; background:#03a9f4; color:#fff; }
 ul.regi_htap { border:#03a9f4 !important; color: #fff; }
 
 
 
 /* 안심병원신청 */
-div.register_hbt_next { background:#03a9f4; color:#fff; display:inline-block; padding:10px 20px; margin-top:30px; }
+.register_hbt_next { background:#03a9f4; color:#fff; display:inline-block; padding:10px 20px; margin-top:30px; }
 div.regi_htap ul { overflow:hidden; width:100%; margin-bottom:20px; border-left:1px solid #ddd; }
 div.regi_htap ul li { width:25%; float:left; border-top:3px solid #ddd; }
 div.regi_htap ul li.on { width:25%; float:left; border-top:3px solid #03a9f4; }
 div.regi_htap ul li a { display:block; padding:14px 0; text-align:center; border-right:1px solid #ddd; }
+.hcategory02_txt { width: 100% ;}
 
 
 

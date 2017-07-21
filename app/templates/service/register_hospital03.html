@@ -1,0 +1,50 @@
+{% include '_header.html' %}
+{% include '_navi.html' %}
+
+<div class="login_bg">
+
+    <div class="login_box">
+        <h3>안심성형 신청하기</h3>
+        <p>올바른 정보를 입력해주셔야 지켜드릴수 있습니다.</p>
+        <div class="login_full">
+            <div class="regi_htap">
+                <ul>
+                    <li><a>1.개인정보 확인</a></li>
+                    <li><a>2.안심병원 선택</a></li>
+                    <li class="on"><a>3.안심변호사 선택</a></li>
+                    <li><a>4.결제 및 신청</a></li>
+                </ul>
+            </div>
+            {% if selected_lawyer %}
+                <div class="text-center">
+                    <h3>기존에 선택한 변호사</h3>
+                    <p>{{ selected_lawyer.name }}</p>
+                    <p>{{ selected_lawyer.address }}</p>
+                    <a href="{{ url_for('service.charge', lawyer=selected_lawyer.id) }}">
+                        <button class="btn btn-info">다음</button>
+                    </a>
+                    <br/><br/>
+                </div>
+            {% endif %}
+
+            <ul class="lawyer_intro">
+                <li><a href="{{ url_for('service.charge', lawyer=1) }}">
+                    <img src="../../static/img/sub/lowyer01.jpg" alt="차재승 변호사"/>
+                    <p class="lawyer_name">차재승 변호사</p>
+                </a></li>
+                <li><a href="{{ url_for('service.charge', lawyer=1) }}">
+                    <img src="../../static/img/sub/lowyer02.jpg" alt="최운영 변호사"/>
+                    <p class="lawyer_name">최운영 변호사</p>
+                </a></li>
+                <li><a href="{{ url_for('service.charge', lawyer=1) }}">
+                    <img src="../../static/img/sub/lowyer03.jpg" alt="김평호 변호사"/>
+                    <p class="lawyer_name">김평호 변호사</p>
+                </a></li>
+            </ul>
+        </div>
+
+    </div>
+
+
+</div>
+{% include '_footer.html' %}

@@ -14,25 +14,21 @@ from . import service
 @service.route('/register', methods=['GET', 'POST'])
 @login_required
 def register():
-    # Save Data
-    hospital_num = int(request.args.get('hospital', default=-1))
-    lawyer_num = int(request.args.get('lawyer', default=-1))
-    session['hospital_num'] = hospital_num
-    session['lawyer_num'] = lawyer_num
-
     form = RegisterSurgeryForm()
-    if form.validate_on_submit():
+    if request.method == 'POST':
         if form.phone_submit.data:
             session['phone_number'] = form.phone_number.data
             session['rand_num'] = get_rand_num()
             flash('휴대전화로 인증번호가 전송되었으니 휴대전화 확인을 통해 인증을 완료해주시기 바랍니다.')
             send_sms('auth/sms/confirm', form.phone_number.data, rand_num=session['rand_num'])
         elif form.confirm_submit.data:
+            flash('인증번호 인증')
             if form.confirm.data == session['rand_num']:
                 flash('감사합니다. 인증이 완료되었습니다.')
                 session['checked'] = True
             else:
                 flash('인증번호를 다시 확인하여 주시기 바랍니다.')
+            return redirect(url_for('service.register'))
         elif form.submit.data:
             if session.get('checked'):
                 current_user.username = form.username.data
@@ -42,7 +38,7 @@ def register():
                 current_user.address = form.address.data
                 db.session.add(current_user)
                 db.session.commit()
-                return redirect(url_for('service/hospital'))
+                return redirect(url_for('service.hospital'))
             else:
                 flash('휴대전화 인증을 해주시기 바랍니다.')
         # Store data in session
@@ -51,23 +47,28 @@ def register():
         session['gender'] = form.gender.data
         session['address'] = form.address.data
         return redirect(url_for('service.register'))
+
+    # Save Data
+    hospital_num = int(request.args.get('hospital', default=-1))
+    lawyer_num = int(request.args.get('lawyer', default=-1))
+    session['hospital_num'] = hospital_num
+    session['lawyer_num'] = lawyer_num
     # Fill form data
     form.email.data = current_user.email
-    form.username.data = current_user.username
-    form.birth_date.data = current_user.birth_date
-    form.gender.data = current_user.gender
-    form.address.data = current_user.address
+    form.username.data = current_user.username or session.get('username')
+    form.birth_date.data = current_user.birth_date or datetime.strptime(session.get('birth_date'), '%Y%m%d')
+    form.gender.data = current_user.gender or session.get('gender')
+    form.address.data = current_user.address or session.get('address')
     form.phone_number.data = session.get('phone_number')
-    # TODO: Delete adding confirm number dynamically
     form.confirm.data = session.get('rand_num')
-    if current_user.phone_number or session.get('checked'):
+    if session.get('checked'):
         if current_user.phone_number:
             form.phone_number.data = current_user.phone_number
         form.phone_number.render_kw = {'readonly': 'readonly'}
         form.phone_submit.render_kw = {'disabled': 'disabled'}
         form.confirm.render_kw = {'disabled': 'disabled'}
         form.confirm_submit.render_kw = {'disabled': 'disabled'}
-    return render_template('service/register.html', form=form)
+    return render_template('service/register_hospital01.html', form=form)
 
 
 @service.route('/hospital', methods=['GET', 'POST'])
@@ -79,10 +80,10 @@ def hospital():
         selected_hospital = Hospital.query.get_or_404(hospital_num)
 
     page = request.args.get('page', 1, type=int)
-    pagination = Hospital.query.paginate(page, per_page=current_app.config['HOSPITALS_PER_PAGE'], error_out=False)
+    pagination = Hospital.query.order_by(Hospital.name).paginate(page, per_page=current_app.config['HOSPITALS_PER_PAGE'], error_out=False)
     hospitals = pagination.items
 
-    return render_template('service/hospital.html', hospitals=hospitals, pagination=pagination,
+    return render_template('service/register_hospital02.html', hospitals=hospitals, pagination=pagination,
                            selected_hospital=selected_hospital)
 
 
@@ -98,7 +99,7 @@ def lawyer():
         selected_lawyer = Lawyer.query.get_or_404(lawyer_num)
 
     lawyers = Lawyer.query.all()
-    return render_template('service/lawyer.html', lawyers=lawyers, selected_lawyer=selected_lawyer)
+    return render_template('service/register_hospital03.html', lawyers=lawyers, selected_lawyer=selected_lawyer)
 
 
 @service.route('/payment', methods=['GET', 'POST'])
@@ -124,7 +125,7 @@ def charge():
     session['lawyer_num'] = lawyer_num
     selected_hospital = Hospital.query.get_or_404(hospital_num)
     selected_lawyer = Lawyer.query.get_or_404(lawyer_num)
-    return render_template('service/charge.html', selected_hospital=selected_hospital, selected_lawyer=selected_lawyer,
+    return render_template('service/register_hospital04.html', selected_hospital=selected_hospital, selected_lawyer=selected_lawyer,
                            form=form)
 
 
