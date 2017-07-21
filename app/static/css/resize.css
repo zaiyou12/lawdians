@@ -42,7 +42,7 @@ div.banner ul li.bn06:hover,
 div.banner ul li.bn07:hover,
 div.banner ul li.bn08:hover,
 div.banner ul li.bn09:hover { background-size:contain; }
-	
+
 div.lawyer div.lawyer_main { width:100%; overflow:hidden; }
 div.lawyer div.lawyer_main div.lawyer_mainimg img { float:left; }
 
@@ -51,14 +51,14 @@ ul.hospital li dl { height:136px; }
 
 
 div.lawyer_info div.lawyer_infobox div.txt { width:44%; padding:20px; }
-div.lawyer_info div.lawyer_infobox div.txt p.ltxt_info { font-size:14px; line-height:29px; border-bottom:0; padding:12px 0 0; margin:12px 0 24px; }	
-div.lawyer_info div.lawyer_infobox div.txt p.ltxt_tit { font-size:24px; padding-bottom:4px; }	
+div.lawyer_info div.lawyer_infobox div.txt p.ltxt_info { font-size:14px; line-height:29px; border-bottom:0; padding:12px 0 0; margin:12px 0 24px; }
+div.lawyer_info div.lawyer_infobox div.txt p.ltxt_tit { font-size:24px; padding-bottom:4px; }
 
 div.lawyer_info div.lawyer_infobox div.txt div.lawbt2 div.bt_blue01,
 div.lawyer_info div.lawyer_infobox div.txt div.lawbt2 div.bt_blue02,
 div.hbt_warp div.bt_blue03,
 div.hbt_warp div.bt_blue04 { font-size:14px; }
-	
+
 
 div.hospital_info_warp div.hospital_info > img { width:40%; }
 div.hospital_info_warp div.hospital_info div.htxt_area { width:54%; padding:20px 10px; height:112px; }
@@ -86,7 +86,7 @@ div.reviewbox_warp div.rbox div.txtbox p.txt { line-height:23px; text-overflow:e
 
 
 
-	
+
 }
 
 
@@ -99,9 +99,9 @@ div.nav_warp div.navi ul.nav li { padding-left:30px; }
 div.nav_warp div.navi ul.nav li a { font-size:17px; }
 
 div.banner ul li { width:25%; }
-div.banner ul li.bn05, 
-div.banner ul li.bn06, 
-div.banner ul li.bn07, 
+div.banner ul li.bn05,
+div.banner ul li.bn06,
+div.banner ul li.bn07,
 div.banner ul li.bn08 { display:none; }
 div.bn_arrow { display:none; }
 
@@ -167,7 +167,7 @@ div.view_box div.event_txtbox p.event_tit { padding:50px 0 0; }
 
 
 @media (max-width:800px) {
-	
+
 div.nav_warp div.navi ul.nav { padding-top:12px; }
 div.nav_warp div.navi ul.nav li { padding-left:22px; }
 div.nav_warp div.navi ul.nav li a { font-size:15px; }
@@ -285,10 +285,10 @@ div.content3 { width:90%; pdding:0 4%; }
 
 div.main_img ul.mainimg { height: 300px; }
 div.mainimg_txt p.main_subtit { font-size:19px; }
-div.mainimg_txt p.main_stit { font-size:36px; }	
+div.mainimg_txt p.main_stit { font-size:36px; }
 div.mainimg_txt p.txt { font-size:14px; line-height:22px; }
 div.miainimg_bt { font-size:16px; padding:10px 30px; font-weight:400; margin-top:30px; }
-	
+
 ul.hospital { margin:30px auto 0; width:90%; }
 ul.hospital li { padding:0; height:382px; }
 ul.hospital li dl { height:72px; }
@@ -350,7 +350,7 @@ div.login_bg div.login_box p.login_infotxt2 { padding:20px 0 0; }
 
 input.phone,
 input.confirm { width:70% !important }
-input.phone_bt, 
+input.phone_bt,
 input.confirm_bt{ width:28% !important }
 
 
@@ -363,10 +363,10 @@ input.confirm_bt{ width:28% !important }
 
 @media (max-width:600px) {
 
-table.mypage_t tbody th, 
-table.mypage_t tbody td, 
-table.mypage_tbasic tbody td, 
-table.mypage_tbasic thead th, 
+table.mypage_t tbody th,
+table.mypage_t tbody td,
+table.mypage_tbasic tbody td,
+table.mypage_tbasic thead th,
 table.mypage_tbasic tbody td { font-size:13px; }
 
 div.regi_htap ul li.on,
@@ -386,7 +386,7 @@ div.login_full ul.lawyer_intro li { width:auto; margin-bottom:5px; }
 
 div.lawyer_bg ul.lawyer_intro li p.lawyer_name { font-size:15px; }
 div.lawyer_bg ul.lawyer_intro li { border:2px solid #ccc; }
-div.lawyer_bg ul.lawyer_intro li:hover { border:2px solid #29b6f6; } 
+div.lawyer_bg ul.lawyer_intro li:hover { border:2px solid #29b6f6; }
 
 div.login_full div.hospital_info_warp div.hospital_info { width:99%; }
 div.login_full div.hospital_info_warp div.hospital_info.right,
@@ -478,7 +478,7 @@ div.mypage_tab ul li {
 
 input.phone,
 input.confirm,
-input.phone_bt, 
+input.phone_bt,
 input.confirm_bt{ width:100% !important }
 
 
@@ -535,7 +535,7 @@ div.h_list ul li { width: 50%; }
 
 
 @media (max-width:360px) {
-	
+
 div.section01_1 dl dt span { font-size:15px; }
 div.section01_1 dl { padding: 10px; width:42%; }
 

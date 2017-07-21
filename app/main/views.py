@@ -28,6 +28,7 @@ def index():
 def hospital():
     form = AuctionForm()
     if form.validate_on_submit():
+        flash("submit")
         if current_user.is_authenticated:
             auction = Auction(category_id=form.category.data, body=form.body.data,
                               user_id=current_user.id)
@@ -37,17 +38,23 @@ def hospital():
         else:
             flash('로그인이 필요한 서비스입니다.')
             return redirect(url_for('auth.login'))
+    # hospital ads
+    ads = HospitalAd.query.filter_by(is_confirmed=True).order_by(desc(HospitalAd.start_date)).limit(4)
+
     category = session.get('category')
     page = request.args.get('page', 1, type=int)
     query = Hospital.query
-    if category:
+    if category != 'all':
         query = query.filter(Hospital.categories.any(name=category))
     pagination = query.paginate(page, per_page=current_app.config['HOSPITALS_PER_PAGE'], error_out=False)
     hospitals = pagination.items
 
     hospitals_ad = HospitalAd.query.limit(3)
+    if page > 1:
+        return render_template('hospital.html', hospitals=hospitals, pagination=pagination, hospitals_ad=hospitals_ad,
+                               form=form, ads=ads, scroll='hospital_category', category=category)
     return render_template('hospital.html', hospitals=hospitals, pagination=pagination, hospitals_ad=hospitals_ad,
-                           form=form)
+                           form=form, ads=ads)
 
 
 @main.route('/lawyer-info', methods=['POST'])
@@ -62,15 +69,18 @@ def lawyer_info():
 def hospital_category():
     dict_category = request.get_json()
     category = dict_category['category']
+    page = request.args.get('page', 1, type=int)
 
+    query = Hospital.query
     session['category'] = category
-
-    page = request. args.get('page', 1, type=int)
-    pagination = Hospital.query.filter(Hospital.categories.any(name=category)).paginate(page, per_page=current_app.config['HOSPITALS_PER_PAGE'], error_out=False)
+    if category != 'all':
+        query = query.filter(Hospital.categories.any(name=category))
+    pagination = query.paginate(page, per_page=current_app.config['HOSPITALS_PER_PAGE'], error_out=False)
     hospitals = pagination.items
 
     hospitals_ad = HospitalAd.query.limit(3)
-    return jsonify({'data': render_template('hospital_list.html', hospitals=hospitals, pagination=pagination, hospitals_ad=hospitals_ad)})
+    return jsonify({'data': render_template('hospital_list.html', hospitals=hospitals, pagination=pagination,
+                                            hospitals_ad=hospitals_ad, code=302)})
 
 
 @main.route('/lawyer')

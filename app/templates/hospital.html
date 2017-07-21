@@ -1,5 +1,6 @@
 {% include '_header.html' %}
 {% include '_navi.html' %}
+{% import "_macros.html" as macros %}
 
 <div class="sub_visual">
     <p class="svisual_tit">로디언즈 <b>안심병원</b></p>
@@ -14,152 +15,86 @@
 
         <div class="hospital_warp">
             <ul class="hospital">
-                <li>
-                    <img src="../static/img/main/hospital01.jpg"/>
-                    <dl>
-                        <dd class="htit">충남대학교병원 성형외과</dd>
-                        <dt class="hinfo">대전시 중구 문화로 282 (대사동)</dt>
-                    </dl>
-                    <div class="bt_blue01"><a href="">더 알아보기</a></div>
-                </li>
-                <li>
-                    <img src="../static/img/main/hospital02.jpg"/>
-                    <dl>
-                        <dd class="htit">성균관대학교 삼성창원병원</dd>
-                        <dt class="hinfo">경남 창원시 마산회원구 팔용로 158 (합성동)</dt>
-                    </dl>
-                    <div class="bt_blue01"><a href="">더 알아보기</a></div>
-                </li>
-                <li>
-                    <img src="../static/img/main/hospital03.jpg"/>
-                    <dl>
-                        <dd class="htit">단국대학교병원 성형외과</dd>
-                        <dt class="hinfo">충남 천안시 동남구 망향로 201 (안서동)</dt>
-                    </dl>
-                    <div class="bt_blue01"><a href="">더 알아보기</a></div>
-                </li>
-                <li>
-                    <img src="../static/img/main/hospital04.jpg"/>
-                    <dl>
-                        <dd class="htit">마린 성형외과</dd>
-                        <dt class="hinfo">부산시 해운대구 구남로29번길 32, 3층 (중동)</dt>
-                    </dl>
-                    <div class="bt_blue01"><a href="">더 알아보기</a></div>
-                </li>
+                {% for ad in ads %}
+                    <li>
+                        <img src="../static/img/main/hospital01.jpg"/>
+                        <dl>
+                            <dd class="htit">{{ ad.hospital.name }}</dd>
+                            <dt class="hinfo">{{ ad.hospital.address }}</dt>
+                        </dl>
+                        <div class="bt_blue01"><a href="{{ url_for('service.register', hospital=ad.hospital.id) }}">안심성형
+                            신청하기</a></div>
+                    </li>
+                {% endfor %}
             </ul>
         </div>
     </div>
 </div>
 
 
-<div class="hospital_category">
+<div class="hospital_category" id="hospital_category">
     <div class="content">
         <h3 class="bl01">카테고리별 보기</h3>
         <p class="sub_txt">원하는 성형부위를 카테고리로 간편하게 찾아보세요</p>
 
         <div class="h_list">
             <ul>
-                <li><a href="" class="on">전체</a></li>
-                <li><a role="button" class="category" name="fillar">쁘띠시술</a></li>
-                <li><a role="button" class="category" name="skin">피부</a></li>
-                <li><a role="button" class="category" name="diet">다이어트</a></li>
-                <li><a role="button" class="category" name="lifting">리프</a></li>
-                <li><a role="button" class="category" name="tatoo">반영구화장</a></li>
-                <li><a role="button" class="category" name="hairtransplant">헤어라인</a></li>
-                <li><a role="button" class="category" name="eye">눈</a></li>
-                <li><a role="button" class="category" name="nose">코</a></li>
-                <li><a role="button" class="category" name="lip">치아/입</a></li>
-                <li><a role="button" class="category" name="fatgrafting">지방이식</a></li>
-                <li><a role="button" class="category" name="breast">가슴</a></li>
-                <li><a role="button" class="category" name="facialcontouring">안면윤곽</a></li>
-                <li><a role="button" class="category" name="forehead">이마</a></li>
-                <li><a role="button" class="category" name="jaw">양악</a></li>
-                <li><a role="button" class="category" name="etc">기타</a></li>
+                <li><a role="button" class="category on" name="all" id="all">전체</a></li>
+                <li><a role="button" class="category" name="fillar" id="fillar">쁘띠시술</a></li>
+                <li><a role="button" class="category" name="skin" id="skin">피부</a></li>
+                <li><a role="button" class="category" name="diet" id="diet">다이어트</a></li>
+                <li><a role="button" class="category" name="lifting" id="lifting">리프</a></li>
+                <li><a role="button" class="category" name="tatoo" id="tatoo">반영구화장</a></li>
+                <li><a role="button" class="category" name="hairtransplant" id="hairtransplant">헤어라인</a></li>
+                <li><a role="button" class="category" name="eye" id="eye">눈</a></li>
+                <li><a role="button" class="category" name="nose" id="nose">코</a></li>
+                <li><a role="button" class="category" name="lip" id="lip">치아/입</a></li>
+                <li><a role="button" class="category" name="fatgrafting" id="fatgrafting">지방이식</a></li>
+                <li><a role="button" class="category" name="breast" id="breast">가슴</a></li>
+                <li><a role="button" class="category" name="facialcontouring" id="facialcontouring">안면윤곽</a></li>
+                <li><a role="button" class="category" name="forehead" id="forehead">이마</a></li>
+                <li><a role="button" class="category" name="jaw" id="jaw">양악</a></li>
+                <li><a role="button" class="category" name="etc" id="etc">기타</a></li>
             </ul>
         </div>
 
         <div class="select">
-            <ul>
-                <li class="on"><a>최신순</a></li>
-                <li><a>인기순</a></li>
-                <li><a>후기순</a></li>
-            </ul>
-        </div>
 
-        <div class="hospital_info_warp">
-            {% for hospital in hospitals %}
-                <div class="hospital_info w50">
-                    <div class="medal">
-                        <img src="../static/img/sub/medal02.png"/>
-                        <img src="../static/img/sub/medal01.png"/>
-                    </div>
-                    <img src="../static/img/main/hospital01.jpg"/>
-                    <div class="htxt_area">
-                        <p class="hintro">{{ hospital.intro }}</p>
-                        <p class="htit">{{ hospital.name }}</p>
-                        <p class="hinfo">{{ hospital.address }}</p>
-                        <p class="p_no">조회수 <span>{{ hospital.hits }}</span> &nbsp; 이벤트
-                            <span>{{ hospital.events.count() }}</span> &nbsp; 후기 <span>0</span></p>
-                        <div class="hbt_warp">
-                            <div class="bt_blue03">상세보기</div>
-                            <div class="bt_blue04">안심성형신청</div>
+        </div>
+        <div id="hospital_info_warp">
+            <div class="hospital_info_warp">
+                {% for hospital in hospitals %}
+                    <div class="hospital_info w50">
+                        <div class="medal">
+                            {% if hospital.has_medal_1 %}
+                                <img src="../static/img/sub/medal02.png"/>
+                            {% endif %}
+                            {% if hospital.has_medal_2 %}
+                                <img src="../static/img/sub/medal01.png"/>
+                            {% endif %}
+                        </div>
+                        <img src="../static/img/main/hospital01.jpg"/>
+                        <div class="htxt_area">
+                            <p class="hintro">{{ hospital.intro }}</p>
+                            <p class="htit">{{ hospital.name }}</p>
+                            <p class="hinfo">{{ hospital.address }}</p>
+                            <p class="p_no">조회수 <span>{{ hospital.hits }}</span> &nbsp; 이벤트
+                                <span>{{ hospital.events.count() }}</span> &nbsp; 후기 <span>0</span></p>
+                            <div class="hbt_warp">
+                                <div class="bt_blue03">상세보기</div>
+                                <div class="bt_blue04">안심성형신청</div>
+                            </div>
                         </div>
                     </div>
-                </div>
-            {% endfor %}
-            <!--
-            <div class="hospital_info left w50">
-                <div class="medal">
-                    <img src="../static/img/sub/medal02.png" />
-                    <img src="../static/img/sub/medal01.png" />
-                </div>
-                <img src="../static/img/main/hospital01.jpg" />
-                <div class="htxt_area">
-                    <p class="hintro">아름다운 미래를 만드는 충남대성형외과</p>
-                    <p class="htit">충남대학교병원 성형외과</p>
-                    <p class="hinfo">대전시 중구 문화로 282 (대사동)</p>
-                    <p class="p_no">조회수 <span>13</span> &nbsp; 이벤트 <span>7</span> &nbsp; 후기 <span>10</span></p>
-                    <div class="hbt_warp">
-                        <div class="bt_blue03">상세보기</div>
-                        <div class="bt_blue04">안심성형신청</div>
-                    </div>
+                {% endfor %}
+            </div>
+            <!-- 병원리스트 -->
+            <div class="container text-center">
+                <div class="pagination">
+                    {{ macros.pagination_widget(pagination, 'main.hospital') }}
                 </div>
             </div>
-            <div class="hospital_info right w50">
-                <img src="../static/img/main/hospital02.jpg" />
-                <div class="htxt_area">
-                    <p class="hintro">아름다운 미래를 만드는 충남대성형외과</p>
-                    <p class="htit">충남대학교병원 성형외과</p>
-                    <p class="hinfo">대전시 중구 문화로 282 (대사동)</p>
-                    <p class="p_no">조회수 <span>13</span> &nbsp; 이벤트 <span>7</span> &nbsp; 후기 <span>10</span></p>
-                    <div class="hbt_warp">
-                        <div class="bt_blue03">상세보기</div>
-                        <div class="bt_blue04">안심성형신청</div>
-                    </div>
-                </div>
-            </div>
-            -->
         </div>
-        <!-- 병원리스트 -->
-
-        <!-- paging -->
-        <div class="board_page">
-			<span class="paging_comm"><span class="frist">First</span>
-			<span class="prev">Previous</span>
-			<b>1</b>
-			<a href="">2</a>
-			<a href="">3</a>
-			<a href="">4</a>
-			<a href="">5</a>
-			<a href="">6</a>
-			<a href="">7</a>
-			<a href="">8</a>
-			<a href="">9</a>
-			<a class="next" href="" title="Next page">Next</a>
-			<a class="last" href="" title="Next page">Next</a>
-			</span>
-        </div>
-
     </div>
 </div>
 
@@ -167,39 +102,58 @@
 <div class="hospital_category02">
     <div class="content3">
         <h3 class="bl01">역견적신청</h3>
-        <div class="hcategory02_warp">
-            <dl>
-                <dd>분류</dd>
-                <dt>
-                    <select class="hcategory02_list">
-                        <option value="분류선택">쁘띠시술</option>
-                        <option value="분류선택">피부</option>
-                        <option value="분류선택">다이어트</option>
-                        <option value="분류선택">리프팅</option>
-                        <option value="분류선택">반영구화장</option>
-                        <option value="분류선택">헤어라인</option>
-                        <option value="분류선택">눈</option>
-                        <option value="분류선택">코</option>
-                        <option value="분류선택">치아/입</option>
-                        <option value="분류선택">지방이식</option>
-                        <option value="분류선택">가슴</option>
-                        <option value="분류선택">안면윤곽</option>
-                        <option value="분류선택">이마</option>
-                        <option value="분류선택">양악</option>
-                        <option value="분류선택">기타</option>
-                    </select>
-                </dt>
-            </dl>
-            <dl>
-                <dd>세부내용</dd>
-                <dt><input type="text" class="hcategory02_txt"/></dt>
-            </dl>
-            <div class="bt_blue01 mgT30"><a href="">신청하기</a></div>
-        </div>
-
+        <form action="{{ url_for('main.hospital') }}" method="post">
+            {{ form.hidden_tag() }}
+            <div class="hcategory02_warp">
+                <dl>
+                    <dd>분류</dd>
+                    <dt>
+                        {{ form.category(class="hcategory02_list") }}
+                    </dt>
+                </dl>
+                <dl>
+                    <dd>세부내용</dd>
+                    <dt>{{ form.body(class='hcategory02_txt') }}</dt>
+                    <p class="help-block">{{ form.body.errors[0] }}</p>
+                </dl>
+            </div>
+            {{ form.submit(class="bt_blue01 mgT30") }}
+        </form>
 
     </div>
 </div>
 
 
 {% include '_footer.html' %}
+{% if scroll %}
+    <script type="text/javascript">
+        document.getElementById('{{ scroll }}').scrollIntoView();
+        jQuery('.category').removeClass('on');
+        var button = document.getElementById('{{ category }}');
+        button.className += " on";
+    </script>
+{% endif %}
+<script type="text/javascript">
+    $('.h_list').on('click', 'a', function () {
+        var category = $(this).attr('name');
+        var json = {'category': category};
+        var ajax = $.ajax({
+            url: "{{ url_for('main.hospital_category') }}",
+            type: "POST",
+            dataType: "json",
+            contentType: 'application/json',
+            data: JSON.stringify(json)
+        });
+        ajax.done(function (data) {
+            jQuery('.category').removeClass('on');
+            var button = document.getElementById(category);
+            button.className += " on";
+            data = data.data;
+            $('#hospital_info_warp').html(data);
+        });
+        ajax.fail(function (error) {
+            alert('실패');
+            console.log(error);
+        });
+    });
+</script>

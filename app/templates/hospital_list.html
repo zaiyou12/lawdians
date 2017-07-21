@@ -1,45 +1,31 @@
 {% import "_macros.html" as macros %}
-<div class="hospital-list clearfix">
-    <ul id="hospital-collapse">
-        {% for hospital in hospitals %}
-            <li aria-multiselectable="false">
-                <div class="item-wrapper">
-                    <div class="img-wrapper">
-                        <img src="#" class="hospital-image">
-                    </div>
-                    <div class="hospital-desc">
-                        <h4>{{ hospital.name }}</h4>
-                        <h5>{{ hospital.address }}</h5>
-                        <div>
-                            <button class="btn btn-default" type="button" data-toggle="collapse" data-parent="#hospital-collapse"
-                                    data-target="#collapseHospitalByID{{ hospital.id }}" aria-expanded="false"
-                                    aria-controls="collapseHospital">상세보기</button>
-                            <a href="{{ url_for('service.register', hospital=hospital.id) }}">
-                                <button class="btn btn-default">안심성형 신청</button>
-                            </a>
-                        </div>
-                    </div>
+<div class="hospital_info_warp">
+    {% for hospital in hospitals %}
+        <div class="hospital_info w50">
+            <div class="medal">
+                {% if hospital.has_medal_1 %}
+                    <img src="../static/img/sub/medal02.png"/>
+                {% endif %}
+                {% if hospital.has_medal_2 %}
+                    <img src="../static/img/sub/medal01.png"/>
+                {% endif %}
+            </div>
+            <img src="../static/img/main/hospital01.jpg"/>
+            <div class="htxt_area">
+                <p class="hintro">{{ hospital.intro }}</p>
+                <p class="htit">{{ hospital.name }}</p>
+                <p class="hinfo">{{ hospital.address }}</p>
+                <p class="p_no">조회수 <span>{{ hospital.hits }}</span> &nbsp; 이벤트
+                    <span>{{ hospital.events.count() }}</span> &nbsp; 후기 <span>0</span></p>
+                <div class="hbt_warp">
+                    <div class="bt_blue03">상세보기</div>
+                    <a href="{{ url_for('service.register', hospital=hospital.id) }}">
+                        <div class="bt_blue04">안심성형신청</div>
+                    </a>
                 </div>
-                <div class="collapse" id="collapseHospitalByID{{ hospital.id }}">
-                    <div class="item-wrapper-large">
-                        <div class="img-wrapper">
-                            <img src="#" class="hospital-image-large">
-                        </div>
-                        <div class="hospital-desc" style="padding: 20px;">
-                            <h2>{{ hospital.name }}</h2>
-                            <h3>{{ hospital.address }}</h3>
-                            <div>
-                                <button class="btn btn-default" type="button">상세보기</button>
-                                <a href="{{ url_for('service.register', hospital=hospital.id) }}">
-                                    <button class="btn btn-default">안심성형 신청</button>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </li>
-        {% endfor %}
-    </ul>
+            </div>
+        </div>
+    {% endfor %}
 </div>
 <div class="container text-center">
     <div class="pagination">

@@ -26,7 +26,7 @@ class ProfileForm(FlaskForm):
 
 class AuctionForm(FlaskForm):
     category = SelectField('분류', coerce=int)
-    body = StringField('세부내용', validators=[InputRequired()])
+    body = StringField('세부내용', validators=[InputRequired('데이터를 입력해주세요.')])
     submit = SubmitField('신청하기')
 
     def __init__(self, *args, **kwargs):
