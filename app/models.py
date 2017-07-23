@@ -107,11 +107,14 @@ class User(UserMixin, db.Model):
         for u in users:
             if u.email == current_app.config['LAWDIANS_HOSPITAL']:
                 u.hospital = Hospital.query.first()
+                u.username = '병원 테스트계정'
                 u.role = Role.query.filter_by(name='HospitalManager').first()
             elif u.email == current_app.config['LAWDIANS_LAWYER']:
                 u.lawyer = Lawyer.query.first()
+                u.username = '변호사 테스트계정'
                 u.role = Role.query.filter_by(name='Lawyer').first()
             elif u.email == current_app.config['LAWDIANS_ADMIN']:
+                u.username = '어드민 테스트계정'
                 u.role = Role.query.filter_by(permissions=0xff).first()
             else:
                 u.role = Role.query.filter_by(default=True).first()

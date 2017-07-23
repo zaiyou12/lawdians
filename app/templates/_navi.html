@@ -7,6 +7,7 @@
                     <li><a href="{{ url_for('auth.register') }}">회원가입</a></li>
                 {% else %}
                     <li><a href="{{ url_for('main.my_page_service') }}">마이페이지</a></li>
+                    <li><a href="{{ url_for('auth.logout') }}">로그아웃</a></li>
                 {% endif %}
             </ul>
         </div>
