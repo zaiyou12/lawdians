@@ -148,6 +148,7 @@ ul.hospital li dl dd.htit { font-size:20px; color:#03a9f4; padding:0 0 8px; font
 ul.hospital li dl dt.hinfo { font-size:16px; line-height:22px; }
 
 input.bt_blue01 { background:#03a9f4; color:#fff; font-size:16px; display:inline-block; padding:8px 20px; }
+div.bt_blue01 a{ background:#03a9f4; color:#fff; font-size:16px; display:inline-block; padding:8px 20px; }
 
 div.hospital_warp { position:relative; }
 div.hospital_arrow a img.right { position:absolute; right:-3%; top:32%; }
