@@ -64,8 +64,8 @@ div.hospital_info_warp div.hospital_info > img { width:40%; }
 div.hospital_info_warp div.hospital_info div.htxt_area { width:54%; padding:20px 10px; height:112px; }
 div.hospital_info_warp div.hospital_info div.htxt_area p.hinfo { font-size:14px;  }
 div.hospital_info_warp div.hospital_info div.htxt_area p.hintro { padding-bottom:8px; }
-div.hbt_warp { bottom:10px; left:10px; }
-div.hospital_info_warp div.hospital_info div.htxt_area p.p_no { bottom:60px; }
+div.hbt_warp { position:static !important; }
+div.hospital_info_warp div.hospital_info div.htxt_area p.p_no { position:static !important; padding:5px 0; }
 
 div.hospital_info_warp div.hospital_info div.medal { left:12%; }
 div.hospital_info_warp div.hospital_info div.medal img { width:34%; }
@@ -150,7 +150,7 @@ div.hospital_info_warp div.hospital_info div.htxt_area { width:95%; height:140px
 
 div.hospital_info_warp div.hospital_info div.medal { left:0; }
 div.hospital_info_warp div.hospital_info div.medal img { width:auto; }
-
+div.hospital_info_warp div.hospital_info div.htxt_area p.p_no { padding:15px 0 5px; }
 
 div.review_warp { padding:50px 0; }
 div.reviewbox_warp div.rbox div.rbox_img { height: 160px; }
@@ -394,6 +394,18 @@ div.login_full div.hospital_info_warp div.hospital_info.left { float:left; }
 
 
 
+}
+
+@media (max-width:510px) {
+
+div.hospital_info_warp div.hospital_info div.htxt_area { width:91%; height:auto; }
+div.hospital_info_warp div.hospital_info div.htxt_area p.htit { font-size:16px; }
+div.hospital_info_warp div.hospital_info div.htxt_area p.hintro,
+div.hospital_info_warp div.hospital_info div.htxt_area p.hinfo { font-size:13px; }
+div.hospital_info_warp div.hospital_info div.htxt_area div.hbt_warp div.bt_blue03,
+div.hospital_info_warp div.hospital_info div.htxt_area div.hbt_warp div.bt_blue04 { font-size:13px; }
+
+div.hospital_info_warp div.hospital_info div.htxt_area div.hbt_warp div.bt_blue04 { margin-left:0; }
 }
 
 

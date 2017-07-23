@@ -60,7 +60,7 @@ div.nav_warp div.navi_m{ display:none; }
 
 
 /* footer */
-div.footer { padding:20px 0; text-align:center; border-top:1px solid #ddd; }
+div.footer { padding:20px 0; text-align:center; border-top:1px solid #ddd; overflow:hidden; }
 div.footer p { font-size:12px; padding:1px 0; color:#9a9a9a; }
 
 /* 메인이미지 */
@@ -302,8 +302,8 @@ div.lawyer_info div.lawyer_infobox:hover div.txt div.lawbt2 div.bt_blue02 { back
 
 
 /* 안심이벤트 */
-div.eventbox { box-shadow:0 0 10px #ccc; margin-bottom:20px; float:right; }
-div.eventbox a { display:inline-block; }
+div.event_warp { overflow:hidden; }
+div.eventbox { border:1px solid #ccc; margin-bottom:20px; overflow:hidden; }
 div.eventbox:nth-child(odd) {float:left;}
 div.eventbox div.event_txtbox { padding:20px; text-align:left; position:relative; }
 div.eventbox div.event_txtbox p.hospital_name { font-size:16px; color:#858585; padding-bottom:8px; }
