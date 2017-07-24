@@ -56,7 +56,8 @@ def register():
     # Fill form data
     form.email.data = current_user.email
     form.username.data = current_user.username or session.get('username')
-    form.birth_date.data = current_user.birth_date or datetime.strptime(session.get('birth_date'), '%Y%m%d')
+    if session.get('birth_date'):
+        form.birth_date.data = current_user.birth_date or datetime.strftime(session.get('birth_date'), '%Y%m%d')
     form.gender.data = current_user.gender or session.get('gender')
     form.address.data = current_user.address or session.get('address')
     form.phone_number.data = session.get('phone_number')
