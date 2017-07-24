@@ -24,7 +24,6 @@ def register():
             flash('휴대전화로 인증번호가 전송되었으니 휴대전화 확인을 통해 인증을 완료해주시기 바랍니다.')
             send_sms('auth/sms/confirm', form.phone_number.data, rand_num=session['rand_num'])
         elif form.confirm_submit.data:
-            flash('인증번호 인증')
             if form.confirm.data == session['rand_num']:
                 flash('감사합니다. 인증이 완료되었습니다.')
                 session['checked'] = True
@@ -65,7 +64,6 @@ def register():
     form.gender.data = current_user.gender or session.get('gender')
     form.address.data = current_user.address or session.get('address')
     form.phone_number.data = session.get('phone_number')
-    form.confirm.data = session.get('rand_num')
     if session.get('checked'):
         if current_user.phone_number:
             form.phone_number.data = current_user.phone_number
