@@ -16,7 +16,9 @@ from . import service
 def register():
     form = RegisterSurgeryForm()
     if request.method == 'POST':
-        if form.phone_submit.data:
+        if form.validate_on_submit() is False:
+            flash('입력값 및 휴대전화 인증을 확인해주시기 바랍니다.')
+        elif form.phone_submit.data:
             session['phone_number'] = form.phone_number.data
             session['rand_num'] = get_rand_num()
             flash('휴대전화로 인증번호가 전송되었으니 휴대전화 확인을 통해 인증을 완료해주시기 바랍니다.')
@@ -43,9 +45,11 @@ def register():
                 flash('휴대전화 인증을 해주시기 바랍니다.')
         # Store data in session
         session['username'] = form.username.data
-        session['birth_date'] = datetime.strftime(form.birth_date.data, '%Y%m%d')
+        if form.birth_date.data:
+            session['birth_date'] = datetime.strftime(form.birth_date.data, '%Y%m%d')
         session['gender'] = form.gender.data
         session['address'] = form.address.data
+        session['phone_number'] = form.phone_number.data
         return redirect(url_for('service.register'))
 
     # Save Data

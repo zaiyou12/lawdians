@@ -25,6 +25,11 @@ input[type="text"] {
 }
 
 label {vertical-align:middle; margin:0; padding:0;}
+div.form-group label{display: None;}
+form div.radio{display: inline-block;float:left;margin-left: 20px;}
+form div.form-group #phone_number, form div.form-group #confirm{width: 80% !important; float: left !important;}
+form #phone_submit, form #confirm_submit {width: 18% !important; margin-left: 2%; float:right;}
+form input.btn {background-color: #03a9f4; color: #fff;}
 button {cursor:pointer;vertical-align:middle}
 select {vertical-align:middle;height:24px;border:1px solid #ccc}
 input[type="hidden"] {display:none}

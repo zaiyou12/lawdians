@@ -1,5 +1,6 @@
 {% include '_header.html' %}
 {% include '_navi.html' %}
+{% import "bootstrap/wtf.html" as wtf %}
 
 <div class="login_bg">
 
@@ -15,51 +16,9 @@
                     <li><a>4.결제 및 신청</a></li>
                 </ul>
             </div>
-            <form action="{{ url_for('service.register') }}" method="post">
-                {{ form.hidden_tag() }}
-                <div class="email">
-                    {{ form.email(id="signup-email", class="form-control login-email", type="email", placeholder="이메일", disabled="disabled") }}
-                </div>
-                <div class="username">
-                    {{ form.username(class="form-control", id="signup-username", placeholder="사용자 이름", type="text") }}
-                    {% if form.username.errors[0] %}<p class="help-block">{{ form.username.errors[0] }}</p>{% endif %}
-                </div>
-                <div class="form-group birth ">
-                    {{ form.birth_date(id="signup-birth", class="form-control", placeholder="생년월일   예)19820301") }}
-                    {% if form.birth_date.errors[0] %}
-                        <p class="help-block">{{ form.birth_date.errors[0] }}</p>{% endif %}
-                </div>
-                <div class="form-group gender">
-                    <ul class="cr-styled" id="gender">
-                        {{ form.gender(class="cr-styled") }}
-                        {% if form.gender.errors[0] %}<p class="help-block">{{ form.gender.errors[0] }}</p>{% endif %}
-                    </ul>
-                </div>
-                <div class="form-group address ">
-                    {{ form.address(id="signup-address", class="form-control", placeholder="주소") }}
-                    {% if form.address.errors[0] %}<p class="help-block">{{ form.address.errors[0] }}</p>{% endif %}
-                </div>
-                <div class="form-group phone ">
-                    <div class="form-group-phone">
-                        {{ form.phone_number(class="form-control phone", placeholder="전화번호   '-' 없이 작성해주세요.") }}
-                        {{ form.phone_submit(class="btn btn-info phone_bt") }}
-                    </div>
-                    {% if form.phone_number.errors[0] %}
-                        <p class="help-block">{{ form.phone_number.errors[0] }}</p>{% endif %}
-                </div>
-                <div class="form-group confirm ">
-                    <div class="form-group-phone">
-                        {{ form.confirm(id="form-control", class="form-control confirm", placeholder="인증번호") }}
-                        {{ form.confirm_submit(class="btn btn-info confirm_bt") }}
-                    </div>
-                </div>
-                {{ form.submit(class="register_hbt_next") }}
-            </form>
+            {{ wtf.quick_form(form) }}
         </div>
-
     </div>
-
-
 </div>
 
 

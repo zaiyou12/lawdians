@@ -88,16 +88,8 @@
                                     </div>
                                     <p class="help-block">{{ form.confirm.errors[0] }}</p>
                                 </div>
-                                <ul class="pager">
-                                    <li class="disabled">
-                                        <a>
-                                            <i class="fa fa-angle-double-left"></i>이전
-                                        </a>
-                                    </li>
-                                    <li>
-                                        {{ form.submit() }}
-                                    </li>
-                                </ul>
+                                {{ form.submit() }}
+
                             </form>
                         </div>
                     </div>
