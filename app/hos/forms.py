@@ -8,7 +8,7 @@ from ..models import EventPriceTable, AdsPriceTable
 class EventForm(FlaskForm):
     head = StringField('이벤트 명', validators=[InputRequired(), Length(1, 64)])
     body = StringField('이벤트 내용', validators=[InputRequired()])
-    start_date = DateField('이벤트 시작일', validators=[InputRequired()],
+    start_date = DateField('이벤트 시작일', validators=[InputRequired('년월일 8자리로 입력해주세요.')],
                            render_kw={"placeholder": "년월일 8자리로 입력해주세요."}, format='%Y%m%d')
     delta_date = SelectField('이벤트 기간', coerce=int)
     submit = SubmitField('등록')

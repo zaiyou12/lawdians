@@ -30,6 +30,7 @@ form div.radio{display: inline-block;float:left;margin-left: 20px;}
 form div.form-group #phone_number, form div.form-group #confirm{width: 80% !important; float: left !important;}
 form #phone_submit, form #confirm_submit {width: 18% !important; margin-left: 2%; float:right;}
 form input.btn {background-color: #03a9f4; color: #fff;}
+form input.btn[disabled], form input.btn.disabled{cursor:not-allowed; box-shadow:none; -webkit-box-shadow:none; opacity:.65; filter:alpha(opacity=65);}
 button {cursor:pointer;vertical-align:middle}
 select {vertical-align:middle;height:24px;border:1px solid #ccc}
 input[type="hidden"] {display:none}
