@@ -1,13 +1,10 @@
-import os
-
 import time
 from flask import render_template, request, current_app, flash, redirect, url_for, jsonify, session
 from flask_login import current_user, login_required
 from sqlalchemy import desc
-from werkzeug.utils import secure_filename
 
 from app import db
-from config import basedir
+from app.uploads import check_files, upload_files
 from ..main.forms import EventForm, CounselForm, ProfileForm, AuctionForm, UploadForm
 from ..models import Hospital, Event, EventRegistration, HospitalAd, Lawyer, Counsel, Service, User, Auction, Offer, \
     Point, Role, UploadedImage
@@ -156,33 +153,15 @@ def my_page_service():
 @login_required
 def my_page_service_detail(id):
     form = UploadForm()
-    if form.validate_on_submit():
-        if form.file.data.filename:
-            images = request.files.getlist("file")
+    if form.validate_on_submit() and form.file.data.filename:
+        images = request.files.getlist("file")
 
-            # check files' format
-            for img in images:
-                if not allowed_file(img.filename):
-                    flash('png, jpg, jpeg, gif 형식으로 올려주시기 바랍니다.')
-                    return redirect(url_for('main.my_page_service_detail', id=id))
-
-            # save files
-            for img in images:
-                filename = secure_filename(img.filename)
-                if allowed_file(filename):
-                    target = os.path.join(basedir, 'app/static/img/uploads/')
-                    if not os.path.isdir(target):
-                        os.mkdir(target)
-                    filename = set_filename(filename)
-                    print("filename: " + filename)
-                    img.save("/".join([target, filename]))
-                    img_url = UploadedImage(filename=filename, service_id=id)
-                    db.session.add(img_url)
-            db.session.commit()
+        if check_files(images):
+            upload_files(images, service_id=id)
             flash('사진이 등록되었습니다.')
             return redirect(url_for('main.my_page_service'))
         else:
-            flash('사진을 올려주세요.')
+            return redirect(url_for('main.my_page_service_detail', id=id))
     uploaded_imgs = UploadedImage.query.filter_by(service_id=id).all()
     return render_template('mypage_service_detail.html', id=id, form=form, uploaded_imgs=uploaded_imgs)
 

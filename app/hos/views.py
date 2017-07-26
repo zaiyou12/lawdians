@@ -3,9 +3,10 @@ from flask_login import current_user, login_required
 from sqlalchemy import desc
 
 from app import db
+from app.uploads import check_files, upload_files
 from .forms import EventForm, ProfileForm, AdsForm, OfferForm
 from ..models import Service, Event, EventRegistration, Hospital, HospitalAd, Auction, Offer, EventPriceTable, \
-    AdsPriceTable, Point
+    AdsPriceTable, Point, UploadedImage
 from . import hos
 
 
@@ -173,18 +174,35 @@ def register_ads():
         point_sum += point.point
 
     if form.validate_on_submit():
+        # check files
+        if not form.file.data.filename:
+            flash('사진을 등록하여 주세요.')
+            return redirect(url_for('hos.register_ads'))
+
+        # check points
         paid_price = AdsPriceTable.query.get_or_404(form.delta_date.data).price
         if point_sum < paid_price:
             flash(Markup('포인트가 부족합니다. <a href="/hospital/point">여기</a>를 클릭하시면 포인트를 충전하실수 있습니다.'))
             return redirect(url_for('hos.register_ads'))
+
+        # check is image files
+        images = request.files.getlist("file")
+        if not check_files(images):
+            return redirect(url_for('hos.register_ads'))
+
+        # save ad and point
         new_ad = HospitalAd(hospital_id=current_user.hospital_id, name=form.name.data,
                             start_date=form.start_date.data, is_hospital_ad=form.place.data,
                             term=AdsPriceTable.query.get_or_404(form.delta_date.data).delta_date)
         used_point = Point(user_id=current_user.id, point=-paid_price, body='병원 광고비 집행')
         db.session.add_all([new_ad, used_point])
+        db.session.commit()
+
+        # save images
+        upload_files(images, ads_id=new_ad.id)
         flash('광고가 등록되었습니다.')
         return redirect(url_for('hos.ads'))
-    return render_template('hos/register_ads.html', form=form, point_sum=format(point_sum, ","))
+    return render_template('hos/register_ads.html', form=form, point_sum=format(point_sum, ","), is_register=True)
 
 
 @hos.route('/ads/edit/<int:id>', methods=['GET', 'POST'])
@@ -201,13 +219,22 @@ def edit_ads(id):
         selected_ads.is_hospital_ad = form.place.data
         selected_ads.term = AdsPriceTable.query.get_or_404(form.delta_date.data).delta_date
         db.session.add(selected_ads)
+
+        # change image file
+        if form.file.data.filename:
+            images = request.files.getlist("file")
+            if not check_files(images):
+                return redirect(url_for('hos.edit_ads', id=id))
+            upload_files(images, ads_id=id)
+
         flash('광고가 수정되었습니다.')
         return redirect(url_for('hos.ads'))
     form.name.data = selected_ads.name
     form.start_date.data = selected_ads.start_date
     form.place.data = selected_ads.is_hospital_ad
     form.delta_date.data = AdsPriceTable.query.filter_by(delta_date=selected_ads.term).first().id
-    return render_template('hos/register_event.html', form=form)
+    uploaded_image = UploadedImage.query.filter_by(ad_id=id).first()
+    return render_template('hos/register_ads.html', form=form, uploaded_image=uploaded_image)
 
 
 @hos.route('/point')

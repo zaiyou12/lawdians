@@ -36,5 +36,5 @@ class AuctionForm(FlaskForm):
 
 
 class UploadForm(FlaskForm):
-    file = FileField('Select images', render_kw={'multiple': True})
+    file = FileField('이미지', render_kw={'multiple': True})
     submit = SubmitField('등록')
