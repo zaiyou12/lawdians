@@ -4,7 +4,7 @@ from sqlalchemy import desc
 
 from app import db
 from .forms import EventForm, ProfileForm, AdsForm, OfferForm
-from ..models import Service, Event, EventRegistration, Hospital, HospitalAd, Auction, Category, Offer, EventPriceTable, \
+from ..models import Service, Event, EventRegistration, Hospital, HospitalAd, Auction, Offer, EventPriceTable, \
     AdsPriceTable, Point
 from . import hos
 

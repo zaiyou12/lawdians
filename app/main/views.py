@@ -1,12 +1,27 @@
+import os
+
+import time
 from flask import render_template, request, current_app, flash, redirect, url_for, jsonify, session
 from flask_login import current_user, login_required
 from sqlalchemy import desc
+from werkzeug.utils import secure_filename
 
 from app import db
-from ..main.forms import EventForm, CounselForm, ProfileForm, AuctionForm
+from config import basedir
+from ..main.forms import EventForm, CounselForm, ProfileForm, AuctionForm, UploadForm
 from ..models import Hospital, Event, EventRegistration, HospitalAd, Lawyer, Counsel, Service, User, Auction, Offer, \
-    Point, Role
+    Point, Role, UploadedImage
 from . import main
+
+
+def allowed_file(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1].lower() in current_app.config['ALLOWED_EXTENSIONS']
+
+
+def set_filename(filename):
+    list = filename.rsplit('.', 1)
+    return list[0] + '_' + str(int(time.time()) % 100000) + '.' + list[1]
 
 
 @main.route('/')
@@ -43,16 +58,15 @@ def hospital():
     category = session.get('category')
     page = request.args.get('page', 1, type=int)
     query = Hospital.query
-    if category != 'all':
+    if category is not None and category != 'all':
         query = query.filter(Hospital.categories.any(name=category))
     pagination = query.paginate(page, per_page=current_app.config['HOSPITALS_PER_PAGE'], error_out=False)
     hospitals = pagination.items
 
-    hospitals_ad = HospitalAd.query.limit(3)
     if page > 1:
-        return render_template('hospital.html', hospitals=hospitals, pagination=pagination, hospitals_ad=hospitals_ad,
+        return render_template('hospital.html', hospitals=hospitals, pagination=pagination,
                                form=form, ads=ads, scroll='hospital_category', category=category)
-    return render_template('hospital.html', hospitals=hospitals, pagination=pagination, hospitals_ad=hospitals_ad,
+    return render_template('hospital.html', hospitals=hospitals, pagination=pagination,
                            form=form, ads=ads)
 
 
@@ -138,10 +152,39 @@ def my_page_service():
     return render_template('mypage_service.html', services=services)
 
 
-@main.route('/my-page/service/<int:id>')
+@main.route('/my-page/service/<int:id>', methods=['GET', 'POST'])
 @login_required
 def my_page_service_detail(id):
-    return render_template('profile_service_detail.html', id=id)
+    form = UploadForm()
+    if form.validate_on_submit():
+        if form.file.data.filename:
+            images = request.files.getlist("file")
+
+            # check files' format
+            for img in images:
+                if not allowed_file(img.filename):
+                    flash('png, jpg, jpeg, gif 형식으로 올려주시기 바랍니다.')
+                    return redirect(url_for('main.my_page_service_detail', id=id))
+
+            # save files
+            for img in images:
+                filename = secure_filename(img.filename)
+                if allowed_file(filename):
+                    target = os.path.join(basedir, 'app/static/img/uploads/')
+                    if not os.path.isdir(target):
+                        os.mkdir(target)
+                    filename = set_filename(filename)
+                    print("filename: " + filename)
+                    img.save("/".join([target, filename]))
+                    img_url = UploadedImage(filename=filename, service_id=id)
+                    db.session.add(img_url)
+            db.session.commit()
+            flash('사진이 등록되었습니다.')
+            return redirect(url_for('main.my_page_service'))
+        else:
+            flash('사진을 올려주세요.')
+    uploaded_imgs = UploadedImage.query.filter_by(service_id=id).all()
+    return render_template('mypage_service_detail.html', id=id, form=form, uploaded_imgs=uploaded_imgs)
 
 
 @main.route('/my-page/claim/<int:id>')

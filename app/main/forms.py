@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField, RadioField, DateField, SelectField, TextAreaField
+from wtforms import StringField, SubmitField, RadioField, DateField, SelectField, TextAreaField, FileField
 from wtforms.validators import InputRequired, Length, length
 
 from ..models import Category
@@ -33,3 +33,8 @@ class AuctionForm(FlaskForm):
         super(AuctionForm, self).__init__(*args, **kwargs)
         self.category.choices = [(category.id, category.name_kor) for category
                                  in Category.query.all()]
+
+
+class UploadForm(FlaskForm):
+    file = FileField('Select images', render_kw={'multiple': True})
+    submit = SubmitField('등록')

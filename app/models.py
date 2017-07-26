@@ -220,6 +220,7 @@ class Hospital(db.Model):
                                  backref=db.backref('hospitals', lazy='dynamic'),
                                  lazy='dynamic')
     offers = db.relationship('Offer', backref='hospital', lazy='dynamic')
+    photos = db.relationship('UploadedImage', backref='hospital', lazy='dynamic')
     hits = db.Column(db.Integer, default=0)
     has_medal_1 = db.Column(db.Boolean, default=False)
     has_medal_2 = db.Column(db.Boolean, default=False)
@@ -298,6 +299,7 @@ class Service(db.Model):
     lawyer_id = db.Column(db.Integer, db.ForeignKey('lawyers.id'))
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
     is_claimed = db.Column(db.Boolean, default=False)
+    photos = db.relationship('UploadedImage', backref='service', lazy='dynamic')
 
     def __repr__(self):
         return '<Service %r>' % self.timestamp
@@ -315,6 +317,7 @@ class Event(db.Model):
     registrations = db.relationship('EventRegistration', backref='event', lazy='dynamic')
     is_confirmed = db.Column(db.Boolean, default=False)
     price_text = db.Column(db.String(16))
+    photos = db.relationship('UploadedImage', backref='event', lazy='dynamic')
 
     def __repr__(self):
         return '<Events %r>' % self.head
@@ -367,6 +370,7 @@ class HospitalAd(db.Model):
     hits = db.Column(db.Integer)
     is_confirmed = db.Column(db.Boolean, default=False)
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
+    photos = db.relationship('UploadedImage', backref='hospital_ad', lazy='dynamic')
 
     def __repr__(self):
         return '<HospitalAd %r>' % self.name
@@ -548,6 +552,17 @@ class PostScript(db.Model):
 
     def __repr__(self):
         return '<PostScript %r>' % self.timestamp
+
+
+class UploadedImage(db.Model):
+    __tablename__ = 'uploaded_images'
+    id = db.Column(db.Integer, primary_key=True)
+    filename = db.Column(db.String, unique=True)
+    service_id = db.Column(db.Integer, db.ForeignKey('services.id'))
+    event_id = db.Column(db.Integer, db.ForeignKey('events.id'))
+    ad_id = db.Column(db.Integer, db.ForeignKey('hospital_ads.id'))
+    hospital_id = db.Column(db.Integer, db.ForeignKey('hospitals.id'))
+    timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
 
 
 @login_manager.user_loader

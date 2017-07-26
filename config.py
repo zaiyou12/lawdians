@@ -15,6 +15,7 @@ class Config:
     PERMANENT_SESSION_LIFETIME = datetime.timedelta(days=1)
     SSL_DISABLE = True
     USE_EVALEX = False
+    ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
     LAWDIANS_HOSPITAL = os.environ.get('LAWDIANS_HOSPITAL')
     LAWDIANS_LAWYER = os.environ.get('LAWDIANS_LAWYER')
     LAWDIANS_ADMIN = os.environ.get('LAWDIANS_ADMIN')
@@ -40,7 +41,6 @@ class Config:
         access_token_url='/oauth/access_token',
         access_token_method='GET',
         authorize_url='https://www.facebook.com/dialog/oauth'
-
     )
 
     @staticmethod

@@ -1,0 +1,69 @@
+{% include '_header.html' %}
+{% include '_navi.html' %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{{ moment.include_jquery() }}
+{{ moment.include_moment() }}
+<style>
+    #columns {
+        column-width: 350px;
+        column-gap: 15px;
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+
+    #columns figure {
+        display: inline-block;
+        border: 1px solid rgba(0, 0, 0, 0.2);
+        margin: 0;
+        margin-bottom: 15px;
+        padding: 10px;
+        box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);;
+    }
+
+    #columns figure img {
+        width: 100%;
+    }
+
+    #columns figure figcaption {
+        border-top: 1px solid rgba(0, 0, 0, 0.2);
+        padding: 10px;
+        margin-top: 11px;
+    }
+</style>
+
+<div class="mypage">
+    <div class="content">
+
+        <div class="mypage_tab">
+            <ul>
+                <li><a href="{{ url_for('main.my_page_service') }}" class="on">안심 성형 서비스</a></li>
+                <li><a href="{{ url_for('main.my_page_counsel') }}">안심 변호사 문의</a></li>
+                <li><a href="{{ url_for('main.my_page_event') }}">안심 이벤트 신청</a></li>
+                <li><a href="{{ url_for('main.my_page_auction') }}">역견적 신청 내역</a></li>
+                <li><a href="{{ url_for('main.my_page_point') }}">포인트 관리</a></li>
+                <li><a href="{{ url_for('main.my_page_profile') }}">정보 관리</a></li>
+            </ul>
+        </div>
+
+        <h3 class="bl01 black">사진 등록하기</h3>
+        <div class="box">
+            {{ wtf.quick_form(form) }}
+        </div>
+
+        <h3 class="bl01 black">등록된 사진</h3>
+        <div id="columns">
+            {% for img in uploaded_imgs %}
+                <figure>
+                    <img src="{{ url_for('static', filename='img/uploads/'+img.filename) }}">
+                    <figcaption>{{ moment(img.timestamp).format('YYYY-MM-DD, h:mm a') }}</figcaption>
+                </figure>
+            {% endfor %}
+        </div>
+
+        <h3 class="bl01 black">변호사 선임장</h3>
+        <div class="bt_blue01"><a href="{{ url_for('main.my_page_claim', id=id) }}">사고접수</a></div>
+    </div>
+</div>
+
+{% include '_footer.html' %}
