@@ -12,6 +12,9 @@
         <div class="row">
             <div class="form-box col-md-offset-2 col-sm-offset-0 xs-offset-0 col-xs-12 col-md-8">
                 <div class="form-box-inner">
+                    <button type="button" class="close" aria-label="Close">
+                        <a href="{{ url_for('main.lawyer') }}"><span aria-hidden="true">&times;</span></a>
+                    </button>
                     <h2 class="title text-center">변호사 상담신청</h2>
                     <p class="intro text-center">안심변호사 <strong>{{ lawyer.name }}</strong>에게 물어보세요!</p>
                     <div class="row">

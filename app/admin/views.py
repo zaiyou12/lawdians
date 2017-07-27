@@ -157,7 +157,6 @@ def login_to_user(id):
         if 'google_token' in session:
             session.pop('google_token', None)
         login_user(user, False)
-        session['admin_login_other_user'] = datetime.now()
         if user.hospital:
             flash('병원 계정으로 접속하셨습니다.')
             return redirect(url_for('hos.index'))
