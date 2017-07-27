@@ -1,5 +1,6 @@
 import time
-from flask import render_template, request, current_app, flash, redirect, url_for, jsonify, session
+from flask import render_template, request, current_app, flash, redirect, url_for, jsonify, session, \
+    send_from_directory, app
 from flask_login import current_user, login_required
 from sqlalchemy import desc
 
@@ -252,3 +253,9 @@ def my_page_point():
     for point in points:
         point_sum += point.point
     return render_template('mypage_point.html', points=points, point_sum=point_sum)
+
+
+@main.route('/robots.txt')
+@main.route('/sitemap.xml')
+def static_from_root():
+    return send_from_directory('static/', request.path[1:])
