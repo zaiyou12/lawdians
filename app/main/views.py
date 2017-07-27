@@ -1,6 +1,5 @@
 import time
-from flask import render_template, request, current_app, flash, redirect, url_for, jsonify, session, \
-    send_from_directory, app
+from flask import render_template, request, current_app, flash, redirect, url_for, jsonify, session
 from flask_login import current_user, login_required
 from sqlalchemy import desc
 
@@ -102,7 +101,9 @@ def lawyer():
 @main.route('/event')
 def event():
     page = request.args.get('page', 1, type=int)
-    pagination = Event.query.paginate(page, per_page=current_app.config['HOSPITALS_PER_PAGE'], error_out=False)
+    pagination = Event.query.filter_by(is_confirmed=True).paginate(page,
+                                                                   per_page=current_app.config['HOSPITALS_PER_PAGE'],
+                                                                   error_out=False)
     events = pagination.items
 
     import datetime

@@ -1,4 +1,5 @@
 from datetime import datetime
+import datetime as dt
 
 from flask import render_template, request, current_app, redirect, url_for, flash, session
 from flask_login import login_required, login_user, current_user
@@ -262,7 +263,12 @@ def edit_page_lawyer(id):
 @login_required
 def page_event():
     events = Event.query.filter_by(is_confirmed=False).all()
-    return render_template('admin/page_event.html', events=events)
+    events_on = []
+    current_date = datetime.now()
+    for e in Event.query.filter_by(is_confirmed=True).all():
+        if current_date < e.start_date + dt.timedelta(days=e.term):
+            events_on.append(e)
+    return render_template('admin/page_event.html', events=events, events_on=events_on, datetime=dt)
 
 
 @admin.route('/confirm/event/<int:id>')
