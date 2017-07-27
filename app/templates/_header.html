@@ -1,22 +1,28 @@
 <html>
 
 <head>
-	<meta http-equiv="Cache-Control" content="no-store">
-	<meta http-equiv="Pragma" content="no-cache">
-	<meta http-equiv="Expires" content="0">
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge;">
-	
-	<meta name="author" content="로디언즈" />
-	<meta name="description" content="로디언즈" />
-	<meta name="keywords" content="로디언즈" />
-	<meta name="viewport" content="width=device-width, user-scalable=no, target-densitydpi=medium-dpi" />
+    <meta http-equiv="Cache-Control" content="no-store">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge;">
 
-	
-	<title>로디언즈</title>
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="로디언즈 - 안심성형">
+    <meta property="og:description" content="안전하게 예뻐지세요. 로디언즈입니다.">
+    <meta property="og:image" content="{{ url_for('static', filename='img/main/law01_thum.jpg', _external=True) }}">
+    <meta property="og:url" content="https://lawdians.herokuapp.com/">
 
-	<link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet" type="text/css">
-	<link href="{{ url_for('static', filename='css/resize.css') }}" rel="stylesheet" type="text/css">
+    <meta name="author" content="로디언즈"/>
+    <meta name="description" content="로디언즈"/>
+    <meta name="keywords" content="로디언즈"/>
+    <meta name="viewport" content="width=device-width, user-scalable=no, target-densitydpi=medium-dpi"/>
+
+
+    <title>로디언즈</title>
+
+    <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ url_for('static', filename='css/resize.css') }}" rel="stylesheet" type="text/css">
     {{ moment.include_jquery() }}
     {{ moment.include_moment() }}
 </head>
