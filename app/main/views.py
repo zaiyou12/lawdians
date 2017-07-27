@@ -253,9 +253,3 @@ def my_page_point():
     for point in points:
         point_sum += point.point
     return render_template('mypage_point.html', points=points, point_sum=point_sum)
-
-
-@main.route('/robots.txt')
-@main.route('/sitemap.xml')
-def static_from_root():
-    return send_from_directory('static/', request.path[1:])
