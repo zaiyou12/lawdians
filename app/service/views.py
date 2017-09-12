@@ -92,6 +92,18 @@ def hospital():
                            selected_hospital=selected_hospital)
 
 
+@service.route('/hospital/search')
+@login_required
+def search_hospital():
+    text = request.args['searchText']
+    print(text)
+    page = request.args.get('page', 1, type=int)
+    pagination = Hospital.query.filter(Hospital.name.like("%" + text + "%")).\
+        paginate(page, per_page=current_app.config['HOSPITALS_PER_PAGE'], error_out=False)
+    hospitals = pagination.items
+    return render_template('service/hospital_list.html', hospitals=hospitals, pagination=pagination)
+
+
 @service.route('/lawyer', methods=['GET', 'POST'])
 @login_required
 def lawyer():

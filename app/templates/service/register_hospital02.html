@@ -29,19 +29,22 @@
             {% endif %}
 
             <div class="hospital_info_warp">
-                {% for hospital in hospitals %}
-                    <!-- 1 -->
-                    <div class="hospital_info left w50">
-                        <div class="htxt_area">
-                            <a href="{{ url_for('service.lawyer', hospital=hospital.id) }}">
-                                <p class="htit">{{ hospital.name }}</p></a>
-                            <p class="hinfo">{{ hospital.address[7:15] }}</p>
+                <input type="text" onkeyup="liveSearch(this.value)">
+                <div id="results">
+                    {% for hospital in hospitals %}
+                        <!-- 1 -->
+                        <div class="hospital_info left w50">
+                            <div class="htxt_area">
+                                <a href="{{ url_for('service.lawyer', hospital=hospital.id) }}">
+                                    <p class="htit">{{ hospital.name }}</p></a>
+                                <p class="hinfo">{{ hospital.address[7:15] }}</p>
+                            </div>
                         </div>
-                    </div>
-                {% endfor %}
-                <div class="text-center">
-                    <div class="pagination">
-                        {{ macros.pagination_widget(pagination, 'service.hospital') }}
+                    {% endfor %}
+                    <div class="text-center">
+                        <div class="pagination">
+                            {{ macros.pagination_widget(pagination, 'service.hospital') }}
+                        </div>
                     </div>
                 </div>
             </div>
@@ -52,3 +55,23 @@
 
 </div>
 {% include '_footer.html' %}
+
+<script>
+    function liveSearch(value) {
+        value = value.trim(); // remove any spaces around the text
+        if (value != "") { // don't make requests with an empty string
+            $.ajax({
+                url: "{{ url_for('service.search_hospital') }}",
+                data: {searchText: value},
+                dataType: "html",
+                success: function (data) {
+                    $("#results").html(data);
+                }
+
+            });
+        }
+        else {
+            $("#results").html(""); // set the results empty in case of empty string
+        }
+    }
+</script>

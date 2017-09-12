@@ -1,0 +1,15 @@
+{% import "_macros.html" as macros %}
+{% for hospital in hospitals %}
+    <div class="hospital_info left w50">
+        <div class="htxt_area">
+            <a href="{{ url_for('service.lawyer', hospital=hospital.id) }}">
+                <p class="htit">{{ hospital.name }}</p></a>
+            <p class="hinfo">{{ hospital.address[7:15] }}</p>
+        </div>
+    </div>
+{% endfor %}
+<div class="text-center">
+    <div class="pagination">
+        {{ macros.pagination_widget(pagination, 'service.search_hospital') }}
+    </div>
+</div>

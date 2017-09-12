@@ -1,6 +1,6 @@
 <div class="nav_warp">
     <div class="content">
-    <!--
+
         <div class="nav_top">
             <ul>
                 {% if current_user.is_authenticated == False %}
@@ -30,7 +30,7 @@
                 <li><a href="{{ url_for('main.post_script') }}">안심후기</a></li>
                 <li><a href="{{ url_for('main.contact') }}">문의하기</a></li>
             </ul>
-        </div>-->
+        </div>
     </div>
 </div>
 {% for message in get_flashed_messages() %}

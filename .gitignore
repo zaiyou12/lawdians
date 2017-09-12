@@ -143,3 +143,5 @@ fabric.properties
 pip-selfcheck.json
 
 /app/static/img/uploads/*
+
+*.json
