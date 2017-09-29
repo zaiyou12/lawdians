@@ -227,6 +227,8 @@ class Hospital(db.Model):
 
     @staticmethod
     def insert_hospital():
+        if Hospital.query.first() is not None:
+            return
         import csv
         filepath = os.path.join(os.path.dirname(__file__), 'hospital.csv')
         with open(filepath, 'rt') as csvfile:
@@ -557,12 +559,23 @@ class PostScript(db.Model):
 class UploadedImage(db.Model):
     __tablename__ = 'uploaded_images'
     id = db.Column(db.Integer, primary_key=True)
-    filename = db.Column(db.String, unique=True)
+    filename = db.Column(db.String)
     service_id = db.Column(db.Integer, db.ForeignKey('services.id'))
     event_id = db.Column(db.Integer, db.ForeignKey('events.id'))
     ad_id = db.Column(db.Integer, db.ForeignKey('hospital_ads.id'))
     hospital_id = db.Column(db.Integer, db.ForeignKey('hospitals.id'))
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
+
+
+class SurgeryPosition(db.Model):
+    __tablename__ = 'surgery_points'
+    id = db.Column(db.Integer, primary_key=True)
+    category = db.Column(db.String)
+    part = db.Column(db.String)
+    price = db.Column(db.Integer)
+
+    def __repr__(self):
+        return '<SurgeryPosition %r>' % self.part
 
 
 @login_manager.user_loader

@@ -6,9 +6,9 @@ from flask_login import login_required, login_user, current_user
 from sqlalchemy import desc
 
 from app import db
-from .forms import UserForm, HospitalForm, LawyerForm
+from .forms import UserForm, HospitalForm, LawyerForm, SurgeryPointForm
 from ..models import User, Role, HospitalRegistration, Hospital, Counsel, Category, Event, HospitalAd, Point, Lawyer, \
-    Service, EventRegistration, Auction
+    Service, EventRegistration, Auction, SurgeryPosition
 from . import admin
 
 
@@ -302,6 +302,35 @@ def ads_confirmed(id):
     else:
         flash('존재하지 않는 광고입니다.')
     return redirect(url_for('admin.page_ads'))
+
+
+@admin.route('/page/surgery-point')
+@login_required
+def surgery_point():
+    surgery_points = SurgeryPosition.query.all()
+    return render_template('admin/surgery_point.html', surgery_points=surgery_points)
+
+
+@admin.route('/page/add/surgery-point', methods=['GET', 'POST'])
+@login_required
+def add_surgery_point():
+    form = SurgeryPointForm()
+    if form.validate_on_submit():
+        point = SurgeryPosition(category=form.category.data, part=form.part.data, price=form.price.data)
+        db.session.add(point)
+        db.session.commit()
+        flash('추가되었습니다.')
+        return redirect(url_for('admin.surgery_point'))
+    return render_template('admin/add_surgery_point.html', form=form)
+
+
+@admin.route('/page/delete/surgery-point/<int:id>')
+@login_required
+def delete_surgery_point(id):
+    point = SurgeryPosition.query.get_or_404(id)
+    db.session.delete(point)
+    db.session.commit()
+    return redirect(url_for('admin.surgery_point'))
 
 
 '''

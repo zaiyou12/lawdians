@@ -16,6 +16,13 @@
                     <li><a>4.결제 및 신청</a></li>
                 </ul>
             </div>
+            <div>
+                <h3>성형 부위 선택</h3>
+                {% for point in surgery_points %}
+                    <label class="checkbox-inline"><input type="checkbox" value="{{ point.id }}">{{ point.category }} : {{ point.part }}</label>
+                {% endfor %}
+                <input type="text" id="surgery_name" placeholder="기타 수술명">
+            </div>
             {% if selected_hospital %}
                 <div class="text-center">
                     <h3>기존에 선택한 병원</h3>
@@ -27,8 +34,8 @@
                     <br/><br/>
                 </div>
             {% endif %}
-
             <div class="hospital_info_warp">
+                <h3>병원 검색</h3>
                 <input type="text" onkeyup="liveSearch(this.value)">
                 <div id="results">
                     {% for hospital in hospitals %}
@@ -49,11 +56,9 @@
                 </div>
             </div>
         </div>
-
     </div>
-
-
 </div>
+
 {% include '_footer.html' %}
 
 <script>

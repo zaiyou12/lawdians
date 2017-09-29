@@ -1,0 +1,32 @@
+{% extends "admin/base.html" %}
+{% block page_content %}
+    <div class="page-header">
+        <h1>수술 부위</h1>
+    </div>
+    <div>
+        <a href="{{ url_for('admin.add_surgery_point') }}"><button class="btn btn-primary">추가</button></a><br/>
+        <h3>부위별 가격</h3>
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered table-hover">
+                <thead>
+                <tr>
+                    <th>구분</th>
+                    <th>대분류</th>
+                    <th>수술 부위</th>
+                    <th>가격</th>
+                    <th>삭제</th>
+                </tr>
+                </thead>
+                {% for surgery in surgery_points %}
+                    <tr>
+                        <td>{{ surgery.id }}</td>
+                        <td>{{ surgery.category }}</td>
+                        <td>{{ surgery.part }}</td>
+                        <td>{{ surgery.price }}</td>
+                        <td><a href="{{ url_for('admin.delete_surgery_point', id=surgery.id) }}"><button class="btn btn-primary">삭제</button></a></td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+{% endblock %}

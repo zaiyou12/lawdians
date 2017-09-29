@@ -1,0 +1,11 @@
+{% extends "admin/base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block page_content %}
+    <div class="page-header">
+        <h1>수술 카테고리 추가</h1>
+    </div>
+    <div class="col-md-6">
+        {{ wtf.quick_form(form) }}
+    </div>
+{% endblock %}

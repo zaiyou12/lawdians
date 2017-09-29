@@ -46,3 +46,10 @@ class LawyerForm(FlaskForm):
     address = StringField('주소', validators=[InputRequired(), Length(1, 128)])
     description = StringField('설명', validators=[InputRequired()])
     submit = SubmitField('확인')
+
+
+class SurgeryPointForm(FlaskForm):
+    category = StringField('분류', validators=[InputRequired()])
+    part = StringField('수술 부위', validators=[InputRequired()])
+    price = IntegerField('가격', validators=[InputRequired()])
+    submit = SubmitField('추가')
