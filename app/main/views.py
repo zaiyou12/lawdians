@@ -5,9 +5,9 @@ from sqlalchemy import desc, or_
 
 from app import db
 from app.uploads import check_files, upload_files
-from ..main.forms import EventForm, CounselForm, ProfileForm, AuctionForm, UploadForm
+from ..main.forms import EventForm, CounselForm, ProfileForm, AuctionForm, UploadForm, PostScriptForm
 from ..models import Hospital, Event, EventRegistration, HospitalAd, Lawyer, Counsel, Service, User, Auction, Offer, \
-    Point, Role, UploadedImage
+    Point, Role, UploadedImage, PostScript
 from . import main
 
 
@@ -138,7 +138,8 @@ def event_detail(id):
 
 @main.route('/post-script')
 def post_script():
-    return render_template('post_script.html')
+    scripts = PostScript.query.all()
+    return render_template('post_script.html', scripts=scripts)
 
 
 @main.route('/contact', methods=['GET', 'POST'])
@@ -167,6 +168,7 @@ def my_page_service():
 @login_required
 def my_page_service_detail(id):
     form = UploadForm()
+    form_post = PostScriptForm()
     if form.validate_on_submit() and form.file.data.filename:
         images = request.files.getlist("file")
 
@@ -177,7 +179,26 @@ def my_page_service_detail(id):
         else:
             return redirect(url_for('main.my_page_service_detail', id=id))
     uploaded_imgs = UploadedImage.query.filter_by(service_id=id).all()
-    return render_template('mypage_service_detail.html', id=id, form=form, uploaded_imgs=uploaded_imgs)
+
+    script = PostScript.query.filter_by(user_id=current_user.id).first()
+    if script:
+        form_post.body.data = script.body
+    return render_template('mypage_service_detail.html', id=id, form=form, uploaded_imgs=uploaded_imgs,
+                           form_post=form_post)
+
+
+@main.route('/my-mapge/service/post-script/<int:service_id>', methods=['POST'])
+@login_required
+def my_page_service_post_script(service_id):
+    form = PostScriptForm()
+    if form.validate_on_submit():
+        service = Service.query.get_or_404(service_id)
+        if service:
+            script = PostScript(user_id=current_user.id, hospital_id=service.hospital_id, body=form.body.data)
+            db.session.add(script)
+            db.session.commit()
+            flash('덧글이 등록되었습니다, 감사합니다.')
+    return redirect(url_for('main.my_page_service'))
 
 
 @main.route('/my-page/claim/<int:id>')

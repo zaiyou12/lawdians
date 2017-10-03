@@ -216,6 +216,7 @@ class Hospital(db.Model):
     services = db.relationship('Service', backref='hospital', lazy='dynamic')
     events = db.relationship('Event', backref='hospital', lazy='dynamic')
     event_registrations = db.relationship('EventRegistration', backref='hospital', lazy='dynamic')
+    post_scripts = db.relationship('PostScript', backref='hospital', lazy='dynamic')
     ads = db.relationship('HospitalAd', backref='hospital', lazy='dynamic')
     categories = db.relationship('Category', secondary=hospital_category,
                                  backref=db.backref('hospitals', lazy='dynamic'),
@@ -301,6 +302,7 @@ class Service(db.Model):
     lawyer_id = db.Column(db.Integer, db.ForeignKey('lawyers.id'))
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
     is_claimed = db.Column(db.Boolean, default=False)
+    post_script = db.relationship('PostScript', backref='service', lazy='dynamic')
     photos = db.relationship('UploadedImage', backref='service', lazy='dynamic')
 
     def __repr__(self):
@@ -318,7 +320,7 @@ class Event(db.Model):
     hits = db.Column(db.Integer)
     registrations = db.relationship('EventRegistration', backref='event', lazy='dynamic')
     is_confirmed = db.Column(db.Boolean, default=False)
-    price_text = db.Column(db.String(16))
+    price_text = db.Column(db.String(16), default='상담필요')
     photos = db.relationship('UploadedImage', backref='event', lazy='dynamic')
 
     def __repr__(self):
@@ -548,6 +550,7 @@ class PostScript(db.Model):
     __tablename__ = 'postscripts'
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    service_id = db.Column(db.Integer, db.ForeignKey('services.id'))
     hospital_id = db.Column(db.Integer, db.ForeignKey('hospitals.id'))
     body = db.Column(db.Text)
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)

@@ -61,6 +61,14 @@
             {% endfor %}
         </div>
 
+        <h3 class="bl01 black">댓글 등록</h3>
+        <form action="{{ url_for('main.my_page_service_post_script', service_id=id) }}" method="post">
+            {{ form_post.hidden_tag() }}
+            {{ form_post.body(class="contact_textbox", placeholder="다음 사용자에게 남기시고 싶은 말을 이곳에 써주세요", rows='50',cols='100') }}
+            <p class="help-block">{{ form_post.body.errors[0] }}</p>
+            {{ form_post.submit(class="bt_blue01 mgT30") }}
+        </form>
+
         <h3 class="bl01 black">변호사 선임장</h3>
         <div class="bt_blue01"><a href="{{ url_for('main.my_page_claim', id=id) }}">사고접수</a></div>
     </div>

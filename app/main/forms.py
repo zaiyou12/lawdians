@@ -38,3 +38,8 @@ class AuctionForm(FlaskForm):
 class UploadForm(FlaskForm):
     file = FileField('이미지', render_kw={'multiple': True})
     submit = SubmitField('등록')
+
+
+class PostScriptForm(FlaskForm):
+    body = TextAreaField('내용', validators=[InputRequired()])
+    submit = SubmitField('덧글 등록하기')
