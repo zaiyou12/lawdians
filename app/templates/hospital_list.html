@@ -3,14 +3,16 @@
     {% for hospital in hospitals %}
         <div class="hospital_info w50">
             <div class="medal">
-                {% if hospital.has_medal_1 %}
+                {% if hospital.weight==1 %}
+                    <img src="../static/img/sub/medal02.png"/>
+                {% elif hospital.weight==2 %}
+                    <img src="../static/img/sub/medal01.png"/>
+                {% elif hospital.weight==3 %}
+                    <img src="../static/img/sub/medal01.png"/>
                     <img src="../static/img/sub/medal02.png"/>
                 {% endif %}
-                {% if hospital.has_medal_2 %}
-                    <img src="../static/img/sub/medal01.png"/>
-                {% endif %}
             </div>
-            <img src="../static/img/main/hospital01.jpg"/>
+            <img src="../static/img/sub/hospital_noimg.jpg"/>
             <div class="htxt_area">
                 <p class="hintro">{{ hospital.intro }}</p>
                 <p class="htit">{{ hospital.name }}</p>

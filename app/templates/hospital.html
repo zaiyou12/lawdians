@@ -61,16 +61,19 @@
         <div class="select">
 
         </div>
+        <input type="text" onkeyup="liveSearch(this.value)">
         <div id="hospital_info_warp">
             <div class="hospital_info_warp">
                 {% for hospital in hospitals %}
                     <div class="hospital_info w50">
                         <div class="medal">
-                            {% if hospital.has_medal_1 %}
+                            {% if hospital.weight==1 %}
                                 <img src="../static/img/sub/medal02.png"/>
-                            {% endif %}
-                            {% if hospital.has_medal_2 %}
+                            {% elif hospital.weight==2 %}
                                 <img src="../static/img/sub/medal01.png"/>
+                            {% elif hospital.weight==3 %}
+                                <img src="../static/img/sub/medal01.png"/>
+                                <img src="../static/img/sub/medal02.png"/>
                             {% endif %}
                         </div>
                         <img src="../static/img/sub/hospital_noimg.jpg"/>
@@ -158,4 +161,19 @@
             console.log(error);
         });
     });
+
+    function liveSearch(value) {
+        value = value.trim(); // remove any spaces around the text
+        if (value != "") { // don't make requests with an empty string
+            $.ajax({
+                url: "{{ url_for('main.search_hospital') }}",
+                data: {searchText: value},
+                dataType: "html",
+                success: function (data) {
+                    $("#hospital_info_warp").html(data);
+                }
+
+            });
+        }
+    }
 </script>

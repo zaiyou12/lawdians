@@ -99,6 +99,7 @@ def register_detail():
                 current_user.gender = form.gender.data
                 current_user.phone_number = session['phone_number']
                 current_user.address = form.address.data
+                current_user.nickname = form.nickname.data
                 db.session.add(current_user)
                 db.session.commit()
                 token = current_user.generate_confirmation_token()

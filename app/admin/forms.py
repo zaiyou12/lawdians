@@ -32,6 +32,7 @@ class HospitalForm(FlaskForm):
     phone = StringField('병원 전화번호', validators=[InputRequired(), Length(1, 32)])
     address = StringField('병원 주소', validators=[InputRequired(), Length(1, 128)])
     category = SelectMultipleField('분류', coerce=int)
+    weight = IntegerField('가중치', validators=[InputRequired()])
     submit = SubmitField('확인')
 
     def __init__(self, *args, **kwargs):

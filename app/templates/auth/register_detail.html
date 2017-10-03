@@ -31,6 +31,11 @@
                                     {{ form.username(id="signup-username", class="form-control", placeholder="사용자 이름") }}
                                     <p class="help-block">{{ form.username.errors[0] }}</p>
                                 </div>
+                                <div class="form-group username {% if form.nickname.errors %} has-error {% endif %}">
+                                    <label class="sr-only" for="signup-username">닉네임</label>
+                                    {{ form.nickname(id="signup-nickname", class="form-control", placeholder="닉네임") }}
+                                    <p class="help-block">{{ form.nickname.errors[0] }}</p>
+                                </div>
                                 <div class="form-group birth {% if form.birth_date.errors %} has-error {% endif %}">
                                     <label class="sr-only" for="signup-birth">생년월일</label>
                                     {{ form.birth_date(id="signup-birth", class="form-control", placeholder="생년월일   예)19820301") }}

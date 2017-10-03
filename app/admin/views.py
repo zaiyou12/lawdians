@@ -56,6 +56,7 @@ def hospital_detail(id):
         hos.doctor = form.doctor.data
         hos.phone = form.phone.data
         hos.address = form.address.data
+        hos.weight = form.weight.data
         hos.categories = []
         category_list = form.category.data
         for id in category_list:
@@ -69,6 +70,7 @@ def hospital_detail(id):
     form.doctor.data = hos.doctor
     form.phone.data = hos.phone
     form.address.data = hos.address
+    form.weight.data = hos.weight
     categories = []
     for c in hos.categories.all():
         categories.append(c.id)
@@ -204,6 +206,7 @@ def edit_page_hospital(id):
         hos.doctor = form.doctor.data
         hos.phone = form.phone.data
         hos.address = form.address.data
+        hos.weight = form.weight.data
         hos.categories = []
         category_list = form.category.data
         for id in category_list:
@@ -217,6 +220,7 @@ def edit_page_hospital(id):
     form.doctor.data = hos.doctor
     form.phone.data = hos.phone
     form.address.data = hos.address
+    form.weight.data = hos.weight
     categories = []
     for c in hos.categories.all():
         categories.append(c.id)

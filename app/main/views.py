@@ -1,7 +1,7 @@
 import time
 from flask import render_template, request, current_app, flash, redirect, url_for, jsonify, session
 from flask_login import current_user, login_required
-from sqlalchemy import desc
+from sqlalchemy import desc, or_
 
 from app import db
 from app.uploads import check_files, upload_files
@@ -91,6 +91,18 @@ def hospital_category():
     hospitals_ad = HospitalAd.query.limit(3)
     return jsonify({'data': render_template('hospital_list.html', hospitals=hospitals, pagination=pagination,
                                             hospitals_ad=hospitals_ad, code=302)})
+
+
+@main.route('/hospital/search', methods=['GET', 'POST'])
+def search_hospital():
+    text = request.args['searchText']
+    page = request.args.get('page', 1, type=int)
+    pagination = Hospital.query.filter(
+        or_(Hospital.name.like("%" + text + "%"), Hospital.address.like("%" + text + "%"),
+            Hospital.doctor.like("%" + text + "%"))).order_by(desc(Hospital.weight)). \
+        paginate(page, per_page=current_app.config['HOSPITALS_PER_PAGE'], error_out=False)
+    hospitals = pagination.items
+    return render_template('hospital_list.html', hospitals=hospitals, pagination=pagination)
 
 
 @main.route('/lawyer')

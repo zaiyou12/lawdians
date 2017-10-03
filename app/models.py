@@ -60,6 +60,7 @@ class User(UserMixin, db.Model):
     social_id = db.Column(db.String(64), unique=True)
     email = db.Column(db.String(64), unique=True, index=True)
     username = db.Column(db.String(64))
+    nickname = db.Column(db.String(64))
     password_hash = db.Column(db.String(128))
     role_id = db.Column(db.Integer, db.ForeignKey('roles.id'))
     confirmed = db.Column(db.Boolean, default=False)
@@ -89,16 +90,16 @@ class User(UserMixin, db.Model):
         # add new manager id if do not exist
         hos_user = User.query.filter_by(email=current_app.config['LAWDIANS_HOSPITAL']).first()
         if hos_user is None:
-            hos_user = User(email=current_app.config['LAWDIANS_HOSPITAL'], password='1234', confirmed=True)
+            hos_user = User(email=current_app.config['LAWDIANS_HOSPITAL'], password='asdf', confirmed=True)
         law_user = User.query.filter_by(email=current_app.config['LAWDIANS_LAWYER']).first()
         if law_user is None:
-            law_user = User(email=current_app.config['LAWDIANS_LAWYER'], password='1234', confirmed=True)
+            law_user = User(email=current_app.config['LAWDIANS_LAWYER'], password='asdf', confirmed=True)
         admin_user = User.query.filter_by(email=current_app.config['LAWDIANS_ADMIN']).first()
         if admin_user is None:
-            admin_user = User(email=current_app.config['LAWDIANS_ADMIN'], password='1234', confirmed=True)
+            admin_user = User(email=current_app.config['LAWDIANS_ADMIN'], password='asdf', confirmed=True)
         test_user = User.query.filter_by(email=current_app.config['LAWDIANS_TESTER']).first()
         if test_user is None:
-            test_user = User(email=current_app.config['LAWDIANS_TESTER'], password='1234', confirmed=True)
+            test_user = User(email=current_app.config['LAWDIANS_TESTER'], password='asdf', confirmed=True)
         db.session.add_all([hos_user, law_user, admin_user, test_user])
         db.session.commit()
 
@@ -222,8 +223,7 @@ class Hospital(db.Model):
     offers = db.relationship('Offer', backref='hospital', lazy='dynamic')
     photos = db.relationship('UploadedImage', backref='hospital', lazy='dynamic')
     hits = db.Column(db.Integer, default=0)
-    has_medal_1 = db.Column(db.Boolean, default=False)
-    has_medal_2 = db.Column(db.Boolean, default=False)
+    weight = db.Column(db.Integer, default=0)
 
     @staticmethod
     def insert_hospital():

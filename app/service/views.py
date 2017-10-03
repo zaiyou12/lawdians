@@ -2,10 +2,11 @@ from datetime import datetime
 
 from flask import render_template, redirect, url_for, session, flash, request, current_app, jsonify
 from flask_login import current_user, login_required
+from sqlalchemy import or_
 
 from app import db
 from ..payment import simple_payment, is_payment_completed
-from ..models import Hospital, Lawyer, Service, Counsel, ChargePointTable, Role, Point
+from ..models import Hospital, Lawyer, Service, Counsel, ChargePointTable, Role, Point, SurgeryPosition
 from .forms import RegisterSurgeryForm, ChargeForm, CounselForm
 from ..sms import get_rand_num, send_sms
 from . import service
@@ -88,18 +89,20 @@ def hospital():
                                                                  error_out=False)
     hospitals = pagination.items
 
+    surgery_points = SurgeryPosition.query.all()
     return render_template('service/register_hospital02.html', hospitals=hospitals, pagination=pagination,
-                           selected_hospital=selected_hospital)
+                           selected_hospital=selected_hospital, surgery_points=surgery_points)
 
 
 @service.route('/hospital/search')
 @login_required
 def search_hospital():
     text = request.args['searchText']
-    print(text)
     page = request.args.get('page', 1, type=int)
-    pagination = Hospital.query.filter(Hospital.name.like("%" + text + "%")).\
-        paginate(page, per_page=current_app.config['HOSPITALS_PER_PAGE'], error_out=False)
+    pagination = Hospital.query.filter(
+        or_(Hospital.name.like("%" + text + "%"), Hospital.address.like("%" + text + "%"),
+            Hospital.doctor.like("%" + text + "%"))).paginate(page, per_page=current_app.config['HOSPITALS_PER_PAGE'],
+                                                              error_out=False)
     hospitals = pagination.items
     return render_template('service/hospital_list.html', hospitals=hospitals, pagination=pagination)
 

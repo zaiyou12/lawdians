@@ -1,8 +1,8 @@
 """initial commit
 
-Revision ID: 8b726ef4905f
+Revision ID: cf96d234bbd7
 Revises: 
-Create Date: 2017-09-29 10:36:46.989156
+Create Date: 2017-10-03 19:18:51.164665
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '8b726ef4905f'
+revision = 'cf96d234bbd7'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -68,6 +68,7 @@ def upgrade():
     sa.Column('hits', sa.Integer(), nullable=True),
     sa.Column('has_medal_1', sa.Boolean(), nullable=True),
     sa.Column('has_medal_2', sa.Boolean(), nullable=True),
+    sa.Column('weight', sa.Integer(), nullable=True),
     sa.PrimaryKeyConstraint('id'),
     sa.UniqueConstraint('name')
     )
@@ -140,6 +141,7 @@ def upgrade():
     sa.Column('social_id', sa.String(length=64), nullable=True),
     sa.Column('email', sa.String(length=64), nullable=True),
     sa.Column('username', sa.String(length=64), nullable=True),
+    sa.Column('nickname', sa.String(length=64), nullable=True),
     sa.Column('password_hash', sa.String(length=128), nullable=True),
     sa.Column('role_id', sa.Integer(), nullable=True),
     sa.Column('confirmed', sa.Boolean(), nullable=True),
